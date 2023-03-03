@@ -6,6 +6,9 @@
 
 - Modelado de base de datos
   - [Dia](http://dia-installer.de/download/index.html.en)
+  - [Entidad Relación a Modelo relacional](https://drive.google.com/file/d/1sA0IAXarQatxHzqCi-wYQxgzxZkT9M3P/view)
+  
+- [Guía GIT por consola](https://axelandrade21.github.io/web/guiagit/#/Intro)/[Guía GIT VSC](https://drive.google.com/file/d/1oIQpLqiR-MPKF--p_IX455OUxQGoZfhJ/view)
 
 - PHP 
   - Usar [PDO](https://www.phptutorial.net/php-pdo/) como base
