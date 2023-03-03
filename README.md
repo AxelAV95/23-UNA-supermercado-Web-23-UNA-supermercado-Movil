@@ -1,3 +1,8 @@
+# Flujo de actualizaciones para el Repositorio
+
+- ![Flujo](https://imgtr.ee/images/2023/03/02/RXHu2.png)
+
+
 # Recursos y referencias
 
 - [Gestión de proyectos Taiga](https://www.taiga.io/)
