@@ -1,6 +1,6 @@
 # Flujo de actualizaciones para el Repositorio
 
-- ![Flujo](https://imgtr.ee/images/2023/03/02/RXHu2.png)
+- ![Flujo](https://imgtr.ee/images/2023/03/03/o7qRU.png)
 
 
 # Recursos y referencias
@@ -8,6 +8,8 @@
 - [Gestión de proyectos Taiga](https://www.taiga.io/)
 
 - [UI/UX Guía de componentes y uso correcto](https://drive.google.com/drive/folders/1SorulSjjt3Unn0g7rVZVaNJtE4456jpx?usp=sharing)
+
+- [Balsamiq Wireframes](https://drive.google.com/drive/folders/1RnTtgiDlDYTQ6Km8oY3OBnUv8dRByaxA?usp=share_link) 
 
 - Modelado de base de datos
   - [Dia](http://dia-installer.de/download/index.html.en)
