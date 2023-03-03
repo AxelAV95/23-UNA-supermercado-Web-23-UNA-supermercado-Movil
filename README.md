@@ -2,6 +2,8 @@
 
 - [Gestión de proyectos Taiga](https://www.taiga.io/)
 
+- [UI/UX Guía de componentes y uso correcto](https://drive.google.com/drive/folders/1SorulSjjt3Unn0g7rVZVaNJtE4456jpx?usp=sharing)
+
 - Modelado de base de datos
   - [Dia](http://dia-installer.de/download/index.html.en)
 
