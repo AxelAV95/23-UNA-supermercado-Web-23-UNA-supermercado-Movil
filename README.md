@@ -11,6 +11,10 @@
 
 - [CRUD SQLite](https://www.youtube.com/watch?v=9t8VVWebRFM)
 
+- [Solución HAXM Emulador](https://www.tektutorialshub.com/android-studio/haxm-installation-failed-install-intel-haxm-in-windows/)
+  - [Activar VT-X HP](https://support.hp.com/us-en/document/ish_5637142-5637191-16)
+
+
 - [UI/UX Guía de componentes y uso correcto](https://drive.google.com/drive/folders/1SorulSjjt3Unn0g7rVZVaNJtE4456jpx?usp=sharing)
 
 - [Balsamiq Wireframes](https://drive.google.com/drive/folders/1RnTtgiDlDYTQ6Km8oY3OBnUv8dRByaxA?usp=share_link) 
