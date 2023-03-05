@@ -7,7 +7,7 @@
 
 - [Gestión de proyectos Taiga](https://www.taiga.io/)
 
-- [Administrador para SQLite](http://sqliteadmin.orbmu2k.de/)
+- [Administrador para SQLite](http://sqliteadmin.orbmu2k.de/) / [SQLite Browser](https://sqlitebrowser.org/)
 
 - [CRUD SQLite](https://www.youtube.com/watch?v=9t8VVWebRFM)
 
