@@ -9,7 +9,8 @@
 
 - [Administrador para SQLite](http://sqliteadmin.orbmu2k.de/) / [SQLite Browser](https://sqlitebrowser.org/)
 
-- [CRUD SQLite](https://www.youtube.com/watch?v=9t8VVWebRFM)
+- [CRUD SQLite](https://www.youtube.com/watch?v=9t8VVWebRFM) 
+```  implementation 'com.readystatesoftware.sqliteasset:sqliteassethelper:+' ```
 
 - [Solución HAXM Emulador](https://www.tektutorialshub.com/android-studio/haxm-installation-failed-install-intel-haxm-in-windows/)
   - [Activar VT-X HP](https://support.hp.com/us-en/document/ish_5637142-5637191-16)
