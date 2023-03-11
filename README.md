@@ -9,6 +9,8 @@
 
 - [Administrador para SQLite](http://sqliteadmin.orbmu2k.de/) / [SQLite Browser](https://sqlitebrowser.org/)
 
+- [ORM Green DAO](https://greenrobot.org/greendao/)
+
 - [CRUD SQLite](https://www.youtube.com/watch?v=9t8VVWebRFM) 
 ```  implementation 'com.readystatesoftware.sqliteasset:sqliteassethelper:+' ```
 
