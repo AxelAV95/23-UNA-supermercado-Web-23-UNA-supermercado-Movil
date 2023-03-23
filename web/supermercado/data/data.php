@@ -3,14 +3,11 @@
 
 class Database{
 
-     private static $dbName = "bdcomida";
+     private static $dbName = "bdsupermercado";
     private static $dbHost = "localhost" ;
     private static $dbUsername = "root";
     private static $dbUserPassword = "";
-    // private static $dbName = "bdcomida";
-    // private static $dbHost = "bdcomida.cia11fjdhsfh.us-east-1.rds.amazonaws.com" ;
-    // private static $dbUsername = "admin";
-    // private static $dbUserPassword = "12345678";
+
  
     private static $cont  = null;
     
