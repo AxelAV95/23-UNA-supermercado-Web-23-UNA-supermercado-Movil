@@ -126,7 +126,7 @@ background: linear-gradient(to right, #24243e, #302b63, #0f0c29); /* W3C, IE 10+
           </li>
          
           <li class="nav-item">
-            <a href="" class="nav-link active">
+            <a href="" class="nav-link">
                <i class="nav-icon fas fa-users"></i>
               <p>
                 Usuarios
@@ -152,7 +152,7 @@ background: linear-gradient(to right, #24243e, #302b63, #0f0c29); /* W3C, IE 10+
           </li>
          
          <li class="nav-item">
-            <a href="empleadoview.php" class="nav-link">
+            <a href="empleadoview.php" class="nav-link active">
               <i class="nav-icon fas fa-user-edit"></i>
               <p>
                 Empleados
