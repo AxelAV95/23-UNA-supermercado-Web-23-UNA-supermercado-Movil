@@ -1,25 +1,23 @@
-<?php  
- 
-    include '../business/categoriabusiness.php';
+<?php 
 
-    $categoriaBusiness = new CategoriaBusiness();
-    $categorias = $categoriaBusiness->getAllTBCategorias();
+  include '../business/tipoempleadobusiness.php';
+ // $tipoUsuarioBusiness = new TipoUsuarioBusiness();
+  //$tipos = $tipoUsuarioBusiness->getAllTBTipoUsuarios();
+
+  //print_r($tipos)
 
 
-
-?>
-
+ ?>
 <?php 
    //include 'template/sesion.php';
   ?>
-
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Tipo de empleado | Dashboard</title>
+  <title>Tipos de empleados | Dashboard</title>
 
   <!-- Google Font: Source Sans Pro -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
@@ -31,23 +29,16 @@
   <link rel="stylesheet" href="plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css">
   <!-- iCheck -->
   <link rel="stylesheet" href="plugins/icheck-bootstrap/icheck-bootstrap.min.css">
-  <!-- JQVMap -->
-  <link rel="stylesheet" href="plugins/jqvmap/jqvmap.min.css">
+
   <!-- Theme style -->
   <link rel="stylesheet" href="dist/css/adminlte.min.css">
   <!-- overlayScrollbars -->
   <link rel="stylesheet" href="plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
   <!-- Daterange picker -->
   <link rel="stylesheet" href="plugins/daterangepicker/daterangepicker.css">
-  <!-- summernote -->
-  <link rel="stylesheet" href="plugins/summernote/summernote-bs4.min.css">
+
 
   <!-- DataTables -->
-  <link rel="stylesheet" href="plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
-  <link rel="stylesheet" href="plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
-  <link rel="stylesheet" href="plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
-
-   <!-- DataTables -->
   <link rel="stylesheet" href="plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
   <link rel="stylesheet" href="plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
   <link rel="stylesheet" href="plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
@@ -61,6 +52,10 @@
 <body class="hold-transition sidebar-mini layout-fixed">
 <div class="wrapper">
 
+  <!-- Preloader -->
+ <!--  <div class="preloader flex-column justify-content-center align-items-center">
+    <img class="animation__shake" src="dist/img/AdminLTELogo.png" alt="AdminLTELogo" height="60" width="60">
+  </div> -->
 
   <!-- Navbar -->
   <?php include 'template/header.php' ?>
@@ -70,8 +65,8 @@
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
     <a href="index.html" class="brand-link d-flex justify-content-center ">
-
-         <span class="brand-text font-weight-light">Nombre de Super</span>
+     <!--  <img src="dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8"> -->
+          <span class="brand-text font-weight-light">Nombre de Super</span>
       <img src="img/otros/logo.png" class="img-fluid" alt="Responsive image" width="30px" height="30px" style="margin-left: 1rem;">
     </a>
 
@@ -90,7 +85,7 @@ background: linear-gradient(to right, #24243e, #302b63, #0f0c29); /* W3C, IE 10+
       </div>
 
       <!-- Sidebar Menu -->
-     <nav class="mt-2">
+       <nav class="mt-2">
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
@@ -131,7 +126,7 @@ background: linear-gradient(to right, #24243e, #302b63, #0f0c29); /* W3C, IE 10+
           </li>
          
           <li class="nav-item">
-            <a href="" class="nav-link">
+            <a href="" class="nav-link active">
                <i class="nav-icon fas fa-users"></i>
               <p>
                 Usuarios
@@ -157,7 +152,7 @@ background: linear-gradient(to right, #24243e, #302b63, #0f0c29); /* W3C, IE 10+
           </li>
          
          <li class="nav-item">
-            <a href="empleadoview.php" class="nav-link active">
+            <a href="empleadoview.php" class="nav-link">
               <i class="nav-icon fas fa-user-edit"></i>
               <p>
                 Empleados
@@ -271,7 +266,6 @@ background: linear-gradient(to right, #24243e, #302b63, #0f0c29); /* W3C, IE 10+
           </li>
 
         </ul>
-      </nav>
       <!-- /.sidebar-menu -->
     </div>
     <!-- /.sidebar -->
@@ -284,9 +278,9 @@ background: linear-gradient(to right, #24243e, #302b63, #0f0c29); /* W3C, IE 10+
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1 class="m-0">Tipos de empleado</h1>
+            <h1 class="m-0">Tipo de empleados</h1>
           </div><!-- /.col -->
-        
+         
         </div><!-- /.row -->
       </div><!-- /.container-fluid -->
     </div>
@@ -295,46 +289,32 @@ background: linear-gradient(to right, #24243e, #302b63, #0f0c29); /* W3C, IE 10+
     <!-- Main content -->
     <section class="content">
       <div class="container-fluid">
-        
+       
+      
         <!-- /.row -->
         <!-- Main row -->
        <div class="card">
-              <div class="card-header jus">
-                <button class="btn btn-primary" data-toggle="modal" data-target="#modalAgregarCategoria">
+              <div class="card-header">
+                <button class="btn btn-primary" data-toggle="modal" data-target="#modalAgregarTipo">
 
-                    Agregar tipo empleado
+                    Agregar tipo
 
                   </button>
               </div>
               <!-- /.card-header -->
               <div class="card-body">
-                 <table id="tabla-tipos" class="tabla-categorias table table-bordered table-hover">
+                <table id="tabla-tipos" class="tabla-tipos table table-bordered table-hover">
                   <thead>
                   <tr>
                     <th>Descripción</th>
                     <th>Acciones</th>
-                    
+                   
                   </tr>
                   </thead>
                   <tbody>
-                    <?php 
-                    /*
-                        foreach($categorias as $categoria){
-                          echo '<tr>';
-                          echo '<td>'.$categoria['categoriadescripcion'].'</td>';
-                          echo '<td>';
-                          echo "<div class='btn-group'><button class='btn btn-warning btnEditarCategoria' categoriaid='".$categoria["categoriaid"]."' descripcion='".$categoria['categoriadescripcion']."'  imagen='".$categoria["categoriaimg"]."' codigo='".$categoria["categoriacodigo"]."' data-toggle='modal' data-target='#modalEditarCategoria'><i class='fa fa-pencil'></i></button><button class='btn btn-danger btnEliminarCategoria' categoriaid='".$categoria["categoriaid"]."' imagen='".$categoria["categoriaimg"]."' codigo='".$categoria["categoriacodigo"]."' ><i class='fa fa-times'></i></button></div>";
-                          echo '</td>';
-                          echo '</tr>';
-                        }
-
-
-                      */
-
-                    ?>
-                
+                 
                   </tbody>
-                  
+                 
                 </table>
               </div>
               <!-- /.card-body -->
@@ -347,18 +327,14 @@ background: linear-gradient(to right, #24243e, #302b63, #0f0c29); /* W3C, IE 10+
   <!-- /.content-wrapper -->
   <?php include 'template/footer.php'; ?>
 
-
-</div>
-<!-- ./wrapper -->
-
-<div id="modalAgregarCategoria" class="modal fade" role="dialog">
+  <div id="modalAgregarTipo" class="modal fade" role="dialog">
   
   <div class="modal-dialog">
 
     <div class="modal-content">
 
         <div class="modal-header">
-          <h4 class="modal-title">Agregar categoría</h4>
+          <h4 class="modal-title">Agregar tipo</h4>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
@@ -368,30 +344,17 @@ background: linear-gradient(to right, #24243e, #302b63, #0f0c29); /* W3C, IE 10+
 
           <div class="box-body">
 
-            <form method="POST" action="../../business/categoriaaction.php"  enctype="multipart/form-data">
+            <form id="formulario-insertar"  >
            
 
               <div class="form-group">
+                <input type="hidden" name="metodo" value="agregar">
                 <label >Descripción:</label>
-                <input type="text" class="form-control" name="categoriadescripcion" id="categoriadescripcion" placeholder="Ingrese categoría">
+                <input type="text" class="form-control" name="tipodescripcion" id="tipodescripcion" placeholder="Ingrese tipo">
                
               </div>
-              
-
-
-              <div class="form-group">
-                <label >Imagen: </label>
-                <input type="file" class="nuevaImagen" name="nuevaImagen">
-
-                <p class="help-block">Peso máximo de la imagen 2MB</p>
-
-                <img src="img/categorias/default/anonymous.png" class="img-thumbnail previsualizar" width="100px">
-
-              <input type="hidden" name="imagenActual" id="imagenActual">
-
-              </div>
-              
-             <center><button type="submit" name="insertar" class="btn btn-primary">Insertar</button></center> 
+                         
+             <center><button type="submit" name="insertar" id="insertar" class="btn btn-primary">Insertar</button></center> 
             </form>
 
     </div>
@@ -403,14 +366,14 @@ background: linear-gradient(to right, #24243e, #302b63, #0f0c29); /* W3C, IE 10+
 
 </div>
 
-<div id="modalEditarCategoria" class="modal fade" role="dialog">
+<div id="modalEditarTipo" class="modal fade" role="dialog">
   
   <div class="modal-dialog">
 
     <div class="modal-content">
 
         <div class="modal-header">
-          <h4 class="modal-title">Editar categoría</h4>
+          <h4 class="modal-title">Editar tipo</h4>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
@@ -420,34 +383,22 @@ background: linear-gradient(to right, #24243e, #302b63, #0f0c29); /* W3C, IE 10+
 
           <div class="box-body">
 
-            <form method="POST" action="../../business/categoriaaction.php"  enctype="multipart/form-data">
+            <form id="formulario-editar">
               
               <div class="form-group">
-                <input type="hidden" name="categoriaid" id="categoriaid">
-                <input type="hidden" name="categoriacodigo" id="categoriacodigo">
+                <input type="hidden" name="tipoid" id="tipoid">
+                 <input type="hidden" name="metodo" value="actualizar">
+              
               </div>
 
               <div class="form-group">
                 <label >Descripción:</label>
-                <input type="text" class="form-control" name="categoriadescripcion" id="categoriadescripcion" placeholder="Ingrese categoría">
+                <input type="text" class="form-control" name="tipodescripcion" id="tipodescripcion" placeholder="Ingrese tipo">
                
               </div>
               
 
-
-              <div class="form-group">
-                <label >Imagen: </label>
-                  <input type="file" class="nuevaImagen" name="editarImagen">
-
-                <p class="help-block">Peso máximo de la imagen 2MB</p>
-
-                <img src="img/categorias/default/anonymous.png" class="img-thumbnail previsualizar" width="100px">
-
-              <input type="hidden" name="imagenActual" id="imagenActual">
-
-              </div>
-              
-             <center><button type="submit" name="actualizar" class="btn btn-primary">Actualizar</button></center> 
+             <center><button type="submit" name="actualizar" id="actualizar" class="btn btn-primary">Actualizar</button></center> 
             </form>
 
     </div>
@@ -461,6 +412,9 @@ background: linear-gradient(to right, #24243e, #302b63, #0f0c29); /* W3C, IE 10+
 
 
 
+
+</div>
+<!-- ./wrapper -->
 
 <!-- jQuery -->
 <script src="plugins/jquery/jquery.min.js"></script>
@@ -474,11 +428,7 @@ background: linear-gradient(to right, #24243e, #302b63, #0f0c29); /* W3C, IE 10+
 <script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 <!-- ChartJS -->
 <script src="plugins/chart.js/Chart.min.js"></script>
-<!-- Sparkline -->
-<script src="plugins/sparklines/sparkline.js"></script>
-<!-- JQVMap -->
-<script src="plugins/jqvmap/jquery.vmap.min.js"></script>
-<script src="plugins/jqvmap/maps/jquery.vmap.usa.js"></script>
+
 <!-- jQuery Knob Chart -->
 <script src="plugins/jquery-knob/jquery.knob.min.js"></script>
 <!-- daterangepicker -->
@@ -486,14 +436,13 @@ background: linear-gradient(to right, #24243e, #302b63, #0f0c29); /* W3C, IE 10+
 <script src="plugins/daterangepicker/daterangepicker.js"></script>
 <!-- Tempusdominus Bootstrap 4 -->
 <script src="plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></script>
-<!-- Summernote -->
-<script src="plugins/summernote/summernote-bs4.min.js"></script>
 <!-- overlayScrollbars -->
 <script src="plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
 <!-- AdminLTE App -->
 <script src="dist/js/adminlte.js"></script>
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
 <script src="dist/js/pages/dashboard.js"></script>
+
 <!-- DataTables  & Plugins -->
 <script src="plugins/datatables/jquery.dataTables.min.js"></script>
 <script src="plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
@@ -509,154 +458,198 @@ background: linear-gradient(to right, #24243e, #302b63, #0f0c29); /* W3C, IE 10+
 <script src="plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
 <script src="plugins/sweetalert2/sweetalert2.min.js"></script>
 <script src="plugins/toastr/toastr.min.js"></script>
-<script src="https://unpkg.com/web-audio-daw"></script>
-<script src="dist/js/notificacion.js"></script>
 
-<?php 
-  //ALERTAS
-  echo '<script>';
-  echo " var Toast = Swal.mixin({
+
+
+
+<script>
+
+  var Toast = Swal.mixin({
        toast: true,
        position: 'top-right',
        showConfirmButton: false,
        timer: 3000,
        timerProgressBar: true
-     });";
-  if($_GET['mensaje']==1){ //insertar
-    echo "Toast.fire({
-         icon: 'success',
-
-        title: '<div style=margin-top:0.5rem;>Insertado con éxito.</div>'
-     });";
-  }else if($_GET['mensaje']==2){ //actualizar
-    echo "Toast.fire({
-         icon: 'success',
-        title: '<div style=margin-top:0.5rem;>Actualizado con éxito.</div>'
-     });";
-  }else if($_GET['mensaje'] == 3){ //eliminar
-    echo "Toast.fire({
-         icon: 'success',
-        title: '<div style=margin-top:0.5rem;>Eliminado con éxito.</div>'
-     });";
-  }else if($_GET['mensaje'] == 4){ //error
-    echo " Toast.fire({
-        icon: 'error',
-        title: '<div style=margin-top:0.5rem;>Error al efectuar la operación.</div>'
-      })";
-  }
-  echo "</script>";
-
-?>
+     });
 
 
 
-<script>
-  $(function () {
-
-    $('#tabla-tipos').DataTable({
-       "language": {
-            "url": "//cdn.datatables.net/plug-ins/1.10.16/i18n/Spanish.json"
-        },
-      "paging": true,
-      "lengthChange": false,
-      "searching": true,
-      "ordering": true,
-      "info": true,
-      "autoWidth": false,
-      "responsive": true,
-    });
-  });
-</script>
-
-<script>
-  $(".tabla-categorias tbody").on("click", "button.btnEditarCategoria", function(){
-
-    var idcategoria = $(this).attr("categoriaid");
-    var descripcion = $(this).attr("descripcion");
-    var img = $(this).attr("imagen");
-    var codigo =  $(this).attr("codigo");
-  
-    $("#modalEditarCategoria #categoriaid").val(idcategoria);
-    $("#modalEditarCategoria #categoriadescripcion").val(descripcion);
-    $("#modalEditarCategoria #categoriacodigo").val(codigo);
-    $("#modalEditarCategoria #imagenActual").val(img);
-    $("#modalEditarCategoria .previsualizar").attr("src", img);
-  
-
-});
-
-  
-$(".tabla-categorias tbody").on("click", "button.btnEliminarCategoria", function(){
-
-  var categoriaid = $(this).attr("categoriaid");
-  var imagen = $(this).attr("imagen");
-  var codigo = $(this).attr("codigo");
-
-      Swal.fire({
-        title: '¿Desea eliminar la categoría?',
-        text: "No se podrá revertir el cambio",
-        icon: 'warning',
-        showCancelButton: true,
-        confirmButtonColor: '#3085d6',
-        cancelButtonColor: '#d33',
-         cancelButtonText: "Cancelar",
-        confirmButtonText: 'Eliminar'
-        }).then((result) => {
-          if (result.isConfirmed) {
-            window.location = "../../business/categoriaaction.php?eliminar=true&id="+categoriaid+"&imagen="+imagen+"&codigo="+codigo;
+  $('#tabla-tipos').dataTable( {
+          'processing': true,
+            'serverSide': true,
+            'serverMethod': 'get',
+            'ajax': {
+                'url':'../business/tipoempleadoaction.php?metodo=obtener'
+            },          
+          "columns": [
+             
+              { "data": "tipodescripcion" },
+              { "data": null,
+              render: function ( data, type, row, meta) {
+                return "<div class='btn-group'><button class='btn btn-warning btnEditarTipo' tipoid="+data.tipoid+" descripcion="+data.tipodescripcion+" data-toggle='modal' data-target='#modalEditarTipo'><i class='fa fa-pencil-alt'></i></button><button class='btn btn-danger btnEliminarTipo' tipoid="+data.tipoid+" ><i class='fa fa-times'></i></button></div>";
+                }
+              }
+              
+          ]
       
+        })
+
+
+  $(document).on('click','#insertar',function(e) {
+
+
+     var descripcion = $("#formulario-insertar div").children().get(2);
+   
+    if(descripcion.value  == ""){
+      $("#formulario-insertar div").children().get(2).focus()
+        Toast.fire({
+                    icon: 'warning',
+                    title: '<div style=margin-top:0.5rem;>Ingresar descripción.</div>'
+              })
+        
+    }else{
+        var data = $("#formulario-insertar").serialize();
+
+        console.log(data)
+        $.ajax({
+          data: data,
+          type: "POST",
+          url: "../business/tipoempleadoaction.php",
+          success: function(dataResult){
+              var dataResult = JSON.parse(dataResult);
+              if(dataResult.statusCode==200){
+
+                     Toast.fire({
+                        icon: 'success',
+                        title: '<div style=margin-top:0.5rem;>Insertado con éxito.</div>'
+                  });
+                     $('#modalAgregarTipo #tipodescripcion').val("");
+                     $('#modalAgregarTipo').modal('hide');
+                     $('#tabla-tipos').DataTable().ajax.reload();
+                    
+                                                 
+              }else{
+                    Toast.fire({
+                        icon: 'error',
+                        title: '<div style=margin-top:0.5rem;>Error al efectuar la operación.</div>'
+                  })
+              }
+                        
           }
-    })
- 
+        });
+      }
+  });
+
+  $(document).on('click','#actualizar',function(e) {
+
+    var descripcion = $("#formulario-editar div").children().get(3);
+
+   if(descripcion.value  == ""){
+         $("#formulario-editar div").children().get(3).focus()
+        Toast.fire({
+                    icon: 'warning',
+                    title: '<div style=margin-top:0.5rem;>Ingresar descripción.</div>'
+              })
+    }else{
+        var data = $("#formulario-editar").serialize();
+        console.log(data)
+        $.ajax({
+          data: data,
+          type: "POST",
+          url: "../business/tipoempleadoaction.php",
+          success: function(dataResult){
+                var dataResult = JSON.parse(dataResult);
+              if(dataResult.statusCode==200){
+                           
+                    Toast.fire({
+                        icon: 'success',
+                        title: '<div style=margin-top:0.5rem;>Actualizado con éxito.</div>'
+                  });
+                     
+                     $('#modalEditarTipo').modal('hide');
+                     $('#tabla-tipos').DataTable().ajax.reload();
+                                                 
+              }else{
+                     Toast.fire({
+                        icon: 'error',
+                        title: '<div style=margin-top:0.5rem;>Error al efectuar la operación.</div>'
+                  })
+          
+              }
+                        
+          }
+        });
+    }
+    
+
+  });
+
+
+
+  $(".tabla-tipos tbody").on("click", "button.btnEditarTipo", function(){
+
+    var id = $(this).attr("tipoid");
+    var descripcion = $(this).attr("descripcion");
+   
+    $("#modalEditarTipo #tipoid").val( id );
+    $("#modalEditarTipo #tipodescripcion").val(descripcion);
+
+  
 
 });
 
-
-$(".nuevaImagen").change(function(){
-
-  var imagen = this.files[0];
   
-  /*=============================================
-    VALIDAMOS EL FORMATO DE LA IMAGEN SEA JPG O PNG
-    =============================================*/
+$(".tabla-tipos tbody").on("click", "button.btnEliminarTipo", function(){
 
-    if(imagen["type"] != "image/jpeg" && imagen["type"] != "image/png"){
+  var id = $(this).attr("tipoid");
 
-      $(".nuevaImagen").val("");
+  Swal.fire({
+        title: '¿Desea eliminar este tipo de usuario?',
+        showDenyButton: true,
+        showCancelButton: false,
+        confirmButtonText: 'Sí',
+        denyButtonText: `Cancelar`,
+      }).then((result) => {
+       
+        if (result.isConfirmed) {
+          let requestUrl ="../business/tipoempleadoaction.php?metodo=eliminar&id="+id;
+          console.log(requestUrl)
+          $.ajax({
+          url: requestUrl ,
+          type: "GET",
+          
+          
+          success: function(dataResult){
 
-       Toast.fire({
-          title: "Error al subir la imagen",
-          text: "¡La imagen debe estar en formato JPG o PNG!",
-          type: "error",
-          confirmButtonText: "¡Cerrar!"
+
+            var dataResult = JSON.parse(dataResult);
+            if(dataResult.statusCode==200){
+                         
+                  Toast.fire({
+                      icon: 'success',
+                      title: '<div style=margin-top:0.5rem;>Eliminado con éxito.</div>'
+                });
+                   
+                  
+                   $('#tabla-tipos').DataTable().ajax.reload();
+                                               
+            }else{
+                   Toast.fire({
+                      icon: 'error',
+                      title: '<div style=margin-top:0.5rem;>Error al efectuar la operación.</div>'
+                })
+        
+            }
+          }
         });
 
-    }else if(imagen["size"] > 2000000){
-
-      $(".nuevaImagen").val("");
-
-       Toast.fire({
-          title: "Error al subir la imagen",
-          text: "¡La imagen no debe pesar más de 2MB!",
-          type: "error",
-          confirmButtonText: "¡Cerrar!"
-        });
-
-    }else{
-
-      var datosImagen = new FileReader;
-      datosImagen.readAsDataURL(imagen);
-
-      $(datosImagen).on("load", function(event){
-
-        var rutaImagen = event.target.result;
-
-        $(".previsualizar").attr("src", rutaImagen);
-
+        } 
       })
+});
 
-    }
-})
+
 </script>
+
+
 </body>
 </html>
