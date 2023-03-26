@@ -303,7 +303,7 @@ background: linear-gradient(to right, #24243e, #302b63, #0f0c29); /* W3C, IE 10+
                 <button class="btn btn-primary" data-toggle="modal" data-target="#modalAgregarCategoria">
 
                     Agregar categoría
-
+          
                   </button>
               </div>
               <!-- /.card-header -->
@@ -318,20 +318,21 @@ background: linear-gradient(to right, #24243e, #302b63, #0f0c29); /* W3C, IE 10+
                   </thead>
                   <tbody>
                     <?php 
-                    /*
+                    
                         foreach($categorias as $categoria){
                           echo '<tr>';
-                          echo '<td>'.$categoria['categoriadescripcion'].'</td>';
+                          echo '<td>'.$categoria['categorianombre'].'</td>';
                           echo '<td>';
-                          echo "<div class='btn-group'><button class='btn btn-warning btnEditarCategoria' categoriaid='".$categoria["categoriaid"]."' descripcion='".$categoria['categoriadescripcion']."'  imagen='".$categoria["categoriaimg"]."' codigo='".$categoria["categoriacodigo"]."' data-toggle='modal' data-target='#modalEditarCategoria'><i class='fa fa-pencil'></i></button><button class='btn btn-danger btnEliminarCategoria' categoriaid='".$categoria["categoriaid"]."' imagen='".$categoria["categoriaimg"]."' codigo='".$categoria["categoriacodigo"]."' ><i class='fa fa-times'></i></button></div>";
+                          echo "<div class='btn-group'> <button class='btn btn-warning btnEditarCategoria' categoriaid='".$categoria["categoriaid"]."' categorianombre='".$categoria['categorianombre']."' data-toggle='modal' data-target='#modalEditarCategoria'> <i class='fa fa-pencil'></i></button><button class='btn btn-danger btnEliminarCategoria' categoriaid='".$categoria["categoriaid"]."' categorianombre='".$categoria['categorianombre']."'><i class='fa fa-times'></i>  </button> </div>";
+
                           echo '</td>';
-                          echo '</tr>';
+                                      echo '</tr>';
                         }
+                        ?>
+                      </tr>
 
+                    
 
-                      */
-
-                    ?>
                 
                   </tbody>
                   
@@ -368,30 +369,17 @@ background: linear-gradient(to right, #24243e, #302b63, #0f0c29); /* W3C, IE 10+
 
           <div class="box-body">
 
-            <form method="POST" action="../../business/categoriaaction.php"  enctype="multipart/form-data">
+            <form method="POST" action="../business/categoriaaction.php"  enctype="multipart/form-data">
            
 
-              <div class="form-group">
-                <label >Descripción:</label>
-                <input type="text" class="form-control" name="categoriadescripcion" id="categoriadescripcion" placeholder="Ingrese categoría">
+            <div class="form-group">
+                <label >Nombre:</label>
+                <input type="text" class="form-control"  name="categorianombre" id="categorianombre" placeholder="Ingrese categoría">
                
               </div>
               
 
-
-              <div class="form-group">
-                <label >Imagen: </label>
-                <input type="file" class="nuevaImagen" name="nuevaImagen">
-
-                <p class="help-block">Peso máximo de la imagen 2MB</p>
-
-                <img src="img/categorias/default/anonymous.png" class="img-thumbnail previsualizar" width="100px">
-
-              <input type="hidden" name="imagenActual" id="imagenActual">
-
-              </div>
-              
-             <center><button type="submit" name="insertar" class="btn btn-primary">Insertar</button></center> 
+             <center><button type="submit" value="Insertar" name="Insertar" id="Insertar"class="btn btn-primary">Insertar</button></center> 
             </form>
 
     </div>
@@ -402,7 +390,6 @@ background: linear-gradient(to right, #24243e, #302b63, #0f0c29); /* W3C, IE 10+
   </div>
 
 </div>
-
 <div id="modalEditarCategoria" class="modal fade" role="dialog">
   
   <div class="modal-dialog">
@@ -420,41 +407,33 @@ background: linear-gradient(to right, #24243e, #302b63, #0f0c29); /* W3C, IE 10+
 
           <div class="box-body">
 
-            <form method="POST" action="../../business/categoriaaction.php"  enctype="multipart/form-data">
+            <form method="POST" action="../business/categoriaaction.php"  >
               
               <div class="form-group">
-                <input type="hidden" name="categoriaid" id="categoriaid">
-                <input type="hidden" name="categoriacodigo" id="categoriacodigo">
+                <input type="hidden" name="categoriaid" id="categoriaid" >
+
               </div>
 
               <div class="form-group">
-                <label >Descripción:</label>
-                <input type="text" class="form-control" name="categoriadescripcion" id="categoriadescripcion" placeholder="Ingrese categoría">
+                <label >Nombre:</label>
+                <input type="text" class="form-control" name="categorianombre" id="categorianombre" placeholder="Ingrese categoría">
                
               </div>
               
 
 
-              <div class="form-group">
-                <label >Imagen: </label>
-                  <input type="file" class="nuevaImagen" name="editarImagen">
-
-                <p class="help-block">Peso máximo de la imagen 2MB</p>
-
-                <img src="img/categorias/default/anonymous.png" class="img-thumbnail previsualizar" width="100px">
-
-              <input type="hidden" name="imagenActual" id="imagenActual">
-
-              </div>
+    
               
-             <center><button type="submit" name="actualizar" class="btn btn-primary">Actualizar</button></center> 
+             <center><button type="submit"  value="actualizar" name="actualizar" id="actualizar"  class="btn btn-primary">Actualizar</button></center> 
             </form>
-
+          </div>
+        </div>
+      </div>
     </div>
-
-  </div>
-
 </div>
+
+
+  
   </div>
 
 </div>
@@ -546,8 +525,8 @@ background: linear-gradient(to right, #24243e, #302b63, #0f0c29); /* W3C, IE 10+
   }
   echo "</script>";
 
+  
 ?>
-
 
 
 <script>
@@ -567,20 +546,17 @@ background: linear-gradient(to right, #24243e, #302b63, #0f0c29); /* W3C, IE 10+
     });
   });
 </script>
-
-<script>
+ <script>
   $(".tabla-categorias tbody").on("click", "button.btnEditarCategoria", function(){
 
-    var idcategoria = $(this).attr("categoriaid");
-    var descripcion = $(this).attr("descripcion");
-    var img = $(this).attr("imagen");
-    var codigo =  $(this).attr("codigo");
-  
-    $("#modalEditarCategoria #categoriaid").val(idcategoria);
-    $("#modalEditarCategoria #categoriadescripcion").val(descripcion);
-    $("#modalEditarCategoria #categoriacodigo").val(codigo);
-    $("#modalEditarCategoria #imagenActual").val(img);
-    $("#modalEditarCategoria .previsualizar").attr("src", img);
+    var categoriaid = $(this).attr("categoriaid");
+    var categorianombre = $(this).attr("categorianombre");
+
+    
+   // alert(categoriaid);
+    $("#modalEditarCategoria #categoriaid").val(categoriaid);
+    $("#modalEditarCategoria #categorianombre").val(categorianombre);
+ 
   
 
 });
@@ -589,74 +565,31 @@ background: linear-gradient(to right, #24243e, #302b63, #0f0c29); /* W3C, IE 10+
 $(".tabla-categorias tbody").on("click", "button.btnEliminarCategoria", function(){
 
   var categoriaid = $(this).attr("categoriaid");
-  var imagen = $(this).attr("imagen");
-  var codigo = $(this).attr("codigo");
+  //alert(proveedorid);
+ Swal.fire({
+       title: '¿Desea eliminar la categoria?',
+       text: "No se podrá revertir el cambio",
+       icon: 'warning',
+       showCancelButton: true,
+       confirmButtonColor: '#3085d6',
+       cancelButtonColor: '#d33',
+        cancelButtonText: "Cancelar",
+       confirmButtonText: 'Eliminar'
+       }).then((result) => {
+         if (result.isConfirmed) {
+           window.location = "../business/categoriaaction.php?eliminar=true&categoriaid="+categoriaid;
+    
+         }
+   })
 
-      Swal.fire({
-        title: '¿Desea eliminar la categoría?',
-        text: "No se podrá revertir el cambio",
-        icon: 'warning',
-        showCancelButton: true,
-        confirmButtonColor: '#3085d6',
-        cancelButtonColor: '#d33',
-         cancelButtonText: "Cancelar",
-        confirmButtonText: 'Eliminar'
-        }).then((result) => {
-          if (result.isConfirmed) {
-            window.location = "../../business/categoriaaction.php?eliminar=true&id="+categoriaid+"&imagen="+imagen+"&codigo="+codigo;
-      
-          }
-    })
- 
 
 });
 
 
-$(".nuevaImagen").change(function(){
 
-  var imagen = this.files[0];
-  
-  /*=============================================
-    VALIDAMOS EL FORMATO DE LA IMAGEN SEA JPG O PNG
-    =============================================*/
 
-    if(imagen["type"] != "image/jpeg" && imagen["type"] != "image/png"){
-
-      $(".nuevaImagen").val("");
-
-       Toast.fire({
-          title: "Error al subir la imagen",
-          text: "¡La imagen debe estar en formato JPG o PNG!",
-          type: "error",
-          confirmButtonText: "¡Cerrar!"
-        });
-
-    }else if(imagen["size"] > 2000000){
-
-      $(".nuevaImagen").val("");
-
-       Toast.fire({
-          title: "Error al subir la imagen",
-          text: "¡La imagen no debe pesar más de 2MB!",
-          type: "error",
-          confirmButtonText: "¡Cerrar!"
-        });
-
-    }else{
-
-      var datosImagen = new FileReader;
-      datosImagen.readAsDataURL(imagen);
-
-      $(datosImagen).on("load", function(event){
-
-        var rutaImagen = event.target.result;
-
-        $(".previsualizar").attr("src", rutaImagen);
-
-      })
-
-    }
-})
 </script>
+
+
 </body>
 </html>
