@@ -11,9 +11,9 @@ class Database{
  
     private static $cont  = null;
     
-    public function __construct() {
+  /*  public function __construct() {
         die('Inicialización no permitida.');
-    }
+    }*/
     
     public static function conectar()
     {
