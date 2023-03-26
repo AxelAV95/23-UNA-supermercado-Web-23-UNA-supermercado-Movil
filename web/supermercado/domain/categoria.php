@@ -2,9 +2,8 @@
 
 	class Categoria {
 		private $id;
-		private $descripcion;
-		private $imagen;
-		private $codigo;
+		private $nombre;
+
 
 
     public function getId()
@@ -19,51 +18,20 @@
         return $this;
     }
 
-    public function getDescripcion()
-    {
-        return $this->descripcion;
-    }
-
  
-    public function setDescripcion($descripcion)
-    {
-        $this->descripcion = $descripcion;
+	
+		public function getNombre()
+		{
+				return $this->nombre;
+		}
 
-        return $this;
-    }
+	
+		public function setNombre($nombre)
+		{
+				$this->nombre = $nombre;
 
-
-    public function getImagen()
-    {
-        return $this->imagen;
-    }
-
-    public function setImagen($imagen)
-    {
-        $this->imagen = $imagen;
-
-        return $this;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getCodigo()
-    {
-        return $this->codigo;
-    }
-
-    /**
-     * @param mixed $codigo
-     *
-     * @return self
-     */
-    public function setCodigo($codigo)
-    {
-        $this->codigo = $codigo;
-
-        return $this;
-    }
+				return $this;
+		}
 }
 
 
