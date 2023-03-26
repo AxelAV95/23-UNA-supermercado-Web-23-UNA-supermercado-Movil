@@ -1,16 +1,16 @@
 <?php  
  
-    include '../business/categoriabusiness.php';
+    include '../business/proveedorbusiness.php';
 
-    $categoriaBusiness = new CategoriaBusiness();
-    $categorias = $categoriaBusiness->getAllTBCategorias();
+    $proveedorBusiness = new ProveedorBusiness();
+    $proveedores = $proveedorBusiness->getAllTBProveedores();
 
 
 
 ?>
 
 <?php 
- //  include 'template/sesion.php';
+
   ?>
 
 
@@ -57,6 +57,7 @@
     rel="stylesheet"
     href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
   />
+  <script type="text/javascript" src="wforms.js"></script>
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
 <div class="wrapper">
@@ -299,7 +300,7 @@ background: linear-gradient(to right, #24243e, #302b63, #0f0c29); /* W3C, IE 10+
         <!-- Main row -->
        <div class="card">
               <div class="card-header jus">
-                <button class="btn btn-primary" data-toggle="modal" data-target="#modalAgregarCategoria">
+                <button class="btn btn-primary" data-toggle="modal" data-target="#modalAgregarProveedor">
 
                     Agregar proveedor
 
@@ -307,28 +308,38 @@ background: linear-gradient(to right, #24243e, #302b63, #0f0c29); /* W3C, IE 10+
               </div>
               <!-- /.card-header -->
               <div class="card-body">
-                 <table id="proveedor" class="tabla-proveedor table table-bordered table-hover">
+              <table id="proveedores" class="tabla-proveedores table table-bordered table-hover">
                   <thead>
                   <tr>
-                    <th>Descripción</th>
+                    <th>Nombre</th>
+                    <th>Dirección</th>
+                    <th>Correo</th>
+                    <th>Teléfono</th>
                     <th>Acciones</th>
                     
                   </tr>
                   </thead>
                   <tbody>
                     <?php 
-                    /*
-                        foreach($categorias as $categoria){
+                        foreach($proveedores as $proveedor){
                           echo '<tr>';
-                          echo '<td>'.$categoria['categoriadescripcion'].'</td>';
+                          echo '<td>'.$proveedor['proveedornombre'].'</td>';
+                         
+                          echo '<td>'.$proveedor['proveedordireccion'].'</td>';
+                         
+                          echo '<td>'.$proveedor['proveedorcorreo'].'</td>';
+                          
+                          echo '<td>'.$proveedor['proveedortelefono'].'</td>';
                           echo '<td>';
-                          echo "<div class='btn-group'><button class='btn btn-warning btnEditarCategoria' categoriaid='".$categoria["categoriaid"]."' descripcion='".$categoria['categoriadescripcion']."'  imagen='".$categoria["categoriaimg"]."' codigo='".$categoria["categoriacodigo"]."' data-toggle='modal' data-target='#modalEditarCategoria'><i class='fa fa-pencil'></i></button><button class='btn btn-danger btnEliminarCategoria' categoriaid='".$categoria["categoriaid"]."' imagen='".$categoria["categoriaimg"]."' codigo='".$categoria["categoriacodigo"]."' ><i class='fa fa-times'></i></button></div>";
+<<<<<<< HEAD
+                          echo "<div class='btn-group'><button class='btn btn-warning btnEditarProveedor' proveedorid='".$proveedor["proveedorid"]."' proveedornombre='".$proveedor['proveedornombre']."' proveedordireccion='".$proveedor['proveedordireccion']."'  proveedorcorreo='".$proveedor["proveedorcorreo"]."'  proveedortelefono='".$proveedor["proveedortelefono"]."' data-toggle='modal' data-target='#modalEditarProveedor'><i class='fa fa-pencil-alt'></i></button><button class='btn btn-danger btnEliminarProveedor' proveedorid='".$proveedor["proveedorid"]."' proveedordireccion='".$proveedor["proveedordireccion"]."' proveedorcorreo='".$proveedor["proveedorcorreo"]."' proveedortelefono='".$proveedor["proveedortelefono"]."' ><i class='fa fa-times'></i></button></div>";
+=======
+                          echo "<div class='btn-group'><button class='btn btn-warning btnEditarProveedor' proveedorid='".$proveedor["proveedorid"]."' proveedornombre='".$proveedor['proveedornombre']."' proveedordireccion='".$proveedor['proveedordireccion']."'  proveedortelefono='".$proveedor["usuariotelefono"]."' data-toggle='modal' data-target='#modalEditarProveedor'><i class='fa fa-pencil-alt'></i></button><button class='btn btn-danger btnEliminarProveedor' proveedorid='".$proveedor["proveedorid"]."' proveedordireccion='".$proveedor["proveedordireccion"]."' proveedorcorreo='".$proveedor["proveedorcorreo"]."' proveedortelefono='".$proveedor["proveedortelefono"]."' ><i class='fa fa-times'></i></button></div>";
+>>>>>>> e9d9ffd761021265a8dfaa2568b81956a94eaa02
                           echo '</td>';
                           echo '</tr>';
                         }
 
-
-                      */
 
                     ?>
                 
@@ -350,14 +361,14 @@ background: linear-gradient(to right, #24243e, #302b63, #0f0c29); /* W3C, IE 10+
 </div>
 <!-- ./wrapper -->
 
-<div id="modalAgregarCategoria" class="modal fade" role="dialog">
+<div id="modalAgregarProveedor" class="modal fade" role="dialog">
   
   <div class="modal-dialog">
 
     <div class="modal-content">
 
         <div class="modal-header">
-          <h4 class="modal-title">Agregar categoría</h4>
+          <h4 class="modal-title">Agregar proveedor</h4>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
@@ -367,49 +378,74 @@ background: linear-gradient(to right, #24243e, #302b63, #0f0c29); /* W3C, IE 10+
 
           <div class="box-body">
 
-            <form method="POST" action="../../business/categoriaaction.php"  enctype="multipart/form-data">
+<<<<<<< HEAD
+            <form method="POST" action="../business/proveedoraction.php"  enctype="multipart/form-data">
+=======
+            <form method="POST" action="../../business/proveedoraction.php"  enctype="multipart/form-data">
+>>>>>>> e9d9ffd761021265a8dfaa2568b81956a94eaa02
            
 
               <div class="form-group">
-                <label >Descripción:</label>
-                <input type="text" class="form-control" name="categoriadescripcion" id="categoriadescripcion" placeholder="Ingrese categoría">
+                <label >Nombre:</label>
+<<<<<<< HEAD
+                <input type="text" class="form-control" name="proveedornombre" id="proveedornombre" placeholder="Ingrese un nombre" required>
+=======
+                <input type="text" class="form-control" name="proveedornombre" id="proveedornombre" placeholder="Ingrese un nombre">
+>>>>>>> e9d9ffd761021265a8dfaa2568b81956a94eaa02
                
               </div>
               
-
-
               <div class="form-group">
-                <label >Imagen: </label>
-                <input type="file" class="nuevaImagen" name="nuevaImagen">
-
-                <p class="help-block">Peso máximo de la imagen 2MB</p>
-
-                <img src="img/categorias/default/anonymous.png" class="img-thumbnail previsualizar" width="100px">
-
-              <input type="hidden" name="imagenActual" id="imagenActual">
-
+                <label >Dirección:</label>
+<<<<<<< HEAD
+                <input type="text" class="form-control" name="proveedordireccion" id="proveedordireccion" placeholder="Ingrese una direccion" required>
+=======
+                <input type="text" class="form-control" name="proveedordireccion" id="proveedordireccion" placeholder="Ingrese una direccion">
+>>>>>>> e9d9ffd761021265a8dfaa2568b81956a94eaa02
+               
               </div>
+              <div class="form-group">
+                <label >Correo:</label>
+<<<<<<< HEAD
+                <input type="email" class="form-control" name="proveedorcorreo" id="proveedorcorreo" placeholder="Ingrese un correo" class="validate-email" required>
+=======
+                <input type="text" class="form-control" name="proveedorcorreo" id="proveedorcorreo" placeholder="Ingrese un correo">
+>>>>>>> e9d9ffd761021265a8dfaa2568b81956a94eaa02
+               
+              </div>
+              <div class="form-group">
+                <label >Teléfono:</label>
+<<<<<<< HEAD
+                <input type="number" class="form-control" name="proveedortelefono" id="proveedortelefono" placeholder="Ingrese un teléfono" min="1" required pattern="[0-9]+" >
+=======
+                <input type="text" class="form-control" name="proveedortelefono" id="proveedortelefono" placeholder="Ingrese un teléfono">
+>>>>>>> e9d9ffd761021265a8dfaa2568b81956a94eaa02
+                      </div>
+
+            <br><br>
+
+             
               
              <center><button type="submit" name="insertar" class="btn btn-primary">Insertar</button></center> 
             </form>
 
+        </div>
+
+      </div>
+
     </div>
-
-  </div>
-
-</div>
   </div>
 
 </div>
 
-<div id="modalEditarCategoria" class="modal fade" role="dialog">
-  
-  <div class="modal-dialog">
+<div id="modalEditarProveedor" class="modal fade" role="dialog">
 
-    <div class="modal-content">
+    <div class="modal-dialog">
+
+      <div class="modal-content">
 
         <div class="modal-header">
-          <h4 class="modal-title">Editar categoría</h4>
+          <h4 class="modal-title">Editar proveedor</h4>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
@@ -419,44 +455,62 @@ background: linear-gradient(to right, #24243e, #302b63, #0f0c29); /* W3C, IE 10+
 
           <div class="box-body">
 
-            <form method="POST" action="../../business/categoriaaction.php"  enctype="multipart/form-data">
-              
+<<<<<<< HEAD
+            <form method="POST" action="../business/proveedoraction.php" enctype="multipart/form-data" >
+=======
+            <form method="POST" action="../../business/proveedoraction.php" enctype="multipart/form-data">
+>>>>>>> e9d9ffd761021265a8dfaa2568b81956a94eaa02
+
               <div class="form-group">
-                <input type="hidden" name="categoriaid" id="categoriaid">
-                <input type="hidden" name="categoriacodigo" id="categoriacodigo">
+                <input type="hidden" name="proveedorid" id="proveedorid">
+
               </div>
 
               <div class="form-group">
-                <label >Descripción:</label>
-                <input type="text" class="form-control" name="categoriadescripcion" id="categoriadescripcion" placeholder="Ingrese categoría">
+                <label >Nombre:</label>
+                <input type="text" class="form-control" name="proveedornombre" id="proveedornombre" placeholder="Ingrese un nombre">
                
               </div>
               
-
+              <div class="form-group">
+                <label >Dirección:</label>
+                <input type="text" class="form-control" name="proveedordireccion" id="proveedordireccion" placeholder="Ingrese una dirección">
+               
+              </div>
+              <div class="form-group">
+                <label >Correo:</label>
+<<<<<<< HEAD
+                <input type="email" class="form-control" name="proveedorcorreo" id="proveedorcorreo" placeholder="Ingrese un correo">
+=======
+                <input type="text" class="form-control" name="proveedorcorreo" id="proveedorcorreo" placeholder="Ingrese un correo">
+>>>>>>> e9d9ffd761021265a8dfaa2568b81956a94eaa02
+               
+              </div>
 
               <div class="form-group">
-                <label >Imagen: </label>
-                  <input type="file" class="nuevaImagen" name="editarImagen">
-
-                <p class="help-block">Peso máximo de la imagen 2MB</p>
-
-                <img src="img/categorias/default/anonymous.png" class="img-thumbnail previsualizar" width="100px">
-
-              <input type="hidden" name="imagenActual" id="imagenActual">
-
+                <label >Teléfono:</label>
+<<<<<<< HEAD
+                <input type="number" class="form-control" name="proveedortelefono" id="proveedortelefono" placeholder="Ingrese un teléfono" min="1" required pattern="[0-9]+">
+=======
+                <input type="text" class="form-control" name="proveedortelefono" id="proveedortelefono" placeholder="Ingrese un teléfono">
+>>>>>>> e9d9ffd761021265a8dfaa2568b81956a94eaa02
+               
               </div>
               
-             <center><button type="submit" name="actualizar" class="btn btn-primary">Actualizar</button></center> 
+            <br>
+              <center><button type="submit" name="actualizar" class="btn btn-primary">Actualizar</button></center>
             </form>
 
+          </div>
+
+        </div>
+
+      </div>
     </div>
 
   </div>
 
-</div>
-  </div>
 
-</div>
 
 
 
@@ -511,8 +565,117 @@ background: linear-gradient(to right, #24243e, #302b63, #0f0c29); /* W3C, IE 10+
 <script src="https://unpkg.com/web-audio-daw"></script>
 <script src="dist/js/notificacion.js"></script>
 
+<script type="text/javascript">
+wFORMS.behaviors['validation'].errMsg_email = "El email introducido no tiene un formato valido";
+wFORMS.behaviors['validation'].errMsg_notification = "%% error(s) detectado(s). El formulario no se enviará.Por favor, chequea la información suministrada.";
+</script>
+<script>  
+
+  $.extend( $.validator.messages, {
+    required: "Este campo es requerido.",
+    remote: "Por favor modificar este campo.",
+    email: "Ingrese un correo válido.",
+    url: "Ingrese una URL válida.",
+    date: "Ingrese una fecha válida.",
+    dateISO: "Ingrese una fecha válida(ISO).",
+    number: "Ingrese un número válido.",
+    digits: "Ingrese solo dígitos.",
+    equalTo: "Ingrese el mismo valor otra vez."
+  } );
+
+
+  var form = $("#example-advanced-form").show();
+
+  form.steps({
+    headerTag: "h3",
+    bodyTag: "fieldset",
+    transitionEffect: "slideLeft",
+    labels:{
+      finish: "Insertar"
+    },
+    onStepChanging: function (event, currentIndex, newIndex)
+    {
+        // Allways allow previous action even if the current form is not valid!
+      if (currentIndex > newIndex)
+      {
+        return true;
+      }
+        // Forbid next action on "Warning" step if the user is to young
+      if (newIndex === 3 && Number($("#age-2").val()) < 18)
+      {
+        return false;
+      }
+        // Needed in some cases if the user went back (clean up)
+      if (currentIndex < newIndex)
+      {
+            // To remove error styles
+        form.find(".body:eq(" + newIndex + ") label.error").remove();
+        form.find(".body:eq(" + newIndex + ") .error").removeClass("error");
+      }
+      form.validate().settings.ignore = ":disabled,:hidden";
+      return form.valid();
+    },
+    onStepChanged: function (event, currentIndex, priorIndex)
+    {
+        // Used to skip the "Warning" step if the user is old enough.
+      if (currentIndex === 2 && Number($("#age-2").val()) >= 18)
+      {
+        form.steps("next");
+      }
+        // Used to skip the "Warning" step if the user is old enough and wants to the previous step.
+      if (currentIndex === 2 && priorIndex === 3)
+      {
+        form.steps("previous");
+      }
+    },
+    onFinishing: function (event, currentIndex)
+    {
+      form.validate().settings.ignore = ":disabled";
+      return form.valid();
+    },
+    onFinished: function (event, currentIndex)
+    {
+
+      var form = $("#example-advanced-form").closest("form");
+      var formData = new FormData(form[0]);
+      console.log(formData);
+      var data = $("#example-advanced-form :input").serializeArray();
+      datos = {};
+        jQuery.each(data, function(i, item){
+            datos[item['name']]=item['value'];
+        });
+      console.log(data);
+
+      $.ajax({
+        url: "../business/proveedoraction.php",
+        type: "POST",
+        data: formData,
+         processData: false,
+    contentType: false,
+        
+        success: function(respuesta){
+        // alert(respuesta);
+
+         if(respuesta == 1){
+          window.location = "proveedorview.php";
+         }
+        }
+      });
+   //   alert("Submitted!");
+    }
+  }).validate({
+    errorPlacement: function errorPlacement(error, element) { element.before(error); },
+    rules: {
+      confirm: {
+        equalTo: "#password-2"
+      }
+    }
+  });
+
+</script>
+
 <?php 
-  //ALERTAS
+  //ALERTS
   echo '<script>';
   echo " var Toast = Swal.mixin({
        toast: true,
@@ -521,7 +684,7 @@ background: linear-gradient(to right, #24243e, #302b63, #0f0c29); /* W3C, IE 10+
        timer: 3000,
        timerProgressBar: true
      });";
-  if($_GET['mensaje']==1){ //insertar
+  if($_GET['mensaje']==1){ //insertar proveedor
     echo "Toast.fire({
          icon: 'success',
 
@@ -552,7 +715,7 @@ background: linear-gradient(to right, #24243e, #302b63, #0f0c29); /* W3C, IE 10+
 <script>
   $(function () {
 
-    $('#proveedor').DataTable({
+    $('#proveedores').DataTable({
        "language": {
             "url": "//cdn.datatables.net/plug-ins/1.10.16/i18n/Spanish.json"
         },
@@ -568,94 +731,65 @@ background: linear-gradient(to right, #24243e, #302b63, #0f0c29); /* W3C, IE 10+
 </script>
 
 <script>
-  $(".tabla-categorias tbody").on("click", "button.btnEditarCategoria", function(){
+  $(".tabla-proveedores tbody").on("click", "button.btnEditarProveedor", function(){
 
-    var idcategoria = $(this).attr("categoriaid");
-    var descripcion = $(this).attr("descripcion");
-    var img = $(this).attr("imagen");
-    var codigo =  $(this).attr("codigo");
-  
-    $("#modalEditarCategoria #categoriaid").val(idcategoria);
-    $("#modalEditarCategoria #categoriadescripcion").val(descripcion);
-    $("#modalEditarCategoria #categoriacodigo").val(codigo);
-    $("#modalEditarCategoria #imagenActual").val(img);
-    $("#modalEditarCategoria .previsualizar").attr("src", img);
+    var proveedorid = $(this).attr("proveedorid");
+    var proveedornombre = $(this).attr("proveedornombre");
+    var proveedordireccion = $(this).attr("proveedordireccion");
+    var proveedorcorreo =  $(this).attr("proveedorcorreo");
+    var proveedortelefono = $(this).attr("proveedortelefono");
+    
+<<<<<<< HEAD
+    //alert(proveedortelefono);
+=======
+    alert(proveedorid);
+>>>>>>> e9d9ffd761021265a8dfaa2568b81956a94eaa02
+    $("#modalEditarProveedor #proveedorid").val(proveedorid);
+    $("#modalEditarProveedor #proveedornombre").val(proveedornombre);
+    $("#modalEditarProveedor #proveedordireccion").val(proveedordireccion);
+    $("#modalEditarProveedor #proveedorcorreo").val(proveedorcorreo);
+    $("#modalEditarProveedor #proveedortelefono").val(proveedortelefono);
+
   
 
 });
 
   
-$(".tabla-categorias tbody").on("click", "button.btnEliminarCategoria", function(){
+$(".tabla-proveedores tbody").on("click", "button.btnEliminarProveedor", function(){
 
-  var categoriaid = $(this).attr("categoriaid");
-  var imagen = $(this).attr("imagen");
-  var codigo = $(this).attr("codigo");
+  var proveedorid = $(this).attr("proveedorid");
+  alert(proveedorid);
+ Swal.fire({
+       title: '¿Desea eliminar el proveedor?',
+       text: "No se podrá revertir el cambio",
+       icon: 'warning',
+       showCancelButton: true,
+       confirmButtonColor: '#3085d6',
+       cancelButtonColor: '#d33',
+        cancelButtonText: "Cancelar",
+       confirmButtonText: 'Eliminar'
+       }).then((result) => {
+         if (result.isConfirmed) {
+<<<<<<< HEAD
+           window.location = "../business/proveedoraction.php?eliminar=true&proveedorid="+proveedorid;
+=======
+           window.location = "../../business/proveedoraction.php?eliminar=true&proveedorid="+proveedorid;
+>>>>>>> e9d9ffd761021265a8dfaa2568b81956a94eaa02
+    
+         }
+   })
 
-      Swal.fire({
-        title: '¿Desea eliminar la categoría?',
-        text: "No se podrá revertir el cambio",
-        icon: 'warning',
-        showCancelButton: true,
-        confirmButtonColor: '#3085d6',
-        cancelButtonColor: '#d33',
-         cancelButtonText: "Cancelar",
-        confirmButtonText: 'Eliminar'
-        }).then((result) => {
-          if (result.isConfirmed) {
-            window.location = "../../business/categoriaaction.php?eliminar=true&id="+categoriaid+"&imagen="+imagen+"&codigo="+codigo;
-      
-          }
-    })
- 
 
 });
 
 
-$(".nuevaImagen").change(function(){
 
-  var imagen = this.files[0];
-  
-  /*=============================================
-    VALIDAMOS EL FORMATO DE LA IMAGEN SEA JPG O PNG
-    =============================================*/
 
-    if(imagen["type"] != "image/jpeg" && imagen["type"] != "image/png"){
-
-      $(".nuevaImagen").val("");
-
-       Toast.fire({
-          title: "Error al subir la imagen",
-          text: "¡La imagen debe estar en formato JPG o PNG!",
-          type: "error",
-          confirmButtonText: "¡Cerrar!"
-        });
-
-    }else if(imagen["size"] > 2000000){
-
-      $(".nuevaImagen").val("");
-
-       Toast.fire({
-          title: "Error al subir la imagen",
-          text: "¡La imagen no debe pesar más de 2MB!",
-          type: "error",
-          confirmButtonText: "¡Cerrar!"
-        });
-
-    }else{
-
-      var datosImagen = new FileReader;
-      datosImagen.readAsDataURL(imagen);
-
-      $(datosImagen).on("load", function(event){
-
-        var rutaImagen = event.target.result;
-
-        $(".previsualizar").attr("src", rutaImagen);
-
-      })
-
-    }
-})
 </script>
+<<<<<<< HEAD
+
+  </body>
+=======
 </body>
+>>>>>>> e9d9ffd761021265a8dfaa2568b81956a94eaa02
 </html>
