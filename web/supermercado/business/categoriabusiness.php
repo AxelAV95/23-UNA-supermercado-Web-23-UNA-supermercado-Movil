@@ -31,9 +31,9 @@
 			 return $this->categoriaData->getAllTBCategorias();
 		}
 
-        public function getDescripcionCategoria($id){
+        /*public function getDescripcionCategoria($id){
             return $this->categoriaData->getDescripcionCategoria($id);
-        }
+        }*/
 	}
 
 

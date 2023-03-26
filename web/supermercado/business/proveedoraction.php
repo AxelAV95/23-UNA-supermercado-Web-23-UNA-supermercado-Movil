@@ -36,6 +36,7 @@
 			 
 		
 	}else if(isset($_POST['actualizar'])){
+<<<<<<< HEAD
 		if(isset($_POST['proveedornombre']) && isset($_POST['proveedordireccion']) && isset($_POST['proveedorcorreo'])
         && isset($_POST['proveedortelefono'])){
 			$id = $_POST['proveedorid'];
@@ -43,6 +44,15 @@
 			$direccion = $_POST['proveedordireccion'];
             $correo = $_POST['proveedorcorreo'];
             $telefono = $_POST['proveedortelefono'];
+=======
+		if(isset($_POST['provedornombre']) && isset($_POST['provedordireccion']) && isset($_POST['provedorcorreo'])
+        && isset($_POST['provedortelefono'])){
+			$id = $_POST['provedorid'];
+			$nombre = $_POST['provedornombre'];
+			$direccion = $_POST['provedordireccion'];
+            $correo = $_POST['provedorcorreo'];
+            $telefono = $_POST['provedortelefono'];
+>>>>>>> e9d9ffd761021265a8dfaa2568b81956a94eaa02
            
 			
 
@@ -52,7 +62,11 @@
 				$proveedor->setNombre($nombre);
 	    		$proveedor->setDireccion($direccion);
                 $proveedor->setCorreo($correo);
+<<<<<<< HEAD
                 $proveedor->setTelefono($telefono);
+=======
+                $usuario->setTelefono($telefono);
+>>>>>>> e9d9ffd761021265a8dfaa2568b81956a94eaa02
               
 				
 	    		$resultado = $proveedorBusiness->modificarproveedor($proveedor);

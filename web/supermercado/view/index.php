@@ -7,7 +7,7 @@
  ?>
 
  <?php 
-   include 'template/sesion.php';
+  // include 'template/sesion.php';
   ?>
 
 <!DOCTYPE html>

@@ -331,7 +331,11 @@ background: linear-gradient(to right, #24243e, #302b63, #0f0c29); /* W3C, IE 10+
                           
                           echo '<td>'.$proveedor['proveedortelefono'].'</td>';
                           echo '<td>';
+<<<<<<< HEAD
                           echo "<div class='btn-group'><button class='btn btn-warning btnEditarProveedor' proveedorid='".$proveedor["proveedorid"]."' proveedornombre='".$proveedor['proveedornombre']."' proveedordireccion='".$proveedor['proveedordireccion']."'  proveedorcorreo='".$proveedor["proveedorcorreo"]."'  proveedortelefono='".$proveedor["proveedortelefono"]."' data-toggle='modal' data-target='#modalEditarProveedor'><i class='fa fa-pencil-alt'></i></button><button class='btn btn-danger btnEliminarProveedor' proveedorid='".$proveedor["proveedorid"]."' proveedordireccion='".$proveedor["proveedordireccion"]."' proveedorcorreo='".$proveedor["proveedorcorreo"]."' proveedortelefono='".$proveedor["proveedortelefono"]."' ><i class='fa fa-times'></i></button></div>";
+=======
+                          echo "<div class='btn-group'><button class='btn btn-warning btnEditarProveedor' proveedorid='".$proveedor["proveedorid"]."' proveedornombre='".$proveedor['proveedornombre']."' proveedordireccion='".$proveedor['proveedordireccion']."'  proveedortelefono='".$proveedor["usuariotelefono"]."' data-toggle='modal' data-target='#modalEditarProveedor'><i class='fa fa-pencil-alt'></i></button><button class='btn btn-danger btnEliminarProveedor' proveedorid='".$proveedor["proveedorid"]."' proveedordireccion='".$proveedor["proveedordireccion"]."' proveedorcorreo='".$proveedor["proveedorcorreo"]."' proveedortelefono='".$proveedor["proveedortelefono"]."' ><i class='fa fa-times'></i></button></div>";
+>>>>>>> e9d9ffd761021265a8dfaa2568b81956a94eaa02
                           echo '</td>';
                           echo '</tr>';
                         }
@@ -374,28 +378,48 @@ background: linear-gradient(to right, #24243e, #302b63, #0f0c29); /* W3C, IE 10+
 
           <div class="box-body">
 
+<<<<<<< HEAD
             <form method="POST" action="../business/proveedoraction.php"  enctype="multipart/form-data">
+=======
+            <form method="POST" action="../../business/proveedoraction.php"  enctype="multipart/form-data">
+>>>>>>> e9d9ffd761021265a8dfaa2568b81956a94eaa02
            
 
               <div class="form-group">
                 <label >Nombre:</label>
+<<<<<<< HEAD
                 <input type="text" class="form-control" name="proveedornombre" id="proveedornombre" placeholder="Ingrese un nombre" required>
+=======
+                <input type="text" class="form-control" name="proveedornombre" id="proveedornombre" placeholder="Ingrese un nombre">
+>>>>>>> e9d9ffd761021265a8dfaa2568b81956a94eaa02
                
               </div>
               
               <div class="form-group">
                 <label >Dirección:</label>
+<<<<<<< HEAD
                 <input type="text" class="form-control" name="proveedordireccion" id="proveedordireccion" placeholder="Ingrese una direccion" required>
+=======
+                <input type="text" class="form-control" name="proveedordireccion" id="proveedordireccion" placeholder="Ingrese una direccion">
+>>>>>>> e9d9ffd761021265a8dfaa2568b81956a94eaa02
                
               </div>
               <div class="form-group">
                 <label >Correo:</label>
+<<<<<<< HEAD
                 <input type="email" class="form-control" name="proveedorcorreo" id="proveedorcorreo" placeholder="Ingrese un correo" class="validate-email" required>
+=======
+                <input type="text" class="form-control" name="proveedorcorreo" id="proveedorcorreo" placeholder="Ingrese un correo">
+>>>>>>> e9d9ffd761021265a8dfaa2568b81956a94eaa02
                
               </div>
               <div class="form-group">
                 <label >Teléfono:</label>
+<<<<<<< HEAD
                 <input type="number" class="form-control" name="proveedortelefono" id="proveedortelefono" placeholder="Ingrese un teléfono" min="1" required pattern="[0-9]+" >
+=======
+                <input type="text" class="form-control" name="proveedortelefono" id="proveedortelefono" placeholder="Ingrese un teléfono">
+>>>>>>> e9d9ffd761021265a8dfaa2568b81956a94eaa02
                       </div>
 
             <br><br>
@@ -431,7 +455,11 @@ background: linear-gradient(to right, #24243e, #302b63, #0f0c29); /* W3C, IE 10+
 
           <div class="box-body">
 
+<<<<<<< HEAD
             <form method="POST" action="../business/proveedoraction.php" enctype="multipart/form-data" >
+=======
+            <form method="POST" action="../../business/proveedoraction.php" enctype="multipart/form-data">
+>>>>>>> e9d9ffd761021265a8dfaa2568b81956a94eaa02
 
               <div class="form-group">
                 <input type="hidden" name="proveedorid" id="proveedorid">
@@ -451,13 +479,21 @@ background: linear-gradient(to right, #24243e, #302b63, #0f0c29); /* W3C, IE 10+
               </div>
               <div class="form-group">
                 <label >Correo:</label>
+<<<<<<< HEAD
                 <input type="email" class="form-control" name="proveedorcorreo" id="proveedorcorreo" placeholder="Ingrese un correo">
+=======
+                <input type="text" class="form-control" name="proveedorcorreo" id="proveedorcorreo" placeholder="Ingrese un correo">
+>>>>>>> e9d9ffd761021265a8dfaa2568b81956a94eaa02
                
               </div>
 
               <div class="form-group">
                 <label >Teléfono:</label>
+<<<<<<< HEAD
                 <input type="number" class="form-control" name="proveedortelefono" id="proveedortelefono" placeholder="Ingrese un teléfono" min="1" required pattern="[0-9]+">
+=======
+                <input type="text" class="form-control" name="proveedortelefono" id="proveedortelefono" placeholder="Ingrese un teléfono">
+>>>>>>> e9d9ffd761021265a8dfaa2568b81956a94eaa02
                
               </div>
               
@@ -703,7 +739,11 @@ wFORMS.behaviors['validation'].errMsg_notification = "%% error(s) detectado(s). 
     var proveedorcorreo =  $(this).attr("proveedorcorreo");
     var proveedortelefono = $(this).attr("proveedortelefono");
     
+<<<<<<< HEAD
     //alert(proveedortelefono);
+=======
+    alert(proveedorid);
+>>>>>>> e9d9ffd761021265a8dfaa2568b81956a94eaa02
     $("#modalEditarProveedor #proveedorid").val(proveedorid);
     $("#modalEditarProveedor #proveedornombre").val(proveedornombre);
     $("#modalEditarProveedor #proveedordireccion").val(proveedordireccion);
@@ -730,7 +770,11 @@ $(".tabla-proveedores tbody").on("click", "button.btnEliminarProveedor", functio
        confirmButtonText: 'Eliminar'
        }).then((result) => {
          if (result.isConfirmed) {
+<<<<<<< HEAD
            window.location = "../business/proveedoraction.php?eliminar=true&proveedorid="+proveedorid;
+=======
+           window.location = "../../business/proveedoraction.php?eliminar=true&proveedorid="+proveedorid;
+>>>>>>> e9d9ffd761021265a8dfaa2568b81956a94eaa02
     
          }
    })
@@ -742,6 +786,10 @@ $(".tabla-proveedores tbody").on("click", "button.btnEliminarProveedor", functio
 
 
 </script>
+<<<<<<< HEAD
 
   </body>
+=======
+</body>
+>>>>>>> e9d9ffd761021265a8dfaa2568b81956a94eaa02
 </html>

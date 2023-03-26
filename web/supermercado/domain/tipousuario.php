@@ -6,8 +6,8 @@
 		private $id;
 		private $descripcion;
 
-	public function __construct($descripcion){
-		 $this->descripcion = $descripcion;
+	public function __construct(){
+        
 	}
 	
     /**

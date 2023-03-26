@@ -1,11 +1,7 @@
 <?php 
 	
 	include_once 'data.php';
-	if (is_file("../domain/tipousuario.php")){
-        include ("../domain/tipousuario.php");
-    }else{
-        include ("../../domain/tipousuario.php");
-    }
+	include ("../domain/tipousuario.php");
 
    	class TipoUsuarioData extends Database{
 

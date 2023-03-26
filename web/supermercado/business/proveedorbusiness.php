@@ -2,7 +2,11 @@
     
    
 
+<<<<<<< HEAD
     include '../data/proveedordata.php';
+=======
+    include '../../data/proveedordata.php';
+>>>>>>> e9d9ffd761021265a8dfaa2568b81956a94eaa02
         
     class ProveedorBusiness {
         private $proveedorData;

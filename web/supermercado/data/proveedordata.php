@@ -1,7 +1,11 @@
 <?php 	 
 	
 	include_once 'data.php';
+<<<<<<< HEAD
     include ("../domain/proveedor.php");
+=======
+    include ("../../domain/usuario.php");
+>>>>>>> e9d9ffd761021265a8dfaa2568b81956a94eaa02
     
 	
 class ProveedorData extends Database{
