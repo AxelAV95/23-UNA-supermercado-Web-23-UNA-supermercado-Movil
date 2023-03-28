@@ -76,7 +76,7 @@ background: linear-gradient(to right, #24243e, #302b63, #0f0c29); /* W3C, IE 10+
       
         <div class="info d-flex justify-content-between">
           <i class="fas fa-user text-light mr-3" style="font-size: 23px;"></i>
-          <a href="#" class="d-block"><?php echo $usuario ?></a>
+          <a href="#" class="d-block"><?php //echo $usuario ?></a>
         </div>
       </div>
 
@@ -190,40 +190,16 @@ background: linear-gradient(to right, #24243e, #302b63, #0f0c29); /* W3C, IE 10+
                 </a>
               </li>
               <li class="nav-item">
-                <a href="tipoclienteview.php" class="nav-link">
+                <a href="membresiaview.php" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                    <i class="nav-icon fas fa-list"></i>
-                  <p>Tipos</p>
+                  <p>Tipos de membresia</p>
                 </a>
               </li>
             </ul>
           </li>
 
-          <li class="nav-item">
-            <a href="membresiaview.php" class="nav-link">
-              <i class="nav-icon fas fa-address-book"></i>
-              <p>
-              Membresías
-                <i class="right fas fa-angle-left"></i>
-              </p>
-            </a>
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="membresiaview.php" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <i class="fas fa-users-cog nav-icon"></i>
-                  <p>Gestionar</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="membresiaview.php" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                   <i class="nav-icon fas fa-list"></i>
-                  <p>Tipos</p>
-                </a>
-              </li>
-            </ul>
-          </li>
+          
 
 
 

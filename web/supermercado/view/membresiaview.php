@@ -72,7 +72,8 @@
     <!-- Brand Logo -->
     <a href="index.html" class="brand-link d-flex justify-content-center ">
 
-      <span class="brand-text font-weight-light">Panel de administración SO</span>
+       <span class="brand-text font-weight-light">Nombre de Super</span>
+      <img src="img/otros/logo.png" class="img-fluid" alt="Responsive image" width="30px" height="30px" style="margin-left: 1rem;">
     </a>
 
     <!-- Sidebar -->
@@ -122,7 +123,7 @@ background: linear-gradient(to right, #24243e, #302b63, #0f0c29); /* W3C, IE 10+
           </li>
 
            <li class="nav-item ">
-            <a href="proveedorview.php" class="nav-link active">
+            <a href="proveedorview.php" class="nav-link ">
             <i class="nav-icon fas fa-people-carry"></i>
               <p>
                 Proveedores
@@ -183,7 +184,7 @@ background: linear-gradient(to right, #24243e, #302b63, #0f0c29); /* W3C, IE 10+
           </li>
 
           <li class="nav-item">
-            <a href="clienteview.php" class="nav-link">
+            <a href="clienteview.php" class="nav-link active">
               <i class="nav-icon fas fa-address-book"></i>
               <p>
                 Clientes
@@ -198,11 +199,11 @@ background: linear-gradient(to right, #24243e, #302b63, #0f0c29); /* W3C, IE 10+
                   <p>Gestionar</p>
                 </a>
               </li>
-              <li class="nav-item">
-                <a href="tipoclienteview.php" class="nav-link">
+             <li class="nav-item">
+                <a href="membresiaview.php" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                    <i class="nav-icon fas fa-list"></i>
-                  <p>Tipos</p>
+                  <p>Tipos de membresia</p>
                 </a>
               </li>
             </ul>
@@ -331,7 +332,7 @@ background: linear-gradient(to right, #24243e, #302b63, #0f0c29); /* W3C, IE 10+
               <div class="card-header jus">
                 <button class="btn btn-primary" data-toggle="modal" data-target="#modalAgregarProveedor">
 
-                    Agregar Membresía
+                    Agregar membresía
 
                   </button>
               </div>

@@ -194,10 +194,10 @@ background: linear-gradient(to right, #24243e, #302b63, #0f0c29); /* W3C, IE 10+
                 </a>
               </li>
               <li class="nav-item">
-                <a href="tipoclienteview.php" class="nav-link">
+                <a href="membresiaview.php" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                    <i class="nav-icon fas fa-list"></i>
-                  <p>Tipos</p>
+                  <p>Tipos de membresia</p>
                 </a>
               </li>
             </ul>
@@ -604,7 +604,7 @@ $(".tabla-tipos tbody").on("click", "button.btnEliminarTipo", function(){
   var id = $(this).attr("tipoid");
 
   Swal.fire({
-        title: '¿Desea eliminar este tipo de usuario?',
+        title: '¿Desea eliminar este tipo de empleado?',
         showDenyButton: true,
         showCancelButton: false,
         confirmButtonText: 'Sí',

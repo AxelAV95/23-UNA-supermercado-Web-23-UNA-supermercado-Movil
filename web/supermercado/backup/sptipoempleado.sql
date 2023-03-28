@@ -42,70 +42,20 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `eliminarCategoria` (IN `id` INT)   
     COMMIT;
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `eliminarProveedor` (IN `id` INT(20))  NO SQL BEGIN
-	DECLARE error INT;
-	DECLARE EXIT HANDLER FOR SQLEXCEPTION
-    BEGIN
-    	GET CURRENT DIAGNOSTICS CONDITION 1 error = MYSQL_ERRNO;
-    	SELECT error AS MYSQL_ERROR;
-    	ROLLBACK;
-        RESIGNAL;
-        
-    END;
-    
-    START TRANSACTION;
-    	DELETE FROM `tbproveedor` WHERE `proveedorid` = id;
-    COMMIT;
-END$$
+
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `eliminarTipoEmpleado` (IN `id` INT)   DELETE FROM `tbtipoempleado` WHERE `tipoid` = id$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `eliminarTipoUsuario` (IN `id` INT)   DELETE FROM `tbtipousuario` WHERE `tipoid` = id$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `insertarProveedor` (IN `id` INT(20), IN `nombre` VARCHAR(255), IN `direccion` VARCHAR(255), IN `correo` VARCHAR(255), IN `telefono` INT(20))  NO SQL BEGIN
-	DECLARE error INT;
-	DECLARE EXIT HANDLER FOR SQLEXCEPTION
-    BEGIN
-    	GET CURRENT DIAGNOSTICS CONDITION 1 error = MYSQL_ERRNO;
-    	SELECT error AS MYSQL_ERROR;
-    	ROLLBACK;
-        RESIGNAL;
-        
-    END;
-    
-    START TRANSACTION;
-    	INSERT INTO `tbproveedor`(`proveedorid`, `proveedornombre`, `proveedordireccion`, `proveedorcorreo`, `proveedortelefono`) VALUES (id,nombre,direccion,correo,telefono);
-    COMMIT;
-END$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `insertarTipoEmpleado` (IN `id` INT, IN `descripcion` VARCHAR(150))   INSERT INTO `tbtipoempleado`(`tipoid`, `tipodescripcion`) VALUES (id,descripcion)$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `insertarTipoUsuario` (IN `id` INT, IN `descripcion` VARCHAR(255))   INSERT INTO `tbtipousuario`(`tipoid`, `tipodescripcion`) VALUES (id,descripcion)$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `modificarProveedor` (IN `id` INT(20), IN `nombre` VARCHAR(255), IN `direccion` VARCHAR(255), IN `correo` VARCHAR(255), IN `telefono` INT(20))  NO SQL BEGIN
-	DECLARE error INT;
-	DECLARE EXIT HANDLER FOR SQLEXCEPTION
-    BEGIN
-    	GET CURRENT DIAGNOSTICS CONDITION 1 error = MYSQL_ERRNO;
-    	SELECT error AS MYSQL_ERROR;
-    	ROLLBACK;
-        RESIGNAL;
-        
-    END;
-    
-    START TRANSACTION;
-    	UPDATE `tbproveedor`SET `proveedornombre`=nombre,`proveedordireccion`=direccion,`proveedorcorreo`=correo,`proveedortelefono`=telefono WHERE `proveedorid` = id;
-        
-    COMMIT;
-END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `modificarTipoUsuario` (IN `descripcion` VARCHAR(255), IN `id` INT)   UPDATE `tbtipousuario` SET `tipodescripcion`= descripcion WHERE `tipoid` = id$$
-
-CREATE DEFINER=`root`@`localhost` PROCEDURE `obtenerProveedores` ()  NO SQL SELECT * FROM `tbproveedor`$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `obtenerTipoEmpleado` ()   SELECT * FROM `tbtipoempleado`$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `obtenerTipoUsuario` ()   SELECT * FROM `tbtipousuario`$$
+
 
 DELIMITER ;
 

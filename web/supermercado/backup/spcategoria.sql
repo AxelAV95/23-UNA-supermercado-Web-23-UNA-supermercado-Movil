@@ -40,24 +40,7 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `eliminarCategoria` (IN `id` INT)   
     COMMIT;
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `eliminarTipoUsuario` (IN `id` INT)   DELETE FROM `tbtipousuario` WHERE `tipoid` = id$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `insertarCategoria` (IN `id` INT, IN `nombre` VARCHAR(255))   BEGIN
-    DECLARE error INT;
-    DECLARE EXIT HANDLER FOR SQLEXCEPTION
-    BEGIN
-        GET DIAGNOSTICS CONDITION 1 error = MYSQL_ERRNO;
-        SELECT error AS MYSQL_ERROR;
-        ROLLBACK;
-        RESIGNAL;
-    END;
-    
-    START TRANSACTION;
-        INSERT INTO `tbcategoria`(`categoriaid`, `categorianombre`) VALUES (id, nombre);
-    COMMIT;
-END$$
-
-CREATE DEFINER=`root`@`localhost` PROCEDURE `insertarTipoUsuario` (IN `id` INT, IN `descripcion` VARCHAR(255))   INSERT INTO `tbtipousuario`(`tipoid`, `tipodescripcion`) VALUES (id,descripcion)$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `modificarCategoria` (IN `id` INT, IN `nombre` VARCHAR(255))   BEGIN
     DECLARE error INT;
@@ -74,8 +57,6 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `modificarCategoria` (IN `id` INT, I
     COMMIT;
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `modificarTipoUsuario` (IN `descripcion` VARCHAR(255), IN `id` INT)   UPDATE `tbtipousuario` SET `tipodescripcion`= descripcion WHERE `tipoid` = id$$
-
 CREATE DEFINER=`root`@`localhost` PROCEDURE `obtenerCategoriaPorId` (IN `id` INT)   BEGIN
     SELECT * FROM `tbcategoria` WHERE `categoriaid` = id;
 END$$
@@ -84,7 +65,7 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `obtenerCategorias` ()   BEGIN
     SELECT * FROM `tbcategoria`;
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `obtenerTipoUsuario` ()   SELECT * FROM `tbtipousuario`$$
+
 
 DELIMITER ;
 COMMIT;
