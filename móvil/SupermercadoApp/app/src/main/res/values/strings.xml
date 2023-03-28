@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">SupermercadoApp</string>
+    <string name="modulo_empleados">Empleados</string>
+    <string name="modulo_productos">Productos</string>
+    <string name="modulo_categorias">Categorías</string>
+    <string name="modulo_proveedor">Proveedor</string>
+    <string name="modulo_usuarios">Usuarios</string>
+    <string name="modulo_reportes">Reportes</string>
+    <string name="modulo_clientes">Clientes</string>
+    <string name="content_conf">Configurar información del supermercado</string>
+    <string name="content_cuenta">Ver detalles de cuenta</string>
+    <string name="content_cerrar_sesion">Cerrar sesión</string>
+</resources>

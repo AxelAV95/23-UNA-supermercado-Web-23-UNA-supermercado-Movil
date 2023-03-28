@@ -4,7 +4,11 @@
 		private $id;
 		private $nombre;
 
-
+		function Categoria($id, $nombre){
+			$this->id = $id;
+			$this->nombre = $nombre;
+	
+		}
 
     public function getId()
     {
