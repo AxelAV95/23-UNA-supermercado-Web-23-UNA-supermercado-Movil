@@ -4,50 +4,37 @@
 		
 		private $membresiaid;
 		private $membresiadescripcion;
-		
-    /**
-     * @return mixed
-     */
+
+        public function __construct($membresiaid, $membresiadescripcion){
+            $this->membresiaid = $membresiaid;
+            $this->membresiadescripcion = $membresiadescripcion;
+
+        }
+   
     public function getMembresiaid()
     {
         return $this->membresiaid;
     }
 
-    /**
-     * @param mixed $membresiaid
-     *
-     * @return self
-     */
     public function setMembresiaid($membresiaid)
     {
         $this->membresiaid = $membresiaid;
 
-        return $this;
+  
     }
 
-    /**
-     * @return mixed
-     */
     public function getMembresiadescripcion()
     {
         return $this->membresiadescripcion;
     }
 
-    /**
-     * @param mixed $membresiadescripcion
-     *
-     * @return self
-     */
+
     public function setMembresiadescripcion($membresiadescripcion)
     {
         $this->membresiadescripcion = $membresiadescripcion;
 
-        return $this;
+
     }
 
-    /**
-     * @return mixed
-     */
-    
 }
 ?>

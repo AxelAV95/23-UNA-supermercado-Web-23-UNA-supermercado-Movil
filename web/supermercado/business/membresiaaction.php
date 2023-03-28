@@ -2,72 +2,89 @@
 
 
 	include 'membresiabusiness.php';
+	if(isset($_POST['insertar'])){
+
+		if (isset($_POST['membresiadescripcion'])
+	) {
+		$membresiadescripcion = $_POST['membresiadescripcion'];
+	 
+		$membresiaBusiness = new MembresiaBusiness();
 	
+		$membresia = new Membresia(0,$membresiadescripcion);
+	
+		$resultado = $membresiaBusiness->insertarMembresia($membresia);
+	
+		if ($resultado == 1) {
+			Header("Location: ../view/membresiaview.php?success=inserted");
+		} else {
+			Header("Location: ../view/membresiaview.php?error=dbError");
+		}
+		}
 
-	if(isset($_POST['metodo']) && $_POST['metodo'] == "agregar" && isset($_POST['membresiadescripcion'])){
-		$descripcion = $_POST['membresiadescripcion'];
-		$membresia = new membresia( );
-		$membresia->setMembresiadescripcion($descripcion);
-		
-		$membresiaBusiness = new membresiaBusiness();
-		
 
-		$resultado = $tipoBusiness->insertarMembresia($membresia);
+	}
 
-		if($resultado == 1){
-	    		echo json_encode(array("statusCode"=>200));	
-	    }else{
-	    		echo json_encode(array("statusCode"=>400));	
-	    }
+//metodo de actualizar categoria
+else if(isset($_POST['actualizar'])){
+	if (isset($_POST['membresiadescripcion']) && isset($_POST['membresiaid']) 
+	) 
+	$membresiaid = $_POST['membresiaid'];
+	$membresiadescripcion = $_POST['membresiadescripcion'];
+	$membresia = new Membresia($membresiaid,$membresiadescripcion);
+	
+	$membresiaBusiness = new MembresiaBusiness();
 
-	}else if(isset($_POST['metodo']) && $_POST['metodo'] == "actualizar" && isset($_POST['membresiaid']) && isset($_POST['membresiadescripcion']) ){
-		$id = $_POST['membresiaid'];
-		$descripcion = $_POST['membresiadescripcion'];
+	$resultado = $membresiaBusiness->modificarMembresia($membresia);
+	if ($resultado == 1) {
+		Header("Location: ../view/membresiaview.php?success=update&id=");
+	} else {
+		Header("Location: ../view/membresiaview.php?error=dbError");
+	}
+}
 
-		$membresia = new Membresia();
-		$membresia->setMembresiaid($id);
-		$membresia->setMembresiadescripcion($descripcion);
-		$membresiaBusiness = new MembresiaBusiness();
+else if(isset($_GET['eliminar'])){
+	if(isset($_GET['membresiaid'])) {
+	  $id = $_GET['membresiaid'];
+  
+	
+	  $membresiaBusiness = new MembresiaBusiness();
+  
+	  $resultado = $membresiaBusiness->eliminarMembresia($id);
+	
+	  if($resultado == 1){
+		echo "<script>window.location.reload();</script>";
+	} else {
+		header("location: ../view/membresiaview.php?mensaje=4" );
+	}
+	
+		  
+  }
 
-		$resultado = $membresiaBusiness->modificarMembresia($membresia);
+}
+  
+else if(isset($_GET['metodo']) && $_GET['metodo'] == "obtener" ){
+    $membresiaBusiness = new MembresiaBusiness();
+      $membresias = $membresiaBusiness->getAllTBMembresias();
 
-		if($resultado == 1){
-	    		echo json_encode(array("statusCode"=>200));	
-	    }else{
-	    		echo json_encode(array("statusCode"=>400));	
-	    }
-	}else if(isset($_GET['metodo']) && $_GET['metodo'] == "eliminar"){
-		$id = $_GET['membresiaid'];
+      $data = array();
+      foreach ($membresias as $row) {
+      $data[] = array(
+         "membresiaid"=>$row['membresiaid'],
+         "membresiadescripcion"=>$row['membresiadescripcion']
+      );
+       }
 
-		$membresiaBusiness = new MembresiaBusiness();
-		
+       $response = array(
+           "iTotalRecords" => count($data),
+      "aaData" => $data
+       );
 
-		$resultado = $membresiaBusiness->eliminarMembresia($id);
+      echo json_encode($response);
+  
 
-		if($resultado == 1){
-	    		echo json_encode(array("statusCode"=>200));	
-	    }else{
-	    		echo json_encode(array("statusCode"=>400));	
-	    }
 
-	}else if(isset($_GET['metodo']) && $_GET['metodo'] == "obtener" ){
-		$membresiaBusiness = new MembresiaBusiness();
-  		$membresias = $membresiaBusiness->getAllTBMembresias();
+}
 
-  		$data = array();
-  		foreach ($membresias as $row) {
-	      $data[] = array(
-	         "membresiaid"=>$row['membresiaid'],
-	         "membresiadescripcion"=>$row['membresiadescripcion']
-	      );
-   		}
 
-   		$response = array(
-   			"iTotalRecords" => count($data),
-	      "aaData" => $data
-   		);
-
-  		echo json_encode($response);
-  	}
 
 ?>
