@@ -1,17 +1,10 @@
-<?php  
- 
-    include '../business/membresiabusiness.php';
-
-    $membresiaBusiness = new MembresiaBusiness();
-    $membresias = $membresiaBusiness->getAllTBMembresias();
-
- //print_r($membresias)
-
-?>
-
 <?php 
 
-  ?>
+  include '../business/membresiabusiness.php';
+
+
+
+ ?>
 
 
 <!DOCTYPE html>
@@ -19,7 +12,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Membresías | Dashboard</title>
+  <title>Tipos de membresías | Dashboard</title>
 
   <!-- Google Font: Source Sans Pro -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
@@ -31,23 +24,16 @@
   <link rel="stylesheet" href="plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css">
   <!-- iCheck -->
   <link rel="stylesheet" href="plugins/icheck-bootstrap/icheck-bootstrap.min.css">
-  <!-- JQVMap -->
-  <link rel="stylesheet" href="plugins/jqvmap/jqvmap.min.css">
+
   <!-- Theme style -->
   <link rel="stylesheet" href="dist/css/adminlte.min.css">
   <!-- overlayScrollbars -->
   <link rel="stylesheet" href="plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
   <!-- Daterange picker -->
   <link rel="stylesheet" href="plugins/daterangepicker/daterangepicker.css">
-  <!-- summernote -->
-  <link rel="stylesheet" href="plugins/summernote/summernote-bs4.min.css">
+
 
   <!-- DataTables -->
-  <link rel="stylesheet" href="plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
-  <link rel="stylesheet" href="plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
-  <link rel="stylesheet" href="plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
-
-   <!-- DataTables -->
   <link rel="stylesheet" href="plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
   <link rel="stylesheet" href="plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
   <link rel="stylesheet" href="plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
@@ -57,11 +43,14 @@
     rel="stylesheet"
     href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
   />
-  <script type="text/javascript" src="wforms.js"></script>
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
 <div class="wrapper">
 
+  <!-- Preloader -->
+ <!--  <div class="preloader flex-column justify-content-center align-items-center">
+    <img class="animation__shake" src="dist/img/AdminLTELogo.png" alt="AdminLTELogo" height="60" width="60">
+  </div> -->
 
   <!-- Navbar -->
   <?php include 'template/header.php' ?>
@@ -71,8 +60,8 @@
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
     <a href="index.html" class="brand-link d-flex justify-content-center ">
-
-       <span class="brand-text font-weight-light">Nombre de Super</span>
+     <!--  <img src="dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8"> -->
+          <span class="brand-text font-weight-light">Nombre de Super</span>
       <img src="img/otros/logo.png" class="img-fluid" alt="Responsive image" width="30px" height="30px" style="margin-left: 1rem;">
     </a>
 
@@ -91,7 +80,7 @@ background: linear-gradient(to right, #24243e, #302b63, #0f0c29); /* W3C, IE 10+
       </div>
 
       <!-- Sidebar Menu -->
-     <nav class="mt-2">
+       <nav class="mt-2">
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
@@ -123,7 +112,7 @@ background: linear-gradient(to right, #24243e, #302b63, #0f0c29); /* W3C, IE 10+
           </li>
 
            <li class="nav-item ">
-            <a href="proveedorview.php" class="nav-link ">
+            <a href="proveedorview.php" class="nav-link">
             <i class="nav-icon fas fa-people-carry"></i>
               <p>
                 Proveedores
@@ -158,7 +147,7 @@ background: linear-gradient(to right, #24243e, #302b63, #0f0c29); /* W3C, IE 10+
           </li>
          
          <li class="nav-item">
-            <a href="empleadoview.php" class="nav-link">
+            <a href="empleadoview.php" class="nav-link active">
               <i class="nav-icon fas fa-user-edit"></i>
               <p>
                 Empleados
@@ -184,7 +173,7 @@ background: linear-gradient(to right, #24243e, #302b63, #0f0c29); /* W3C, IE 10+
           </li>
 
           <li class="nav-item">
-            <a href="clienteview.php" class="nav-link active">
+            <a href="clienteview.php" class="nav-link">
               <i class="nav-icon fas fa-address-book"></i>
               <p>
                 Clientes
@@ -199,7 +188,7 @@ background: linear-gradient(to right, #24243e, #302b63, #0f0c29); /* W3C, IE 10+
                   <p>Gestionar</p>
                 </a>
               </li>
-             <li class="nav-item">
+              <li class="nav-item">
                 <a href="membresiaview.php" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                    <i class="nav-icon fas fa-list"></i>
@@ -208,35 +197,6 @@ background: linear-gradient(to right, #24243e, #302b63, #0f0c29); /* W3C, IE 10+
               </li>
             </ul>
           </li>
-
-          <li class="nav-item">
-            <a href="membresiaview.php" class="nav-link">
-              <i class="nav-icon fas fa-address-book"></i>
-              <p>
-              Membresías
-                <i class="right fas fa-angle-left"></i>
-              </p>
-            </a>
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="membresiaview.php" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <i class="fas fa-users-cog nav-icon"></i>
-                  <p>Gestionar</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="membresiaview.php" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                   <i class="nav-icon fas fa-list"></i>
-                  <p>Tipos</p>
-                </a>
-              </li>
-            </ul>
-          </li>
-
-
-
 
            <li class="nav-item">
             <a href="" class="nav-link">
@@ -301,7 +261,6 @@ background: linear-gradient(to right, #24243e, #302b63, #0f0c29); /* W3C, IE 10+
           </li>
 
         </ul>
-      </nav>
       <!-- /.sidebar-menu -->
     </div>
     <!-- /.sidebar -->
@@ -314,9 +273,9 @@ background: linear-gradient(to right, #24243e, #302b63, #0f0c29); /* W3C, IE 10+
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1 class="m-0">Membresías</h1>
+            <h1 class="m-0">Tipo de membresías</h1>
           </div><!-- /.col -->
-        
+         
         </div><!-- /.row -->
       </div><!-- /.container-fluid -->
     </div>
@@ -329,56 +288,28 @@ background: linear-gradient(to right, #24243e, #302b63, #0f0c29); /* W3C, IE 10+
         <!-- /.row -->
         <!-- Main row -->
        <div class="card">
-              <div class="card-header jus">
-                <button class="btn btn-primary" data-toggle="modal" data-target="#modalAgregarProveedor">
+              <div class="card-header">
+                <button class="btn btn-primary" data-toggle="modal" data-target="#modalAgregarTipo">
 
-                    Agregar membresía
+                    Agregar tipo membresía
 
                   </button>
               </div>
               <!-- /.card-header -->
               <div class="card-body">
-              <table id="proveedores" class="tabla-proveedores table table-bordered table-hover">
-  <thead>
-    <tr>
-      <th>Id Membresía</th>
-      <th>Descripción</th>
-      <th>Acciones</th>
-    </tr>
-  </thead>
-  <tbody>
-    <?php foreach($membresias as $membresia) { ?>
-      <tr>
-        <td><?= $membresia['membresiaid'] ?></td>
-        <td>
-          <form method="post" action="../business/membresiaaction.php">
-            <input type="hidden" name="membresiaid" id="membresiaid" value="<?= $membresia['membresiaid'] ?>">
-            <input type="text" class="form-control" name="membresiadescripcion" value="<?= $membresia['membresiadescripcion'] ?>">
-        </td>
-        <td>
-          <button type="submit" name="actualizar" class="btn btn-primary">
-            <i class="fa fa-pencil-alt"></i>
-          </button>
-          </form>
-          <form>
-            <button class="btn btn-danger btnEliminarMembresia" type="submit" name="membresiaid" value="<?= $membresia['membresiaid'] ?>" onclick="confirmarEliminacion(<?= $membresia['membresiaid'] ?>)">
-              <i class="fa fa-trash"></i>
-            </button>
-          </form>
-        </td>
-      </tr>
-    <?php } ?>
-  </tbody>
-</table>
-
-<script>
-function confirmarEliminacion(btnValue) {
-  if (confirm('¿Estás seguro de que quieres eliminar esta membresía?')) {
-    window.location.href = `../business/membresiaaction.php?eliminar=1&membresiaid=${btnValue}`;
-  }
-}
-</script>
-
+                <table id="tabla-tipos" class="tabla-tipos table table-bordered table-hover">
+                  <thead>
+                  <tr>
+                    <th>Descripción</th>
+                    <th>Acciones</th>
+                   
+                  </tr>
+                  </thead>
+                  <tbody>
+                 
+                  </tbody>
+                 
+                </table>
               </div>
               <!-- /.card-body -->
             </div>
@@ -390,18 +321,14 @@ function confirmarEliminacion(btnValue) {
   <!-- /.content-wrapper -->
   <?php include 'template/footer.php'; ?>
 
-
-</div>
-<!-- ./wrapper -->
-
-<div id="modalAgregarProveedor" class="modal fade" role="dialog">
+  <div id="modalAgregarTipo" class="modal fade" role="dialog">
   
   <div class="modal-dialog">
 
     <div class="modal-content">
 
         <div class="modal-header">
-          <h4 class="modal-title">Agregar Membresía</h4>
+          <h4 class="modal-title">Agregar tipo membresía</h4>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
@@ -411,30 +338,77 @@ function confirmarEliminacion(btnValue) {
 
           <div class="box-body">
 
-            <form method="POST" action="../business/membresiaaction.php"  enctype="multipart/form-data">
+            <form id="formulario-insertar"  >
            
 
-              
               <div class="form-group">
+                <input type="hidden" name="metodo" value="agregar">
                 <label >Descripción:</label>
-                <input type="text" class="form-control" name="membresiadescripcion" id="membresiadescripcion" placeholder="Ingrese una descripción" required>
-            
-            <br><br>
-
-             
-              
-             <center><button type="submit" name="insertar" class="btn btn-primary">Insertar</button></center> 
+                <input type="text" class="form-control" name="membresiadescripcion" id="membresiadescripcion" placeholder="Ingrese tipo de membresía">
+               
+              </div>
+                         
+             <center><button type="submit" name="insertar" id="insertar" class="btn btn-primary">Insertar</button></center> 
             </form>
 
-        </div>
-
-      </div>
-
     </div>
+
+  </div>
+
+</div>
   </div>
 
 </div>
 
+<div id="modalEditarTipo" class="modal fade" role="dialog">
+  
+  <div class="modal-dialog">
+
+    <div class="modal-content">
+
+        <div class="modal-header">
+          <h4 class="modal-title">Editar tipo de membresía</h4>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+
+        <div class="modal-body">
+
+          <div class="box-body">
+
+            <form id="formulario-editar">
+              
+              <div class="form-group">
+                <input type="hidden" name="membresiaid" id="membresiaid">
+                 <input type="hidden" name="metodo" value="actualizar">
+              
+              </div>
+
+              <div class="form-group">
+                <label >Descripción:</label>
+                <input type="text" class="form-control" name="membresiadescripcion" id="membresiadescripcion" placeholder="Ingrese tipo de membresía">
+               
+              </div>
+              
+
+             <center><button type="submit" name="actualizar" id="actualizar" class="btn btn-primary">Actualizar</button></center> 
+            </form>
+
+    </div>
+
+  </div>
+
+</div>
+  </div>
+
+</div>
+
+
+
+
+</div>
+<!-- ./wrapper -->
 
 <!-- jQuery -->
 <script src="plugins/jquery/jquery.min.js"></script>
@@ -448,11 +422,7 @@ function confirmarEliminacion(btnValue) {
 <script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 <!-- ChartJS -->
 <script src="plugins/chart.js/Chart.min.js"></script>
-<!-- Sparkline -->
-<script src="plugins/sparklines/sparkline.js"></script>
-<!-- JQVMap -->
-<script src="plugins/jqvmap/jquery.vmap.min.js"></script>
-<script src="plugins/jqvmap/maps/jquery.vmap.usa.js"></script>
+
 <!-- jQuery Knob Chart -->
 <script src="plugins/jquery-knob/jquery.knob.min.js"></script>
 <!-- daterangepicker -->
@@ -460,14 +430,13 @@ function confirmarEliminacion(btnValue) {
 <script src="plugins/daterangepicker/daterangepicker.js"></script>
 <!-- Tempusdominus Bootstrap 4 -->
 <script src="plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></script>
-<!-- Summernote -->
-<script src="plugins/summernote/summernote-bs4.min.js"></script>
 <!-- overlayScrollbars -->
 <script src="plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
 <!-- AdminLTE App -->
 <script src="dist/js/adminlte.js"></script>
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
 <script src="dist/js/pages/dashboard.js"></script>
+
 <!-- DataTables  & Plugins -->
 <script src="plugins/datatables/jquery.dataTables.min.js"></script>
 <script src="plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
@@ -483,81 +452,198 @@ function confirmarEliminacion(btnValue) {
 <script src="plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
 <script src="plugins/sweetalert2/sweetalert2.min.js"></script>
 <script src="plugins/toastr/toastr.min.js"></script>
-<script src="https://unpkg.com/web-audio-daw"></script>
-<script src="dist/js/notificacion.js"></script>
 
-<script type="text/javascript">
-wFORMS.behaviors['validation'].errMsg_email = "El email introducido no tiene un formato valido";
-wFORMS.behaviors['validation'].errMsg_notification = "%% error(s) detectado(s). El formulario no se enviará.Por favor, chequea la información suministrada.";
 
-<?php 
-  //ALERTS
-  echo '<script>';
-  echo " var Toast = Swal.mixin({
+
+
+<script>
+
+  var Toast = Swal.mixin({
        toast: true,
        position: 'top-right',
        showConfirmButton: false,
        timer: 3000,
        timerProgressBar: true
-     });";
-  if($_GET['mensaje']==1){ //insertar proveedor
-    echo "Toast.fire({
-         icon: 'success',
-
-        title: '<div style=margin-top:0.5rem;>Insertado con éxito.</div>'
-     });";
-  }else if($_GET['mensaje']==2){ //actualizar
-    echo "Toast.fire({
-         icon: 'success',
-        title: '<div style=margin-top:0.5rem;>Actualizado con éxito.</div>'
-     });";
-  }else if($_GET['mensaje'] == 3){ //eliminar
-    echo "Toast.fire({
-         icon: 'success',
-        title: '<div style=margin-top:0.5rem;>Eliminado con éxito.</div>'
-     });";
-  }else if($_GET['mensaje'] == 4){ //error
-    echo " Toast.fire({
-        icon: 'error',
-        title: '<div style=margin-top:0.5rem;>Error al efectuar la operación.</div>'
-      })";
-  }
-  echo "</script>";
-
-?>
+     });
 
 
 
-<script>
-  $(function () {
+  $('#tabla-tipos').dataTable( {
+          'processing': true,
+            'serverSide': true,
+            'serverMethod': 'get',
+            'ajax': {
+                'url':'../business/membresiaaction.php?metodo=obtener'
+            },          
+          "columns": [
+             
+              { "data": "membresiadescripcion" },
+              { "data": null,
+              render: function ( data, type, row, meta) {
+                return "<div class='btn-group'><button class='btn btn-warning btnEditarTipo' membresiaid="+data.membresiaid+" membresiadescripcion="+data.membresiadescripcion+" data-toggle='modal' data-target='#modalEditarTipo'><i class='fa fa-pencil-alt'></i></button><button class='btn btn-danger btnEliminarTipo' membresiaid="+data.membresiaid+" ><i class='fa fa-times'></i></button></div>";
+                }
+              }
+              
+          ]
+      
+        })
 
-    $('#proveedores').DataTable({
-       "language": {
-            "url": "//cdn.datatables.net/plug-ins/1.10.16/i18n/Spanish.json"
-        },
-      "paging": true,
-      "lengthChange": false,
-      "searching": true,
-      "ordering": true,
-      "info": true,
-      "autoWidth": false,
-      "responsive": true,
-    });
+
+  $(document).on('click','#insertar',function(e) {
+
+
+     var descripcion = $("#formulario-insertar div").children().get(2);
+   
+    if(descripcion.value  == ""){
+      $("#formulario-insertar div").children().get(2).focus()
+        Toast.fire({
+                    icon: 'warning',
+                    title: '<div style=margin-top:0.5rem;>Ingresar descripción.</div>'
+              })
+        
+    }else{
+        var data = $("#formulario-insertar").serialize();
+
+        console.log(data)
+        $.ajax({
+          data: data,
+          type: "POST",
+          url: "../business/membresiaaction.php",
+          success: function(dataResult){
+              var dataResult = JSON.parse(dataResult);
+              if(dataResult.statusCode==200){
+
+                     Toast.fire({
+                        icon: 'success',
+                        title: '<div style=margin-top:0.5rem;>Insertado con éxito.</div>'
+                  });
+                     $('#modalAgregarTipo #membresiadescripcion').val("");
+                     $('#modalAgregarTipo').modal('hide');
+                     $('#tabla-tipos').DataTable().ajax.reload();
+                    
+                                                 
+              }else{
+                    Toast.fire({
+                        icon: 'error',
+                        title: '<div style=margin-top:0.5rem;>Error al efectuar la operación.</div>'
+                  })
+              }
+                        
+          }
+        });
+      }
+  });
+
+  $(document).on('click','#actualizar',function(e) {
+
+    var descripcion = $("#formulario-editar div").children().get(3);
+
+   if(descripcion.value  == ""){
+         $("#formulario-editar div").children().get(3).focus()
+        Toast.fire({
+                    icon: 'warning',
+                    title: '<div style=margin-top:0.5rem;>Ingresar descripción.</div>'
+              })
+    }else{
+        var data = $("#formulario-editar").serialize();
+        console.log(data)
+        $.ajax({
+          data: data,
+          type: "POST",
+          url: "../business/membresiaaction.php",
+          success: function(dataResult){
+                var dataResult = JSON.parse(dataResult);
+              if(dataResult.statusCode==200){
+                           
+                    Toast.fire({
+                        icon: 'success',
+                        title: '<div style=margin-top:0.5rem;>Actualizado con éxito.</div>'
+                  });
+                     
+                     $('#modalEditarTipo').modal('hide');
+                     $('#tabla-tipos').DataTable().ajax.reload();
+                                                 
+              }else{
+                     Toast.fire({
+                        icon: 'error',
+                        title: '<div style=margin-top:0.5rem;>Error al efectuar la operación.</div>'
+                  })
+          
+              }
+                        
+          }
+        });
+    }
+    
+
   });
 
 
 
+  $(".tabla-tipos tbody").on("click", "button.btnEditarTipo", function(){
+
+    var membresiaid = $(this).attr("membresiaid");
+    var membresiadescripcion = $(this).attr("membresiadescripcion");
+   
+    $("#modalEditarTipo #membresiaid").val(membresiaid);
+    $("#modalEditarTipo #membresiadescripcion").val(membresiadescripcion);
+
+  
+
+});
+
+  
+$(".tabla-tipos tbody").on("click", "button.btnEliminarTipo", function(){
+
+  var membresiaid = $(this).attr("membresiaid");
+
+  Swal.fire({
+        title: '¿Desea eliminar este tipo de membresía?',
+        showDenyButton: true,
+        showCancelButton: false,
+        confirmButtonText: 'Sí',
+        denyButtonText: `Cancelar`,
+      }).then((result) => {
+       
+        if (result.isConfirmed) {
+          let requestUrl ="../business/membresiaaction.php?metodo=eliminar&membresiaid="+membresiaid;
+          console.log(requestUrl)
+          $.ajax({
+          url: requestUrl ,
+          type: "GET",
+          
+          
+          success: function(dataResult){
 
 
+            var dataResult = JSON.parse(dataResult);
+            if(dataResult.statusCode==200){
+                         
+                  Toast.fire({
+                      icon: 'success',
+                      title: '<div style=margin-top:0.5rem;>Eliminado con éxito.</div>'
+                });
+                   
+                  
+                   $('#tabla-tipos').DataTable().ajax.reload();
+                                               
+            }else{
+                   Toast.fire({
+                      icon: 'error',
+                      title: '<div style=margin-top:0.5rem;>Error al efectuar la operación.</div>'
+                })
+        
+            }
+          }
+        });
 
+        } 
+      })
+});
 
 
 </script>
 
 
-
-
-
-
-  </body>
+</body>
 </html>
