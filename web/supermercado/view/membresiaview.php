@@ -353,7 +353,7 @@ background: linear-gradient(to right, #24243e, #302b63, #0f0c29); /* W3C, IE 10+
         <td>
           <form method="post" action="../business/membresiaaction.php">
             <input type="hidden" name="membresiaid" id="membresiaid" value="<?= $membresia['membresiaid'] ?>">
-            <input type="text" class="form-control" name="membresiadescripcion" value="<?= $membresia['membresiadescripcion'] ?>">
+            <input type="text" class="form-control" name="membresiadescripcion" value="<?= $membresia['membresiadescripcion'] ?>" required>
         </td>
         <td>
           <button type="submit" name="actualizar" class="btn btn-primary">

@@ -1,11 +1,6 @@
 <?php 
 
   include '../business/tipousuariobusiness.php';
- // $tipoUsuarioBusiness = new TipoUsuarioBusiness();
-  //$tipos = $tipoUsuarioBusiness->getAllTBTipoUsuarios();
-
-  //print_r($tipos)
-
 
  ?>
 <?php 
@@ -19,43 +14,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Tipos de usuarios | Dashboard</title>
 
-  <!-- Google Font: Source Sans Pro -->
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
-  <!-- Font Awesome -->
-  <link rel="stylesheet" href="plugins/fontawesome-free/css/all.min.css">
-  <!-- Ionicons -->
-  <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
-  <!-- Tempusdominus Bootstrap 4 -->
-  <link rel="stylesheet" href="plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css">
-  <!-- iCheck -->
-  <link rel="stylesheet" href="plugins/icheck-bootstrap/icheck-bootstrap.min.css">
-
-  <!-- Theme style -->
-  <link rel="stylesheet" href="dist/css/adminlte.min.css">
-  <!-- overlayScrollbars -->
-  <link rel="stylesheet" href="plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
-  <!-- Daterange picker -->
-  <link rel="stylesheet" href="plugins/daterangepicker/daterangepicker.css">
-
-
-  <!-- DataTables -->
-  <link rel="stylesheet" href="plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
-  <link rel="stylesheet" href="plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
-  <link rel="stylesheet" href="plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
-  <link rel="stylesheet" href="plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css">
-  <link rel="stylesheet" href="plugins/toastr/toastr.min.css">
-  <link
-    rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
-  />
+  <?php include 'template/dependenciascss.php' ?>
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
 <div class="wrapper">
-
-  <!-- Preloader -->
- <!--  <div class="preloader flex-column justify-content-center align-items-center">
-    <img class="animation__shake" src="dist/img/AdminLTELogo.png" alt="AdminLTELogo" height="60" width="60">
-  </div> -->
 
   <!-- Navbar -->
   <?php include 'template/header.php' ?>
@@ -277,8 +239,8 @@ background: linear-gradient(to right, #24243e, #302b63, #0f0c29); /* W3C, IE 10+
     <div class="content-header">
       <div class="container-fluid">
         <div class="row mb-2">
-          <div class="col-sm-6">
-            <h1 class="m-0">Tipo de usuarios</h1>
+          <div class="col-sm-12">
+            <h1 class="m-0 text-center">Tipo de usuarios</h1>
           </div><!-- /.col -->
          
         </div><!-- /.row -->
@@ -327,137 +289,17 @@ background: linear-gradient(to right, #24243e, #302b63, #0f0c29); /* W3C, IE 10+
   <!-- /.content-wrapper -->
   <?php include 'template/footer.php'; ?>
 
-  <div id="modalAgregarTipo" class="modal fade" role="dialog">
-  
-  <div class="modal-dialog">
+  <?php include 'template/modales/modalinsertartipousuario.php' ?>
 
-    <div class="modal-content">
-
-        <div class="modal-header">
-          <h4 class="modal-title">Agregar tipo</h4>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-
-        <div class="modal-body">
-
-          <div class="box-body">
-
-            <form id="formulario-insertar"  >
-           
-
-              <div class="form-group">
-                <input type="hidden" name="metodo" value="agregar">
-                <label >Descripción:</label>
-                <input type="text" class="form-control" name="tipodescripcion" id="tipodescripcion" placeholder="Ingrese tipo">
-               
-              </div>
-                         
-             <center><button type="button" name="insertar" id="insertar" class="btn btn-primary">Insertar</button></center> 
-            </form>
-
-    </div>
-
-  </div>
-
-</div>
-  </div>
-
-</div>
-
-<div id="modalEditarTipo" class="modal fade" role="dialog">
-  
-  <div class="modal-dialog">
-
-    <div class="modal-content">
-
-        <div class="modal-header">
-          <h4 class="modal-title">Editar tipo</h4>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-
-        <div class="modal-body">
-
-          <div class="box-body">
-
-            <form id="formulario-editar">
-              
-              <div class="form-group">
-                <input type="hidden" name="tipoid" id="tipoid">
-                 <input type="hidden" name="metodo" value="actualizar">
-              
-              </div>
-
-              <div class="form-group">
-                <label >Descripción:</label>
-                <input type="text" class="form-control" name="tipodescripcion" id="tipodescripcion" placeholder="Ingrese tipo">
-               
-              </div>
-              
-
-             <center><button type="button" name="actualizar" id="actualizar" class="btn btn-primary">Actualizar</button></center> 
-            </form>
-
-    </div>
-
-  </div>
-
-</div>
-  </div>
-
-</div>
+<?php include 'template/modales/modaleditartipousuario.php' ?>
 
 
-
-
-</div>
+<?php include 'template/modales/modalqr.php' ?>
 <!-- ./wrapper -->
 
-<!-- jQuery -->
-<script src="plugins/jquery/jquery.min.js"></script>
-<!-- jQuery UI 1.11.4 -->
-<script src="plugins/jquery-ui/jquery-ui.min.js"></script>
-<!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
-<script>
-  $.widget.bridge('uibutton', $.ui.button)
-</script>
-<!-- Bootstrap 4 -->
-<script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-<!-- ChartJS -->
-<script src="plugins/chart.js/Chart.min.js"></script>
+<?php include 'template/dependenciasjs.php' ?>
 
-<!-- jQuery Knob Chart -->
-<script src="plugins/jquery-knob/jquery.knob.min.js"></script>
-<!-- daterangepicker -->
-<script src="plugins/moment/moment.min.js"></script>
-<script src="plugins/daterangepicker/daterangepicker.js"></script>
-<!-- Tempusdominus Bootstrap 4 -->
-<script src="plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></script>
-<!-- overlayScrollbars -->
-<script src="plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
-<!-- AdminLTE App -->
-<script src="dist/js/adminlte.js"></script>
-<!-- AdminLTE dashboard demo (This is only for demo purposes) -->
-<script src="dist/js/pages/dashboard.js"></script>
 
-<!-- DataTables  & Plugins -->
-<script src="plugins/datatables/jquery.dataTables.min.js"></script>
-<script src="plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
-<script src="plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
-<script src="plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
-<script src="plugins/datatables-buttons/js/dataTables.buttons.min.js"></script>
-<script src="plugins/datatables-buttons/js/buttons.bootstrap4.min.js"></script>
-<script src="plugins/jszip/jszip.min.js"></script>
-<script src="plugins/pdfmake/pdfmake.min.js"></script>
-<script src="plugins/pdfmake/vfs_fonts.js"></script>
-<script src="plugins/datatables-buttons/js/buttons.html5.min.js"></script>
-<script src="plugins/datatables-buttons/js/buttons.print.min.js"></script>
-<script src="plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
-<script src="plugins/sweetalert2/sweetalert2.min.js"></script>
-<script src="plugins/toastr/toastr.min.js"></script>
 
 
 
