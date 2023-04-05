@@ -27,9 +27,9 @@ include 'tipoempleadobusiness.php';
     $resultado = $tipoBusiness->actualizar($tipo);
 
     if($resultado == 1){
-        header("Location: ../view/tipoempleadoview.php?sucess=update");
+        echo json_encode(array("statusCode"=>200)); 
     }else{
-        header("Location: ../view/tipoempleadoview.php?error=dbError");
+        echo json_encode(array("statusCode"=>400)); 
     }
 
 

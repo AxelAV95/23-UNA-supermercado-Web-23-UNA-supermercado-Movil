@@ -37,7 +37,7 @@
 
 		$resultado = $categoriaBusiness->modificarCategoria($categoria);
 		if ($resultado == 1) {
-			Header("Location: ../view/categoriaview.php?success=update&id=");
+			Header("Location: ../view/categoriaview.php?success=update");
 		} else {
 			Header("Location: ../view/categoriaview.php?error=dbError");
 		}
@@ -48,7 +48,7 @@
 		$resultado = $categoriaBusiness->eliminarCategoria($id);
 
 		if ($resultado == 1) {
-			Header("Location: ../view/categoriaview.php?success=delete&id=");
+			Header("Location: ../view/categoriaview.php?success=deleted");
 		} else {
 			Header("Location: ../view/categoriaview.php?error=dbError");
 		}

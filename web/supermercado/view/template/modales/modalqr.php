@@ -8,10 +8,12 @@
         </button>
       </div>
       <div class="modal-body"  >
-        <p class="text-center"><em>Escanea el código QR para iniciar sesión desde la aplicación móvil</em></p>
+       
 
         <div id="qrcode" class="d-flex justify-content-center mt-2" > 
         </div>
+
+         <p class="text-center mt-4"><em>Escanea el código QR para iniciar sesión desde la aplicación móvil</em></p>
 
       </div>
     </div>

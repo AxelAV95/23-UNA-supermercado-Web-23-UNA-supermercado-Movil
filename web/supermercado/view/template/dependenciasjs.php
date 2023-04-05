@@ -72,3 +72,22 @@
 <script src="plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
 <script src="plugins/sweetalert2/sweetalert2.min.js"></script>
 <script src="plugins/toastr/toastr.min.js"></script>
+
+<script type="text/javascript">
+  var currentURL = window.location.href;
+
+  $('.sidebar li a').each(function() {
+
+    var linkURL = $(this).attr('href');
+    const myArray = currentURL.split("/");
+    
+    if(linkURL == myArray[myArray.length - 1]){
+        $(this).closest('li a').addClass('active');
+        
+        var element = $(this).parent().parent().parent().children().parent()[0];
+        $(element).addClass('menu-is-opening')
+        $(element).addClass('menu-open')
+        
+    }
+  });
+</script>

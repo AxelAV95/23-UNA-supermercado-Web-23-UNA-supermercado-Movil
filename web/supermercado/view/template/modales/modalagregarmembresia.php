@@ -1,11 +1,11 @@
-<div id="modalAgregarTipo" class="modal fade mt-5" role="dialog">
+<div id="modalAgregarTipo" class="modal fade" role="dialog">
   
   <div class="modal-dialog">
 
     <div class="modal-content">
 
         <div class="modal-header">
-          <h4 class="modal-title">Agregar tipo</h4>
+          <h4 class="modal-title">Agregar tipo membresía</h4>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true" style="font-size: 30px;">&times;</span>
           </button>
@@ -21,7 +21,7 @@
               <div class="form-group">
                 <input type="hidden" name="metodo" value="agregar">
                 <label >Descripción:</label>
-                <input type="text" class="form-control" name="tipodescripcion" id="tipodescripcion" placeholder="Ingrese tipo">
+                <input type="text" class="form-control" name="membresiadescripcion" id="membresiadescripcion" placeholder="Ingrese tipo de membresía">
                
               </div>
                          

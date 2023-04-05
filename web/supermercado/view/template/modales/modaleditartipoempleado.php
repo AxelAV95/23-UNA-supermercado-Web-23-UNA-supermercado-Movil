@@ -1,4 +1,4 @@
-<div id="modalEditarTipo" class="modal fade mt-5" role="dialog">
+<div id="modalEditarTipo" class="modal fade" role="dialog">
   
   <div class="modal-dialog">
 
@@ -7,7 +7,7 @@
         <div class="modal-header">
           <h4 class="modal-title">Editar tipo</h4>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true" style="font-size: 30px;">&times;</span>
+            <span aria-hidden="true">&times;</span>
           </button>
         </div>
 
