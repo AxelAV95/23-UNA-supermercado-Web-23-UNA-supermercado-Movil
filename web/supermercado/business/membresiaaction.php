@@ -1,68 +1,60 @@
-<?php 
 
+<?php
+include 'membresiabusiness.php';
 
-	include 'membresiabusiness.php';
-	if(isset($_POST['insertar'])){
-
-		if (isset($_POST['membresiadescripcion'])
-	) {
+	if(isset($_POST['metodo']) && $_POST['metodo'] == "agregar" && isset($_POST['membresiadescripcion'])){
 		$membresiadescripcion = $_POST['membresiadescripcion'];
-	 
 		$membresiaBusiness = new MembresiaBusiness();
-	
 		$membresia = new Membresia(0,$membresiadescripcion);
 	
 		$resultado = $membresiaBusiness->insertarMembresia($membresia);
-	
-		if ($resultado == 1) {
-			Header("Location: ../view/membresiaview.php?success=inserted");
-		} else {
-			Header("Location: ../view/membresiaview.php?error=dbError");
-		}
-		}
+
+		if($resultado == 1){
+	    		echo json_encode(array("statusCode"=>200));	
+	    }else{
+	    		echo json_encode(array("statusCode"=>400));	
+	    }
 
 
-	}
+}else if(isset($_POST['metodo']) && $_POST['metodo'] == "actualizar" && isset($_POST['membresiadescripcion']) && isset($_POST['membresiaid']) ){
+    $membresiaid = $_POST['membresiaid'];
+    $membresiadescripcion = $_POST['membresiadescripcion'];
 
-//metodo de actualizar categoria
-else if(isset($_POST['actualizar'])){
-	if (isset($_POST['membresiadescripcion']) && isset($_POST['membresiaid']) 
-	) 
-	$membresiaid = $_POST['membresiaid'];
-	$membresiadescripcion = $_POST['membresiadescripcion'];
 	$membresia = new Membresia($membresiaid,$membresiadescripcion);
 	
 	$membresiaBusiness = new MembresiaBusiness();
 
 	$resultado = $membresiaBusiness->modificarMembresia($membresia);
-	if ($resultado == 1) {
-		Header("Location: ../view/membresiaview.php?success=update&id=");
-	} else {
-		Header("Location: ../view/membresiaview.php?error=dbError");
-	}
+
+    if($resultado == 1){
+        header("Location: ../view/membresiaview.php?sucess=update");
+    }else{
+        header("Location: ../view/membresiaview.php?error=dbError");
+    }
+
+
+
+
+}else if(isset($_GET['metodo']) && $_GET['metodo'] == "eliminar"){
+	$membresiaid = $_GET['membresiaid'];
+
+	
+	$membresiaBusiness = new MembresiaBusiness();
+  
+	$resultado = $membresiaBusiness->eliminarMembresia($membresiaid);
+  
+
+    if($resultado == 1){
+		echo json_encode(array("statusCode"=>200));	
+}else{
+		echo json_encode(array("statusCode"=>400));	
 }
 
-else if(isset($_GET['eliminar'])){
-	if(isset($_GET['membresiaid'])) {
-	  $id = $_GET['membresiaid'];
-  
-	
-	  $membresiaBusiness = new MembresiaBusiness();
-  
-	  $resultado = $membresiaBusiness->eliminarMembresia($id);
-	
-	  if($resultado == 1){
-		echo "<script>window.location.reload();</script>";
-	} else {
-		header("location: ../view/membresiaview.php?mensaje=4" );
-	}
-	
-		  
-  }
 
-}
-  
-else if(isset($_GET['metodo']) && $_GET['metodo'] == "obtener" ){
+
+
+
+}else if(isset($_GET['metodo']) && $_GET['metodo'] == "obtener" ){
     $membresiaBusiness = new MembresiaBusiness();
       $membresias = $membresiaBusiness->getAllTBMembresias();
 
@@ -84,7 +76,6 @@ else if(isset($_GET['metodo']) && $_GET['metodo'] == "obtener" ){
 
 
 }
-
 
 
 ?>
