@@ -7,7 +7,7 @@
         <div class="modal-header">
           <h4 class="modal-title">Agregar usuario</h4>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
+            <span aria-hidden="true" style="font-size: 30px">&times;</span>
           </button>
         </div>
 
@@ -15,46 +15,48 @@
 
           <div class="box-body">
 
-            <form method="POST" action="../../business/usuarioaction.php"  enctype="multipart/form-data">
-           
+            <form id="formulario-insertar">
+             <input type="hidden" name="metodo" value="agregar">
 
               <div class="form-group">
-                <label >Nombre:</label>
-                <input type="text" class="form-control" name="usuarionombre" id="usuarionombre" placeholder="Ingrese un nombre">
+
+                <label >Empleado: </label>
+                <select id="empleados" class="form-control" name="empleadoid" >
+                  <option selected>Seleccione un empleado</option>
+                </select>
                
               </div>
+
+              <div class="form-group">
+                 <label>Tipo de usuario: </label>
+              <select class="tipoid form-control" name="tipoid" id="tipos" >
+
+                <option selected>Seleccione el tipo de usuario</option>
               
-              <div class="form-group">
-                <label >Telefono:</label>
-                <input type="text" class="form-control" name="usuariotelefono" id="usuariotelefono" placeholder="Ingrese un telefono">
-               
+                  <?php 
+                  /*
+                  foreach($tipousuarios as $tipousuario){
+
+                    echo ' <option value="'.$tipousuario['tipoid'].'" class="badge badge-pill badge-warning" style="font-size: 15px;">'.$tipousuario['tipodescripcion'].'</option>';
+                  }*/
+                  ?>
+
+                </select>
+                
               </div>
-              <div class="form-group">
-                <label >Correo:</label>
-                <input type="text" class="form-control" name="usuariocorreo" id="usuariocorreo" placeholder="Ingrese un correo">
                
-              </div>
+              
               <div class="form-group">
                 <label >Password:</label>
                 <input type="text" class="form-control" name="usuariopassword" id="usuariopassword" placeholder="Ingrese contraseña">
                       </div>
 
-                <label>Tipo de Usuario: </label>
-              <select class="tipoid form-control" name="tipoid" id="tipoid" >
-
-                <option selected>Seleccione el tipo de usuario</option>
               
-                  <?php foreach($tipousuarios as $tipousuario){
-
-                    echo ' <option value="'.$tipousuario['tipoid'].'" class="badge badge-pill badge-warning" style="font-size: 15px;">'.$tipousuario['tipodescripcion'].'</option>';
-                  }?>
-
-            </select>
             <br><br>
 
              
               
-             <center><button type="submit" name="insertar" class="btn btn-primary">Insertar</button></center> 
+             <center><button type="button" name="insertar" id="insertar" class="btn btn-primary">Insertar</button></center> 
             </form>
 
         </div>

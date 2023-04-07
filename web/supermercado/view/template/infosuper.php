@@ -1,0 +1,2 @@
+ <span class="brand-text font-weight-light"><?php echo $_SESSION['nombresuper'] ?></span>
+ <img src="<?php echo $_SESSION['logo'] ?>" id="logo-super" class="img-fluid" alt="Responsive image" width="30px" height="30px" style="margin-left: 1rem;">

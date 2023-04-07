@@ -21,18 +21,26 @@
         public function insertarUsuario($usuario){
             return $this->usuarioData->insertarUsuario($usuario);
         }
+
+        public function verificarEmpleadoUsuario($id){
+            return $this->usuarioData->verificarEmpleadoUsuario($id);
+        }
         public function modificarusuario($usuario){
             return $this->usuarioData->modificarUsuario($usuario);
         }
-        public function eliminarusuario($id){
-            return $this->usuarioData->eliminarusuario($id);
+        public function eliminarUsuario($id){
+            return $this->usuarioData->eliminarUsuario($id);
         }
         public function getAllTBUsuarios(){
              return $this->usuarioData->getAllTBUsuarios();
         }
 
-        public function obtenerUsuarioLogin($correo, $password){
-            return $this->usuarioData->obtenerUsuarioLogin($correo, $password);
+        public function obtenerUsuarioLogin($cedula){
+            return $this->usuarioData->obtenerUsuarioLogin($cedula);
+        }
+
+        public function verificarCuentaUsuario($cedula){
+            return $this->usuarioData->verificarCuentaUsuario($cedula);
         }
     }
 

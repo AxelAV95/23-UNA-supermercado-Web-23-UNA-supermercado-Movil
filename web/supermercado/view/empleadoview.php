@@ -10,7 +10,7 @@
 ?>
 
 <?php 
- //  include 'template/sesion.php';
+   include 'template/sesion.php';
   ?>
 
 
@@ -35,9 +35,8 @@
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
     <a href="index.html" class="brand-link d-flex justify-content-center ">
-
-         <span class="brand-text font-weight-light">Nombre de Super</span>
-      <img src="img/otros/logo.png" class="img-fluid" alt="Responsive image" width="30px" height="30px" style="margin-left: 1rem;">
+  <?php include 'template/infosuper.php' ?>
+  
     </a>
 
     <!-- Sidebar -->

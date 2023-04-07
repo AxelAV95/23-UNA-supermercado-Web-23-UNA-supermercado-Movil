@@ -1,6 +1,6 @@
 
  <?php 
-  // include 'template/sesion.php';
+   include 'template/sesion.php';
   ?>
 
 <!DOCTYPE html>
@@ -26,8 +26,8 @@
     <a href="index.php" class="brand-link d-flex justify-content-center ">
      <!--  <img src="dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8"> -->
    
-         <span class="brand-text font-weight-light">Nombre de Super</span>
-      <img src="img/otros/logo.png" class="img-fluid " alt="Responsive image" width="30px" height="30px" style="margin-left: 1rem;">
+         <?php include 'template/infosuper.php' ?>
+  
   
     
     </a>

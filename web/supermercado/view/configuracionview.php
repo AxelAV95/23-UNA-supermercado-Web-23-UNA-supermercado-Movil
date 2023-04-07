@@ -7,7 +7,7 @@
  ?>
 
  <?php 
-   //include 'template/sesion.php';
+   include 'template/sesion.php';
   ?>
 
 <!DOCTYPE html>
@@ -31,8 +31,7 @@
     <!-- Brand Logo -->
     <a href="index.php" class="brand-link d-flex justify-content-center ">
      <!--  <img src="dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8"> -->
-       <span class="brand-text font-weight-light">Nombre de Super</span>
-      <img src="img/otros/logo.png" class="img-fluid" alt="Responsive image" width="30px" height="30px" style="margin-left: 1rem;">
+      <?php include 'template/infosuper.php' ?>
   
     
     </a>
@@ -61,15 +60,68 @@
     <section class="content">
 
       <div class="container-fluid">
-        <!-- Small boxes (Stat box) -->
-        <div class="row">
-          
 
+        
+
+        <!-- Small boxes (Stat box) -->
+      <form id="formulario-configuracion" enctype="multipart/form-data">
+
+        <div class="card">
+  
+          <div class="card-body">
+              <div class="row m-3">
+            
+          
+            <div class="col-lg-6">
+                
+                <input type="hidden" class="form-control" id="supermercadoid" name="supermercadoid" >
+                <input type="hidden" class="form-control" name="metodo" value="actualizar" >
+                <div class="form-group">
+                  <label for="formNombre">Nombre</label>
+                  <input type="text" class="form-control" id="supermercadonombre" name="supermercadonombre" placeholder="Nombre del supermercado">
+                </div>
+                <div class="form-group">
+                  <label for="formTelefono">Teléfono</label>
+                  <input type="number" class="form-control" id="supermercadotelefono" name="supermercadotelefono" placeholder="Teléfono">
+                </div>
+                <div class="form-group">
+                  <label for="formCorreo">Correo</label>
+                  <input type="email" class="form-control" id="supermercadocorreo" name="supermercadocorreo" placeholder="Correo">
+                </div>
+             
+            </div>
+
+
+             <div class="col-lg-6">
+          
+                <div class="form-group">
+                  <label for="formDireccion">Dirección</label>
+                  <input type="text" class="form-control" id="supermercadodireccion" name="supermercadodireccion" placeholder="Dirección">
+                </div>
+                <div class="form-group">
+                  <label for="formLogo">Logo</label>
+                  <input type="file" class="form-control" id="supermercadologo" name="supermercadologo" accept="image/png, image/jpeg" >
+
+                  <div class="d-flex justify-content-center mt-2">
+                    <img src="" id="logo" width="100" height="100">
+                  </div>
+                  <input type="hidden" name="imagenActual" id="imagenActual">
+                </div>
+                
+            </div>
+            
+            <div class="mx-auto">
+                <button type="submit" name="actualizar" id="actualizar" class="btn btn-primary">  Actualizar información</button>  
+            </div>
+            
          
          
          
         </div>
-       
+          </div>
+        </div>
+        
+       </form>
         <!-- Main row -->
        
         <!-- /.row (main row) -->
@@ -86,6 +138,164 @@
 <!-- ./wrapper -->
 
 <?php include 'template/dependenciasjs.php' ?>
+
+
+<script type="text/javascript">
+
+   var Toast = Swal.mixin({
+       toast: true,
+       position: 'top-right',
+       showConfirmButton: false,
+       timer: 3000,
+       timerProgressBar: true
+     });
+
+
+
+
+  $( document ).ready(function() {
+
+     $.ajax({
+      type: "GET",
+      url: '../business/configuracionaction.php?metodo=obtener',
+      dataType: 'json',
+      success: function(data) {
+
+          $("#supermercadoid").val(data[0].supermercadoid)
+          $("#supermercadonombre").val(data[0].supermercadonombre)
+          $("#supermercadotelefono").val(data[0].supermercadotelefono)
+          $("#supermercadocorreo").val(data[0].supermercadocorreo)
+          $("#supermercadodireccion").val(data[0].supermercadodireccion)
+          $("#imagenActual").val(data[0].supermercadologo)
+          $("#logo").attr("src", data[0].supermercadologo);
+          
+          
+          console.log(data[0] .supermercadologo)
+
+      }
+    });
+  });
+
+  $("#supermercadologo").on("change",function(){
+
+    var imagen = this.files[0];
+    var datosImagen = new FileReader;
+    datosImagen.readAsDataURL(imagen);
+    console.log(imagen)
+
+    $(datosImagen).on("load", function(event) {
+
+          var rutaImagen = event.target.result;
+
+           $("#logo").attr("src", rutaImagen);
+           $("#imagenActual").val(imagen.name);
+
+    });    
+  })
+
+  $('#formulario-configuracion').on("submit",function(){
+    event.preventDefault();
+
+    if($("#supermercadonombre").val() == ""){
+      $("#supermercadonombre").focus();
+        Toast.fire({
+            icon: 'warning',
+            title: '<div style=margin-top:0.5rem;>Debe ingresar un nombre.</div>'
+        });
+        event.preventDefault();
+    }else if($("#supermercadotelefono").val() == ""){
+      $("#supermercadotelefono").focus();
+      Toast.fire({
+            icon: 'warning',
+            title: '<div style=margin-top:0.5rem;>Debe ingresar un teléfono.</div>'
+        });
+        event.preventDefault();
+
+    }else if($("#supermercadocorreo").val() == ""){
+      $("#supermercadocorreo").focus();
+      Toast.fire({
+            icon: 'warning',
+            title: '<div style=margin-top:0.5rem;>Debe ingresar un correo.</div>'
+        });
+        event.preventDefault();
+
+    }else if($("#supermercadodireccion").val() == ""){
+      $("#supermercadodireccion").focus()
+      Toast.fire({
+            icon: 'warning',
+            title: '<div style=margin-top:0.5rem;>Debe ingresar una dirección.</div>'
+        });
+        event.preventDefault();
+
+    }else if($("#supermercadologo").get(0).files.length === 0){
+      $("#supermercadologo").focus()
+        Toast.fire({
+            icon: 'warning',
+            title: '<div style=margin-top:0.5rem;>Debe seleccionar algún logo.</div>'
+        });
+        event.preventDefault();
+    }else{
+      var formData = new FormData(this);
+    console.log(formData)
+
+     $.ajax({
+        url: '../business/configuracionaction.php',
+        type: 'POST',
+        data: formData,
+        async: false,
+        cache: false,
+        contentType: false,
+        processData: false,
+        success: function(dataResult) {
+          var dataResult = JSON.parse(dataResult);
+          console.log(dataResult)
+              if(dataResult.statusCode==200){
+                           
+                  Toast.fire({
+                        icon: 'success',
+                        title: '<div style=margin-top:0.5rem;>Actualizado con éxito.</div>'
+                  });
+                     
+                     location.reload();
+                                                 
+              }else{
+                     Toast.fire({
+                        icon: 'error',
+                        title: '<div style=margin-top:0.5rem;>Error al efectuar la operación.</div>'
+                  })
+          
+              }
+
+        }
+      });
+    }
+
+
+    
+
+
+
+  })
+
+  //$('#formulario-configuracion').submit(function(event) {
+    
+    /*
+    $.ajax({
+        url: 'upload.php',
+        type: 'POST',
+        data: formData,
+        async: false,
+        cache: false,
+        contentType: false,
+        processData: false,
+        success: function(response) {
+          console.log(response);
+        }
+      });
+    });
+*/
+
+</script>
 
 </body>
 </html>

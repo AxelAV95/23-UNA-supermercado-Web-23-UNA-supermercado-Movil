@@ -7,7 +7,7 @@ background: linear-gradient(to right, #24243e, #302b63, #0f0c29); /* W3C, IE 10+
       
         <div class="info d-flex justify-content-between">
           <i class="fas fa-user text-light mr-3" style="font-size: 23px;"></i>
-          <a href="#" class="d-block"><?php //echo $usuario ?></a>
+          <a href="#" class="d-block"><?php echo $nombre." ".$apellidos ?></a>
         </div>
       </div>
 
@@ -52,6 +52,7 @@ background: linear-gradient(to right, #24243e, #302b63, #0f0c29); /* W3C, IE 10+
             </a>
           </li>
          
+         <?php if($_SESSION['tipodescripcion'] == "Administrador"){ ?>
           <li class="nav-item">
             <a href="" class="nav-link">
                <i class="nav-icon fas fa-users"></i>
@@ -77,7 +78,9 @@ background: linear-gradient(to right, #24243e, #302b63, #0f0c29); /* W3C, IE 10+
               </li>
             </ul>
           </li>
+          <?php } ?>
          
+          <?php if($_SESSION['tipodescripcion'] == "Administrador"){ ?>
          <li class="nav-item">
             <a href="" class="nav-link">
               <i class="nav-icon fas fa-user-edit"></i>
@@ -103,6 +106,7 @@ background: linear-gradient(to right, #24243e, #302b63, #0f0c29); /* W3C, IE 10+
               </li>
             </ul>
           </li>
+          <?php } ?>
 
           <li class="nav-item">
             <a href="" class="nav-link">
@@ -156,6 +160,7 @@ background: linear-gradient(to right, #24243e, #302b63, #0f0c29); /* W3C, IE 10+
             </ul>
           </li>
 
+           <?php if($_SESSION['tipodescripcion'] == "Administrador"){ ?>
           <li class="nav-item">
             <a href="" class="nav-link">
               <i class="nav-icon fas fa-cog"></i>
@@ -181,10 +186,10 @@ background: linear-gradient(to right, #24243e, #302b63, #0f0c29); /* W3C, IE 10+
               </li>
             </ul>
           </li>
-         
+          <?php } ?>
 
          <li class="nav-item ">
-            <a href="../business/usuarioaction.php?cerrarSesion=true" class="nav-link">
+            <a href="../business/usuarioaction.php?metodo=cerrarSesion" class="nav-link">
                <i class="nav-icon fas fa-sign-out-alt"></i>
               <p>
                 Cerrar sesión

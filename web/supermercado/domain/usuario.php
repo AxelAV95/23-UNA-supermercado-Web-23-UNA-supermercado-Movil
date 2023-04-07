@@ -3,9 +3,7 @@
 	class Usuario{
 		
 		private $id;
-		private $nombre;
-		private $telefono;
-		private $correo;
+	    private $empleadoid;
 		private $password;
 		private $tipoid;
 
@@ -32,65 +30,14 @@
         return $this;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getNombre()
+    public function setEmpleadoId($id)
     {
-        return $this->nombre;
+        $this->empleadoid = $id;
+
     }
 
-    /**
-     * @param mixed $nombre
-     *
-     * @return self
-     */
-    public function setNombre($nombre)
-    {
-        $this->nombre = $nombre;
+   
 
-        return $this;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getTelefono()
-    {
-        return $this->telefono;
-    }
-
-    /**
-     * @param mixed $telefono
-     *
-     * @return self
-     */
-    public function setTelefono($telefono)
-    {
-        $this->telefono = $telefono;
-
-        return $this;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getCorreo()
-    {
-        return $this->correo;
-    }
-
-    /**
-     * @param mixed $correo
-     *
-     * @return self
-     */
-    public function setCorreo($correo)
-    {
-        $this->correo = $correo;
-
-        return $this;
-    }
 
     /**
      * @return mixed
@@ -118,6 +65,11 @@
     public function getTipoid()
     {
         return $this->tipoid;
+    }
+
+    public function getEmpleadoId()
+    {
+        return $this->empleadoid;
     }
 
     /**

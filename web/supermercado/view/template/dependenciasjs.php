@@ -7,11 +7,6 @@
 
 <script type="text/javascript" src="dist/js/qrcode.min.js"></script>
 
-<?php 
-  
-  $cedula = 207380286;
-
- ?>
 
 <script type="text/javascript">
   
@@ -90,4 +85,18 @@
         
     }
   });
+  /*
+ $.ajax({
+      type: "GET",
+      url: '../business/configuracionaction.php?metodo=obtener',
+      dataType: 'json',
+      success: function(data) {
+
+          $("#logo-super").attr("src", data[0].supermercadologo);
+          
+          
+          console.log(data[0] .supermercadologo)
+
+      }
+    });*/
 </script>
