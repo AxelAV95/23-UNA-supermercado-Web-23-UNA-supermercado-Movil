@@ -90,36 +90,7 @@
                   </tr>
                   </thead>
                   <tbody>
-                    <?php 
-
-                    /*
-                        foreach($usuarios as $usuario){
-                          echo '<tr>';
-                          echo '<td>'.$usuario['usuarionombre'].'</td>';
-                         
-                          echo '<td>'.$usuario['usuariotelefono'].'</td>';
-                         
-                          echo '<td>'.$usuario['usuariocorreo'].'</td>';
-                          
-                          echo '<td class="hidetext">'.$usuario['usuariopassword'].'</td>';
-                          echo '<td>';
-                          if($usuario['tipoid'] == 1){
-                            echo '<span class="badge badge-light">Administrador</span>';
-                          }else{
-                            echo '<span class="badge badge-light">Empleado</span>';
-                          }
-                          echo '</td>';
-                          echo '<td>';
-                          echo "<div class='btn-group'><button class='btn btn-warning btnEditarUsuario' usuarioid='".$usuario["usuarioid"]."' usuarionombre='".$usuario['usuarionombre']."' usuariotelefono='".$usuario['usuariotelefono']."'  usuariocorreo='".$usuario["usuariocorreo"]."' usuariopassword='".$usuario["usuariopassword"]."' tipoid='".$usuario["tipoid"]."' data-toggle='modal' data-target='#modalEditarUsuario'><i class='fa fa-pencil-alt'></i></button><button class='btn btn-danger btnEliminarUsuario' usuarioid='".$usuario["usuarioid"]."' usuariotelefono='".$usuario["usuariotelefono"]."' usuariocorreo='".$usuario["usuariocorreo"]."' usuariopassword='".$usuario["usuariopassword"]."' tipoid='".$usuario["tipoid"]."' ><i class='fa fa-times'></i></button></div>";
-                          echo '</td>';
-                          echo '</tr>';
-                        }
-
-
-                      */
-
-                    ?>
-                
+                  
                   </tbody>
                   
                 </table>
