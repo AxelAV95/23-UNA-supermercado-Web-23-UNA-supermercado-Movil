@@ -21,16 +21,21 @@ import com.michaldrabik.tapbarmenulib.TapBarMenu;
 
 import es.dmoral.toasty.Toasty;
 import una.ac.cr.supermercadoapp.R;
+import una.ac.cr.supermercadoapp.data.TipoUsuarioData;
 
 public class MainActivity extends AppCompatActivity {
 
     private CardView cardEmpleados, cardProductos, cardCategorias, cardProveedor, cardUsuarios, cardReportes, cardClientes;
     private ImageView iconCuenta, iconConfig, iconLogOut;
     private TapBarMenu tapMenu;
+
+    private TipoUsuarioData mTipoUsuarioData;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        //mTipoUsuarioData = new TipoUsuarioData(this);
 
         iniciarComponentes();
         agregarAnimaciones();
@@ -77,7 +82,10 @@ public class MainActivity extends AppCompatActivity {
         cardUsuarios.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toasty.info(getApplicationContext(), "Usuarios", Toast.LENGTH_SHORT, true).show();
+                Intent intent = new Intent(MainActivity.this,UsuariosActivity.class);
+                startActivity(intent);
+                finish();
+                //Toasty.info(getApplicationContext(), "Usuarios", Toast.LENGTH_SHORT, true).show();
             }
         });
 

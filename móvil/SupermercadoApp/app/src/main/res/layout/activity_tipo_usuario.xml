@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bgtu"
+    tools:context=".view.activities.TipoUsuarioActivity">
+
+    <!--
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/icon_ti_usuarios"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        app:lottie_autoPlay="true"
+        app:lottie_loop="true"
+        android:layout_below="@id/recycler_view_tipos_usuario"
+
+        app:lottie_rawRes="@raw/usuarios" />
+-->
+
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/icon_ti_usuarios"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:layout_centerHorizontal="true"
+        android:layout_margin="10dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+
+
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="10dp"
+        app:lottie_autoPlay="true"
+        app:lottie_loop="true"
+        app:lottie_rawRes="@raw/usuarios" />
+
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/icon_agregar_tipo_usuario"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        app:lottie_autoPlay="true"
+        app:lottie_loop="true"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginBottom="16dp"
+        android:layout_marginEnd="16dp"
+
+        app:lottie_rawRes="@raw/add" />
+
+    <!--
+    <TextView
+        android:id="@+id/titulo_tipo_usuarios"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignEnd="@id/barra_busqueda_tu"
+        android:layout_marginTop="23dp"
+        android:layout_marginRight="10dp"
+
+        android:fontFamily="@font/dosis"
+        android:text="Tipos de usuario"
+        android:textColor="@color/black"
+        android:textSize="23sp"
+        android:layout_below="@id/barra_busqueda_tu"
+        android:textStyle="bold" />-->
+
+    <SearchView
+        android:layout_width="match_parent"
+        android:layout_marginTop="15dp"
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/icon_ti_usuarios"
+        android:id="@+id/barra_busqueda_tu"
+        android:queryHint="Ingrese descripción"
+        android:background="@drawable/search_bg"
+        />
+
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler_view_tipos_usuario"
+        android:layout_width="match_parent"
+        android:layout_height="350dp"
+        android:layout_below="@id/barra_busqueda_tu"
+
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="100dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="10dp" />
+
+</RelativeLayout>

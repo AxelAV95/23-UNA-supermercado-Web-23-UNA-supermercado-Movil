@@ -10,9 +10,13 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/Theme.SupermercadoApp"
+        tools:replace="android:icon"
         tools:targetApi="31">
         <activity
-            android:name=".view.activities.SplashActivity"
+            android:name=".view.activities.FormularioTipoUsuarioActivity"
+            android:exported="false" />
+        <activity
+            android:name=".view.activities.UsuariosActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -21,10 +25,23 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".view.activities.MainActivity"
+            android:name=".view.activities.TipoUsuarioActivity"
+            android:exported="true"></activity>
+        <activity
+            android:name=".view.activities.SplashActivity"
             android:exported="true">
 
+            <!--
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+            -->
         </activity>
+        <activity
+            android:name=".view.activities.MainActivity"
+            android:exported="true" />
     </application>
 
 </manifest>

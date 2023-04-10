@@ -10,4 +10,8 @@
     <string name="content_conf">Configurar información del supermercado</string>
     <string name="content_cuenta">Ver detalles de cuenta</string>
     <string name="content_cerrar_sesion">Cerrar sesión</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+
 </resources>
