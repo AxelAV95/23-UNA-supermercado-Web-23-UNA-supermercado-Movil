@@ -1,12 +1,6 @@
 <?php    
-    
-    if (is_file("../data/usuariodata.php")){
-        include ("../data/usuariodata.php");
-    }else{
-        include ("../../data/usuariodata.php");
-    }
-
-    //include '../../data/usuariodata.php';
+  
+    include ("../data/usuariodata.php");
         
     class UsuarioBusiness {
         private $usuarioData;

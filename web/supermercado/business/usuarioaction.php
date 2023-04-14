@@ -189,6 +189,14 @@
 	    	echo json_encode(array("statusCode"=>400));	
 	    }
 
+	}else if($_SERVER['REQUEST_METHOD'] === "GET"){
+
+		$usuarioBusiness = new UsuarioBusiness();
+		$usuarios = $usuarioBusiness->getAllTBusuarios();
+//		echo json_encode($usuarios);
+
+		echo json_encode($usuarios);
+
 	}
 
 
