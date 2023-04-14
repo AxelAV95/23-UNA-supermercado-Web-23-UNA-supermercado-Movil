@@ -6,7 +6,9 @@ import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -51,6 +53,15 @@ public class TipoUsuarioActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tipo_usuario);
+
+        SharedPreferences credenciales = getSharedPreferences("credenciales", Context.MODE_PRIVATE);
+        String cedula  = credenciales.getString("cedula", null);
+
+        if(cedula == null){
+            Intent intent = new Intent(TipoUsuarioActivity.this, LoginActivity.class);
+            startActivity(intent);;
+            finish();
+        }
 
         iniciarWidgets();
         configurarRecycler();

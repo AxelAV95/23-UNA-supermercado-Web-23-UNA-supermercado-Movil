@@ -52,7 +52,15 @@ dependencies {
     implementation 'com.github.Shashank02051997:FancyAlertDialog-Android:0.3'
     implementation "com.github.skydoves:powermenu:2.2.2"
     implementation 'com.wrapp.floatlabelededittext:library:0.0.6'
-    implementation 'org.mindrot:jbcrypt:0.4'
+    //implementation 'org.mindrot:jbcrypt:0.4'
+    implementation 'at.favre.lib:bcrypt:0.9.0'
+
+
+    //Dependencia QR
+    implementation 'com.journeyapps:zxing-android-embedded:4.3.0'
+
+    //Volley
+    implementation 'com.android.volley:volley:1.2.1'
 
 
 }

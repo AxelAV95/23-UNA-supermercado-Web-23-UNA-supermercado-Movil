@@ -2,7 +2,9 @@ package una.ac.cr.supermercadoapp.view.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -13,7 +15,7 @@ import android.widget.Toast;
 
 import com.airbnb.lottie.LottieAnimationView;
 
-import org.mindrot.jbcrypt.BCrypt;
+
 
 import una.ac.cr.supermercadoapp.R;
 import una.ac.cr.supermercadoapp.domain.TipoUsuario;
@@ -30,6 +32,15 @@ public class FormularioTipoUsuarioActivity extends AppCompatActivity {
         setContentView(R.layout.activity_formulario_tipo_usuario);
         botonMetodo = findViewById(R.id.btn_metodo);
         campoDescripcion = findViewById(R.id.form_tu_desc);
+
+        SharedPreferences credenciales = getSharedPreferences("credenciales", Context.MODE_PRIVATE);
+        String cedula  = credenciales.getString("cedula", null);
+
+        if(cedula == null){
+            Intent intent = new Intent(FormularioTipoUsuarioActivity.this, LoginActivity.class);
+            startActivity(intent);;
+            finish();
+        }
 
 
 

@@ -6,66 +6,40 @@ import androidx.cardview.widget.CardView;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.Typeface;
 import android.os.Bundle;
 import android.os.Handler;
-import android.transition.Explode;
 import android.view.View;
-import android.view.Window;
 import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.daimajia.androidanimations.library.Techniques;
 import com.daimajia.androidanimations.library.YoYo;
-import com.jaredrummler.android.widget.AnimatedSvgView;
 import com.michaldrabik.tapbarmenulib.TapBarMenu;
-
 
 import es.dmoral.toasty.Toasty;
 import una.ac.cr.supermercadoapp.R;
-import una.ac.cr.supermercadoapp.data.TipoUsuarioData;
-import una.ac.cr.supermercadoapp.utils.NetworkUtils;
 
-public class MainActivity extends AppCompatActivity {
+public class MenuEmpleadoActivity extends AppCompatActivity {
 
-    private CardView cardEmpleados, cardProductos, cardCategorias, cardProveedor, cardUsuarios, cardReportes, cardClientes;
-    private ImageView iconCuenta, iconConfig, iconLogOut;
+    private CardView cardProductos, cardCategorias, cardProveedor, cardReportes, cardClientes;
+    private ImageView iconCuenta, iconLogOut;
     private TapBarMenu tapMenu;
 
-    private TipoUsuarioData mTipoUsuarioData;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_menu_empleado);
 
-        //mTipoUsuarioData = new TipoUsuarioData(this);
-        SharedPreferences credenciales = getSharedPreferences("credenciales", Context.MODE_PRIVATE);
-        String cedula  = credenciales.getString("cedula", null);
-
-        if(cedula == null){
-            Intent intent = new Intent(MainActivity.this, LoginActivity.class);
-            startActivity(intent);;
-            finish();
-        }
-
-       // Toast.makeText(getApplicationContext(), NetworkUtils.IP, Toast.LENGTH_SHORT).show();
         iniciarComponentes();
         agregarAnimaciones();
         agregarEventos();
-
     }
 
     private void agregarEventos() {
         tapMenu.setOnClickListener(new View.OnClickListener() {
             @Override public void onClick(View v) {
                 tapMenu.toggle();
-            }
-        });
-
-        cardEmpleados.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toasty.info(getApplicationContext(), "Empleados", Toast.LENGTH_SHORT, true).show();
             }
         });
 
@@ -90,16 +64,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        cardUsuarios.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this,UsuariosActivity.class);
-                startActivity(intent);
-                finish();
-                //Toasty.info(getApplicationContext(), "Usuarios", Toast.LENGTH_SHORT, true).show();
-            }
-        });
-
         cardReportes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -111,13 +75,6 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Toasty.info(getApplicationContext(), "Clientes", Toast.LENGTH_SHORT, true).show();
-            }
-        });
-
-        iconConfig.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toasty.info(getApplicationContext(), "Configuración", Toast.LENGTH_SHORT, true).show();
             }
         });
 
@@ -140,24 +97,33 @@ public class MainActivity extends AppCompatActivity {
                 Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
                 startActivity(intent);
                 finish();
-                Toasty.info(getApplicationContext(), "Cerrar sesión", Toast.LENGTH_SHORT, true).show();
+
+                Toasty.info(getApplicationContext(), cedula, Toast.LENGTH_SHORT, true).show();
             }
         });
     }
 
 
     private void iniciarComponentes() {
-        tapMenu = findViewById(R.id.tapBarMenu);
-        cardEmpleados = findViewById(R.id.cardv_empleados);
-        cardProductos = findViewById(R.id.cardv_productos);
-        cardCategorias = findViewById(R.id.cardv_categorias);
-        cardProveedor = findViewById(R.id.cardv_proveedores);
-        cardUsuarios = findViewById(R.id.cardv_usuarios);
-        cardReportes = findViewById(R.id.cardv_reportes);
-        cardClientes = findViewById(R.id.cardv_clientes);
-        iconLogOut = findViewById(R.id.icon_logout);
-        iconCuenta = findViewById(R.id.icon_cuenta);
-        iconConfig = findViewById(R.id.icon_configuracion);
+
+        SharedPreferences credenciales = getSharedPreferences("credenciales", Context.MODE_PRIVATE);
+        String cedula  = credenciales.getString("cedula", null);
+
+        if(cedula == null){
+            Intent intent = new Intent(MenuEmpleadoActivity.this, LoginActivity.class);
+            startActivity(intent);;
+            finish();
+        }
+
+        tapMenu = findViewById(R.id.tapBarMenu_emp);
+        cardProductos = findViewById(R.id.cardv_productos_emp);
+        cardCategorias = findViewById(R.id.cardv_categorias_emp);
+        cardProveedor = findViewById(R.id.cardv_proveedores_emp);
+        cardReportes = findViewById(R.id.cardv_reportes_emp);
+        cardClientes = findViewById(R.id.cardv_clientes_emp);
+        iconLogOut = findViewById(R.id.icon_logout_emp);
+        iconCuenta = findViewById(R.id.icon_cuenta_emp);
+
     }
 
     private void agregarAnimaciones() {
@@ -165,10 +131,7 @@ public class MainActivity extends AppCompatActivity {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                YoYo.with(Techniques.RubberBand)
-                        .duration(700)
-                        .repeat(0)
-                        .playOn(cardEmpleados);
+
                 YoYo.with(Techniques.RubberBand)
                         .duration(700)
                         .repeat(0)
@@ -185,10 +148,7 @@ public class MainActivity extends AppCompatActivity {
                         .duration(700)
                         .repeat(0)
                         .playOn(cardProveedor);
-                YoYo.with(Techniques.RubberBand)
-                        .duration(700)
-                        .repeat(0)
-                        .playOn(cardUsuarios);
+
                 YoYo.with(Techniques.RubberBand)
                         .duration(700)
                         .repeat(0)
@@ -202,6 +162,5 @@ public class MainActivity extends AppCompatActivity {
         },3000);
 
     }
-
 
 }

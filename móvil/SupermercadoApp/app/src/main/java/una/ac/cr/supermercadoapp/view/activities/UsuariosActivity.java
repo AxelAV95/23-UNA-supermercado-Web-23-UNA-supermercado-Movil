@@ -3,7 +3,9 @@ package una.ac.cr.supermercadoapp.view.activities;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
@@ -53,6 +55,15 @@ public class UsuariosActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_usuarios);
+
+        SharedPreferences credenciales = getSharedPreferences("credenciales", Context.MODE_PRIVATE);
+        String cedula  = credenciales.getString("cedula", null);
+
+        if(cedula == null){
+            Intent intent = new Intent(UsuariosActivity.this, LoginActivity.class);
+            startActivity(intent);;
+            finish();
+        }
 
         powerMenu = new PowerMenu.Builder(this)
 
