@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.activity.result.ActivityResultLauncher;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -35,11 +36,24 @@ import una.ac.cr.supermercadoapp.view.activities.FormularioTipoUsuarioActivity;
 
 public class TipoUsuarioAdapter extends RecyclerSwipeAdapter<TipoUsuarioAdapter.ViewHolderTipoUsuario> {
 
+    private ActivityResultLauncher<Intent> activityResultLauncher;
     private ArrayList<TipoUsuario> listaTipoUsuarios;
+
     private Context mContext;
     protected SwipeItemRecyclerMangerImpl mItemManger = new SwipeItemRecyclerMangerImpl(this);
 
-    public TipoUsuarioAdapter(ArrayList<TipoUsuario> dataset, Context context) {
+    public interface OnItemClickListener {
+        void onItemClick(int position);
+    }
+
+    private OnItemClickListener mListener;
+
+    public void setOnItemClickListener(OnItemClickListener listener) {
+        mListener = listener;
+    }
+
+    public TipoUsuarioAdapter(ActivityResultLauncher<Intent> activityResultLauncher,ArrayList<TipoUsuario> dataset, Context context) {
+        this.activityResultLauncher = activityResultLauncher;
         listaTipoUsuarios = dataset;
         mContext = context;
     }
@@ -51,7 +65,7 @@ public class TipoUsuarioAdapter extends RecyclerSwipeAdapter<TipoUsuarioAdapter.
     @Override
     public ViewHolderTipoUsuario onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_recycler, parent, false);
-        return new ViewHolderTipoUsuario(view);
+        return new ViewHolderTipoUsuario(view,mListener);
 
     }
 
@@ -84,12 +98,10 @@ public class TipoUsuarioAdapter extends RecyclerSwipeAdapter<TipoUsuarioAdapter.
                         .show();
 
 
-                        //.onPositiveClicked(dialog -> Toast.makeText(viewHolder.itemView.getContext(), "Rate", Toast.LENGTH_SHORT).show())
-                        //.onNegativeClicked(dialog -> Toast.makeText(viewHolder.itemView.getContext(), "Cancel", Toast.LENGTH_SHORT).show())
-
-                //Toast.makeText(mContext, "DoubleClick", Toast.LENGTH_SHORT).show();
             }
         });
+
+
 
         viewHolder.btnUpdate.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -97,20 +109,11 @@ public class TipoUsuarioAdapter extends RecyclerSwipeAdapter<TipoUsuarioAdapter.
                 Intent intent = new Intent(v.getContext(), FormularioTipoUsuarioActivity.class);
                 intent.putExtra("metodo","actualizar");
                 intent.putExtra("tipoUsuario",listaTipoUsuarios.get(position));
-                v.getContext().startActivity(intent);
+              //  v.getContext().startActivity(intent);
+                activityResultLauncher.launch(intent);
             }
         });
-        viewHolder.buttonDelete.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                mItemManger.removeShownLayouts(viewHolder.swipeLayout);
-                listaTipoUsuarios.remove(position);
-                notifyItemRemoved(position);
-                notifyItemRangeChanged(position, listaTipoUsuarios.size());
-                mItemManger.closeAllItems();
-                Toast.makeText(view.getContext(), "Deleted " + viewHolder.textViewData.getText().toString() + "!", Toast.LENGTH_SHORT).show();
-            }
-        });
+
 
         viewHolder.textViewData.setText(item);
         mItemManger.bindView(viewHolder.itemView, position);
@@ -133,7 +136,8 @@ public class TipoUsuarioAdapter extends RecyclerSwipeAdapter<TipoUsuarioAdapter.
         TextView textViewPos;
         TextView textViewData;
         LottieAnimationView buttonDelete, btnUpdate;
-        public ViewHolderTipoUsuario(@NonNull View itemView) {
+
+        public ViewHolderTipoUsuario(@NonNull View itemView,  OnItemClickListener listener) {
             super(itemView);
             swipeLayout = (SwipeLayout) itemView.findViewById(R.id.swipe);
 
@@ -141,44 +145,19 @@ public class TipoUsuarioAdapter extends RecyclerSwipeAdapter<TipoUsuarioAdapter.
             buttonDelete =  itemView.findViewById(R.id.delete);
             btnUpdate = itemView.findViewById(R.id.update);
 
-            /*
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    Log.d(getClass().getSimpleName(), "onItemSelected: " + textViewData.getText().toString());
-                    Toast.makeText(view.getContext(), "onItemSelected: " + textViewData.getText().toString(), Toast.LENGTH_SHORT).show();
-                }
-            });*/
-        }
-
-        public void setDatos(String dato, int position){
-            swipeLayout.setShowMode(SwipeLayout.ShowMode.LayDown);
-            swipeLayout.addSwipeListener(new SimpleSwipeListener() {
-                @Override
-                public void onOpen(SwipeLayout layout) {
-                //    YoYo.with(Techniques.Tada).duration(500).delay(100).playOn(layout.findViewById(R.id.trash));
-                }
-            });
-            swipeLayout.setOnDoubleClickListener(new SwipeLayout.DoubleClickListener() {
-                @Override
-                public void onDoubleClick(SwipeLayout layout, boolean surface) {
-                    Toast.makeText(mContext, "DoubleClick", Toast.LENGTH_SHORT).show();
-                }
-            });
             buttonDelete.setOnClickListener(new View.OnClickListener() {
                 @Override
-                public void onClick(View view) {
-                    mItemManger.removeShownLayouts(swipeLayout);
-                    listaTipoUsuarios.remove(position);
-                    notifyItemRemoved(position);
-                    notifyItemRangeChanged(position, listaTipoUsuarios.size());
-                    mItemManger.closeAllItems();
-                    Toast.makeText(view.getContext(), "Deleted " + textViewData.getText().toString() + "!", Toast.LENGTH_SHORT).show();
+                public void onClick(View v) {
+                    if (listener != null) {
+                        int position = getAdapterPosition();
+                        if (position != RecyclerView.NO_POSITION) {
+                            listener.onItemClick(position);
+                        }
+                    }
                 }
             });
-            textViewPos.setText((position + 1) + ".");
-            textViewData.setText(dato);
-            mItemManger.bindView(itemView, position);
         }
+
+
     }
 }

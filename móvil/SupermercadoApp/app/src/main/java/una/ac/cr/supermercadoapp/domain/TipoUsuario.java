@@ -15,6 +15,10 @@ public class TipoUsuario implements Serializable {
     public TipoUsuario() {
     }
 
+    public TipoUsuario(String descripcion) {
+        this.descripcion = descripcion;
+    }
+
     public int getId() {
         return id;
     }

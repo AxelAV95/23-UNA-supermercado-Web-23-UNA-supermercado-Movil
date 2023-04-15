@@ -109,12 +109,8 @@ public class MenuEmpleadoActivity extends AppCompatActivity {
         SharedPreferences credenciales = getSharedPreferences("credenciales", Context.MODE_PRIVATE);
         String cedula  = credenciales.getString("cedula", null);
 
-        if(cedula == null){
-            Intent intent = new Intent(MenuEmpleadoActivity.this, LoginActivity.class);
-            startActivity(intent);;
-            finish();
-        }
 
+        verificarEstadoSesion(cedula);
         tapMenu = findViewById(R.id.tapBarMenu_emp);
         cardProductos = findViewById(R.id.cardv_productos_emp);
         cardCategorias = findViewById(R.id.cardv_categorias_emp);
@@ -124,6 +120,14 @@ public class MenuEmpleadoActivity extends AppCompatActivity {
         iconLogOut = findViewById(R.id.icon_logout_emp);
         iconCuenta = findViewById(R.id.icon_cuenta_emp);
 
+    }
+
+    private void verificarEstadoSesion(String cedula) {
+        if(cedula == null){
+            Intent intent = new Intent(MenuEmpleadoActivity.this, LoginActivity.class);
+            startActivity(intent);;
+            finish();
+        }
     }
 
     private void agregarAnimaciones() {

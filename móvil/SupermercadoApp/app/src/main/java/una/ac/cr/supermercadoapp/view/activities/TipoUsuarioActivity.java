@@ -1,11 +1,15 @@
 package una.ac.cr.supermercadoapp.view.activities;
 
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -13,18 +17,25 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.SearchView;
+import android.widget.Toast;
+
 import com.airbnb.lottie.LottieAnimationView;
 import com.airbnb.lottie.LottieProperty;
 import com.airbnb.lottie.SimpleColorFilter;
 import com.airbnb.lottie.model.KeyPath;
 import com.airbnb.lottie.value.LottieValueCallback;
 import com.daimajia.swipe.util.Attributes;
+import com.r0adkll.slidr.Slidr;
 import com.yqritc.recyclerviewflexibledivider.HorizontalDividerItemDecoration;
 import java.util.ArrayList;
 import java.util.Arrays;
+
+import es.dmoral.toasty.Toasty;
 import una.ac.cr.supermercadoapp.R;
 import una.ac.cr.supermercadoapp.domain.TipoUsuario;
+import una.ac.cr.supermercadoapp.network.VolleyTipoUsuario;
 import una.ac.cr.supermercadoapp.view.adapters.TipoUsuarioAdapter;
+import una.ac.cr.supermercadoapp.view.interfaces.TipoUsuarioICallback;
 
 public class TipoUsuarioActivity extends AppCompatActivity {
     CardView cardViewTitulo;
@@ -33,6 +44,23 @@ public class TipoUsuarioActivity extends AppCompatActivity {
     private ArrayList<TipoUsuario> listaTipoUsuarios; //Lista auxiliar
     private SearchView searchTipoUsuario; //buscador
     private LottieAnimationView iconUsuarios, iconAgregar; //iconos
+    private SharedPreferences credenciales;
+    public static final int REQUEST_CODE = 1;
+
+    //API para manejar la iniciación de actividades y la recepción de resultados de actividades
+    ActivityResultLauncher<Intent> launcher = registerForActivityResult(
+            new ActivityResultContracts.StartActivityForResult(),
+            result -> {
+                if (result.getResultCode() == Activity.RESULT_OK) {
+                    Toasty.success(this, "Agregado con éxito", Toast.LENGTH_SHORT, true).show();
+                    actualizarLista();
+                }
+                else if(result.getResultCode() == 200){
+                    Toasty.success(this, "Actualizado con éxito", Toast.LENGTH_SHORT, true).show();
+                    actualizarLista();
+                }
+            }
+    );
 
     private RecyclerView.OnScrollListener onScrollListener = new RecyclerView.OnScrollListener() {
         @Override
@@ -44,31 +72,29 @@ public class TipoUsuarioActivity extends AppCompatActivity {
         @Override
         public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
             super.onScrolled(recyclerView, dx, dy);
-            // Could hide open views here if you wanted. //
         }
     };
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tipo_usuario);
 
-        SharedPreferences credenciales = getSharedPreferences("credenciales", Context.MODE_PRIVATE);
+        credenciales = getSharedPreferences("credenciales", Context.MODE_PRIVATE);
         String cedula  = credenciales.getString("cedula", null);
 
-        if(cedula == null){
-            Intent intent = new Intent(TipoUsuarioActivity.this, LoginActivity.class);
-            startActivity(intent);;
-            finish();
-        }
-
+        verificarEstadoSesion(cedula);
         iniciarWidgets();
         configurarRecycler();
         agregarEventos();
 
     }
-
+    private void verificarEstadoSesion(String cedula) {
+        if(cedula == null){
+            Intent intent = new Intent(TipoUsuarioActivity.this, LoginActivity.class);
+            startActivity(intent);;
+            finish();
+        }
+    }
     private void agregarEventos() {
         searchTipoUsuario.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
@@ -94,14 +120,15 @@ public class TipoUsuarioActivity extends AppCompatActivity {
         iconAgregar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 Intent intent = new Intent(TipoUsuarioActivity.this, FormularioTipoUsuarioActivity.class);
                 intent.putExtra("metodo","agregar");
-                startActivity(intent);
+                launcher.launch(intent);
+
             }
         });
 
     }
-
     private void configurarRecycler() {
         recyclerTipoUsuarios = findViewById(R.id.recycler_view_tipos_usuario);
         recyclerTipoUsuarios .setLayoutManager(new LinearLayoutManager(this,RecyclerView.VERTICAL,false));
@@ -112,20 +139,33 @@ public class TipoUsuarioActivity extends AppCompatActivity {
                 .build());
 
         //Aquí se tendría que llenar la lista auxiliar con lo que hay en la BD del server
+        VolleyTipoUsuario volleyTipoUsuario = new VolleyTipoUsuario();
 
-        ArrayList<TipoUsuario> data = new ArrayList<>();
-        data.add(new TipoUsuario(1,"Administrador"));
-        data.add(new TipoUsuario(2,"Empleado"));
+        // Callback es una función que se pasa como argumento a otra función
+        // y se invoca cuando se completa una tarea.
+        TipoUsuarioICallback listener = new TipoUsuarioICallback() {
+            @Override
+            public void onTiposUsuarioReceived(ArrayList<TipoUsuario> lista) {
+                listaTipoUsuarios = lista;
+                mAdaptadorTipoUsuario = new TipoUsuarioAdapter(launcher, listaTipoUsuarios, getApplicationContext());
+                ((TipoUsuarioAdapter)mAdaptadorTipoUsuario ).setOnItemClickListener(new TipoUsuarioAdapter.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(int position) {
+                        volleyTipoUsuario.eliminarUsuario(TipoUsuarioActivity.this,listaTipoUsuarios.get(position),credenciales.getString("ip", "192.168.100.216"));
+                        actualizarLista();
 
-        listaTipoUsuarios = new ArrayList<TipoUsuario>(data);
-        mAdaptadorTipoUsuario = new TipoUsuarioAdapter( listaTipoUsuarios, getApplicationContext());
+                    }
+                });
+                ((TipoUsuarioAdapter)mAdaptadorTipoUsuario ).setMode(Attributes.Mode.Single);
+                recyclerTipoUsuarios.setAdapter(mAdaptadorTipoUsuario );
 
-        ((TipoUsuarioAdapter)mAdaptadorTipoUsuario ).setMode(Attributes.Mode.Single);
-        recyclerTipoUsuarios.setAdapter(mAdaptadorTipoUsuario );
+                recyclerTipoUsuarios.addOnScrollListener(onScrollListener);
+            }
+        };
 
-        recyclerTipoUsuarios.addOnScrollListener(onScrollListener);
+        volleyTipoUsuario.obtenerTipos(this,credenciales.getString("ip", "192.168.100.216"),listener);
+
     }
-
     private void iniciarWidgets() {
        // cardViewTitulo = findViewById(R.id.contenedor_titulo);
         searchTipoUsuario = findViewById(R.id.barra_busqueda_tu);
@@ -140,38 +180,51 @@ public class TipoUsuarioActivity extends AppCompatActivity {
 
 
     }
-
-
-
     private void actualizarLista() {
-        ArrayList<TipoUsuario> data = new ArrayList<>();
-        data.add(new TipoUsuario(1,"Administrador"));
-        data.add(new TipoUsuario(2,"Empleado"));
-
+        listaTipoUsuarios.clear();
+        VolleyTipoUsuario volleyTipoUsuario = new VolleyTipoUsuario();
         if(mAdaptadorTipoUsuario == null){
             return;
         }else{
-            listaTipoUsuarios = new ArrayList<TipoUsuario>(data);
+
+            TipoUsuarioICallback listener = new TipoUsuarioICallback() {
+                @Override
+                public void onTiposUsuarioReceived(ArrayList<TipoUsuario> lista) {
+                    listaTipoUsuarios = lista;
+                    ((TipoUsuarioAdapter)mAdaptadorTipoUsuario ).setListaTipoUsuarios(listaTipoUsuarios);
+                    mAdaptadorTipoUsuario.notifyDataSetChanged();
+                }
+            };
+
+            volleyTipoUsuario.obtenerTipos(this,credenciales.getString("ip", "192.168.100.216"),listener);
 
         }
 
-        ((TipoUsuarioAdapter)mAdaptadorTipoUsuario ).setListaTipoUsuarios(listaTipoUsuarios);
-        mAdaptadorTipoUsuario.notifyDataSetChanged();
-    }
 
+    }
     public void filtrar(String dato){
         ArrayList<TipoUsuario> filtrado = new ArrayList<>();
+        VolleyTipoUsuario volleyTipoUsuario = new VolleyTipoUsuario();
+        TipoUsuarioICallback listener = new TipoUsuarioICallback() {
+            @Override
+            public void onTiposUsuarioReceived(ArrayList<TipoUsuario> lista) {
+                listaTipoUsuarios = lista;
+                for(TipoUsuario tu : listaTipoUsuarios){
+                    if(tu.getDescripcion().toLowerCase().contains(dato.toLowerCase())){
+                        filtrado.add(tu);
+                    }
+                }
 
-        for(TipoUsuario tu : listaTipoUsuarios){
-            if(tu.getDescripcion().toLowerCase().contains(dato.toLowerCase())){
-                filtrado.add(tu);
+                listaTipoUsuarios = filtrado;
+                ((TipoUsuarioAdapter)mAdaptadorTipoUsuario ).setListaTipoUsuarios(listaTipoUsuarios);
+
+                mAdaptadorTipoUsuario.notifyDataSetChanged();
             }
-        }
+        };
 
-        listaTipoUsuarios = filtrado;
-        ((TipoUsuarioAdapter)mAdaptadorTipoUsuario ).setListaTipoUsuarios(listaTipoUsuarios);
+        volleyTipoUsuario.obtenerTipos(this,credenciales.getString("ip", "192.168.100.216"),listener);
 
-        mAdaptadorTipoUsuario.notifyDataSetChanged();
+
     }
 
 

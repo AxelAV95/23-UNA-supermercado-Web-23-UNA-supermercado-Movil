@@ -65,6 +65,8 @@ public class UsuariosActivity extends AppCompatActivity {
             finish();
         }
 
+        verificarEstadoSesion(cedula);
+
         powerMenu = new PowerMenu.Builder(this)
 
                 .addItem(new PowerMenuItem("Tipos de usuario", false)) // add an item.
@@ -108,5 +110,13 @@ public class UsuariosActivity extends AppCompatActivity {
                 powerMenu.showAsDropDown(view);
             }
         });
+    }
+
+    private void verificarEstadoSesion(String cedula) {
+        if(cedula == null){
+            Intent intent = new Intent(UsuariosActivity.this, LoginActivity.class);
+            startActivity(intent);;
+            finish();
+        }
     }
 }

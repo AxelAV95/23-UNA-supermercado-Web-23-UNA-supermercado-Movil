@@ -2,6 +2,7 @@ package una.ac.cr.supermercadoapp.view.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
+import androidx.core.content.res.ResourcesCompat;
 
 import android.content.Context;
 import android.content.Intent;
@@ -24,7 +25,7 @@ import com.michaldrabik.tapbarmenulib.TapBarMenu;
 import es.dmoral.toasty.Toasty;
 import una.ac.cr.supermercadoapp.R;
 import una.ac.cr.supermercadoapp.data.TipoUsuarioData;
-import una.ac.cr.supermercadoapp.utils.NetworkUtils;
+
 
 public class MainActivity extends AppCompatActivity {
 
@@ -41,18 +42,19 @@ public class MainActivity extends AppCompatActivity {
         //mTipoUsuarioData = new TipoUsuarioData(this);
         SharedPreferences credenciales = getSharedPreferences("credenciales", Context.MODE_PRIVATE);
         String cedula  = credenciales.getString("cedula", null);
+        verificarEstadoSesion(cedula);
+        iniciarComponentes();
+        agregarAnimaciones();
+        agregarEventos();
 
+    }
+
+    private void verificarEstadoSesion(String cedula) {
         if(cedula == null){
             Intent intent = new Intent(MainActivity.this, LoginActivity.class);
             startActivity(intent);;
             finish();
         }
-
-       // Toast.makeText(getApplicationContext(), NetworkUtils.IP, Toast.LENGTH_SHORT).show();
-        iniciarComponentes();
-        agregarAnimaciones();
-        agregarEventos();
-
     }
 
     private void agregarEventos() {

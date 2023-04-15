@@ -62,5 +62,9 @@ dependencies {
     //Volley
     implementation 'com.android.volley:volley:1.2.1'
 
+    //Cierre de actividades
+    implementation 'com.r0adkll:slidableactivity:2.1.0'
+
+
 
 }
