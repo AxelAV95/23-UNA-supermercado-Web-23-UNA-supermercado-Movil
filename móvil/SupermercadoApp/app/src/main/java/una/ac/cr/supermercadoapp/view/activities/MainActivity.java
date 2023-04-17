@@ -67,28 +67,36 @@ public class MainActivity extends AppCompatActivity {
         cardEmpleados.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toasty.info(getApplicationContext(), "Empleados", Toast.LENGTH_SHORT, true).show();
+                Intent intent = new Intent(MainActivity.this,EmpleadoActivity.class);
+                startActivity(intent);
+                finish();
             }
         });
 
         cardProductos.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toasty.info(getApplicationContext(), "Productos", Toast.LENGTH_SHORT, true).show();
+                Intent intent = new Intent(MainActivity.this,ProductoActivity.class);
+                startActivity(intent);
+                finish();
             }
         });
 
         cardCategorias.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toasty.info(getApplicationContext(), "Categorías", Toast.LENGTH_SHORT, true).show();
+                Intent intent = new Intent(MainActivity.this,CategoriaActivity.class);
+                startActivity(intent);
+                finish();
             }
         });
 
         cardProveedor.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toasty.info(getApplicationContext(), "Proveedor", Toast.LENGTH_SHORT, true).show();
+                Intent intent = new Intent(MainActivity.this,ProveedorActivity.class);
+                startActivity(intent);
+                finish();
             }
         });
 
@@ -105,21 +113,27 @@ public class MainActivity extends AppCompatActivity {
         cardReportes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toasty.info(getApplicationContext(), "Reportes", Toast.LENGTH_SHORT, true).show();
+                Intent intent = new Intent(MainActivity.this,ReporteActivity.class);
+                startActivity(intent);
+                finish();
             }
         });
 
         cardClientes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toasty.info(getApplicationContext(), "Clientes", Toast.LENGTH_SHORT, true).show();
+                Intent intent = new Intent(MainActivity.this,ClienteActivity.class);
+                startActivity(intent);
+                finish();
             }
         });
 
         iconConfig.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toasty.info(getApplicationContext(), "Configuración", Toast.LENGTH_SHORT, true).show();
+                Intent intent = new Intent(MainActivity.this,ConfiguracionActivity.class);
+                startActivity(intent);
+                finish();
             }
         });
 

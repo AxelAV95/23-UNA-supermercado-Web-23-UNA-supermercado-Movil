@@ -18,6 +18,42 @@
         tools:replace="android:icon"
         tools:targetApi="31">
         <activity
+            android:name=".view.activities.MembresiaActivity"
+            android:exported="false" />
+        <activity
+            android:name=".view.activities.ConfiguracionActivity"
+            android:exported="false" />
+        <activity
+            android:name=".view.activities.ClienteActivity"
+            android:exported="false" />
+        <activity
+            android:name=".view.activities.ReporteActivity"
+            android:exported="false" />
+        <activity
+            android:name=".view.activities.ProveedorActivity"
+            android:exported="false" />
+        <activity
+            android:name=".view.activities.CategoriaActivity"
+            android:exported="false" />
+        <activity
+            android:name=".view.activities.FormularioProductoActivity"
+            android:exported="false" />
+        <activity
+            android:name=".view.activities.ProductoActivity"
+            android:exported="false" />
+        <activity
+            android:name=".view.activities.FormularioTipoEmpleadoActivity"
+            android:exported="false" />
+        <activity
+            android:name=".view.activities.TipoEmpleadoActivity"
+            android:exported="false" />
+        <activity
+            android:name=".view.activities.FormularioEmpleadoActivity"
+            android:exported="false" />
+        <activity
+            android:name=".view.activities.EmpleadoActivity"
+            android:exported="false" />
+        <activity
             android:name=".view.activities.MenuEmpleadoActivity"
             android:exported="false" />
         <activity
@@ -34,7 +70,7 @@
             android:exported="false" />
         <activity
             android:name=".view.activities.UsuariosActivity"
-            android:exported="true"></activity>
+            android:exported="true" />
         <activity
             android:name=".view.activities.TipoUsuarioActivity"
             android:exported="true" />

@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bgtiemp"
+    tools:context=".view.activities.TipoEmpleadoActivity">
+
+
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/icon_ti_empleados"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+
+
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="10dp"
+        app:lottie_autoPlay="true"
+        app:lottie_loop="true"
+        app:lottie_rawRes="@raw/empleados" />
+
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/icon_agregar_tipo_empleado"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        app:lottie_autoPlay="true"
+        app:lottie_loop="true"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginBottom="16dp"
+        android:layout_marginEnd="16dp"
+
+        app:lottie_rawRes="@raw/add" />
+
+
+
+    <SearchView
+        android:layout_width="match_parent"
+        android:layout_marginTop="15dp"
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/icon_ti_empleados"
+        android:id="@+id/barra_busqueda_te"
+        android:queryHint="Ingrese descripción"
+        android:background="@drawable/search_bg"
+        />
+
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler_view_tipos_empleado"
+        android:layout_width="match_parent"
+        android:layout_height="350dp"
+        android:layout_below="@id/barra_busqueda_te"
+
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="100dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="10dp" />
+
+</RelativeLayout>
