@@ -26,6 +26,9 @@
         public function getAllTBProveedores(){
              return $this->proveedorData->getAllTBProveedores();
         }
+        public function getProveedorNombre($id){
+            return $this->proveedorData->getNombreProveedor($id);
+       }
 
         
     }

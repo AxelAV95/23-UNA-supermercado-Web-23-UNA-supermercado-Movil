@@ -77,6 +77,14 @@ END$$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `obtenerProveedores` ()  NO SQL SELECT * FROM `tbproveedor`$$
 
 DELIMITER ;
+DELIMITER //
+
+CREATE PROCEDURE obtenerProveedorNombre (IN proveedor_id INT)
+BEGIN
+    SELECT proveedornombre FROM tbproveedor WHERE proveedorid = proveedor_id;
+END //
+
+DELIMITER ;
 
 -- --------------------------------------------------------
 

@@ -37,7 +37,7 @@
                 <label>Estado: </label>
                 <select class="form-control" name="productoestado" id="productoestado">
                   <option value="1">Disponible</option>
-                  <option value="2">No disponible</option>
+                  <option value="0">No disponible</option>
                 </select>
                
               </div>
@@ -50,18 +50,18 @@
                 <option selected>Seleccione la categoría</option>
               
                   <?php 
-                  /*
+                
                   foreach($categorias as $categoria){
 
                     echo '<script>var idc = $("#productocategoriaid").val()</script>';
                     echo $variable = "<script>document.write(idc)</script>";
                     if($categoria['categoriaid'] == $variable){
-                        echo ' <option value="'.$categoria['categoriaid'].'" class="badge badge-pill badge-warning" style="font-size: 15px;" selected>'.$categoria['categoriadescripcion'].'</option>';
+                        echo ' <option value="'.$categoria['categoriaid'].'" class="badge badge-pill badge-warning" style="font-size: 15px;" selected>'.$categoria['categorianombre'].'</option>';
                     }else{
-                        echo ' <option value="'.$categoria['categoriaid'].'" class="badge badge-pill badge-warning" style="font-size: 15px;">'.$categoria['categoriadescripcion'].'</option>';
+                        echo ' <option value="'.$categoria['categoriaid'].'" class="badge badge-pill badge-warning" style="font-size: 15px;">'.$categoria['categorianombre'].'</option>';
                     }
                     
-                  }*/?>
+                  }?>
 
                
               </select>
@@ -70,17 +70,7 @@
 
             
 
-              <div class="form-group">
-                <label>Imagen: </label>
-                <input type="file" class="nuevaImagen" name="editarImagen">
-
-                <p class="help-block">Peso máximo de la imagen 2MB</p>
-
-                <img src="img/productos/default/anonymous.png" class="img-thumbnail previsualizar" width="100px">
-
-                <input type="hidden" name="imagenActual" id="imagenActual">
-
-              </div>
+          
 
               <center><button type="submit" name="actualizar" class="btn btn-primary">Actualizar</button></center>
             </form>

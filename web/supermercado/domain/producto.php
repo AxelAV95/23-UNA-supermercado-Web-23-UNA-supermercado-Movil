@@ -3,20 +3,22 @@
     class Producto{
         private $productoid ;
         private $productonombre;
-        private $productoimg;
         private $productoprecio;
+        private $productoFechaIngresoProducto;
+        private $stockProducto;
         private $productoestado;
         private $productocategoria;
-        private $productocodigo;
+        private $productoproveedor;
 
-        public function __construct($id, $nombre, $img,$precio,$estado,$categoria,$codigo){
+        public function __construct($id, $nombre, $precio,  $fechaIngreso, $stock, $estado, $categoria, $codigo) {
             $this->productoid = $id;
             $this->productonombre = $nombre;
-            $this->productoimg = $img;
             $this->productoprecio = $precio;
             $this->productoestado = $estado;
             $this->productocategoria = $categoria;
-            $this->productocodigo = $codigo;
+            $this->productoproveedor = $codigo;
+            $this->productoFechaIngresoProducto = $fechaIngreso;
+            $this->stockProducto = $stock;
         }
 
         function setIdProducto($id){
@@ -47,13 +49,7 @@
             $this->productoestado = $estado;
         }
 
-        function setImagenProducto($productoimg){
-            $this->productoimg = $productoimg;
-        }
-
-        function getImagenProducto(){
-            return $this->productoimg;
-        }
+   
 
 
         function getEstadoProducto(){
@@ -72,22 +68,49 @@
     /**
      * @return mixed
      */
-    public function getProductocodigo()
+    public function getProductoproveedor()
     {
-        return $this->productocodigo;
+        return $this->productoproveedor;
     }
 
     /**
-     * @param mixed $productocodigo
+     * @param mixed $productoproveedor
      *
      * @return self
      */
-    public function setProductocodigo($productocodigo)
+    public function setProductoproveedor($productoproveedor)
     {
-        $this->productocodigo = $productocodigo;
+        $this->productoproveedor = $productoproveedor;
 
         return $this;
     }
+
+        /**
+         * Get the value of productoFechaIngresoProducto
+         */ 
+        public function getProductoFechaIngresoProducto()
+        {
+                return $this->productoFechaIngresoProducto;
+        }
+
+        /**
+         * Set the value of productoFechaIngresoProducto
+         *
+         * @return  self
+         */ 
+        public function setProductoFechaIngresoProducto($productoFechaIngresoProducto)
+        {
+                $this->productoFechaIngresoProducto = $productoFechaIngresoProducto;
+
+                return $this;
+        }
+        public function getStockProducto() {
+            return $this->stockProducto;
+        }
+    
+        public function setStockProducto($stock) {
+            $this->stockProducto = $stock;
+        }
 }
 
 

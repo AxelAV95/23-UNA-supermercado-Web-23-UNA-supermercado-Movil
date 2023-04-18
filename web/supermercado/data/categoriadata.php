@@ -83,14 +83,14 @@
             return $stm->fetchAll(PDO::FETCH_ASSOC);
         }
 
-      /*  public function getDescripcionCategoria($id){
+        public function getNombreCategoria($id){
         	$pdo = Database::conectar();
-            $stm = $pdo->prepare("CALL obtenerCategoriaDescripcion(?)");
+            $stm = $pdo->prepare("CALL obtenerCategoriaNombre(?)");
             $stm->bindParam(1,$id, PDO::PARAM_INT);
             $stm->execute();
             Database::desconectar();
             return $stm->fetchAll(PDO::FETCH_ASSOC);
-        }*/
+        }
 
 	}
 

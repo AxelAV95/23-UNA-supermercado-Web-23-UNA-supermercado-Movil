@@ -2,11 +2,14 @@
   
   include '../business/productobusiness.php';
   include '../business/categoriabusiness.php';
+  include '../business/proveedorbusiness.php';
+
   $productoBusiness = new ProductoBusiness();
   $productos = $productoBusiness->getAllTBProductos();
   $categoriabusiness = new Categoriabusiness();
+  $proveedorbusiness = new ProveedorBusiness();
   $categorias = $categoriabusiness->getAllTBCategorias();
-
+  $proveedores = $proveedorbusiness ->getAllTBProveedores();
   //var_dump($productos);
 
 ?>
@@ -94,14 +97,16 @@
                     <th>Precio</th>
                     <th>Estado</th>
                     <th>Categoria</th>
+                    <th>Proveedor</th>
+                    <th>Stock</th>
+                    <th>Fecha Ingreso</th>
                     <th>Acciones</th>
-                    
                   </tr>
                   </thead>
                   </center>
                   <tbody>
                     <?php 
-                    /*
+                  
                         foreach($productos as $producto){
                           echo '<tr>';
                           echo '<td>'.$producto['productonombre'].'</td>';
@@ -110,20 +115,28 @@
                           echo '<td>';
                           if($producto['productoestado'] == 1){
                             echo '<span class="badge badge-success">Disponible</span>';
-                          }else if($producto['productoestado'] == 2){
+                          }else if($producto['productoestado'] == 0){
                             echo '<span class="badge badge-warning">No disponible</span>';
                           }
                           echo '</td>';
                          echo '<td >';
-                         echo '<span class="badge badge-light">'.$categoriabusiness->getDescripcionCategoria($producto['productocategoriaid'])[0]['categoriadescripcion'].'</span>';
-                          
+                         echo '<span class="badge badge-light">'.$categoriabusiness->getNombreCategoria($producto['productocategoriaid'])[0]['categorianombre'].'</span>';
+
 
                            echo '</td>';
+                           echo '<td >';
+                           echo '<span class="badge badge-light">'.$proveedorbusiness->getProveedorNombre($producto['productoproveedorid'])[0]['proveedornombre'].'</span>';
+  
+  
+                             echo '</td>';
+                             echo '<td>'.$producto['productostock'].'</td>';
+                             echo '<td>'.$producto['productofechaingreso'].'</td>';
+
                           echo '<td>';
-                          echo "<div class='btn-group'><button class='btn btn-warning btnEditarProducto' productoid='" . $producto["productoid"] . "' imagen='" . $producto["productoimg"] . "' productonombre='" . $producto['productonombre'] . "' productoprecio='" . $producto['productoprecio'] . "' productocodigo='" . $producto['productocodigo'] . "' productoestado='" . $producto['productoestado'] . "' productocategoriaid='" . $producto['productocategoriaid'] . "'  data-toggle='modal' data-target='#modalEditarProducto'><i class='fa fa-pencil-alt'></i></button><button class='btn btn-danger btnEliminarProducto' productoid='" . $producto["productoid"] . "' productoimg='" . $producto["productoimg"] . "'><i class='fa fa-times'></i></button></div>";
+                          echo "<div class='btn-group'><button class='btn btn-warning btnEditarProducto' productoid='" . $producto["productoid"] . "' productonombre='" . $producto['productonombre'] . "' productoprecio='" . $producto['productoprecio'] . "' productoestado='" . $producto['productoestado'] . "' productocategoriaid='" . $producto['productocategoriaid'] . "'  data-toggle='modal' data-target='#modalEditarProducto'><i class='fa fa-pencil-alt'></i></button><button class='btn btn-danger btnEliminarProducto' productoid='" . $producto["productoid"] . "'><i class='fa fa-times'></i></button></div>";
                           echo '</td>';
                           echo '</tr>';
-                        }*/
+                        }
 
 
 
@@ -213,7 +226,6 @@
     $(".tabla-productos tbody").on("click", "button.btnEditarProducto", function() {
 
       var productoid = $(this).attr("productoid");
-      var img = $(this).attr("imagen");
       var nombre = $(this).attr("productonombre");
       var precio = $(this).attr("productoprecio");
       var estado = $(this).attr("productoestado");
@@ -228,7 +240,6 @@
       $("#modalEditarProducto #productocategoriaid").val(productocategoriaid);
      
       $("#modalEditarProducto #productocodigo").val(codigo);
-      $("#modalEditarProducto #imagenActual").val(img);
       $("#modalEditarProducto .previsualizar").attr("src", img);
 
 
@@ -261,55 +272,7 @@
 
     });
 
-
-    $(".nuevaImagen").change(function() {
-
-      var imagen = this.files[0];
-
-      /*=============================================
-        VALIDAMOS EL FORMATO DE LA IMAGEN SEA JPG O PNG
-        =============================================*/
-
-      if (imagen["type"] != "image/jpeg" && imagen["type"] != "image/png") {
-
-        $(".nuevaImagen").val("");
-
-       Toast.fire({
-          title: "Error al subir la imagen",
-          text: "¡La imagen debe estar en formato JPG o PNG!",
-          type: "error",
-          confirmButtonText: "¡Cerrar!"
-        });
-
-      
-      } else if (imagen["size"] > 2000000) {
-
-        $(".nuevaImagen").val("");
-
-        Toast.fire({
-          title: "Error al subir la imagen",
-          text: "¡La imagen no debe pesar más de 2MB!",
-          type: "error",
-          confirmButtonText: "¡Cerrar!"
-        });
-
-        
-
-      } else {
-
-        var datosImagen = new FileReader;
-        datosImagen.readAsDataURL(imagen);
-
-        $(datosImagen).on("load", function(event) {
-
-          var rutaImagen = event.target.result;
-
-          $(".previsualizar").attr("src", rutaImagen);
-
-        })
-
-      }
-    })
-  </script>
+    </script>
+ 
 </body>
 </html>
