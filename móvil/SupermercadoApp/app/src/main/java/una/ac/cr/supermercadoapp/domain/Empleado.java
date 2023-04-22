@@ -17,6 +17,18 @@ public class Empleado implements Serializable {
     public Empleado() {
     }
 
+    public Empleado(int cedula, String nombre, String apellidos, int telefono, String direccion, String fechaIngreso, String fechaSalida, int estado, int tipo) {
+        this.cedula = cedula;
+        this.nombre = nombre;
+        this.apellidos = apellidos;
+        this.telefono = telefono;
+        this.direccion = direccion;
+        this.fechaIngreso = fechaIngreso;
+        this.fechaSalida = fechaSalida;
+        this.estado = estado;
+        this.tipo = tipo;
+    }
+
     public Empleado(int id, int cedula, String nombre, String apellidos, int telefono, String direccion, String fechaIngreso, String fechaSalida, int estado, int tipo) {
         this.id = id;
         this.cedula = cedula;

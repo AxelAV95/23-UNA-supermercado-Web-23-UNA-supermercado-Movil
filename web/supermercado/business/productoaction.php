@@ -5,76 +5,33 @@
 	if(isset($_POST['insertar'])){
 		if(isset($_POST['productonombre'])
 		&&isset($_POST['productoprecio']) && isset($_POST['productoestado'])
-		&&isset($_POST['productocategoriaid']) 
+		&&isset($_POST['productocategoriaid']) && isset($_POST['productofechaingreso'])&&isset($_POST['productostock'])
+		&&isset($_POST['productoproveedorid'])
 		){
 			$productoBusiness = new ProductoBusiness();		
 			$nombre = $_POST['productonombre'];	
-			$ruta = "img/productos/default/anonymous.png";	
 			$precio = $_POST['productoprecio'];
+			$fecha = $_POST['productofechaingreso'];
+			$stock = $_POST['productostock'];
 			$estado = $_POST['productoestado'];
 			$categoria = $_POST['productocategoriaid'];
-			$codigo = $productoBusiness->getUltimoIdInsertado()+11;
+			$proveedor = $_POST['productoproveedorid'];
+
 			
-			
-
-			if(isset($_FILES["nuevaImagen"]["tmp_name"])){
-
-				list($ancho, $alto) = getimagesize($_FILES["nuevaImagen"]["tmp_name"]);
-
-
-				// $nuevoAncho = 160;
-	   //  		$nuevoAlto = 200;
-	    		$aleatorio = mt_rand(100,999);
-	    		$directorio = "../view/backend/img/productos/".$codigo;
-				mkdir($directorio, 0755);
-
-				 if($_FILES["nuevaImagen"]["type"] == "image/jpeg"){
-
-
-				     $ruta = $directorio."/".$aleatorio.".jpg";
-				     $rutaAux = "img/productos/".$codigo."/".$aleatorio.".jpg";
-				     $origen = imagecreatefromjpeg($_FILES["nuevaImagen"]["tmp_name"]);      
-
-				     $destino = imagecreatetruecolor(160, 160);
-
-				     imagecopyresized($destino, $origen, 0, 0, 0, 0, 160, 160, $ancho, $alto);
-
-				     imagejpeg($destino, $ruta);
-
-			    }
-
-			    if($_FILES["nuevaImagen"]["type"] == "image/png"){
-
-					echo "entro";
-				     $ruta = $directorio."/".$aleatorio.".png";
-				     $rutaAux = "img/productos/".$codigo."/".$aleatorio.".png";
-
-				     $origen = imagecreatefrompng($_FILES["nuevaImagen"]["tmp_name"]);      
-
-				     $destino = imagecreatetruecolor(160, 160);
-				     imagealphablending($destino, false);
-				     imagesavealpha($destino, true);
-
-				     imagecopyresized($destino, $origen, 0, 0, 0, 0,160, 160, $ancho, $alto);
-
-				     imagepng($destino, $ruta);
-
-	    		}
-
-	    		
-			}
 
 		
-	    	$producto = new Producto(0,$nombre,$rutaAux,$precio,$estado,$categoria,$codigo);				 
+
+		
+	    	$producto = new Producto(0,$nombre,$precio,$fecha,$stock,$estado,$categoria,$proveedor);				 
 			
 			
 	    	$resultado = $productoBusiness->insertarProducto($producto);
 
 
 	    	if($resultado == 1){
-	    		header("location: ../view/backend/productoview.php?mensaje=1" );
+	    		header("location: ../view/productoview.php?mensaje=1" );
 	    	}else{
-	    		header("location: ../view/backend/productoview.php?mensaje=4" );
+	    		header("location: ../view/productoview.php?mensaje=4" );
 	    	}
 			 
 		}
@@ -150,7 +107,7 @@
 				}
 
 				$productoBusiness = new ProductoBusiness();
-				$producto = new Producto($productoid, $productonombre, $rutaAux,$productoprecio,$productoestado,$productocategoriaid,$productocodigo);
+				//$producto = new Producto($productoid, $productonombre, $rutaAux,$productoprecio,$productoestado,$productocategoriaid,$productocodigo);
 				
 
 	    		$resultado = $productoBusiness->modificarProducto($producto);

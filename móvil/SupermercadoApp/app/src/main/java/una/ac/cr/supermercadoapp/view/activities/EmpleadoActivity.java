@@ -11,7 +11,7 @@ import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.View;
-import android.widget.Toast;
+import android.widget.SearchView;
 
 import com.airbnb.lottie.LottieAnimationView;
 import com.airbnb.lottie.LottieProperty;
@@ -25,28 +25,32 @@ import com.skydoves.powermenu.PowerMenuItem;
 
 import una.ac.cr.supermercadoapp.R;
 
-public class UsuariosActivity extends AppCompatActivity {
+public class EmpleadoActivity extends AppCompatActivity {
 
-    private LottieAnimationView tipoUsuarios,iconUsuarios;
+    private LottieAnimationView tipoEmpleado,iconEmpleados;
+
     private PowerMenu powerMenu;
+
+    private LottieAnimationView iconAgregar;
+    private SearchView searchEmpleado; //buscador
 
     private OnMenuItemClickListener<PowerMenuItem> onMenuItemClickListener = new OnMenuItemClickListener<PowerMenuItem>() {
         @Override
         public void onItemClick(int position, PowerMenuItem item) {
 
-            if(item.title.equals("Tipos de usuario")){
-             //   powerMenu.setSelectedPosition(position); // change selected item
+            if(item.title.equals("Tipos de empleado")){
+
                 powerMenu.dismiss();
-                Intent intent = new Intent(UsuariosActivity.this, TipoUsuarioActivity.class);
+                Intent intent = new Intent(EmpleadoActivity.this, TipoEmpleadoActivity.class);
                 startActivity(intent);
 
             }else if(item.title.equals("Menú principal")){
                 powerMenu.dismiss();
-                Intent intent = new Intent(UsuariosActivity.this, MainActivity.class);
+                Intent intent = new Intent(EmpleadoActivity.this, MainActivity.class);
                 startActivity(intent);
                 finish();
             }
-            //Toast.makeText(getBaseContext(), item.title, Toast.LENGTH_SHORT).show();
+
 
         }
     };
@@ -54,16 +58,17 @@ public class UsuariosActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_usuarios);
+        setContentView(R.layout.activity_empleado);
 
         SharedPreferences credenciales = getSharedPreferences("credenciales", Context.MODE_PRIVATE);
         String cedula  = credenciales.getString("cedula", null);
 
         verificarEstadoSesion(cedula);
 
+
         powerMenu = new PowerMenu.Builder(this)
 
-                .addItem(new PowerMenuItem("Tipos de usuario", false)) // add an item.
+                .addItem(new PowerMenuItem("Tipos de empleado", false)) // add an item.
                 .addItem(new PowerMenuItem("Menú principal", false)) // add an item.
                 .setAnimation(MenuAnimation.SHOWUP_BOTTOM_RIGHT) // Animation start point (TOP | LEFT).
                 .setMenuRadius(10f) // sets the corner radius.
@@ -77,24 +82,18 @@ public class UsuariosActivity extends AppCompatActivity {
                 .setOnMenuItemClickListener(onMenuItemClickListener)
                 .build();
 
-        tipoUsuarios = findViewById(R.id.icon_ver_tipos_usuario);
+        tipoEmpleado = findViewById(R.id.icon_ver_tipos_empleados);
         int primaryColor = ContextCompat.getColor(this, R.color.primary);
-        tipoUsuarios.addValueCallback(
+        tipoEmpleado.addValueCallback(
                 new KeyPath("**"),
                 LottieProperty.COLOR_FILTER,
                 new LottieValueCallback<>(new SimpleColorFilter(primaryColor)));
 
 
 
-        iconUsuarios = findViewById(R.id.icon_usuarios);
-        int whiteColor = ContextCompat.getColor(this, R.color.white);
-        iconUsuarios .addValueCallback(
-                new KeyPath("**"),
-                LottieProperty.COLOR_FILTER,
-                new LottieValueCallback<>(new SimpleColorFilter(whiteColor)));
+        iconEmpleados = findViewById(R.id.icon_empleados);
 
-
-        tipoUsuarios.setOnClickListener(new View.OnClickListener() {
+        tipoEmpleado.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if (powerMenu.isShowing()) {
@@ -104,11 +103,26 @@ public class UsuariosActivity extends AppCompatActivity {
                 powerMenu.showAsDropDown(view);
             }
         });
+
+        iconAgregar = findViewById(R.id.icon_add_empleado);
+        iconAgregar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent intent = new Intent(EmpleadoActivity.this, FormularioEmpleadoActivity.class);
+                intent.putExtra("metodo","agregar");
+                startActivity(intent);
+
+            }
+        });
+
+
+
     }
 
     private void verificarEstadoSesion(String cedula) {
         if(cedula == null){
-            Intent intent = new Intent(UsuariosActivity.this, LoginActivity.class);
+            Intent intent = new Intent(EmpleadoActivity.this, LoginActivity.class);
             startActivity(intent);;
             finish();
         }

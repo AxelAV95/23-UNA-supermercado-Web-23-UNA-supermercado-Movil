@@ -88,6 +88,15 @@ class ProveedorData extends Database{
             Database::desconectar();
             return $stm->fetchAll(PDO::FETCH_ASSOC);
         }
+
+		public function getNombreProveedor($id){
+        	$pdo = Database::conectar();
+            $stm = $pdo->prepare("CALL obtenerProveedorNombre(?)");
+            $stm->bindParam(1,$id, PDO::PARAM_INT);
+            $stm->execute();
+            Database::desconectar();
+            return $stm->fetchAll(PDO::FETCH_ASSOC);
+        }
 	
 }
 

@@ -7,6 +7,7 @@
   		$tipos = $tipoUsuarioBusiness->getAllTBTipoUsuarios();
   		echo json_encode($tipos);
 	}else if($_SERVER['REQUEST_METHOD'] == "POST"){
+		//se utiliza en PHP para obtener el contenido de la solicitud HTTP entrante
 		$json = file_get_contents('php://input');
 		$data = json_decode($json);
 
