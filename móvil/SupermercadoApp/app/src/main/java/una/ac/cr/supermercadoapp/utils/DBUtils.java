@@ -21,35 +21,35 @@ public class DBUtils {
 
     //CONSULTAS DDL
     public static final String CREAR_TABLA_CATEGORIA = "CREATE TABLE "+ CATEGORIA+
-            " (categoriaid INTEGER PRIMARY KEY AUTOINCREMENT, categorianombre VARCHAR(225));";
+            " (categoriaid INTEGER PRIMARY KEY AUTOINCREMENT, categorianombre VARCHAR(225), categoriasync INTEGER);";
     public static final String CREAR_TABLA_CLIENTE = "CREATE TABLE "+ CLIENTE+
             " (clienteid INTEGER PRIMARY KEY AUTOINCREMENT, clientenombre VARCHAR(225),clienteapellidos VARCHAR(255)," +
             "clientecedula INTEGER, clientedireccion VARCHAR(255), clientecorreo VARCHAR(255), clientefechaafiliacion DATE, " +
-            "clientetipomembresia INTEGER);";
+            "clientetipomembresia INTEGER, clientesync INTEGER);";
     public static final String CREAR_TABLA_DESCUENTO = "CREATE TABLE "+ DESCUENTO+
-            " (descuentoid INTEGER PRIMARY KEY AUTOINCREMENT, descuentotarifa FLOAT,descuentomembresiaid INTEGER);";
+            " (descuentoid INTEGER PRIMARY KEY AUTOINCREMENT, descuentotarifa FLOAT,descuentomembresiaid INTEGER, descuentosync INTEGER);";
     public static final String CREAR_TABLA_EMPLEADO = "CREATE TABLE "+ EMPLEADO+
             " (empleadoid INTEGER PRIMARY KEY AUTOINCREMENT, empleadocedula INTEGER, empleadonombre VARCHAR(255)," +
             "empleadoapellidos VARCHAR(255), empleadotelefono INTEGER, empleadodireccion VARCHAR(255), empleadofechaaingreso DATE, " +
-            "empleadofechasalida DATE, empleadotipo INTEGER);";
+            "empleadofechasalida DATE, empleadotipo INTEGER, empleadosync INTEGER);";
     public static final String CREAR_TABLA_MEMBRESIA = "CREATE TABLE "+ MEMBRESIA+
-            " (membresiaid INTEGER PRIMARY KEY AUTOINCREMENT, membresiadescripcion VARCHAR(255));";
+            " (membresiaid INTEGER PRIMARY KEY AUTOINCREMENT, membresiadescripcion VARCHAR(255), membresiasync INTEGER);";
     public static final String CREAR_TABLA_PRODUCTO = "CREATE TABLE "+ PRODUCTO+
             " (productoid INTEGER PRIMARY KEY AUTOINCREMENT, productonombre VARCHAR(255), productoprecio FLOAT," +
             "productofechaingreso DATE, productostock INTEGER, productoestado INTEGER, productocategoriaid INTEGER, " +
-            "productoproveedorid INTEGER);";
+            "productoproveedorid INTEGER, productosync INTEGER);";
     public static final String CREAR_TABLA_PROVEEDOR = "CREATE TABLE "+ PROVEEDOR+
             " (proveedorid INTEGER PRIMARY KEY AUTOINCREMENT, proveedornombre VARCHAR(255), proveedordireccion VARCHAR(255)," +
-            "proveedortelefono INTEGER, proveedorcorreo VARCHAR(255), proveedorlat INTEGER, proveedorlong INTEGER);";
+            "proveedortelefono INTEGER, proveedorcorreo VARCHAR(255), proveedorlat INTEGER, proveedorlong INTEGER, proveedorsync INTEGER);";
     public static final String CREAR_TABLA_SUPERMERCADO = "CREATE TABLE "+ SUPERMERCADO+
             " (supermercadoid INTEGER PRIMARY KEY AUTOINCREMENT, supermercadonombre VARCHAR(255), supermercadotelefono INTEGER," +
-            "supermercadocorreo VARCHAR(255), supermercadodireccion VARCHAR(255), supermercadologo VARCHAR(255));";
+            "supermercadocorreo VARCHAR(255), supermercadodireccion VARCHAR(255), supermercadologo VARCHAR(255), supermercadosync INTEGER);";
     public static final String CREAR_TABLA_TIPO_EMPLEADO = "CREATE TABLE "+ TIPO_EMPLEADO+
-            " (tipoid INTEGER PRIMARY KEY AUTOINCREMENT, tipodescripcion VARCHAR(255));";
+            " (tipoid INTEGER PRIMARY KEY AUTOINCREMENT, tipodescripcion VARCHAR(255), tiposync INTEGER);";
     public static final String CREAR_TABLA_TIPO_USUARIO = "CREATE TABLE "+ TIPO_USUARIO +
-            " (tipoid INTEGER PRIMARY KEY AUTOINCREMENT, tipodescripcion VARCHAR(255));";
+            " (tipoid INTEGER PRIMARY KEY AUTOINCREMENT, tipodescripcion VARCHAR(255), tiposync INTEGER);";
     public static final String CREAR_TABLA_USUARIO = "CREATE TABLE "+ USUARIO +
-            " (usuarioid INTEGER PRIMARY KEY AUTOINCREMENT, usuariopassword VARCHAR(255), usuarioempleadoid INTEGER, usuariotipo INTEGER);";
+            " (usuarioid INTEGER PRIMARY KEY AUTOINCREMENT, usuariopassword VARCHAR(255), usuarioempleadoid INTEGER, usuariotipo INTEGER, usuariosync INTEGER);";
 
 
     //CONSULTAS DML
