@@ -133,7 +133,25 @@
                              echo '<td>'.$producto['productofechaingreso'].'</td>';
 
                           echo '<td>';
-                          echo "<div class='btn-group'><button class='btn btn-warning btnEditarProducto' productoid='" . $producto["productoid"] . "' productonombre='" . $producto['productonombre'] . "' productoprecio='" . $producto['productoprecio'] . "' productoestado='" . $producto['productoestado'] . "' productocategoriaid='" . $producto['productocategoriaid'] . "'  data-toggle='modal' data-target='#modalEditarProducto'><i class='fa fa-pencil-alt'></i></button><button class='btn btn-danger btnEliminarProducto' productoid='" . $producto["productoid"] . "'><i class='fa fa-times'></i></button></div>";
+                          echo "<div class='btn-group'>
+                          <button class='btn btn-warning btnEditarProducto' 
+                                  productoid='" . $producto["productoid"] . "' 
+                                  productonombre='" . $producto['productonombre'] . "' 
+                                  productoprecio='" . $producto['productoprecio'] . "' 
+                                  productoestado='" . $producto['productoestado'] . "' 
+                                  productofechaingreso='" . $producto['productofechaingreso'] . "' 
+                                  productostock='" . $producto['productostock'] . "' 
+                                  productocategoriaid='" . $producto['productocategoriaid'] . "'  
+                                  productoproveedorid='" . $producto['productoproveedorid'] . "' 
+                                  data-toggle='modal' data-target='#modalEditarProducto'>
+                              <i class='fa fa-pencil-alt'></i>
+                          </button>
+                          <button class='btn btn-danger btnEliminarProducto' 
+                                  productoid='" . $producto["productoid"] . "'>
+                              <i class='fa fa-times'></i>
+                          </button>
+                       </div>";
+                 
                           echo '</td>';
                           echo '</tr>';
                         }
@@ -229,18 +247,23 @@
       var nombre = $(this).attr("productonombre");
       var precio = $(this).attr("productoprecio");
       var estado = $(this).attr("productoestado");
+      var fecha = $(this).attr("productofechaingreso");
+      var stock = $(this).attr("productostock");
       var productocategoriaid = $(this).attr("productocategoriaid");
-      var codigo = $(this).attr("productocodigo");
+      var productoproveedorid = $(this).attr("productoproveedorid");
+
     
 
       $("#modalEditarProducto #productoid").val(productoid);
       $("#modalEditarProducto #productonombre").val(nombre);
       $("#modalEditarProducto #productoprecio").val(precio);
       $("#modalEditarProducto #productoestado").val(estado);
+      $("#modalEditarProducto #productofechaingreso").val(fecha);
+      $("#modalEditarProducto #productostock").val(stock);
+
       $("#modalEditarProducto #productocategoriaid").val(productocategoriaid);
-     
-      $("#modalEditarProducto #productocodigo").val(codigo);
-      $("#modalEditarProducto .previsualizar").attr("src", img);
+      $("#modalEditarProducto #productoproveedorid").val(productoproveedorid);
+
 
 
 
@@ -264,7 +287,7 @@
         confirmButtonText: 'Eliminar'
       }).then((result) => {
         if (result.isConfirmed) {
-          window.location = "../../business/productoaction.php?eliminar=true&productoid=" + productoid;
+          window.location = "../business/productoaction.php?eliminar=true&productoid=" + productoid;
 
         }
       })
