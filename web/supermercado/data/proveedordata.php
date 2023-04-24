@@ -26,7 +26,7 @@ class ProveedorData extends Database{
 		//insertar proveedor
 		public function insertarProveedor($proveedor){
 			$pdo = Database::conectar();
-            $stm = $pdo->prepare("CALL insertarProveedor(?,?,?,?,?)");
+            $stm = $pdo->prepare("CALL insertarProveedor(?,?,?,?,?,?,?)");
 
             $max = $pdo ->prepare("SELECT MAX(proveedorid) AS proveedorid  FROM tbproveedor");
 	        $max -> execute();
@@ -39,11 +39,16 @@ class ProveedorData extends Database{
 	        $direccion = $proveedor->getDireccion();
 	        $correo = $proveedor->getCorreo();
 			$telefono = $proveedor->getTelefono();
+			$latitud = $proveedor->getLatitud();
+			$longitud = $proveedor->getLongitud();
+
             $stm ->bindParam(1,$nextId,PDO::PARAM_INT);
             $stm ->bindParam(2,$nombre,PDO::PARAM_STR);
 			$stm ->bindParam(3,$direccion,PDO::PARAM_STR);
             $stm ->bindParam(4,$correo,PDO::PARAM_STR);
             $stm ->bindParam(5,$telefono,PDO::PARAM_INT);
+			$stm ->bindParam(6,$latitud,PDO::PARAM_STR);
+            $stm ->bindParam(7,$longitud,PDO::PARAM_STR);
             $resultado = $stm->execute();
             Database::desconectar();
 	           
@@ -52,18 +57,21 @@ class ProveedorData extends Database{
 		//actualizar proveedor
 		public function modificarProveedor($proveedor){
 			$pdo = Database::conectar();
-            $stm = $pdo->prepare("CALL modificarProveedor(?,?,?,?,?)");
+            $stm = $pdo->prepare("CALL modificarProveedor(?,?,?,?,?,?,?)");
             $id = $proveedor->getId();
             $nombre = $proveedor->getNombre();
 	        $direccion = $proveedor->getDireccion();
 			$correo = $proveedor->getCorreo();
             $telefono = $proveedor->getTelefono();
+			$latitud = $proveedor->getLatitud();
+			$longitud = $proveedor->getLongitud();
             $stm ->bindParam(1,$id,PDO::PARAM_INT);
             $stm ->bindParam(2,$nombre,PDO::PARAM_STR);
             $stm ->bindParam(3,$direccion,PDO::PARAM_STR);
 			$stm ->bindParam(4,$correo,PDO::PARAM_STR);
             $stm ->bindParam(5,$telefono,PDO::PARAM_INT);
-			
+			$stm ->bindParam(6,$latitud,PDO::PARAM_STR);
+            $stm ->bindParam(7,$longitud,PDO::PARAM_STR);
             $resultado = $stm->execute();
             Database::desconectar();
 	           
@@ -92,6 +100,15 @@ class ProveedorData extends Database{
 		public function getNombreProveedor($id){
         	$pdo = Database::conectar();
             $stm = $pdo->prepare("CALL obtenerProveedorNombre(?)");
+            $stm->bindParam(1,$id, PDO::PARAM_INT);
+            $stm->execute();
+            Database::desconectar();
+            return $stm->fetchAll(PDO::FETCH_ASSOC);
+        }
+
+		public function obtenerproveerdorid($id){
+        	$pdo = Database::conectar();
+            $stm = $pdo->prepare("CALL obtenerproveerdorid(?)");
             $stm->bindParam(1,$id, PDO::PARAM_INT);
             $stm->execute();
             Database::desconectar();

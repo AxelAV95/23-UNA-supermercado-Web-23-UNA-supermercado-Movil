@@ -23,6 +23,8 @@ $(".tabla-proveedores tbody").on("click", "button.btnEditarProveedor", function(
     var proveedordireccion = $(this).attr("proveedordireccion");
     var proveedorcorreo =  $(this).attr("proveedorcorreo");
     var proveedortelefono = $(this).attr("proveedortelefono");
+    var proveedorlat =  $(this).attr("proveedorlat");
+    var proveedorlong = $(this).attr("proveedorlong");
     
     //alert(proveedortelefono);
     $("#modalEditarProveedor #proveedorid").val(proveedorid);
@@ -30,6 +32,8 @@ $(".tabla-proveedores tbody").on("click", "button.btnEditarProveedor", function(
     $("#modalEditarProveedor #proveedordireccion").val(proveedordireccion);
     $("#modalEditarProveedor #proveedorcorreo").val(proveedorcorreo);
     $("#modalEditarProveedor #proveedortelefono").val(proveedortelefono);
+    $("#modalEditarProveedor #proveedorlat").val(proveedorlat);
+    $("#modalEditarProveedor #proveedorlong").val(proveedorlong);
 
   
 

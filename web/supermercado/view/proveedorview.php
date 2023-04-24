@@ -85,6 +85,8 @@
                     <th>Dirección</th>
                     <th>Correo</th>
                     <th>Teléfono</th>
+                    <th>Latitud</th>
+                    <th>Longitud</th>
                     <th>Acciones</th>
                     
                   </tr>
@@ -100,8 +102,22 @@
                           echo '<td>'.$proveedor['proveedorcorreo'].'</td>';
                           
                           echo '<td>'.$proveedor['proveedortelefono'].'</td>';
+                          echo '<td>'.$proveedor['proveedorlat'].'</td>';
+                          
+                          echo '<td>'.$proveedor['proveedorlong'].'</td>';
                           echo '<td>';
-                          echo "<div class='btn-group'><button class='btn btn-warning btnEditarProveedor' proveedorid='".$proveedor["proveedorid"]."' proveedornombre='".$proveedor['proveedornombre']."' proveedordireccion='".$proveedor['proveedordireccion']."'  proveedorcorreo='".$proveedor["proveedorcorreo"]."'  proveedortelefono='".$proveedor["proveedortelefono"]."' data-toggle='modal' data-target='#modalEditarProveedor'><i class='fa fa-pencil-alt'></i></button><button class='btn btn-danger btnEliminarProveedor' proveedorid='".$proveedor["proveedorid"]."' proveedordireccion='".$proveedor["proveedordireccion"]."' proveedorcorreo='".$proveedor["proveedorcorreo"]."' proveedortelefono='".$proveedor["proveedortelefono"]."' ><i class='fa fa-times'></i></button></div>";
+                        echo "<div class='btn-group'>
+        <button class='btn btn-warning btnEditarProveedor' proveedorid='".$proveedor["proveedorid"]."' proveedornombre='".$proveedor['proveedornombre']."' proveedordireccion='".$proveedor['proveedordireccion']."' proveedorcorreo='".$proveedor["proveedorcorreo"]."' proveedortelefono='".$proveedor["proveedortelefono"]."' proveedorlat='".$proveedor["proveedorlat"]."' proveedorlong='".$proveedor["proveedorlong"]."' data-toggle='modal' data-target='#modalEditarProveedor'>
+          <i class='fa fa-pencil-alt'></i>
+        </button>
+        <button class='btn btn-danger btnEliminarProveedor' proveedorid='".$proveedor["proveedorid"]."' proveedordireccion='".$proveedor["proveedordireccion"]."' proveedorcorreo='".$proveedor["proveedorcorreo"]."' proveedortelefono='".$proveedor["proveedortelefono"]."' proveedorlat='".$proveedor["proveedorlat"]."' proveedorlong='".$proveedor["proveedorlong"]."'>
+          <i class='fa fa-times'></i>
+        </button>
+        <button class='btn btn-info btnInfoProveedor' proveedorid='".$proveedor["proveedorid"]."' proveedornombre='".$proveedor['proveedornombre']."' proveedordireccion='".$proveedor['proveedordireccion']."' proveedorcorreo='".$proveedor["proveedorcorreo"]."' proveedortelefono='".$proveedor["proveedortelefono"]."' proveedorlat='".$proveedor["proveedorlat"]."' proveedorlong='".$proveedor["proveedorlong"]."' onclick='abrirVentana(\"prueba.php?proveedorid=".$proveedor["proveedorid"]."\")'>
+          <i class='fa fa-info'></i>
+        </button>
+      </div>";
+
                           echo '</td>';
                           echo '</tr>';
                         }
@@ -172,9 +188,16 @@
   }
   echo "</script>";
 
+ 
+
+
 ?>
 
-
+ <script>
+function abrirVentana(url) {
+  window.open(url, '_blank');
+}
+</script>
 
   </body>
 </html>
