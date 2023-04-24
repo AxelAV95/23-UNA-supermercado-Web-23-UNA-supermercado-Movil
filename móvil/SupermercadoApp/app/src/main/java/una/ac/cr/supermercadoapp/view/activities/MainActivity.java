@@ -3,6 +3,7 @@ package una.ac.cr.supermercadoapp.view.activities;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 import androidx.core.content.res.ResourcesCompat;
+import androidx.lifecycle.Observer;
 
 import android.content.Context;
 import android.content.Intent;
@@ -25,6 +26,8 @@ import com.michaldrabik.tapbarmenulib.TapBarMenu;
 import es.dmoral.toasty.Toasty;
 import una.ac.cr.supermercadoapp.R;
 import una.ac.cr.supermercadoapp.data.TipoUsuarioData;
+import una.ac.cr.supermercadoapp.domain.AdministradorRed;
+import una.ac.cr.supermercadoapp.utils.MonitorRedUtils;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -34,6 +37,23 @@ public class MainActivity extends AppCompatActivity {
     private TapBarMenu tapMenu;
 
     private TipoUsuarioData mTipoUsuarioData;
+
+    public MonitorRedUtils monitorRedUtils;
+
+    private final Observer<Boolean> observadoEstadoRed = new Observer<Boolean>() {
+        @Override
+        public void onChanged(Boolean isConnected) {
+            if(isConnected){
+                // Toast.makeText(getApplicationContext(),"Sincronizando...",Toast.LENGTH_SHORT).show();
+               // sincronizarDB();
+                Toast.makeText(getApplicationContext(),"Sincronizando",Toast.LENGTH_SHORT).show();
+
+            }else{
+                Toast.makeText(getApplicationContext(),"Sin conexion",Toast.LENGTH_SHORT).show();
+            }
+        }
+    };
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,9 +64,18 @@ public class MainActivity extends AppCompatActivity {
         String cedula  = credenciales.getString("cedula", null);
         verificarEstadoSesion(cedula);
         iniciarComponentes();
+        configurarEstadoRed();
         agregarAnimaciones();
         agregarEventos();
 
+    }
+
+    private void configurarEstadoRed() {
+        monitorRedUtils = new MonitorRedUtils(this);
+        monitorRedUtils.verificarEstadoRed();
+        monitorRedUtils.registrarEventosCallbackRed();
+
+        AdministradorRed.getInstance().getEstadoConectividad().observe(this,observadoEstadoRed);
     }
 
     private void verificarEstadoSesion(String cedula) {
