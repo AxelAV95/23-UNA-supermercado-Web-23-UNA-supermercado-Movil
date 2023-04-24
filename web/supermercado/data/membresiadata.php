@@ -63,7 +63,14 @@ class membresiaData extends Database{
         }
 	
 
-
+		public function getNombreMembresia($id){
+        	$pdo = Database::conectar();
+            $stm = $pdo->prepare("CALL obtenerMembresiaNombre(?)");
+            $stm->bindParam(1,$id, PDO::PARAM_INT);
+            $stm->execute();
+            Database::desconectar();
+            return $stm->fetchAll(PDO::FETCH_ASSOC);
+        }
 		//insertar
 		//actualizar
 		//eliminar

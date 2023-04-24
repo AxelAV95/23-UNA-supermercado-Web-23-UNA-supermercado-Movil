@@ -1,12 +1,12 @@
 
-<div id="modalAgregarCategoria" class="modal fade" role="dialog">
+<div id="modalAgregarCliente" class="modal fade" role="dialog">
   
   <div class="modal-dialog">
 
     <div class="modal-content">
 
         <div class="modal-header">
-          <h4 class="modal-title">Agregar categoría</h4>
+          <h4 class="modal-title">Agregar cliente</h4>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true" style="font-size: 30px">&times;</span>
           </button>
@@ -16,30 +16,59 @@
 
           <div class="box-body">
 
-            <form method="POST" action="../../business/categoriaaction.php"  enctype="multipart/form-data">
-           
+          <form id="formulario-insertar" >
+
+            <div class="form-group">
+                <input type="hidden" name="clienteid" id="clienteid">
+                <input type="hidden" name="clientenombre" id="clientenombre">
+                <input type="hidden" name="clienteapellidos" id="clienteapellidos">
+                <input type="hidden" name="clientecedula" id="clientecedula">
+                <input type="hidden" name="clientedireccion" id="clientedireccion">
+                <input type="hidden" name="clientetelefono" id="clientetelefono">
+                <input type="hidden" name="clientecorreo" id="clientecorreo">
+                <input type="hidden" name="clientefechaafiliacion" id="clientefechaafiliacion">
+                <input type="hidden" name="clientetipomembresia" id="clientetipomembresia">
+              </div>
 
               <div class="form-group">
-                <label >Descripción:</label>
-                <input type="text" class="form-control" name="categoriadescripcion" id="categoriadescripcion" placeholder="Ingrese categoría">
-               
+                <label >Nombre:</label>
+                <input type="text" class="form-control" name="clientenombre" id="clientenombre" placeholder="Ingrese nombre">
+                <label >Apellidos:</label>
+                <input type="text" class="form-control" name="clienteapellidos" id="clienteapellidos" placeholder="Ingrese Apellidos">
+                <label >Cédula:</label>
+                <input type="number" class="form-control" name="clientecedula" id="clientecedula" placeholder="Ingrese cédula">
+                <label >Dirección:</label>
+                <input type="text" class="form-control" name="clientedireccion" id="clientedireccion" placeholder="Ingrese dirección">
+                <label >Télefono:</label>
+                <input type="number" class="form-control" name="clientetelefono" id="clientetelefono" placeholder="Ingrese télefono">
+                <label >Correo:</label>
+                <input type="text" class="form-control" name="clientecorreo" id="clientecorreo" placeholder="Ingrese correo">
+                <label>Fecha de afiliación:</label>
+                <input type="date" class="form-control" name="clientefechaafiliacion" id="clientefechaafiliacion" placeholder="Ingrese fecha de afiliación" value="<?php echo $clientefechaafiliacion; ?>">
+                </div>
+       
+       
+                <div class="form-group">
+                <label>Tipo de membresía:</label>
+        <select class="clientetipomembresia form-control" name="clientetipomembresia" id="clientetipomembresia">
+        <option selected>Seleccione la membresía</option>
+        <?php 
+                
+                foreach($membresias as $membresia){
+
+                  echo '<script>var idc = $("#clientetipomembresia").val()</script>';
+                  echo $variable = "<script>document.write(idc)</script>";
+                  if($categoria['membresiaid'] == $variable){
+                      echo ' <option value="'.$membresia['membresiaid'].'" class="badge badge-pill badge-warning" style="font-size: 15px;" selected>'.$membresia['membresiadescripcion'].'</option>';
+                  }else{
+                      echo ' <option value="'.$membresia['membresiaid'].'" class="badge badge-pill badge-warning" style="font-size: 15px;">'.$membresia['membresiadescripcion'].'</option>';
+                  }
+                  
+                }?>
+</select>
               </div>
               
-
-
-              <div class="form-group">
-                <label >Imagen: </label>
-                <input type="file" class="nuevaImagen" name="nuevaImagen">
-
-                <p class="help-block">Peso máximo de la imagen 2MB</p>
-
-                <img src="img/categorias/default/anonymous.png" class="img-thumbnail previsualizar" width="100px">
-
-              <input type="hidden" name="imagenActual" id="imagenActual">
-
-              </div>
-              
-             <center><button type="submit" name="insertar" class="btn btn-primary">Insertar</button></center> 
+             <center><button type="button" name="insertar" id="insertar" class="btn btn-primary">Insertar</button></center> 
             </form>
 
     </div>
