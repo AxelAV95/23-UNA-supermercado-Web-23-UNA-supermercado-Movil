@@ -30,6 +30,10 @@
             return $this->proveedorData->getNombreProveedor($id);
        }
 
+       public function obtenerproveerdorid($id){
+        return $this->proveedorData->obtenerproveerdorid($id);
+   }
+
         
     }
 
