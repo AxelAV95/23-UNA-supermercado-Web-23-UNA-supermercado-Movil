@@ -5,14 +5,15 @@
 
 	if(isset($_POST['insertar'])){
 		if(isset($_POST['proveedornombre'])&& isset($_POST['proveedordireccion']) && isset($_POST['proveedorcorreo'])
-        && isset($_POST['proveedortelefono'])
+        && isset($_POST['proveedortelefono'])  && isset($_POST['proveedorlat'])  && isset($_POST['proveedorlong'])
         ){
 			$proveedorBusiness = new ProveedorBusiness();
 			$nombre = $_POST['proveedornombre'];
 			$direccion = $_POST['proveedordireccion'];
             $correo = $_POST['proveedorcorreo'];
             $telefono = $_POST['proveedortelefono'];
-           
+            $latitud = $_POST['proveedorlat'];
+            $longitud = $_POST['proveedorlong'];
 			
 
 			
@@ -21,7 +22,8 @@
 			$proveedor->setDireccion($direccion);			   		    	
 	    	$proveedor->setCorreo($correo);
 			$proveedor->setTelefono($telefono);
-			
+			$proveedor->setLatitud($latitud);
+            $proveedor->setLongitud($longitud);
 			
 			
 	    	$resultado = $proveedorBusiness->insertarproveedor($proveedor);
@@ -37,13 +39,14 @@
 		
 	}else if(isset($_POST['actualizar'])){
 		if(isset($_POST['proveedornombre']) && isset($_POST['proveedordireccion']) && isset($_POST['proveedorcorreo'])
-        && isset($_POST['proveedortelefono'])){
+        && isset($_POST['proveedortelefono']) && isset($_POST['proveedorlat']) && isset($_POST['proveedorlong'])){
 			$id = $_POST['proveedorid'];
 			$nombre = $_POST['proveedornombre'];
 			$direccion = $_POST['proveedordireccion'];
             $correo = $_POST['proveedorcorreo'];
             $telefono = $_POST['proveedortelefono'];
-           
+            $latitud = $_POST['proveedorlat'];
+            $longitud = $_POST['proveedorlong'];
 			
 
 				$proveedorBusiness = new ProveedorBusiness();
@@ -53,7 +56,8 @@
 	    		$proveedor->setDireccion($direccion);
                 $proveedor->setCorreo($correo);
                 $proveedor->setTelefono($telefono);
-              
+				$proveedor->setLatitud($latitud);
+                $proveedor->setLongitud($longitud);
 				
 	    		$resultado = $proveedorBusiness->modificarproveedor($proveedor);
 

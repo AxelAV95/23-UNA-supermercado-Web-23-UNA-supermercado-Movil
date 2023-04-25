@@ -44,6 +44,17 @@
                 <input type="number" class="form-control" name="proveedortelefono" id="proveedortelefono" placeholder="Ingrese un teléfono" min="1" required pattern="[0-9]+">
                
               </div>
+              <div class="form-group">
+                <label >Latitud:</label>
+                <input type="text" class="form-control" name="proveedorlat" id="proveedorlat" placeholder="Ingrese la latitud">
+               
+              </div>
+
+              <div class="form-group">
+                <label >Longitud:</label>
+                <input type="text" class="form-control" name="proveedorlong" id="proveedorlong" placeholder="Ingrese la longitud" >
+               
+              </div>
               
             <br>
               <center><button type="submit" name="actualizar" class="btn btn-primary">Actualizar</button></center>
