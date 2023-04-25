@@ -1,10 +1,11 @@
 <?php  
  
-    include '../business/categoriabusiness.php';
-
-    $categoriaBusiness = new CategoriaBusiness();
-    $categorias = $categoriaBusiness->getAllTBCategorias();
-
+    include '../business/clientebusiness.php';
+    include '../business/membresiabusiness.php';
+    $clienteBusiness = new ClienteBusiness();
+    $clientes = $clienteBusiness->getAllTBClientes();
+    $membresiabusiness = new MembresiaBusiness();
+    $membresias = $membresiabusiness->getAllTBMembresias();
 
 
 ?>
@@ -67,9 +68,9 @@
         <!-- Main row -->
        <div class="card">
               <div class="card-header jus">
-                <button class="btn btn-primary" data-toggle="modal" data-target="#modalAgregarCategoria">
+                <button class="btn btn-primary" data-toggle="modal" data-target="#modalAgregarCliente">
 
-                    Agregar categoría
+                    Agregar Cliente
 
                   </button>
               </div>
@@ -78,26 +79,40 @@
                  <table id="categorias" class="tabla-categorias table table-bordered table-hover">
                   <thead>
                   <tr>
-                    <th>Descripción</th>
+   
+                    <th>Nombre</th>
+                    <th>Apellidos</th>
+                    <th>Cédula</th>
+                    <th>Direccion</th>
+                    <th>Teléfono</th>
+                    <th>Correo</th>
+                    <th>Fecha afiliacion</th>
+                    <th>Tipo membresia</th>
                     <th>Acciones</th>
-                    
+                
+	
                   </tr>
                   </thead>
                   <tbody>
                     <?php 
-                    /*
-                        foreach($categorias as $categoria){
+                    
+                        foreach($clientes as $cliente){
                           echo '<tr>';
-                          echo '<td>'.$categoria['categoriadescripcion'].'</td>';
+                          echo '<td>'.$cliente['clientenombre'].'</td>';
+                           echo '<td>'.$cliente['clienteapellidos'].'</td>';
+                           echo '<td>'.$cliente['clientecedula'].'</td>';
+                           echo '<td>'.$cliente['clientedireccion'].'</td>';
+                           echo '<td>'.$cliente['clientetelefono'].'</td>';
+                           echo '<td>'.$cliente['clientecorreo'].'</td>';
+                           echo '<td>'.$cliente['clientefechaafiliacion'].'</td>';
+                           echo '<td>';
+                           echo '<span class="badge badge-light">'.$membresiabusiness->getNombreMembresia($cliente['clientetipomembresia'])[0]['membresiadescripcion'].'</span>';
+                           echo '</td>';                
                           echo '<td>';
-                          echo "<div class='btn-group'><button class='btn btn-warning btnEditarCategoria' categoriaid='".$categoria["categoriaid"]."' descripcion='".$categoria['categoriadescripcion']."'  imagen='".$categoria["categoriaimg"]."' codigo='".$categoria["categoriacodigo"]."' data-toggle='modal' data-target='#modalEditarCategoria'><i class='fa fa-pencil'></i></button><button class='btn btn-danger btnEliminarCategoria' categoriaid='".$categoria["categoriaid"]."' imagen='".$categoria["categoriaimg"]."' codigo='".$categoria["categoriacodigo"]."' ><i class='fa fa-times'></i></button></div>";
+                          echo "<div class='btn-group'><button class='btn btn-warning btnEditarCategoria' clienteid='" . $cliente["clienteid"] . "' clientenombre='" . $cliente['clientenombre'] . "' clienteapellidos='" . $cliente['clienteapellidos'] . "' clientecedula='" . $cliente["clientecedula"] . "' clientedireccion='" . $cliente["clientedireccion"] . "' clientetelefono='" . $cliente["clientetelefono"] . "' clientecorreo='".$cliente["clientecorreo"] . "' clientefechaafiliacion='" . $cliente["clientefechaafiliacion"] . "' clientetipomembresia='" . $cliente["clientetipomembresia"] . "'  data-toggle='modal' data-target='#modalEditarlCiente'><i class='fa fa-pencil-alt'></i></button><button class='btn btn-danger btnEliminarCategoria'clienteid='".$cliente["clienteid"]. "' ><i class='fa fa-times'></i></button></div>";  
                           echo '</td>';
                           echo '</tr>';
                         }
-
-
-                      */
-
                     ?>
                 
                   </tbody>
@@ -119,7 +134,7 @@
 <!-- ./wrapper -->
 <?php include 'template/modales/modalagregarcliente.php' ?>
 
-<?php include 'template/modales/modaleditarlciente.php' ?>
+<?php include 'template/modales/modaleditarcliente.php' ?>
 <?php include 'template/modales/modalqr.php' ?>
 
 
@@ -183,48 +198,228 @@
 </script>
 
 <script>
-  $(".tabla-categorias tbody").on("click", "button.btnEditarCategoria", function(){
 
-    var idcategoria = $(this).attr("categoriaid");
-    var descripcion = $(this).attr("descripcion");
-    var img = $(this).attr("imagen");
-    var codigo =  $(this).attr("codigo");
   
-    $("#modalEditarCategoria #categoriaid").val(idcategoria);
-    $("#modalEditarCategoria #categoriadescripcion").val(descripcion);
-    $("#modalEditarCategoria #categoriacodigo").val(codigo);
-    $("#modalEditarCategoria #imagenActual").val(img);
-    $("#modalEditarCategoria .previsualizar").attr("src", img);
-  
+$(document).on('click','#insertar',function(e) {
 
+var descripcion = $("#formulario-insertar div").children().get(2);
+
+if(descripcion.value  == ""){
+ $("#formulario-insertar div").children().get(2).focus()
+   Toast.fire({
+               icon: 'warning',
+               title: '<div style=margin-top:0.5rem;>Ingresar descripción.</div>'
+         })
+   
+}else{
+   var data = $("#formulario-insertar").serialize();
+
+   console.log(data)
+   $.ajax({
+     data: data,
+     type: "POST",
+     url: "../business/clienteaction.php",
+     success: function(dataResult){
+         var dataResult = JSON.parse(dataResult);
+         if(dataResult.statusCode==200){
+
+                Toast.fire({
+                   icon: 'success',
+                   title: '<div style=margin-top:0.5rem;>Insertado con éxito.</div>'
+             });
+
+                $('#modalAgregarCliente #clientenombre').val("");
+                $('#modalAgregarCliente #clienteapellidos').val("");
+                $('#modalAgregarCliente #clientecedula').val("");
+                $('#modalAgregarCliente #clientedireccion').val("");
+                $('#modalAgregarCliente #clientetelefono').val("");
+                $('#modalAgregarCliente #clientecorreo').val("");
+                $('#modalAgregarCliente #clientefechaafiliacion').val("");
+                $('#modalAgregarCliente #clientetipomembresia').val("");
+
+
+
+                $('#modalAgregarCliente').modal('hide');
+                $('#tabla-categorias').DataTable().ajax.reload();
+               
+                                            
+         }else{
+               Toast.fire({
+                   icon: 'error',
+                   title: '<div style=margin-top:0.5rem;>Error al efectuar la operación.</div>'
+             })
+         }
+                   
+     }
+   });
+ }
 });
+$(document).on('click','#actualizar',function(e) {
 
-  
-$(".tabla-categorias tbody").on("click", "button.btnEliminarCategoria", function(){
+var descripcion = $("#formulario-editar div").children().get(3);
 
-  var categoriaid = $(this).attr("categoriaid");
-  var imagen = $(this).attr("imagen");
-  var codigo = $(this).attr("codigo");
-
-      Swal.fire({
-        title: '¿Desea eliminar la categoría?',
-        text: "No se podrá revertir el cambio",
-        icon: 'warning',
-        showCancelButton: true,
-        confirmButtonColor: '#3085d6',
-        cancelButtonColor: '#d33',
-         cancelButtonText: "Cancelar",
-        confirmButtonText: 'Eliminar'
-        }).then((result) => {
-          if (result.isConfirmed) {
-            window.location = "../../business/categoriaaction.php?eliminar=true&id="+categoriaid+"&imagen="+imagen+"&codigo="+codigo;
+if(descripcion.value  == ""){
+     $("#formulario-editar div").children().get(3).focus()
+    Toast.fire({
+                icon: 'warning',
+                title: '<div style=margin-top:0.5rem;>Ingresar descripción.</div>'
+          })
+}else{
+    var data = $("#formulario-editar").serialize();
+    console.log(data)
+    $.ajax({
+      data: data,
+      type: "POST",
+      url: "../business/clienteaction.php",
+      success: function(dataResult){
+            var dataResult = JSON.parse(dataResult);
+          if(dataResult.statusCode==200){
+                       
+                Toast.fire({
+                    icon: 'success',
+                    title: '<div style=margin-top:0.5rem;>Actualizado con éxito.</div>'
+              });
+                 
+                 $('#modalEditarlCiente').modal('hide');
+                 $('#tabla-clientes').DataTable().ajax.reload();
+                                             
+          }else{
+                 Toast.fire({
+                    icon: 'error',
+                    title: '<div style=margin-top:0.5rem;>Error al efectuar la operación.</div>'
+              })
       
           }
-    })
- 
+                    
+      }
+    });
+}
+
 
 });
 
+
+
+
+  $(".tabla-categorias tbody").on("click", "button.btnEditarCategoria", function(){
+
+    var clienteid = $(this).attr("clienteid");
+    var clientenombre = $(this).attr("clientenombre");
+    var clienteapellidos = $(this).attr("clienteapellidos");
+    var clientecedula = $(this).attr("clientecedula");
+    var clientedireccion = $(this).attr("clientedireccion");
+    var clientetelefono = $(this).attr("clientetelefono");
+    var clientecorreo = $(this).attr("clientecorreo");
+    var clientefechaafiliacion = $(this).attr("clientefechaafiliacion");
+    var clientetipomembresia = $(this).attr("clientetipomembresia");
+   
+    $("#modalEditarlCiente #clienteid").val(clienteid);
+    $("#modalEditarlCiente #clientenombre").val(clientenombre);
+    $("#modalEditarlCiente #clienteapellidos").val(clienteapellidos);
+    $("#modalEditarlCiente #clientecedula").val(clientecedula);
+    $("#modalEditarlCiente #clientedireccion").val(clientedireccion);
+    $("#modalEditarlCiente #clientetelefono").val(clientetelefono);
+    $("#modalEditarlCiente #clientecorreo").val(clientecorreo);
+    $("#modalEditarlCiente #clientefechaafiliacion").val(clientefechaafiliacion);
+    $("#modalEditarlCiente #clientetipomembresia").val(clientetipomembresia);
+  
+});
+
+$(".tabla-categorias tbody").on("click", "button.btnEliminarCategoria", function(){
+  var clienteid = $(this).attr("clienteid");
+Swal.fire({
+      title: '¿Desea eliminar este cliente?',
+      showDenyButton: true,
+      showCancelButton: false,
+      confirmButtonText: 'Sí',
+      denyButtonText: `Cancelar`,
+    }).then((result) => {
+     
+      if (result.isConfirmed) {
+        let requestUrl ="../business/clienteaction.php?metodo=eliminar&clienteid="+clienteid;
+        console.log(requestUrl)
+        $.ajax({
+        url: requestUrl ,
+        type: "GET",
+        
+        success: function(dataResult){
+          var dataResult = JSON.parse(dataResult);
+          if(dataResult.statusCode==200){
+                Toast.fire({
+                    icon: 'success',
+                    title: '<div style=margin-top:0.5rem;>Eliminado con éxito.</div>'
+              });
+                 
+                
+                 $('#categorias').DataTable().ajax.reload();
+                                             
+          }else{
+                 Toast.fire({
+                    icon: 'error',
+                    title: '<div style=margin-top:0.5rem;>Error al efectuar la operación.</div>'
+              })
+      
+          }
+        }
+      });
+
+      } 
+    })
+});
+
+
+$(document).on('click','#insertar',function(e) {
+
+
+var descripcion = $("#formulario-insertar div").children().get(2);
+
+if(descripcion.value  == ""){
+ $("#formulario-insertar div").children().get(2).focus()
+   Toast.fire({
+               icon: 'warning',
+               title: '<div style=margin-top:0.5rem;>Ingresar descripción.</div>'
+         })
+   
+}else{
+   var data = $("#formulario-insertar").serialize();
+
+   console.log(data)
+   $.ajax({
+     data: data,
+     type: "POST",
+     url: "../business/clienteaction.php",
+     success: function(dataResult){
+         var dataResult = JSON.parse(dataResult);
+         if(dataResult.statusCode==200){
+
+                Toast.fire({
+                   icon: 'success',
+                   title: '<div style=margin-top:0.5rem;>Insertado con éxito.</div>'
+             });
+
+                $('#modalAgregarCliente #clientenombre').val("");
+                $('#modalAgregarCliente #clienteapellidos').val("");
+                $('#modalAgregarCliente #clientecedula').val("");
+                $('#modalAgregarCliente #clientedireccion').val("");
+                $('#modalAgregarCliente #clientetelefono').val("");
+                $('#modalAgregarCliente #clientecorreo').val("");
+                $('#modalAgregarCliente #clientefechaafiliacion').val("");
+                $('#modalAgregarCliente #clientetipomembresia').val("");
+                $('#modalAgregarCliente').modal('hide');
+                $('#tabla-tipos').DataTable().ajax.reload();
+               
+                                            
+         }else{
+               Toast.fire({
+                   icon: 'error',
+                   title: '<div style=margin-top:0.5rem;>Error al efectuar la operación.</div>'
+             })
+         }
+                   
+     }
+   });
+ }
+});
 
 $(".nuevaImagen").change(function(){
 
@@ -272,5 +467,6 @@ $(".nuevaImagen").change(function(){
     }
 })
 </script>
+
 </body>
 </html>

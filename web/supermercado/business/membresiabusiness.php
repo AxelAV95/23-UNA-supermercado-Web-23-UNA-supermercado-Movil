@@ -25,6 +25,11 @@
 		public function getAllTBMembresias(){
 			 return $this->membresiaData->getAllTBMembresias();
 		}
+
+		public function getNombreMembresia($id){
+            return $this->membresiaData->getNombreMembresia($id);
+        }
+
 	}
 
 

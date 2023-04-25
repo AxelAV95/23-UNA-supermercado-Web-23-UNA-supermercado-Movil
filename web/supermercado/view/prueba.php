@@ -174,4 +174,8 @@ foreach($proveedores as $row){
 
           
     </body>
+<<<<<<< HEAD
 </html>
+=======
+</html>
+>>>>>>> 4a9fa671b4a446f86b88a8c0dcbcbc42e60b8bca

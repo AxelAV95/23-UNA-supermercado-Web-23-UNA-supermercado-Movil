@@ -61,19 +61,24 @@
         
          public function modificarProducto($producto){
             $pdo = Database::conectar();
-            $stm = $pdo->prepare("CALL modificarProducto(?,?,?,?,?,?)");
+            $stm = $pdo->prepare("CALL modificarProducto(?,?,?,?,?,?,?,?)");
             $productoid = $producto->getIdProducto();
             $productonombre = $producto->getNombreProducto();
             $productoprecio = $producto->getPrecioProducto();
+            $productofecha = $producto->getProductoFechaIngresoProducto();
+            $productostock = $producto->getStockProducto();
             $productoestado = $producto->getEstadoProducto();
             $productocategoriaid = $producto->getCategoriaProducto();
-            $productocodigo = $producto->getProductocodigo();
-            $stm ->bindParam(1,$productoid,PDO::PARAM_INT);
-            $stm ->bindParam(2,$productonombre,PDO::PARAM_STR);           
-            $stm ->bindParam(3,$productoprecio,PDO::PARAM_INT);
-            $stm ->bindParam(4,$productoestado,PDO::PARAM_INT);
-            $stm ->bindParam(5,$productocategoriaid,PDO::PARAM_INT);
-            $stm ->bindParam(6,$productocodigo,PDO::PARAM_INT);
+            $productoproveedorid = $producto->getProductoproveedor();
+            $stm->bindParam(1, $productoid, PDO::PARAM_INT);
+            $stm->bindParam(2, $productonombre, PDO::PARAM_STR);
+            $stm->bindParam(3, $productoprecio, PDO::PARAM_STR);
+            $stm->bindParam(4, $productofecha, PDO::PARAM_STR);
+            $stm->bindParam(5, $productostock, PDO::PARAM_INT);
+            $stm->bindParam(6, $productoestado, PDO::PARAM_INT);
+            $stm->bindParam(7, $productocategoriaid, PDO::PARAM_INT);
+            $stm->bindParam(8, $productoproveedorid, PDO::PARAM_INT);
+            
             $resultado = $stm->execute();
             Database::desconectar();
                
