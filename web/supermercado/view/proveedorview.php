@@ -113,7 +113,7 @@
         <button class='btn btn-danger btnEliminarProveedor' proveedorid='".$proveedor["proveedorid"]."' proveedordireccion='".$proveedor["proveedordireccion"]."' proveedorcorreo='".$proveedor["proveedorcorreo"]."' proveedortelefono='".$proveedor["proveedortelefono"]."' proveedorlat='".$proveedor["proveedorlat"]."' proveedorlong='".$proveedor["proveedorlong"]."'>
           <i class='fa fa-times'></i>
         </button>
-        <button class='btn btn-info btnInfoProveedor' proveedorid='".$proveedor["proveedorid"]."' proveedornombre='".$proveedor['proveedornombre']."' proveedordireccion='".$proveedor['proveedordireccion']."' proveedorcorreo='".$proveedor["proveedorcorreo"]."' proveedortelefono='".$proveedor["proveedortelefono"]."' proveedorlat='".$proveedor["proveedorlat"]."' proveedorlong='".$proveedor["proveedorlong"]."' onclick='abrirVentana(\"prueba.php?proveedorid=".$proveedor["proveedorid"]."\")'>
+        <button class='btn btn-info btnInfoProveedor' proveedorid='".$proveedor["proveedorid"]."' proveedornombre='".$proveedor['proveedornombre']."' proveedordireccion='".$proveedor['proveedordireccion']."' proveedorcorreo='".$proveedor["proveedorcorreo"]."' proveedortelefono='".$proveedor["proveedortelefono"]."' proveedorlat='".$proveedor["proveedorlat"]."' proveedorlong='".$proveedor["proveedorlong"]."' onclick='abrirVentana(\"ubicacionproveedor.php?proveedorid=".$proveedor["proveedorid"]."\")'>
           <i class='fa fa-info'></i>
         </button>
       </div>";
