@@ -15,10 +15,10 @@
         <div class="modal-body">
 
           <div class="box-body">
-
-          <form id="formulario-insertar" >
+          <form method="POST" action="../business/clienteaction.php"  enctype="multipart/form-data">
 
             <div class="form-group">
+            <input type="hidden" name="accion" id="accion" value="agregar">
                 <input type="hidden" name="clienteid" id="clienteid">
                 <input type="hidden" name="clientenombre" id="clientenombre">
                 <input type="hidden" name="clienteapellidos" id="clienteapellidos">
@@ -68,7 +68,7 @@
 </select>
               </div>
               
-             <center><button type="button" name="insertar" id="insertar" class="btn btn-primary">Insertar</button></center> 
+             <center><button type="submit" name="insertar" id="insertar" class="btn btn-primary">Insertar</button></center> 
             </form>
 
     </div>

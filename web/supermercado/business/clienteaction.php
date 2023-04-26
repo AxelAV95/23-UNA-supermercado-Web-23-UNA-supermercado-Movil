@@ -1,7 +1,7 @@
 <?php
 include 'clientebusiness.php';
 
-	if(isset($_POST['metodo']) && $_POST['metodo'] == "agregar" && isset($_POST['clientenombre'])&& isset($_POST['clienteapellidos'])&& isset($_POST['clientecedula'])
+	if(isset($_POST['accion']) && $_POST['accion'] == "agregar" && isset($_POST['clientenombre'])&& isset($_POST['clienteapellidos'])&& isset($_POST['clientecedula'])
     && isset($_POST['clientedireccion'])&& isset($_POST['clientetelefono'])&& isset($_POST['clientecorreo'])&& isset($_POST['clientefechaafiliacion'])
     && isset($_POST['clientetipomembresia'])){
 
@@ -20,17 +20,18 @@ include 'clientebusiness.php';
     
 		$resultado = $clienteBusiness->insertarCliente($cliente);
 
-		if($resultado == 1){
-	    		echo json_encode(array("statusCode"=>200));	
-	    }else{
-	    		echo json_encode(array("statusCode"=>400));	
-	    }
+	   if($resultado == 1){
+        header("Location: ../view/clienteview.php?sucess=update");
+    }else{
+        header("Location: ../view/clienteview.php?error=dbError");
+    }
 
 
-}else if(isset($_POST['metodo']) && $_POST['metodo'] == "actualizar" && isset($_POST['clientenombre'])&& isset($_POST['clienteapellidos'])&& isset($_POST['clientecedula'])
-&& isset($_POST['clientedireccion'])&& isset($_POST['clientetelefono'])&& isset($_POST['clientecorreo'])&& isset($_POST['clientefechaafiliacion'])
-&& isset($_POST['clientetipomembresia'])){
-    $clientenombre = $_POST['clientenombre'];
+}else if(isset($_POST['accion']) && $_POST['accion'] == "actualizar" && isset($_POST['clientenombre'])&& isset($_POST['clienteapellidos'])&& isset($_POST['clientecedula'])
+&& isset($_POST['clientedireccion'])&& isset($_POST['clientetelefono'])&& isset($_POST['clientecorreo'])&& isset($_POST['clientefechaafiliacion'])&& isset($_POST['clientetipomembresia'])
+&& isset($_POST['clienteid'])){
+        $clienteid = $_POST['clienteid'];
+        $clientenombre = $_POST['clientenombre'];
         $clienteapellidos = $_POST['clienteapellidos'];
         $clientecedula = $_POST['clientecedula'];
         $clientedireccion = $_POST['clientedireccion'];
@@ -40,7 +41,7 @@ include 'clientebusiness.php';
         $clientetipomembresia = $_POST['clientetipomembresia'];
 
         $clienteBusiness = new clienteBusiness();
-		$cliente = new Cliente(0,$clientenombre,$clienteapellidos,$clientecedula,$clientedireccion,$clientetelefono,
+		$cliente = new Cliente($clienteid,$clientenombre,$clienteapellidos,$clientecedula,$clientedireccion,$clientetelefono,
         $clientecorreo,$clientefechaafiliacion,$clientetipomembresia);
 	$resultado = $clienteBusiness->modificarCliente($cliente);
 
