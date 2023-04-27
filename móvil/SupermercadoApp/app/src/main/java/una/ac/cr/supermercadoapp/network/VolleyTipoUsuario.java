@@ -22,6 +22,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 
 import es.dmoral.toasty.Toasty;
+import una.ac.cr.supermercadoapp.data.TipoUsuarioData;
 import una.ac.cr.supermercadoapp.domain.TipoUsuario;
 import una.ac.cr.supermercadoapp.utils.NetworkUtils;
 import una.ac.cr.supermercadoapp.view.activities.MainActivity;
@@ -77,14 +78,21 @@ public class VolleyTipoUsuario {
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, NetworkUtils.HTTP+IP+NetworkUtils.RUTA_TIPO_USUARIO,  tipoUsuarioJson , new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
-
+                TipoUsuarioData tipoUsuarioData = new TipoUsuarioData(context);
                     if(response.optString("statusCode").toString().equals("200")){
 
-                        Intent returnIntent = new Intent();
-                        ((Activity) context).setResult(Activity.RESULT_OK, returnIntent);
-                        ((Activity) context).finish();
+
+                        long resultado = tipoUsuarioData.insertarTipoUsuario(new TipoUsuario(tipoUsuario.getDescripcion(),0));
+                        if(resultado == -1){
+                            Toasty.error(context, "Error al insertar en la base de datos local", Toast.LENGTH_SHORT, true).show();
+                        }else{
+                            Intent returnIntent = new Intent();
+                            ((Activity) context).setResult(Activity.RESULT_OK, returnIntent);
+                            ((Activity) context).finish();
+                        }
 
                     }else{
+                        long resultado = tipoUsuarioData.insertarTipoUsuario(new TipoUsuario(tipoUsuario.getDescripcion(),-1));
                         Toasty.error(context, "Error al insertar", Toast.LENGTH_SHORT, true).show();
                     }
 
