@@ -16,9 +16,10 @@
 
           <div class="box-body">
 
-            <form method="POST" action="../../business/clienteaction.php" enctype="multipart/form-data">
+            <form method="POST" action="../business/clienteaction.php" enctype="multipart/form-data">
               
               <div class="form-group">
+              <input type="hidden" name="accion" id="accion" value="actualizar">
                 <input type="hidden" name="clienteid" id="clienteid">
                 <input type="hidden" name="clientenombre" id="clientenombre">
                 <input type="hidden" name="clienteapellidos" id="clienteapellidos">
@@ -66,7 +67,7 @@
 </select>
               </div>
               
-             <center><button type="submit" name="actualizar" class="btn btn-primary">Actualizar</button></center> 
+             <center><button type="submit" name="actualizar" id="actualizar" class="btn btn-primary">Actualizar</button></center> 
             </form>
 
           </div>

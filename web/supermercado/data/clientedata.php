@@ -56,8 +56,6 @@ class clienteData extends Database{
             $clientecorreo = $cliente->getClientecorreo();
             $clientefechaafiliacion = $cliente->getClientefechaafiliacion();
             $clientetipomembresia = $cliente->getClientetipomembresia();
-
-
             $stm ->bindParam(1,$clientenombre,PDO::PARAM_STR);
             $stm ->bindParam(2,$clienteapellidos,PDO::PARAM_STR);
             $stm ->bindParam(3,$clientecedula,PDO::PARAM_INT);
