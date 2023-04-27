@@ -1,11 +1,11 @@
-<div id="modalAgregarCategoria" class="modal fade" role="dialog">
+<div id="modalAgregarEmpleado" class="modal fade" role="dialog">
   
   <div class="modal-dialog">
 
     <div class="modal-content">
 
         <div class="modal-header">
-          <h4 class="modal-title">Agregar categoría</h4>
+          <h4 class="modal-title">Agregar empleado</h4>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
@@ -14,28 +14,51 @@
         <div class="modal-body">
 
           <div class="box-body">
-
-            <form method="POST" action="../../business/categoriaaction.php"  enctype="multipart/form-data">
-           
+            <form method="POST" action="../business/empleadoaction.php"  enctype="multipart/form-data">
+           <input type="hidden" name="metodo" id="metodo" value="agregar">
+           <input type="hidden" name="empleadofechasalida" id="empleadofechasalida" value="0000-00-00">
+           <input type="hidden" name="empleadoestado" id="empleadoestado" value="1">
 
               <div class="form-group">
-                <label >Descripción:</label>
-                <input type="text" class="form-control" name="categoriadescripcion" id="categoriadescripcion" placeholder="Ingrese categoría">
-               
+                <label >Cédula:</label>
+                <input type="text" class="form-control" name="empleadocedula" id="empleadocedula" placeholder="Ingrese cédula">
               </div>
-              
-
 
               <div class="form-group">
-                <label >Imagen: </label>
-                <input type="file" class="nuevaImagen" name="nuevaImagen">
+                <label >Nombre:</label>
+                <input type="text" class="form-control" name="empleadonombre" id="empleadonombre" placeholder="Ingrese nombre">
+              </div>
 
-                <p class="help-block">Peso máximo de la imagen 2MB</p>
+              <div class="form-group">
+                <label >Apellidos:</label>
+                <input type="text" class="form-control" name="empleadoapellidos" id="empleadoapellidos" placeholder="Ingrese apellidos">
+              </div>
 
-                <img src="img/categorias/default/anonymous.png" class="img-thumbnail previsualizar" width="100px">
+              <div class="form-group">
+                <label >Teléfono:</label>
+                <input type="text" class="form-control" name="empleadotelefono" id="empleadotelefono" placeholder="Ingrese teléfono">
+              </div>
 
-              <input type="hidden" name="imagenActual" id="imagenActual">
+              <div class="form-group">
+                <label >Dirección:</label>
+                <input type="text" class="form-control" name="empleadodireccion" id="empleadodireccion" placeholder="Ingrese direccion">
+              </div>
 
+              <div class="form-group">
+                <label >Fecha de ingreso:</label>
+                <input type="date" class="form-control" name="empleadofechaingreso" id="empleadofechaingreso" placeholder="Ingrese fecha de ingreso">
+              </div>
+
+              <div class="form-group">
+                <label >Tipo de empleado:</label>
+                <select class="tipoid form-control" name="empleadotipoid" id="empleadotipoid" >              
+                  <?php
+                  
+                  foreach($tipos as $tipoempleado){
+                    echo ' <option value="'.$tipoempleado['tipoid'].'" class="badge badge-pill badge-warning" style="font-size: 15px;">'.$tipoempleado['tipodescripcion'].'</option>';
+                  }
+                  ?>
+                </select>
               </div>
               
              <center><button type="submit" name="insertar" class="btn btn-primary">Insertar</button></center> 

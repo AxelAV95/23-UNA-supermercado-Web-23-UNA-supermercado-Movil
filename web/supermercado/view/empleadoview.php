@@ -5,7 +5,9 @@
     $categoriaBusiness = new CategoriaBusiness();
     $categorias = $categoriaBusiness->getAllTBCategorias();
 
-
+    include '../business/tipoempleadobusiness.php';
+    $tipoempleadosbusiness = new TipoEmpleadoBusiness();
+    $tipos = $tipoempleadosbusiness->obtener();
 
 ?>
 
@@ -67,7 +69,7 @@
         <!-- Main row -->
        <div class="card">
               <div class="card-header jus">
-                <button class="btn btn-primary" data-toggle="modal" data-target="#modalAgregarCategoria">
+                <button class="btn btn-primary" data-toggle="modal" data-target="#modalAgregarEmpleado">
 
                     Agregar empleado
 
@@ -75,31 +77,21 @@
               </div>
               <!-- /.card-header -->
               <div class="card-body">
-                 <table id="empleados" class="tabla-categorias table table-bordered table-hover">
+              <table id="empleados2" class="tabla-empleados table table-bordered table-hover">
                   <thead>
                   <tr>
-                    <th>Descripción</th>
+                    
+                    <th>Cédula</th>
+                    <th>Nombre</th>
+                    <th>Apellidos</th>
+                    <th>Direccion</th>
+                    <th>Tipo</th>
                     <th>Acciones</th>
                     
                   </tr>
                   </thead>
                   <tbody>
-                    <?php 
-                    /*
-                        foreach($categorias as $categoria){
-                          echo '<tr>';
-                          echo '<td>'.$categoria['categoriadescripcion'].'</td>';
-                          echo '<td>';
-                          echo "<div class='btn-group'><button class='btn btn-warning btnEditarCategoria' categoriaid='".$categoria["categoriaid"]."' descripcion='".$categoria['categoriadescripcion']."'  imagen='".$categoria["categoriaimg"]."' codigo='".$categoria["categoriacodigo"]."' data-toggle='modal' data-target='#modalEditarCategoria'><i class='fa fa-pencil'></i></button><button class='btn btn-danger btnEliminarCategoria' categoriaid='".$categoria["categoriaid"]."' imagen='".$categoria["categoriaimg"]."' codigo='".$categoria["categoriacodigo"]."' ><i class='fa fa-times'></i></button></div>";
-                          echo '</td>';
-                          echo '</tr>';
-                        }
-
-
-                      */
-
-                    ?>
-                
+                  
                   </tbody>
                   
                 </table>
@@ -124,6 +116,94 @@
 <?php include 'template/modales/modalqr.php' ?>
 <?php include 'template/dependenciasjs.php' ?>
 
+<script src="dist/js/empleados.js"> </script>
+
+
+<!-- EDITAR -->
+<script>
+  $(".tabla-empleados tbody").on("click", "button.btnEditarEmpleado", function(){
+
+var empleadoid = $(this).attr("empleadoid");
+var empleadocedula = $(this).attr("empleadocedula");
+var empleadonombre = $(this).attr("empleadonombre");
+var empleadoapellidos = $(this).attr("empleadoapellidos");
+var empleadotelefono = $(this).attr("empleadotelefono");
+var empleadodireccion = $(this).attr("empleadodireccion");
+var empleadofechaingreso = $(this).attr("empleadofechaingreso");
+var empleadofechasalida = $(this).attr("empleadofechasalida");
+var empleadoestado = $(this).attr("empleadoestado");
+var empleadotipoid = $(this).attr("empleadotipoid");
+
+$("#modalEditarEmpleado #empleadoid").val(empleadoid);
+$("#modalEditarEmpleado #empleadocedula").val(empleadocedula);
+$("#modalEditarEmpleado #empleadonombre").val(empleadonombre);
+$("#modalEditarEmpleado #empleadoapellidos").val(empleadoapellidos);
+$("#modalEditarEmpleado #empleadotelefono").val(empleadotelefono);
+$("#modalEditarEmpleado #empleadodireccion").val(empleadodireccion);
+$("#modalEditarEmpleado #empleadofechaingreso").val(empleadofechaingreso);
+$("#modalEditarEmpleado #empleadofechasalida").val(empleadofechasalida);
+$("#modalEditarEmpleado #empleadoestado").val(empleadoestado);
+$("#modalEditarEmpleado #empleadotipoid").val(empleadotipoid);
+
+$.ajax({
+  type: "GET",
+  url: '../business/usuarioaction.php?metodo=obtenerTipos',
+  dataType: 'json',
+  success: function(data) {
+
+    $.each(data, function(key, value){ 
+      $('#modalEditarEmpleado #tipos').append($('<option>').text(value.tipodescripcion).attr('value', value.tipoid));
+    });
+
+  }
+});
+
+});
+
+
+
+$(".tabla-empleados tbody").on("click", "button.btnEliminarEmpleado", function(){
+
+var empleadoid = $(this).attr("empleadoid");
+
+Swal.fire({
+      title: '¿Desea eliminar este empleado?',
+      showDenyButton: true,
+      showCancelButton: false,
+      confirmButtonText: 'Sí',
+      denyButtonText: `Cancelar`,
+     }).then((result) => {
+       if (result.isConfirmed) {
+         let requestUrl ="../business/empleadoaction.php?metodo=eliminar&empleadoid="+empleadoid;
+        console.log(requestUrl)
+        $.ajax({
+        url: requestUrl ,
+        type: "GET",
+        
+        
+        success: function(dataResult){
+          var dataResult = JSON.parse(dataResult);
+          if(dataResult.statusCode==200){
+                       
+                Toast.fire({
+                    icon: 'success',
+                    title: '<div style=margin-top:0.5rem;>Eliminado con éxito.</div>'
+              });                
+                
+                 $('#empleados2').DataTable().ajax.reload();                                             
+          }else{
+                 Toast.fire({
+                    icon: 'error',
+                    title: '<div style=margin-top:0.5rem;>Error al efectuar la operación.</div>'
+              })
+      
+          }
+        }
+      });
+       }
+ })
+});
+</script>
 
 <?php 
   //ALERTAS
@@ -198,78 +278,7 @@
 
 });
 
-  
-$(".tabla-categorias tbody").on("click", "button.btnEliminarCategoria", function(){
 
-  var categoriaid = $(this).attr("categoriaid");
-  var imagen = $(this).attr("imagen");
-  var codigo = $(this).attr("codigo");
-
-      Swal.fire({
-        title: '¿Desea eliminar la categoría?',
-        text: "No se podrá revertir el cambio",
-        icon: 'warning',
-        showCancelButton: true,
-        confirmButtonColor: '#3085d6',
-        cancelButtonColor: '#d33',
-         cancelButtonText: "Cancelar",
-        confirmButtonText: 'Eliminar'
-        }).then((result) => {
-          if (result.isConfirmed) {
-            window.location = "../../business/categoriaaction.php?eliminar=true&id="+categoriaid+"&imagen="+imagen+"&codigo="+codigo;
-      
-          }
-    })
- 
-
-});
-
-
-$(".nuevaImagen").change(function(){
-
-  var imagen = this.files[0];
-  
-  /*=============================================
-    VALIDAMOS EL FORMATO DE LA IMAGEN SEA JPG O PNG
-    =============================================*/
-
-    if(imagen["type"] != "image/jpeg" && imagen["type"] != "image/png"){
-
-      $(".nuevaImagen").val("");
-
-       Toast.fire({
-          title: "Error al subir la imagen",
-          text: "¡La imagen debe estar en formato JPG o PNG!",
-          type: "error",
-          confirmButtonText: "¡Cerrar!"
-        });
-
-    }else if(imagen["size"] > 2000000){
-
-      $(".nuevaImagen").val("");
-
-       Toast.fire({
-          title: "Error al subir la imagen",
-          text: "¡La imagen no debe pesar más de 2MB!",
-          type: "error",
-          confirmButtonText: "¡Cerrar!"
-        });
-
-    }else{
-
-      var datosImagen = new FileReader;
-      datosImagen.readAsDataURL(imagen);
-
-      $(datosImagen).on("load", function(event){
-
-        var rutaImagen = event.target.result;
-
-        $(".previsualizar").attr("src", rutaImagen);
-
-      })
-
-    }
-})
 </script>
 </body>
 </html>
