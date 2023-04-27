@@ -135,7 +135,7 @@ public class MainActivity extends AppCompatActivity {
                 Intent intent = new Intent(MainActivity.this,UsuariosActivity.class);
                 startActivity(intent);
                 finish();
-                //Toasty.info(getApplicationContext(), "Usuarios", Toast.LENGTH_SHORT, true).show();
+
             }
         });
 

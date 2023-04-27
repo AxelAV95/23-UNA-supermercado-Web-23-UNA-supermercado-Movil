@@ -59,6 +59,12 @@ public class UsuariosActivity extends AppCompatActivity {
         SharedPreferences credenciales = getSharedPreferences("credenciales", Context.MODE_PRIVATE);
         String cedula  = credenciales.getString("cedula", null);
 
+        if(cedula == null){
+            Intent intent = new Intent(UsuariosActivity.this, LoginActivity.class);
+            startActivity(intent);;
+            finish();
+        }
+
         verificarEstadoSesion(cedula);
 
         powerMenu = new PowerMenu.Builder(this)

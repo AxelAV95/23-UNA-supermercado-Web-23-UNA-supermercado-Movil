@@ -6,6 +6,9 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.ConnectivityManager;
+import android.net.NetworkCapabilities;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -20,6 +23,7 @@ import com.r0adkll.slidr.Slidr;
 
 import es.dmoral.toasty.Toasty;
 import una.ac.cr.supermercadoapp.R;
+import una.ac.cr.supermercadoapp.data.TipoUsuarioData;
 import una.ac.cr.supermercadoapp.domain.TipoUsuario;
 import una.ac.cr.supermercadoapp.network.VolleyTipoUsuario;
 
@@ -29,6 +33,8 @@ public class FormularioTipoUsuarioActivity extends AppCompatActivity {
     private TipoUsuario mTipoUsuario;
     private EditText campoDescripcion;
     private  VolleyTipoUsuario volleyTipoUsuario;
+
+    private TipoUsuarioData tipoUsuarioData;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,6 +42,8 @@ public class FormularioTipoUsuarioActivity extends AppCompatActivity {
 
         SharedPreferences credenciales = getSharedPreferences("credenciales", Context.MODE_PRIVATE);
         String cedula  = credenciales.getString("cedula", null);
+
+        tipoUsuarioData = new TipoUsuarioData(this);
 
         verificarEstadoSesion(cedula);
         volleyTipoUsuario = new VolleyTipoUsuario();
@@ -59,10 +67,20 @@ public class FormularioTipoUsuarioActivity extends AppCompatActivity {
                     Toasty.info(getApplicationContext(), "Ingrese una descripción", Toast.LENGTH_SHORT, true).show();
                 }else{
                     if(intent.getExtras().getString("metodo").equals("agregar")){
-                        //método de agregar
-
                         TipoUsuario tipoUsuario = new TipoUsuario(campoDescripcion.getText().toString());
-                        volleyTipoUsuario.insertarUsuario(FormularioTipoUsuarioActivity.this,tipoUsuario,credenciales.getString("ip", "192.168.100.216"));
+                        //método de agregar
+                        if(verificarConexion()){
+                            //agrega a la base de datos del servidor
+                            volleyTipoUsuario.insertarUsuario(FormularioTipoUsuarioActivity.this,tipoUsuario,credenciales.getString("ip", "192.168.100.216"));
+                        }else{
+                            //agrega a la base de datos móvil
+                            if(tipoUsuarioData.insertarTipoUsuario(new TipoUsuario(campoDescripcion.getText().toString(),-1)) == -1){
+                                Toasty.error(getApplicationContext(), "Error al insertar en la base de datos móvil", Toast.LENGTH_SHORT, true).show();
+                            }else{
+                                Toasty.success(getApplicationContext(), "Insertado con éxito en la base de datos móvil", Toast.LENGTH_SHORT, true).show();
+                            }
+                            finish();
+                        }
 
                     }else if(intent.getExtras().getString("metodo").equals("actualizar")){
                         //método de actualizar
@@ -71,8 +89,6 @@ public class FormularioTipoUsuarioActivity extends AppCompatActivity {
 
                     }
                 }
-
-
             }
         });
 
@@ -82,6 +98,8 @@ public class FormularioTipoUsuarioActivity extends AppCompatActivity {
 
     private void agregarEventos() {
     }
+
+
 
     private void iniciarComponentes() {
         botonMetodo = findViewById(R.id.btn_metodo);
@@ -94,5 +112,13 @@ public class FormularioTipoUsuarioActivity extends AppCompatActivity {
             startActivity(intent);;
             finish();
         }
+    }
+
+    public boolean verificarConexion(){
+        ConnectivityManager manager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkCapabilities capabilities = manager.getNetworkCapabilities(manager.getActiveNetwork());
+        return (capabilities != null && capabilities.hasCapability(NetworkCapabilities.NET_CAPABILITY_INTERNET));
+
+
     }
 }
