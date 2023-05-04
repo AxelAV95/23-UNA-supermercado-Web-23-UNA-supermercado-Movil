@@ -119,4 +119,10 @@ public class UsuariosActivity extends AppCompatActivity {
             finish();
         }
     }
+
+    @Override
+    public void onBackPressed() {
+
+    }
+
 }

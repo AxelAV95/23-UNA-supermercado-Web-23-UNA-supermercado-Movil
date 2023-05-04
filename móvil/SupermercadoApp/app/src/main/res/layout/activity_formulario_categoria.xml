@@ -57,7 +57,7 @@
         android:layout_marginBottom="5dp"
         app:lottie_autoPlay="true"
         app:lottie_loop="true"
-        app:lottie_rawRes="@raw/usuarios" />
+        app:lottie_rawRes="@raw/categorias" />
 
     <androidx.cardview.widget.CardView
         android:id="@+id/formulario_agregar_tipo_usuario"

@@ -46,10 +46,11 @@ public class MainActivity extends AppCompatActivity {
             if(isConnected){
                 // Toast.makeText(getApplicationContext(),"Sincronizando...",Toast.LENGTH_SHORT).show();
                // sincronizarDB();
-                Toast.makeText(getApplicationContext(),"Sincronizando",Toast.LENGTH_SHORT).show();
+               // Toast.makeText(getApplicationContext(),"Sincronizando",Toast.LENGTH_SHORT).show();
 
             }else{
-                Toast.makeText(getApplicationContext(),"Sin conexion",Toast.LENGTH_SHORT).show();
+                Toasty.error(getApplicationContext(), "Sin conexión", Toast.LENGTH_SHORT, true).show();
+
             }
         }
     };

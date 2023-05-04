@@ -15,8 +15,11 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
+import android.graphics.Color;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.SearchView;
 import android.widget.Toast;
@@ -32,6 +35,10 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.daimajia.swipe.util.Attributes;
 import com.r0adkll.slidr.Slidr;
+import com.skydoves.powermenu.MenuAnimation;
+import com.skydoves.powermenu.OnMenuItemClickListener;
+import com.skydoves.powermenu.PowerMenu;
+import com.skydoves.powermenu.PowerMenuItem;
 import com.yqritc.recyclerviewflexibledivider.HorizontalDividerItemDecoration;
 
 import org.json.JSONException;
@@ -42,27 +49,46 @@ import java.util.Arrays;
 
 import es.dmoral.toasty.Toasty;
 import una.ac.cr.supermercadoapp.R;
-import una.ac.cr.supermercadoapp.data.TipoUsuarioData;
+import una.ac.cr.supermercadoapp.data.CategoriaData;
 import una.ac.cr.supermercadoapp.domain.AdministradorRed;
-import una.ac.cr.supermercadoapp.domain.TipoUsuario;
+import una.ac.cr.supermercadoapp.domain.Categoria;
 import una.ac.cr.supermercadoapp.network.VolleySingleton;
-import una.ac.cr.supermercadoapp.network.VolleyTipoUsuario;
+import una.ac.cr.supermercadoapp.network.VolleyCategoria;
 import una.ac.cr.supermercadoapp.utils.MonitorRedUtils;
 import una.ac.cr.supermercadoapp.utils.NetworkUtils;
-import una.ac.cr.supermercadoapp.view.adapters.TipoUsuarioAdapter;
-import una.ac.cr.supermercadoapp.view.interfaces.TipoUsuarioICallback;
+import una.ac.cr.supermercadoapp.view.adapters.CategoriaAdapter;
+import una.ac.cr.supermercadoapp.view.interfaces.CategoriaICallback;
 
-public class TipoUsuarioActivity extends AppCompatActivity {
-    private RecyclerView recyclerTipoUsuarios; //recycler
-    private RecyclerView.Adapter mAdaptadorTipoUsuario; //Objeto para adaptador
-    private ArrayList<TipoUsuario> listaTipoUsuarios; //Lista auxiliar
-    private SearchView searchTipoUsuario; //buscador
-    private LottieAnimationView iconUsuarios, iconAgregar; //iconos
+public class CategoriaActivity extends AppCompatActivity {
+    private RecyclerView recyclerCategorias; //recycler
+    private RecyclerView.Adapter mAdaptadorCategoria; //Objeto para adaptador
+    private ArrayList<Categoria> listaCategorias; //Lista auxiliar
+    private SearchView searchCategoria; //buscador
+    private LottieAnimationView iconCategoria, iconAgregar; //iconos
     private SharedPreferences credenciales;
     public static final int REQUEST_CODE = 1;
 
-    private TipoUsuarioData tipoUsuarioData;
+    private CategoriaData categoriaData;
     public MonitorRedUtils monitorRedUtils;
+
+    private PowerMenu powerMenu;
+
+    private OnMenuItemClickListener<PowerMenuItem> onMenuItemClickListener = new OnMenuItemClickListener<PowerMenuItem>() {
+        @Override
+        public void onItemClick(int position, PowerMenuItem item) {
+
+            if(item.title.equals("Menú principal")){
+                powerMenu.dismiss();
+                Intent intent = new Intent(CategoriaActivity.this, MainActivity.class);
+                startActivity(intent);
+                finish();
+            }
+            //Toast.makeText(getBaseContext(), item.title, Toast.LENGTH_SHORT).show();
+
+        }
+    };
+
+
 
     private final Observer<Boolean> observadoEstadoRed = new Observer<Boolean>() {
         @Override
@@ -70,11 +96,11 @@ public class TipoUsuarioActivity extends AppCompatActivity {
             if(isConnected){
                 // Toast.makeText(getApplicationContext(),"Sincronizando...",Toast.LENGTH_SHORT).show();
                 // sincronizarDB();
-                sincronizarBDServer();
-                Toast.makeText(getApplicationContext(),"Sincronizando",Toast.LENGTH_SHORT).show();
+            //    sincronizarBDServer();
+              //  Toast.makeText(getApplicationContext(),"Sincronizando",Toast.LENGTH_SHORT).show();
 
             }else{
-                Toast.makeText(getApplicationContext(),"Sin conexion",Toast.LENGTH_SHORT).show();
+                Toasty.error(getApplicationContext(), "Sin conexión", Toast.LENGTH_SHORT, true).show();
             }
         }
     };
@@ -112,25 +138,25 @@ public class TipoUsuarioActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_tipo_usuario);
+        setContentView(R.layout.activity_categoria);
 
-        tipoUsuarioData = new TipoUsuarioData(this);
+        categoriaData = new CategoriaData(this);
 
-        /*
 
-        if(tipoUsuarioData.insertarTipoUsuario(new TipoUsuario("Test")) == -1){
+
+        /*if(categoriaData.insertarCategoria(new Categoria("Test")) == -1){
             Toast.makeText(this,"Error al insertar",Toast.LENGTH_SHORT).show();
         }else{
             Toast.makeText(this,"Insertado con éxito",Toast.LENGTH_SHORT).show();
         }*/
 
-        /*if(tipoUsuarioData.actualizarTipoUsuario(new TipoUsuario(1,"Modificado",1))!= 1){
+        /*if(categoriaData.actualizarCategoria(new Categoria(1,"Modificado",1))!= 1){
             Toast.makeText(this,"Error al actualizar",Toast.LENGTH_SHORT).show();
         }else{
             Toast.makeText(this,"Actualizado con éxito",Toast.LENGTH_SHORT).show();
         }*/
 
-        /*if(tipoUsuarioData.eliminarTipoUsuario(new TipoUsuario(1,"Modificado",1))!= 1){
+        /*if(categoriaData.eliminarCategoria(new Categoria(1,"Modificado",1))!= 1){
             Toast.makeText(this,"Error al borrar",Toast.LENGTH_SHORT).show();
         }else{
             Toast.makeText(this,"Borrado con éxito",Toast.LENGTH_SHORT).show();
@@ -147,16 +173,47 @@ public class TipoUsuarioActivity extends AppCompatActivity {
         configurarRecycler();
         agregarEventos();
 
+        powerMenu = new PowerMenu.Builder(this)
+                .addItem(new PowerMenuItem("Menú principal", false)) // add an item.
+                .setAnimation(MenuAnimation.SHOWUP_BOTTOM_RIGHT) // Animation start point (TOP | LEFT).
+                .setMenuRadius(10f) // sets the corner radius.
+                .setMenuShadow(10f) // sets the shadow.
+                .setTextColor(ContextCompat.getColor(this, R.color.dark_gray))
+                .setTextGravity(Gravity.CENTER)
+                .setTextTypeface(Typeface.create("sans-serif-medium", Typeface.BOLD))
+                .setSelectedTextColor(Color.WHITE)
+                .setMenuColor(Color.WHITE)
+                .setSelectedMenuColor(ContextCompat.getColor(getApplicationContext(), R.color.black))
+                .setOnMenuItemClickListener(onMenuItemClickListener)
+                .build();
+        iconCategoria = findViewById(R.id.icon_ver_categorias);
+        int primaryColor = ContextCompat.getColor(this, R.color.primary);
+        iconCategoria.addValueCallback(
+                new KeyPath("**"),
+                LottieProperty.COLOR_FILTER,
+                new LottieValueCallback<>(new SimpleColorFilter(primaryColor)));
+        iconCategoria.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (powerMenu.isShowing()) {
+                    powerMenu.dismiss();
+                    return;
+                }
+                powerMenu.showAsDropDown(view);
+            }
+        });
+
+
     }
     private void verificarEstadoSesion(String cedula) {
         if(cedula == null){
-            Intent intent = new Intent(TipoUsuarioActivity.this, LoginActivity.class);
+            Intent intent = new Intent(CategoriaActivity.this, LoginActivity.class);
             startActivity(intent);;
             finish();
         }
     }
     private void agregarEventos() {
-        searchTipoUsuario.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+        searchCategoria.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
                 return false;
@@ -181,7 +238,7 @@ public class TipoUsuarioActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                Intent intent = new Intent(TipoUsuarioActivity.this, FormularioTipoUsuarioActivity.class);
+                Intent intent = new Intent(CategoriaActivity.this, FormularioCategoriaActivity.class);
                 intent.putExtra("metodo","agregar");
                 launcher.launch(intent);
 
@@ -190,50 +247,52 @@ public class TipoUsuarioActivity extends AppCompatActivity {
 
     }
     private void configurarRecycler() {
-        recyclerTipoUsuarios = findViewById(R.id.recycler_view_tipos_usuario);
-        recyclerTipoUsuarios .setLayoutManager(new LinearLayoutManager(this,RecyclerView.VERTICAL,false));
-        recyclerTipoUsuarios.addItemDecoration(new HorizontalDividerItemDecoration.Builder(this)
+        recyclerCategorias = findViewById(R.id.recycler_view_categoria);
+        recyclerCategorias .setLayoutManager(new LinearLayoutManager(this,RecyclerView.VERTICAL,false));
+        recyclerCategorias.addItemDecoration(new HorizontalDividerItemDecoration.Builder(this)
                 .drawable(R.drawable.divider)
                 .size(3)
                 .margin(18,18)
                 .build());
 
         //Aquí se tendría que llenar la lista auxiliar con lo que hay en la BD del server
-        VolleyTipoUsuario volleyTipoUsuario = new VolleyTipoUsuario();
+        VolleyCategoria volleyCategoria = new VolleyCategoria();
 
         // Callback es una función que se pasa como argumento a otra función
         // y se invoca cuando se completa una tarea.
-        TipoUsuarioICallback listener = new TipoUsuarioICallback() {
+        CategoriaICallback listener = new CategoriaICallback() {
+
+
             @Override
-            public void onTiposUsuarioReceived(ArrayList<TipoUsuario> lista) {
-                listaTipoUsuarios = lista;
-                mAdaptadorTipoUsuario = new TipoUsuarioAdapter(launcher, listaTipoUsuarios, getApplicationContext());
-                ((TipoUsuarioAdapter)mAdaptadorTipoUsuario ).setOnItemClickListener(new TipoUsuarioAdapter.OnItemClickListener() {
+            public void onCategoriaReceived(ArrayList<Categoria> lista) {
+                listaCategorias = lista;
+                mAdaptadorCategoria = new CategoriaAdapter(launcher, listaCategorias, getApplicationContext());
+                ((CategoriaAdapter)mAdaptadorCategoria ).setOnItemClickListener(new CategoriaAdapter.OnItemClickListener() {
                     @Override
                     public void onItemClick(int position) {
-                        volleyTipoUsuario.eliminarUsuario(TipoUsuarioActivity.this,listaTipoUsuarios.get(position),credenciales.getString("ip", "192.168.100.216"));
+                        volleyCategoria.eliminarCategoria(CategoriaActivity.this,listaCategorias.get(position),credenciales.getString("ip", "192.168.100.216"));
                         actualizarLista();
 
                     }
                 });
-                ((TipoUsuarioAdapter)mAdaptadorTipoUsuario ).setMode(Attributes.Mode.Single);
-                recyclerTipoUsuarios.setAdapter(mAdaptadorTipoUsuario );
+                ((CategoriaAdapter)mAdaptadorCategoria ).setMode(Attributes.Mode.Single);
+                recyclerCategorias.setAdapter(mAdaptadorCategoria );
 
-                recyclerTipoUsuarios.addOnScrollListener(onScrollListener);
+                recyclerCategorias.addOnScrollListener(onScrollListener);
             }
         };
 
-        volleyTipoUsuario.obtenerTipos(this,credenciales.getString("ip", "192.168.100.216"),listener);
+        volleyCategoria.obtenerTipos(this,credenciales.getString("ip", "192.168.100.216"),listener);
 
     }
     private void iniciarWidgets() {
-       // cardViewTitulo = findViewById(R.id.contenedor_titulo);
-        searchTipoUsuario = findViewById(R.id.barra_busqueda_tu);
-        searchTipoUsuario.clearFocus();
-        iconUsuarios = findViewById(R.id.icon_ti_usuarios);
-        iconAgregar = findViewById(R.id.icon_agregar_tipo_usuario);
+        // cardViewTitulo = findViewById(R.id.contenedor_titulo);
+        searchCategoria = findViewById(R.id.barra_busqueda_categoria);
+          searchCategoria.clearFocus();
+        iconCategoria = findViewById(R.id.icon_ver_categorias);
+        iconAgregar = findViewById(R.id.icon_add_categoria);
         int whiteColor = ContextCompat.getColor(this, R.color.white);
-        iconUsuarios .addValueCallback(
+        iconCategoria .addValueCallback(
                 new KeyPath("**"),
                 LottieProperty.COLOR_FILTER,
                 new LottieValueCallback<>(new SimpleColorFilter(whiteColor)));
@@ -241,48 +300,48 @@ public class TipoUsuarioActivity extends AppCompatActivity {
 
     }
     private void actualizarLista() {
-        listaTipoUsuarios.clear();
-        VolleyTipoUsuario volleyTipoUsuario = new VolleyTipoUsuario();
-        if(mAdaptadorTipoUsuario == null){
+        listaCategorias.clear();
+        VolleyCategoria volleyCategoria = new VolleyCategoria();
+        if(mAdaptadorCategoria == null){
             return;
         }else{
 
-            TipoUsuarioICallback listener = new TipoUsuarioICallback() {
+            CategoriaICallback listener = new CategoriaICallback() {
                 @Override
-                public void onTiposUsuarioReceived(ArrayList<TipoUsuario> lista) {
-                    listaTipoUsuarios = lista;
-                    ((TipoUsuarioAdapter)mAdaptadorTipoUsuario ).setListaTipoUsuarios(listaTipoUsuarios);
-                    mAdaptadorTipoUsuario.notifyDataSetChanged();
+                public void onCategoriaReceived(ArrayList<Categoria> lista) {
+                    listaCategorias = lista;
+                    ((CategoriaAdapter)mAdaptadorCategoria ).setListaCategorias(listaCategorias);
+                    mAdaptadorCategoria.notifyDataSetChanged();
                 }
             };
 
-            volleyTipoUsuario.obtenerTipos(this,credenciales.getString("ip", "192.168.100.216"),listener);
+            volleyCategoria.obtenerTipos(this,credenciales.getString("ip", "192.168.100.216"),listener);
 
         }
 
 
     }
     public void filtrar(String dato){
-        ArrayList<TipoUsuario> filtrado = new ArrayList<>();
-        VolleyTipoUsuario volleyTipoUsuario = new VolleyTipoUsuario();
-        TipoUsuarioICallback listener = new TipoUsuarioICallback() {
+        ArrayList<Categoria> filtrado = new ArrayList<>();
+        VolleyCategoria volleyCategoria = new VolleyCategoria();
+        CategoriaICallback listener = new CategoriaICallback() {
             @Override
-            public void onTiposUsuarioReceived(ArrayList<TipoUsuario> lista) {
-                listaTipoUsuarios = lista;
-                for(TipoUsuario tu : listaTipoUsuarios){
-                    if(tu.getDescripcion().toLowerCase().contains(dato.toLowerCase())){
+            public void onCategoriaReceived(ArrayList<Categoria> lista) {
+                listaCategorias = lista;
+                for(Categoria tu : listaCategorias){
+                    if(tu.getNombre().toLowerCase().contains(dato.toLowerCase())){
                         filtrado.add(tu);
                     }
                 }
 
-                listaTipoUsuarios = filtrado;
-                ((TipoUsuarioAdapter)mAdaptadorTipoUsuario ).setListaTipoUsuarios(listaTipoUsuarios);
+                listaCategorias = filtrado;
+                ((CategoriaAdapter)mAdaptadorCategoria ).setListaCategorias(listaCategorias);
 
-                mAdaptadorTipoUsuario.notifyDataSetChanged();
+                mAdaptadorCategoria.notifyDataSetChanged();
             }
         };
 
-        volleyTipoUsuario.obtenerTipos(this,credenciales.getString("ip", "192.168.100.216"),listener);
+        volleyCategoria.obtenerTipos(this,credenciales.getString("ip", "192.168.100.216"),listener);
 
 
     }
@@ -298,24 +357,24 @@ public class TipoUsuarioActivity extends AppCompatActivity {
     }
 
     private void sincronizarBDServer(){
-        Cursor cursor = tipoUsuarioData.obtenerTipoUsuarios();
+        Cursor cursor = categoriaData.obtenerCategorias();
         String IP = credenciales.getString("ip", "192.168.100.216");
 
         while(cursor.moveToNext()){
             int estado = cursor.getInt(2); //obtengo el estado
             if(estado == -1){
                 //Construyo objeto
-                TipoUsuario tipoUsuario = new TipoUsuario(cursor.getInt(0),cursor.getString(1),cursor.getInt(2));
-                JSONObject tipoUsuarioJson = new JSONObject();
+                Categoria categoria = new Categoria(cursor.getInt(0),cursor.getString(1),cursor.getInt(2));
+                JSONObject categoriaJson = new JSONObject();
                 try {
-                    tipoUsuarioJson.put("metodo", "insertar");
-                    tipoUsuarioJson.put("descripcion",tipoUsuario.getDescripcion());
+                    categoriaJson.put("metodo", "insertar");
+                    categoriaJson.put("nombre",categoria.getNombre());
 
                 } catch (JSONException e) {
                     throw new RuntimeException(e);
                 }
 
-                JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, NetworkUtils.HTTP+IP+NetworkUtils.RUTA_TIPO_USUARIO,  tipoUsuarioJson , new Response.Listener<JSONObject>() {
+                JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, NetworkUtils.HTTP+IP+NetworkUtils.RUTA_CATEGORIA,  categoriaJson , new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
 
@@ -338,7 +397,7 @@ public class TipoUsuarioActivity extends AppCompatActivity {
 
                 VolleySingleton.getVolleySingleton(this).addToRequestQueue(jsonObjectRequest);
 
-                boolean actualizado = tipoUsuarioData.actualizarEstado(0);
+                boolean actualizado = categoriaData.actualizarEstado(0);
                 if(actualizado){
                     //Actualizo recyclerview
 
@@ -351,6 +410,12 @@ public class TipoUsuarioActivity extends AppCompatActivity {
         }
 
     }
+
+    @Override
+    public void onBackPressed() {
+
+    }
+
 
 
 }

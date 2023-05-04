@@ -104,9 +104,7 @@ public class TipoUsuarioAdapter extends RecyclerSwipeAdapter<TipoUsuarioAdapter.
                 Intent intent = new Intent(v.getContext(), FormularioTipoUsuarioActivity.class);
                 intent.putExtra("metodo","actualizar");
                 intent.putExtra("tipoUsuario",listaTipoUsuarios.get(position));
-                System.out.println(listaTipoUsuarios.get(position).getDescripcion()+"P2");
-
-                //  v.getContext().startActivity(intent);
+              //  v.getContext().startActivity(intent);
                 activityResultLauncher.launch(intent);
             }
         });
