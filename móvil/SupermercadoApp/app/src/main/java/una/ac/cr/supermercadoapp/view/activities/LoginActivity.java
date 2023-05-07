@@ -64,8 +64,8 @@ public class LoginActivity extends AppCompatActivity {
         credenciales = getSharedPreferences("credenciales", MODE_PRIVATE);
 
         verificarEstadoSesion(); //Permite verificar si el archivo de configuración ya existen datos de sesión
-        iniciarComponentes(); //Inicializa los widgets
-        agregarEventos(); //Ajusta los eventos para los diferentes widgets
+        //iniciarComponentes(); //Inicializa los widgets
+        //agregarEventos(); //Ajusta los eventos para los diferentes widgets
 
 
 
@@ -118,6 +118,8 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void verificarEstadoSesion() {
+
+        iniciarComponentes();
         String cedula = credenciales.getString("cedula", null);
         String tipo = credenciales.getString("tipo",null);
         if (cedula != null ) {
@@ -136,6 +138,7 @@ public class LoginActivity extends AppCompatActivity {
         } else {
             setContentView(R.layout.activity_login);
         }
+        agregarEventos(); //Agregar eventos después de inicializar componentes
     }
 
     private void iniciarComponentes(){

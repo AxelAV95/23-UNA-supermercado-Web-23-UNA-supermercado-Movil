@@ -66,5 +66,8 @@ dependencies {
     implementation 'com.r0adkll:slidableactivity:2.1.0'
 
 
+    //Searchable spinner
+    implementation 'com.toptoche.searchablespinner:searchablespinnerlibrary:1.3.1'
+
 
 }

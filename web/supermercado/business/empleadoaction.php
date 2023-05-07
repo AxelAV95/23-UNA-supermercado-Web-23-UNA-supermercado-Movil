@@ -47,7 +47,7 @@ $empleadoestado,$empleadotipoid);
          "empleadofechaingreso"=>$row['empleadofechaingreso'],
          "empleadofechasalida"=>$row['empleadofechasalida'],
          "empleadoestado"=>$row['empleadoestado'],
-         "empleadotipoid"=>$row['empleadotipoid']
+         "empleadotipoid"=>$row['tipodescripcion']
       );
        }
 

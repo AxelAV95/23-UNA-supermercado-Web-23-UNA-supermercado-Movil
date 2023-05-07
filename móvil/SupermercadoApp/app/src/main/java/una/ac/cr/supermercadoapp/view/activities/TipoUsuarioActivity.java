@@ -211,8 +211,18 @@ public class TipoUsuarioActivity extends AppCompatActivity {
                 ((TipoUsuarioAdapter)mAdaptadorTipoUsuario ).setOnItemClickListener(new TipoUsuarioAdapter.OnItemClickListener() {
                     @Override
                     public void onItemClick(int position) {
+                        VolleyTipoUsuario volleyTipoUsuario = new VolleyTipoUsuario();
+                        TipoUsuarioICallback listener = new TipoUsuarioICallback() {
+                            @Override
+                            public void onTiposUsuarioReceived(ArrayList<TipoUsuario> lista) {
+                                listaTipoUsuarios = lista;
+                                ((TipoUsuarioAdapter)mAdaptadorTipoUsuario ).setListaTipoUsuarios(listaTipoUsuarios);
+                                mAdaptadorTipoUsuario.notifyDataSetChanged();
+                            }
+                        };
+
                         volleyTipoUsuario.eliminarUsuario(TipoUsuarioActivity.this,listaTipoUsuarios.get(position),credenciales.getString("ip", "192.168.100.216"));
-                        actualizarLista();
+                        volleyTipoUsuario.obtenerTipos(TipoUsuarioActivity.this,credenciales.getString("ip", "192.168.100.216"),listener);
 
                     }
                 });

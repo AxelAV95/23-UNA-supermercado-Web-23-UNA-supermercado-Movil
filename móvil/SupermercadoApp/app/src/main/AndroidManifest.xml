@@ -18,6 +18,9 @@
         tools:replace="android:icon"
         tools:targetApi="31">
         <activity
+            android:name=".view.activities.FormularioUsuarioActivity"
+            android:exported="false" />
+        <activity
             android:name=".view.activities.FormularioCategoriaActivity"
             android:exported="false" />
         <activity

@@ -16,5 +16,6 @@ public class NetworkUtils {
 
     public static final String RUTA_CATEGORIA = "/23-UNA-supermercado-Web-23-UNA-supermercado-Movil/web/supermercado/service/categoriaservice.php";
 
+    public static final String RUTA_EMPLEADO = "/23-UNA-supermercado-Web-23-UNA-supermercado-Movil/web/supermercado/service/empleadoservice.php";
 
 }

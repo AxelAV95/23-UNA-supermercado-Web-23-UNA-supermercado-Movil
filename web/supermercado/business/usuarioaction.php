@@ -2,6 +2,7 @@
 	session_start();
 	include 'usuariobusiness.php';
 	include 'tipousuariobusiness.php';
+	include 'empleadobusiness.php';
 	include 'configuracionbusiness.php';
 
 
@@ -129,14 +130,18 @@
 		
 		echo json_encode($tipos);
 	}else if(isset($_GET['metodo']) && $_GET['metodo'] == "obtenerEmpleados"){
-		$empleados =  array(
+		
+		$empleadoBusiness = new EmpleadoBusiness();
+    	$empleados = $empleadoBusiness->obtenerempleados();
+		
+		/*$empleados =  array(
 		  array('empleadoid' => 1, 'empleadonombre' => 'Option 1'),
 		  array('empleadoid' => 2, 'empleadonombre' => 'Option 2'),
 		  array('empleadoid' => 3, 'empleadonombre' => 'Option 3')
 
-		);
+		);*/
 
-		echo json_encode($empleados);
+		echo json_encode($empleados );
 
 
 	}else if(isset($_GET['metodo']) && $_GET['metodo'] == "verificarEmpleado"){

@@ -270,8 +270,18 @@ public class CategoriaActivity extends AppCompatActivity {
                 ((CategoriaAdapter)mAdaptadorCategoria ).setOnItemClickListener(new CategoriaAdapter.OnItemClickListener() {
                     @Override
                     public void onItemClick(int position) {
+
+                        VolleyCategoria volleyCategoria = new VolleyCategoria();
+                        CategoriaICallback listener = new CategoriaICallback() {
+                            @Override
+                            public void onCategoriaReceived(ArrayList<Categoria> lista) {
+                                listaCategorias = lista;
+                                ((CategoriaAdapter)mAdaptadorCategoria ).setListaCategorias(listaCategorias);
+                                mAdaptadorCategoria.notifyDataSetChanged();
+                            }
+                        };
                         volleyCategoria.eliminarCategoria(CategoriaActivity.this,listaCategorias.get(position),credenciales.getString("ip", "192.168.100.216"));
-                        actualizarLista();
+                        volleyCategoria.obtenerTipos(CategoriaActivity.this,credenciales.getString("ip", "192.168.100.216"),listener);
 
                     }
                 });
