@@ -42,19 +42,30 @@
               <div class="form-group">
                 <label >Teléfono:</label>
                 <input type="number" class="form-control" name="proveedortelefono" id="proveedortelefono" placeholder="Ingrese un teléfono" min="1" required pattern="[0-9]+">
-               
               </div>
+
               <div class="form-group">
                 <label >Latitud:</label>
-                <input type="text" class="form-control" name="proveedorlat" id="proveedorlat" placeholder="Ingrese la latitud">
-               
+                <input type="text" class="form-control" readonly name="proveedorlat" id="proveedorlat" placeholder="Ingrese la latitud">
               </div>
 
               <div class="form-group">
                 <label >Longitud:</label>
-                <input type="text" class="form-control" name="proveedorlong" id="proveedorlong" placeholder="Ingrese la longitud" >
-               
-              </div>
+                <input type="text" class="form-control" readonly name="proveedorlong" id="proveedorlong" placeholder="Ingrese la longitud" >
+              </div> 
+
+           <!--   <div class="form-group">
+              <label for="proveedorprovincia">Provincia:</label>
+                <select class="form-select" required name="proveedorprovincia" id="proveedorprovincia" required >
+                  <option value="1">San José</option>
+                  <option value="2">Alajuela</option>
+                  <option value="3">Cartago</option>
+                  <option value="4">Heredia</option>
+                  <option value="5">Guanacaste</option>
+                  <option value="6">Puntarenas</option>
+                  <option value="7">Limón</option>
+                </select>
+              </div>-->
               
             <br>
               <center><button type="submit" name="actualizar" class="btn btn-primary">Actualizar</button></center>

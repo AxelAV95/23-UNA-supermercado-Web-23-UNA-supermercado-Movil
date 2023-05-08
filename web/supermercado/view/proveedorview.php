@@ -85,8 +85,8 @@
                     <th>Dirección</th>
                     <th>Correo</th>
                     <th>Teléfono</th>
-                    <th>Latitud</th>
-                    <th>Longitud</th>
+                  <!--  <th>Latitud</th>
+                    <th>Longitud</th> -->
                     <th>Acciones</th>
                     
                   </tr>
@@ -102,9 +102,9 @@
                           echo '<td>'.$proveedor['proveedorcorreo'].'</td>';
                           
                           echo '<td>'.$proveedor['proveedortelefono'].'</td>';
-                          echo '<td>'.$proveedor['proveedorlat'].'</td>';
+                        //  echo '<td>'.$proveedor['proveedorlat'].'</td>';
                           
-                          echo '<td>'.$proveedor['proveedorlong'].'</td>';
+                        //  echo '<td>'.$proveedor['proveedorlong'].'</td>';
                           echo '<td>';
                         echo "<div class='btn-group'>
         <button class='btn btn-warning btnEditarProveedor' proveedorid='".$proveedor["proveedorid"]."' proveedornombre='".$proveedor['proveedornombre']."' proveedordireccion='".$proveedor['proveedordireccion']."' proveedorcorreo='".$proveedor["proveedorcorreo"]."' proveedortelefono='".$proveedor["proveedortelefono"]."' proveedorlat='".$proveedor["proveedorlat"]."' proveedorlong='".$proveedor["proveedorlong"]."' data-toggle='modal' data-target='#modalEditarProveedor'>
