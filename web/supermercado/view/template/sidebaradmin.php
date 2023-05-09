@@ -185,7 +185,7 @@ background: linear-gradient(to right, #24243e, #302b63, #0f0c29); /* W3C, IE 10+
                 </a>
               </li>
               <li class="nav-item">
-                <a href="descuentosview.php" class="nav-link">
+                <a href="descuentoview.php" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                  <i class="nav-icon fas fa-percent"></i>
                   <p>Descuentos</p>

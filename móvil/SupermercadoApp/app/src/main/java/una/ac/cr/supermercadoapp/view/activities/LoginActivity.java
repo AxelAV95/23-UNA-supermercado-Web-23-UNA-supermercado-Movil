@@ -137,6 +137,7 @@ public class LoginActivity extends AppCompatActivity {
 
         } else {
             setContentView(R.layout.activity_login);
+            iniciarComponentes();
         }
         agregarEventos(); //Agregar eventos después de inicializar componentes
     }
