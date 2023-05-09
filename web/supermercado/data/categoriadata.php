@@ -36,7 +36,7 @@
 	        $nombre = $categoria->getNombre();
 	    
             
-            $stm ->bindParam(1,$nombre,PDO::PARAM_STR);
+            $stm ->bindParam(1 ,$nombre,PDO::PARAM_STR);
      
             $resultado = $stm->execute();
             Database::desconectar();
