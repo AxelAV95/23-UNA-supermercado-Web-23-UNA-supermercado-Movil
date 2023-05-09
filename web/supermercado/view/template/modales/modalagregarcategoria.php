@@ -15,7 +15,7 @@
 
           <div class="box-body">
 
-            <form method="POST" action="../business/categoriaaction.php"  enctype="multipart/form-data">
+            <form method="POST" action="../business/categoriaaction.php" >
            
 
             <div class="form-group">

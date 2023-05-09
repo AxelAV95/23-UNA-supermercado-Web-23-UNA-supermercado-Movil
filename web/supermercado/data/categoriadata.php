@@ -30,19 +30,13 @@
 		//insertar
 		public function insertarCategoria($categoria){
 			$pdo = Database::conectar();
-            $stm = $pdo->prepare("CALL insertarCategoria(?,?)");
+            $stm = $pdo->prepare("CALL insertarCategoria(?)");
 
-            $max = $pdo ->prepare("SELECT MAX(categoriaid) AS categoriaid  FROM tbcategoria");
-	        $max -> execute();
-	        $nextId = 1;
-	                
-	        if($row = $max->fetch()){
-	           $nextId = $row[0]+1;
-	        }
+            
 	        $nombre = $categoria->getNombre();
 	    
-            $stm ->bindParam(1,$nextId,PDO::PARAM_INT);
-            $stm ->bindParam(2,$nombre,PDO::PARAM_STR);
+            
+            $stm ->bindParam(1,$nombre,PDO::PARAM_STR);
      
             $resultado = $stm->execute();
             Database::desconectar();

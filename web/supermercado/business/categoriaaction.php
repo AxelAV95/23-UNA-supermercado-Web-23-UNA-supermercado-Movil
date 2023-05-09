@@ -4,16 +4,15 @@
 	include 'categoriabusiness.php';
 	//post de insercion de categoria
 	if(isset($_POST['Insertar'])){
-		if (isset($_POST['categorianombre'])
-	) {
+		if (isset($_POST['categorianombre'])) {
 		$nombre = $_POST['categorianombre'];
 	 
 	 $categoriaBusiness = new CategoriaBusiness();
 	
 	
 	
-		$categoria = new Categoria(0, $nombre);
-	
+		$categoria = new Categoria();
+		$categoria->setNombre($nombre);
 		$resultado = $categoriaBusiness->insertarCategoria($categoria);
 	
 		if ($resultado == 1) {
@@ -31,8 +30,9 @@
 		) 
 		$id = $_POST['categoriaid'];
 		$nombre = $_POST['categorianombre'];
-		$categoria = new Categoria($id,$nombre);
-		
+		$categoria = new Categoria();
+		$categoria->setId($id);
+		$categoria->setNombre($nombre);
 		$categoriaBusiness = new CategoriaBusiness();
 
 		$resultado = $categoriaBusiness->modificarCategoria($categoria);
