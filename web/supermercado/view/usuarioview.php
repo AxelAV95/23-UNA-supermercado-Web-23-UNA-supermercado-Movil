@@ -75,6 +75,7 @@
                     Agregar usuario
 
                   </button>
+                  <a href="tipousuarioview.php" class="btn btn-primary">Tipos de usuario</a>
               </div>
               <!-- /.card-header -->
               <div class="card-body">

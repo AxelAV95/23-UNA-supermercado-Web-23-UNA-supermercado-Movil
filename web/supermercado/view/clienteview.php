@@ -73,6 +73,7 @@
                     Agregar Cliente
 
                   </button>
+                  <a href="membresiaview.php" class="btn btn-primary">Tipos de membresías</a>
               </div>
               <!-- /.card-header -->
               <div class="card-body">

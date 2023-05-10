@@ -72,6 +72,7 @@
         <!-- Main row -->
        <div class="card">
               <div class="card-header">
+              <a href="empleadoview.php" class="btn btn-primary">Regresar</a>
                 <button class="btn btn-primary" data-toggle="modal" data-target="#modalAgregarTipo">
 
                     Agregar tipo

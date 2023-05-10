@@ -74,6 +74,7 @@
                     Agregar empleado
 
                   </button>
+                  <a href="tipoempleadoview.php" class="btn btn-primary">Tipos de empleado</a>
               </div>
               <!-- /.card-header -->
               <div class="card-body">

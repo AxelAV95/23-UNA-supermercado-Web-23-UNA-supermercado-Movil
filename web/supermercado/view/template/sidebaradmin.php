@@ -54,14 +54,14 @@ background: linear-gradient(to right, #24243e, #302b63, #0f0c29); /* W3C, IE 10+
          
          <?php if($_SESSION['tipodescripcion'] == "Administrador"){ ?>
           <li class="nav-item">
-            <a href="" class="nav-link">
+            <a href="usuarioview.php" class="nav-link" >
                <i class="nav-icon fas fa-users"></i>
               <p>
                 Usuarios
-                <i class="right fas fa-angle-left"></i>
+                <!-- <i class="right fas fa-angle-left"></i> -->
               </p>
             </a>
-            <ul class="nav nav-treeview">
+            <!-- <ul class="nav nav-treeview">
               <li class="nav-item">
                 <a href="usuarioview.php" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
@@ -76,20 +76,20 @@ background: linear-gradient(to right, #24243e, #302b63, #0f0c29); /* W3C, IE 10+
                   <p>Tipos</p>
                 </a>
               </li>
-            </ul>
+            </ul> -->
           </li>
           <?php } ?>
          
           <?php if($_SESSION['tipodescripcion'] == "Administrador"){ ?>
          <li class="nav-item">
-            <a href="" class="nav-link">
+            <a href="empleadoview.php" class="nav-link">
               <i class="nav-icon fas fa-user-edit"></i>
               <p>
                 Empleados
-                <i class="right fas fa-angle-left"></i>
+                <!-- <i class="right fas fa-angle-left"></i> -->
               </p>
             </a>
-            <ul class="nav nav-treeview">
+            <!-- <ul class="nav nav-treeview">
               <li class="nav-item">
                 <a href="empleadoview.php" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
@@ -104,19 +104,19 @@ background: linear-gradient(to right, #24243e, #302b63, #0f0c29); /* W3C, IE 10+
                   <p>Tipos</p>
                 </a>
               </li>
-            </ul>
+            </ul> -->
           </li>
           <?php } ?>
 
           <li class="nav-item">
-            <a href="" class="nav-link">
+            <a href="clienteview.php" class="nav-link">
               <i class="nav-icon fas fa-address-book"></i>
               <p>
                 Clientes
-                <i class="right fas fa-angle-left"></i>
+                <!-- <i class="right fas fa-angle-left"></i> -->
               </p>
             </a>
-            <ul class="nav nav-treeview">
+            <!-- <ul class="nav nav-treeview">
               <li class="nav-item">
                 <a href="clienteview.php" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
@@ -138,7 +138,7 @@ background: linear-gradient(to right, #24243e, #302b63, #0f0c29); /* W3C, IE 10+
                   <p>Descuentos</p>
                 </a>
               </li>
-            </ul>
+            </ul> -->
           </li>
 
            <li class="nav-item">

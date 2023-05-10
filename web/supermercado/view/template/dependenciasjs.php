@@ -74,6 +74,9 @@
   $('.sidebar li a').each(function() {
 
     var linkURL = $(this).attr('href');
+    
+
+
     const myArray = currentURL.split("/");
     
     if(linkURL == myArray[myArray.length - 1]){
@@ -83,6 +86,17 @@
         $(element).addClass('menu-is-opening')
         $(element).addClass('menu-open')
         
+    }
+    if("tipousuarioview.php" == myArray[myArray.length - 1] ){
+      $('a.nav-link[href="usuarioview.php').addClass('active');
+    }
+
+    if("tipoempleadoview.php" == myArray[myArray.length - 1] ){
+      $('a.nav-link[href="empleadoview.php').addClass('active');
+    }
+
+    if("membresiaview.php" == myArray[myArray.length - 1] ){
+      $('a.nav-link[href="clienteview.php').addClass('active');
     }
   });
   /*

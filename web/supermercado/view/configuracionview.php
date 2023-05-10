@@ -203,11 +203,27 @@
             title: '<div style=margin-top:0.5rem;>Debe ingresar un nombre.</div>'
         });
         event.preventDefault();
-    }else if($("#supermercadotelefono").val() == ""){
+    }else if(!/^[a-zA-Z\s]*$/.test($("#supermercadonombre").val())){
+      $("#supermercadonombre").focus();
+        Toast.fire({
+            icon: 'warning',
+            title: '<div style=margin-top:0.5rem;>El nombre ingresado contiene caracteres no válidos, ingrese solo texto.</div>'
+        });
+        event.preventDefault();
+    }
+    else if($("#supermercadotelefono").val() == ""){
       $("#supermercadotelefono").focus();
       Toast.fire({
             icon: 'warning',
             title: '<div style=margin-top:0.5rem;>Debe ingresar un teléfono.</div>'
+        });
+        event.preventDefault();
+
+    }else if(!(/^\d{8}$/.test($("#supermercadotelefono").val()))){
+      $("#supermercadotelefono").focus();
+      Toast.fire({
+            icon: 'warning',
+            title: '<div style=margin-top:0.5rem;>El teléfono ingresado debe tener 8 dígitos.</div>'
         });
         event.preventDefault();
 
@@ -219,6 +235,13 @@
         });
         event.preventDefault();
 
+    }else if(!(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test($("#supermercadocorreo").val()))){
+      $("#supermercadocorreo").focus();
+      Toast.fire({
+            icon: 'warning',
+            title: '<div style=margin-top:0.5rem;>El correo ingresado no es válido.</div>'
+        });
+        event.preventDefault();
     }else if($("#supermercadodireccion").val() == ""){
       $("#supermercadodireccion").focus()
       Toast.fire({
@@ -227,6 +250,13 @@
         });
         event.preventDefault();
 
+    }else if(!/^[a-zA-Z0-9\s,'-]*$/.test($("#supermercadodireccion").val())){
+      $("#supermercadodireccion").focus()
+      Toast.fire({
+            icon: 'warning',
+            title: '<div style=margin-top:0.5rem;>Dirección no válida. Por favor ingrese solo letras, números y los caracteres</div>'
+        });
+        event.preventDefault();
     }else if($("#supermercadologo").get(0).files.length === 0){
       $("#supermercadologo").focus()
         Toast.fire({
