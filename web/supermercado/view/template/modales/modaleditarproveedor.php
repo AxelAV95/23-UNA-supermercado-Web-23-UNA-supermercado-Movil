@@ -41,7 +41,9 @@
 
               <div class="form-group">
                 <label >Teléfono:</label>
-                <input type="number" class="form-control" name="proveedortelefono" id="proveedortelefono" placeholder="Ingrese un teléfono" minlength="8" maxlength="8" required pattern="[0-9]{8}">
+                <input type="text" class="form-control" name="proveedortelefono" id="proveedortelefono" placeholder="Ingrese un teléfono" maxlength="8" required pattern="[0-9]{8}">
+
+
               </div>
 
               <div class="form-group">
