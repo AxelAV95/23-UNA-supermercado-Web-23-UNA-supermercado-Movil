@@ -15,7 +15,7 @@
 
     <div class="box-body">
 
-      <form method="POST" action="../business/productoaction.php" enctype="multipart/form-data">
+    <form method="POST" action="../business/productoaction.php" enctype="multipart/form-data" onsubmit="return validarFormulario();">
 
 
         <div class="form-group">
@@ -93,3 +93,4 @@
 
 
   </div>
+  <script src="dist/js/validarProducto.js"></script>

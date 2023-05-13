@@ -22,7 +22,7 @@
 		
 
 		
-	    	$producto = new Producto(0,$nombre,$precio,$fecha,$stock,$estado,$categoria,$proveedor);				 
+	    	$producto = new Producto(0,$nombre,$precio,$estado,$fecha,$stock,$categoria,$proveedor);				 
 			
 			
 	    	$resultado = $productoBusiness->insertarProducto($producto);

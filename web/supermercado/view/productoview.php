@@ -221,56 +221,100 @@
 
   ?>
 
-<script>
-  $(function () {
-   
-    $('#tabla-productos').DataTable({
-       "language": {
-            "url": "//cdn.datatables.net/plug-ins/1.10.16/i18n/Spanish.json"
-        },
-      "paging": true,
-      "lengthChange": false,
-      "searching": true,
-      "ordering": true,
-      "info": true,
-      "autoWidth": false,
-      "responsive": true
-
-    });
+<script>$(function() {
+  $('#tabla-productos').DataTable({
+    "language": {
+      "url": "//cdn.datatables.net/plug-ins/1.10.16/i18n/Spanish.json"
+    },
+    "paging": true,
+    "lengthChange": false,
+    "searching": true,
+    "ordering": true,
+    "info": true,
+    "autoWidth": false,
+    "responsive": true
   });
-</script>
+});
 
-<script>
-    $(".tabla-productos tbody").on("click", "button.btnEditarProducto", function() {
+$(document).ready(function() {
+  $("#modalAgregarProducto form").submit(function() {
+    return validarFormulario();
+  });
 
-      var productoid = $(this).attr("productoid");
-      var nombre = $(this).attr("productonombre");
-      var precio = $(this).attr("productoprecio");
-      var estado = $(this).attr("productoestado");
-      var fecha = $(this).attr("productofechaingreso");
-      var stock = $(this).attr("productostock");
-      var productocategoriaid = $(this).attr("productocategoriaid");
-      var productoproveedorid = $(this).attr("productoproveedorid");
+  $("#modalEditarProducto form").submit(function() {
+    return validarFormularioEditar();
+  });
+});
 
-    
+$(".tabla-productos tbody").on("click", "button.btnEditarProducto", function() {
+  var productoid = $(this).attr("productoid");
+  var nombre = $(this).attr("productonombre");
+  var precio = $(this).attr("productoprecio");
+  var estado = $(this).attr("productoestado");
+  var fecha = $(this).attr("productofechaingreso");
+  var stock = $(this).attr("productostock");
+  var productocategoriaid = $(this).attr("productocategoriaid");
+  var productoproveedorid = $(this).attr("productoproveedorid");
 
-      $("#modalEditarProducto #productoid").val(productoid);
-      $("#modalEditarProducto #productonombre").val(nombre);
-      $("#modalEditarProducto #productoprecio").val(precio);
-      $("#modalEditarProducto #productoestado").val(estado);
-      $("#modalEditarProducto #productofechaingreso").val(fecha);
-      $("#modalEditarProducto #productostock").val(stock);
+  $("#modalEditarProducto #productoid").val(productoid);
+  $("#modalEditarProducto #productonombre").val(nombre);
+  $("#modalEditarProducto #productoprecio").val(precio);
+  $("#modalEditarProducto #productoestado").val(estado);
+  $("#modalEditarProducto #productofechaingreso").val(fecha);
+  $("#modalEditarProducto #productostock").val(stock);
+  $("#modalEditarProducto #productocategoriaid").val(productocategoriaid);
+  $("#modalEditarProducto #productoproveedorid").val(productoproveedorid);
+});
 
-      $("#modalEditarProducto #productocategoriaid").val(productocategoriaid);
-      $("#modalEditarProducto #productoproveedorid").val(productoproveedorid);
+function validarFormularioEditar() {
+  var nombre = $("#modalEditarProducto #productonombre").val();
+  var precio = $("#modalEditarProducto #productoprecio").val();
+  var stock = $("#modalEditarProducto #productostock").val();
+  var fecha = $("#modalEditarProducto #productofechaingreso").val();
+  var categoria = $("#modalEditarProducto #productocategoriaid").val();
+  var proveedor = $("#modalEditarProducto #productoproveedorid").val();
 
-
-
-
-
+  // Validar que todos los campos estén llenos
+  if (
+    nombre === "" ||
+    precio === "" ||
+    stock === "" ||
+    fecha === "" ||
+    categoria === "Seleccione la categoría" ||
+    proveedor === "Seleccione el proveedor"
+  ) {
+    Swal.fire({
+      icon: "error",
+      title: "Campos incompletos",
+      text: "Por favor, complete todos los campos.",
     });
+    return false;
+  }
 
-   
+  // Validar que el nombre solo contenga letras
+  var letras = /^[A-Za-z\s]+$/;
+  if (!nombre.match(letras)) {
+    Swal.fire({
+      icon: "error",
+      title: "Nombre inválido",
+      text: "El nombre solo debe contener letras.",
+    });
+    return false;
+  }
+
+  // Validar que el precio y el stock solo contengan números
+  var numeros = /^[0-9]+$/;
+  if (!precio.match(numeros) || !stock.match(numeros)) {
+    Swal.fire({
+      icon: "error",
+      title: "Valores inválidos",
+      text: "El precio y el stock deben contener solo números.",
+    });
+    return false;
+  }
+
+  return true; // El formulario se envía si pasa todas las validaciones
+}
 
     $(".tabla-productos tbody").on("click", "button.btnEliminarProducto", function() {
 
