@@ -17,26 +17,27 @@ $(function () {
     var categorianombre = $(this).attr("categorianombre");
     $("#modalEditarCategoria input[name='categoriaid']").val(categoriaid);
     $("#modalEditarCategoria input[name='categorianombre']").val(categorianombre);
-  });
+});
 
-  $(document).on("submit", "#modalEditarCategoria form", function(e){
+$(document).on("submit", "#modalEditarCategoria form", function(e){
     var categoriaNombre = $("#modalEditarCategoria input[name='categorianombre']").val();
-    if (categoriaNombre == "") {
-      e.preventDefault();
-      Swal.fire({
-        icon: 'error',
-        title: 'Error',
-        text: 'El nombre de la categoría no puede estar vacío.'
-      });
+    if (categoriaNombre.trim() === "") {
+        e.preventDefault();
+        Swal.fire({
+            icon: 'error',
+            title: 'Error',
+            text: 'El nombre de la categoría no puede estar vacío.'
+        });
     } else if (!/^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$/.test(categoriaNombre)) {
-      e.preventDefault();
-      Swal.fire({
-        icon: 'error',
-        title: 'Error',
-        text: 'El nombre de la categoría solo puede contener letras y espacios.'
-      });
+        e.preventDefault();
+        Swal.fire({
+            icon: 'error',
+            title: 'Error',
+            text: 'El nombre de la categoría solo puede contener letras y espacios.'
+        });
     }
-  });
+});
+
 });
 
 

@@ -110,7 +110,7 @@
                         foreach($productos as $producto){
                           echo '<tr>';
                           echo '<td>'.$producto['productonombre'].'</td>';
-                          echo '<td>'.$producto['productoprecio'].'</td>';
+                          echo '<td>₡'.number_format($producto['productoprecio'], 2).'</td>';
 
                           echo '<td>';
                           if($producto['productoestado'] == 1){
@@ -130,7 +130,7 @@
   
                              echo '</td>';
                              echo '<td>'.$producto['productostock'].'</td>';
-                             echo '<td>'.$producto['productofechaingreso'].'</td>';
+                             echo '<td>'.date('d-m-Y', strtotime($producto['productofechaingreso'])).'</td>';
 
                           echo '<td>';
                           echo "<div class='btn-group'>
