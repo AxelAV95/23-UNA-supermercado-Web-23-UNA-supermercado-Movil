@@ -429,7 +429,7 @@ DROP TABLE IF EXISTS `tbproducto`;
 CREATE TABLE `tbproducto` (
   `productoid` int(11) NOT NULL,
   `productonombre` varchar(255) NOT NULL,
-  `productoprecio` float(2,0) NOT NULL,
+  `productoprecio` float(9,0) NOT NULL,
   `productofechaingreso` date NOT NULL,
   `productostock` int(11) NOT NULL,
   `productoestado` int(11) NOT NULL,
