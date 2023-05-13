@@ -27,16 +27,17 @@ function validarFormulario() {
       return false;
     }
   
-    // Validar que el precio y el stock solo contengan números
-    var numeros = /^[0-9]+$/;
-    if (!precio.match(numeros) || !stock.match(numeros)) {
-      Swal.fire({
-        icon: 'error',
-        title: 'Valores inválidos',
-        text: 'El precio y el stock deben contener solo números.',
-      });
-      return false;
-    }
+   // Validar que el precio y el stock solo contengan números
+var numeros = /^[0-9]{1,6}$/;
+if (!precio.match(numeros) || !stock.match(numeros)) {
+  Swal.fire({
+    icon: 'error',
+    title: 'Valores inválidos',
+    text: 'El precio y el stock deben contener solo números.',
+  });
+  return false;
+}
+
   
     // El formulario se envía si pasa todas las validaciones
     return true;
