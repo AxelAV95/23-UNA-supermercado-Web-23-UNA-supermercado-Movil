@@ -20,23 +20,25 @@
 
               <div class="form-group">
                 <label >Nombre:</label>
-                <input type="text" class="form-control" name="proveedornombre" id="proveedornombre" placeholder="Ingrese un nombre" required>
+                <input type="text" class="form-control" name="proveedornombre" id="proveedornombre" placeholder="Ingrese un nombre" required pattern="[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]+">
                
               </div>
               
               <div class="form-group">
                 <label >Dirección:</label>
-                <input type="text" class="form-control" name="proveedordireccion" id="proveedordireccion" placeholder="Ingrese una direccion" required>
+                <input type="text" class="form-control" name="proveedordireccion" id="proveedordireccion" placeholder="Ingrese una dirección" required pattern="[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]+">
                
               </div>
               <div class="form-group">
                 <label >Correo:</label>
-                <input type="email" class="form-control" name="proveedorcorreo" id="proveedorcorreo" placeholder="Ingrese un correo" class="validate-email" required>
+                <input type="email" class="form-control" name="proveedorcorreo" id="proveedorcorreo" placeholder="Ingrese un correo" class="validate-email" required pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$">
+
                
               </div>
               <div class="form-group">
                 <label >Teléfono:</label>
-                <input type="number" class="form-control" name="proveedortelefono" id="proveedortelefono" placeholder="Ingrese un teléfono" min="1" required pattern="[0-9]+" >
+                <input type="tel" class="form-control" name="proveedortelefono" id="proveedortelefono" placeholder="Ingrese un teléfono" minlength="8" maxlength="8" required pattern="[0-9]{8}">
+
                       </div>
                 
               <!--<div class="form-group">
