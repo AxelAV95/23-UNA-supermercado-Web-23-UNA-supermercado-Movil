@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 09-05-2023 a las 09:29:34
+-- Tiempo de generación: 13-05-2023 a las 04:40:02
 -- Versión del servidor: 10.4.20-MariaDB
 -- Versión de PHP: 7.4.21
 
@@ -302,20 +302,25 @@ DELIMITER ;
 --
 
 DROP TABLE IF EXISTS `tbcategoria`;
-CREATE TABLE IF NOT EXISTS `tbcategoria` (
-  `categoriaid` int(11) NOT NULL AUTO_INCREMENT,
-  `categorianombre` varchar(255) NOT NULL,
-  PRIMARY KEY (`categoriaid`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4;
+CREATE TABLE `tbcategoria` (
+  `categoriaid` int(11) NOT NULL,
+  `categorianombre` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Volcado de datos para la tabla `tbcategoria`
 --
 
 INSERT INTO `tbcategoria` (`categoriaid`, `categorianombre`) VALUES
-(4, '33'),
 (5, '44'),
-(6, '33');
+(6, '33'),
+(8, 'gg'),
+(9, 'pab'),
+(10, '5665'),
+(11, ''),
+(12, ''),
+(13, '<img src=\"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTcdpZvMR4Hpg4awarZWX6-2eePTet0m3-yv3HlJ11a&s\"/>'),
+(14, '11');
 
 -- --------------------------------------------------------
 
@@ -324,8 +329,8 @@ INSERT INTO `tbcategoria` (`categoriaid`, `categorianombre`) VALUES
 --
 
 DROP TABLE IF EXISTS `tbcliente`;
-CREATE TABLE IF NOT EXISTS `tbcliente` (
-  `clienteid` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `tbcliente` (
+  `clienteid` int(11) NOT NULL,
   `clientenombre` varchar(255) NOT NULL,
   `clienteapellidos` varchar(255) NOT NULL,
   `clientecedula` int(11) NOT NULL,
@@ -333,16 +338,16 @@ CREATE TABLE IF NOT EXISTS `tbcliente` (
   `clientetelefono` int(11) NOT NULL,
   `clientecorreo` varchar(255) NOT NULL,
   `clientefechaafiliacion` date NOT NULL,
-  `clientetipomembresia` int(11) NOT NULL,
-  PRIMARY KEY (`clienteid`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4;
+  `clientetipomembresia` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Volcado de datos para la tabla `tbcliente`
 --
 
 INSERT INTO `tbcliente` (`clienteid`, `clientenombre`, `clienteapellidos`, `clientecedula`, `clientedireccion`, `clientetelefono`, `clientecorreo`, `clientefechaafiliacion`, `clientetipomembresia`) VALUES
-(2, '33', '33', 33, '33', 33, '33', '2023-05-26', 2);
+(2, '33', '33', 33, '33', 33, '33', '2023-05-26', 2),
+(3, '', '', 2, '', 0, '', '0000-00-00', 0);
 
 -- --------------------------------------------------------
 
@@ -351,12 +356,18 @@ INSERT INTO `tbcliente` (`clienteid`, `clientenombre`, `clienteapellidos`, `clie
 --
 
 DROP TABLE IF EXISTS `tbdescuento`;
-CREATE TABLE IF NOT EXISTS `tbdescuento` (
-  `descuentoid` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `tbdescuento` (
+  `descuentoid` int(11) NOT NULL,
   `descuentotarifa` float NOT NULL,
-  `descuentomembresiaid` int(11) NOT NULL,
-  PRIMARY KEY (`descuentoid`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4;
+  `descuentomembresiaid` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `tbdescuento`
+--
+
+INSERT INTO `tbdescuento` (`descuentoid`, `descuentotarifa`, `descuentomembresiaid`) VALUES
+(1, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -365,8 +376,8 @@ CREATE TABLE IF NOT EXISTS `tbdescuento` (
 --
 
 DROP TABLE IF EXISTS `tbempleado`;
-CREATE TABLE IF NOT EXISTS `tbempleado` (
-  `empleadoid` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `tbempleado` (
+  `empleadoid` int(11) NOT NULL,
   `empleadocedula` int(11) NOT NULL,
   `empleadonombre` varchar(255) NOT NULL,
   `empleadoapellidos` varchar(255) NOT NULL,
@@ -375,9 +386,8 @@ CREATE TABLE IF NOT EXISTS `tbempleado` (
   `empleadofechaingreso` date NOT NULL,
   `empleadofechasalida` date NOT NULL,
   `empleadoestado` int(11) NOT NULL,
-  `empleadotipoid` int(11) NOT NULL,
-  PRIMARY KEY (`empleadoid`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4;
+  `empleadotipoid` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Volcado de datos para la tabla `tbempleado`
@@ -385,7 +395,8 @@ CREATE TABLE IF NOT EXISTS `tbempleado` (
 
 INSERT INTO `tbempleado` (`empleadoid`, `empleadocedula`, `empleadonombre`, `empleadoapellidos`, `empleadotelefono`, `empleadodireccion`, `empleadofechaingreso`, `empleadofechasalida`, `empleadoestado`, `empleadotipoid`) VALUES
 (1, 22, '22', '22', 22, '22', '2023-04-05', '2023-04-11', 1, 1),
-(2, 12345678, '5454', '45', 45, '454', '2023-04-19', '2023-04-20', 1, 1)
+(2, 12345678, '5454', '45', 45, '454', '2023-04-19', '2023-04-20', 1, 1),
+(3, 207380286, 'Axel', 'Andrade Villalobos', 86253019, 'Finca 2', '2023-05-06', '0000-00-00', 1, 2);
 
 -- --------------------------------------------------------
 
@@ -394,10 +405,9 @@ INSERT INTO `tbempleado` (`empleadoid`, `empleadocedula`, `empleadonombre`, `emp
 --
 
 DROP TABLE IF EXISTS `tbmembresia`;
-CREATE TABLE IF NOT EXISTS `tbmembresia` (
+CREATE TABLE `tbmembresia` (
   `membresiaid` int(11) NOT NULL,
-  `membresiadescripcion` varchar(255) NOT NULL,
-  PRIMARY KEY (`membresiaid`)
+  `membresiadescripcion` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -416,16 +426,15 @@ INSERT INTO `tbmembresia` (`membresiaid`, `membresiadescripcion`) VALUES
 --
 
 DROP TABLE IF EXISTS `tbproducto`;
-CREATE TABLE IF NOT EXISTS `tbproducto` (
+CREATE TABLE `tbproducto` (
   `productoid` int(11) NOT NULL,
   `productonombre` varchar(255) NOT NULL,
-  `productoprecio` float NOT NULL,
+  `productoprecio` float(2,0) NOT NULL,
   `productofechaingreso` date NOT NULL,
   `productostock` int(11) NOT NULL,
   `productoestado` int(11) NOT NULL,
   `productocategoriaid` int(11) NOT NULL,
-  `productoproveedorid` int(11) NOT NULL,
-  PRIMARY KEY (`productoid`)
+  `productoproveedorid` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -433,8 +442,7 @@ CREATE TABLE IF NOT EXISTS `tbproducto` (
 --
 
 INSERT INTO `tbproducto` (`productoid`, `productonombre`, `productoprecio`, `productofechaingreso`, `productostock`, `productoestado`, `productocategoriaid`, `productoproveedorid`) VALUES
-(1, 'ds', 2232, '2023-04-22', 22, 1, 1, 3),
-(2, 'AA', 22, '2023-05-18', 1, 1, 1, 3);
+(1, '2', 99, '0000-00-00', 1, 0, 6, 3);
 
 -- --------------------------------------------------------
 
@@ -443,15 +451,14 @@ INSERT INTO `tbproducto` (`productoid`, `productonombre`, `productoprecio`, `pro
 --
 
 DROP TABLE IF EXISTS `tbproveedor`;
-CREATE TABLE IF NOT EXISTS `tbproveedor` (
+CREATE TABLE `tbproveedor` (
   `proveedorid` int(11) NOT NULL,
   `proveedornombre` varchar(255) NOT NULL,
   `proveedordireccion` varchar(255) NOT NULL,
   `proveedortelefono` int(11) NOT NULL,
   `proveedorcorreo` varchar(255) NOT NULL,
   `proveedorlat` varchar(255) DEFAULT NULL,
-  `proveedorlong` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`proveedorid`)
+  `proveedorlong` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -460,7 +467,8 @@ CREATE TABLE IF NOT EXISTS `tbproveedor` (
 
 INSERT INTO `tbproveedor` (`proveedorid`, `proveedornombre`, `proveedordireccion`, `proveedortelefono`, `proveedorcorreo`, `proveedorlat`, `proveedorlong`) VALUES
 (3, 'AAA', '22', 22, '1@gmail.com', '10.345677', '-84.6650668'),
-(4, '33', '1', 33, '1@gmail.com', '10.00236', '-84.11651');
+(4, '33', '1', 33, '1@gmail.com', '10.00236', '-84.11651'),
+(5, '22', '33', 22222222, '1@gmail.com', '9.93333', '-84.08333');
 
 -- --------------------------------------------------------
 
@@ -469,15 +477,14 @@ INSERT INTO `tbproveedor` (`proveedorid`, `proveedornombre`, `proveedordireccion
 --
 
 DROP TABLE IF EXISTS `tbsupermercado`;
-CREATE TABLE IF NOT EXISTS `tbsupermercado` (
-  `supermercadoid` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `tbsupermercado` (
+  `supermercadoid` int(11) NOT NULL,
   `supermercadonombre` varchar(255) DEFAULT NULL,
   `supermercadotelefono` int(11) DEFAULT NULL,
   `supermercadocorreo` varchar(255) DEFAULT NULL,
   `supermercadodireccion` varchar(255) DEFAULT NULL,
-  `supermercadologo` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`supermercadoid`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4;
+  `supermercadologo` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Volcado de datos para la tabla `tbsupermercado`
@@ -493,11 +500,10 @@ INSERT INTO `tbsupermercado` (`supermercadoid`, `supermercadonombre`, `supermerc
 --
 
 DROP TABLE IF EXISTS `tbtipoempleado`;
-CREATE TABLE IF NOT EXISTS `tbtipoempleado` (
-  `tipoid` int(11) NOT NULL AUTO_INCREMENT,
-  `tipodescripcion` varchar(255) NOT NULL,
-  PRIMARY KEY (`tipoid`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4;
+CREATE TABLE `tbtipoempleado` (
+  `tipoid` int(11) NOT NULL,
+  `tipodescripcion` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Volcado de datos para la tabla `tbtipoempleado`
@@ -506,7 +512,8 @@ CREATE TABLE IF NOT EXISTS `tbtipoempleado` (
 INSERT INTO `tbtipoempleado` (`tipoid`, `tipodescripcion`) VALUES
 (1, '334'),
 (2, '44'),
-(3, '44');
+(3, '44'),
+(4, '221ad* Validar todos los campos y que no tengan caracteres especiales, cédula está aceptando letras');
 
 -- --------------------------------------------------------
 
@@ -515,10 +522,9 @@ INSERT INTO `tbtipoempleado` (`tipoid`, `tipodescripcion`) VALUES
 --
 
 DROP TABLE IF EXISTS `tbtipousuario`;
-CREATE TABLE IF NOT EXISTS `tbtipousuario` (
+CREATE TABLE `tbtipousuario` (
   `tipoid` int(11) NOT NULL,
-  `tipodescripcion` varchar(255) NOT NULL,
-  PRIMARY KEY (`tipoid`)
+  `tipodescripcion` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -536,13 +542,12 @@ INSERT INTO `tbtipousuario` (`tipoid`, `tipodescripcion`) VALUES
 --
 
 DROP TABLE IF EXISTS `tbusuario`;
-CREATE TABLE IF NOT EXISTS `tbusuario` (
-  `usuarioid` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `tbusuario` (
+  `usuarioid` int(11) NOT NULL,
   `usuariopassword` varchar(255) NOT NULL,
   `usuarioempleadoid` int(11) NOT NULL,
-  `usuariotipo` int(11) NOT NULL,
-  PRIMARY KEY (`usuarioid`)
-) ENGINE=InnoDB AUTO_INCREMENT=30 DEFAULT CHARSET=utf8mb4;
+  `usuariotipo` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Volcado de datos para la tabla `tbusuario`
@@ -551,6 +556,122 @@ CREATE TABLE IF NOT EXISTS `tbusuario` (
 INSERT INTO `tbusuario` (`usuarioid`, `usuariopassword`, `usuarioempleadoid`, `usuariotipo`) VALUES
 (9, '$2y$10$cj9AiGyPMjYR5gSyipNJF.KT0MZcUpfuzOZN2ah7gsjw0gNNAlJcW', 2, 5),
 (11, '$2y$10$bjBFI.HfwTm0Z6ln5TmlveDFYbDdErgAfQ9BR..ND2/suWlKEskja', 1, 2);
+
+--
+-- Índices para tablas volcadas
+--
+
+--
+-- Indices de la tabla `tbcategoria`
+--
+ALTER TABLE `tbcategoria`
+  ADD PRIMARY KEY (`categoriaid`);
+
+--
+-- Indices de la tabla `tbcliente`
+--
+ALTER TABLE `tbcliente`
+  ADD PRIMARY KEY (`clienteid`);
+
+--
+-- Indices de la tabla `tbdescuento`
+--
+ALTER TABLE `tbdescuento`
+  ADD PRIMARY KEY (`descuentoid`);
+
+--
+-- Indices de la tabla `tbempleado`
+--
+ALTER TABLE `tbempleado`
+  ADD PRIMARY KEY (`empleadoid`);
+
+--
+-- Indices de la tabla `tbmembresia`
+--
+ALTER TABLE `tbmembresia`
+  ADD PRIMARY KEY (`membresiaid`);
+
+--
+-- Indices de la tabla `tbproducto`
+--
+ALTER TABLE `tbproducto`
+  ADD PRIMARY KEY (`productoid`);
+
+--
+-- Indices de la tabla `tbproveedor`
+--
+ALTER TABLE `tbproveedor`
+  ADD PRIMARY KEY (`proveedorid`);
+
+--
+-- Indices de la tabla `tbsupermercado`
+--
+ALTER TABLE `tbsupermercado`
+  ADD PRIMARY KEY (`supermercadoid`);
+
+--
+-- Indices de la tabla `tbtipoempleado`
+--
+ALTER TABLE `tbtipoempleado`
+  ADD PRIMARY KEY (`tipoid`);
+
+--
+-- Indices de la tabla `tbtipousuario`
+--
+ALTER TABLE `tbtipousuario`
+  ADD PRIMARY KEY (`tipoid`);
+
+--
+-- Indices de la tabla `tbusuario`
+--
+ALTER TABLE `tbusuario`
+  ADD PRIMARY KEY (`usuarioid`);
+
+--
+-- AUTO_INCREMENT de las tablas volcadas
+--
+
+--
+-- AUTO_INCREMENT de la tabla `tbcategoria`
+--
+ALTER TABLE `tbcategoria`
+  MODIFY `categoriaid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+
+--
+-- AUTO_INCREMENT de la tabla `tbcliente`
+--
+ALTER TABLE `tbcliente`
+  MODIFY `clienteid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT de la tabla `tbdescuento`
+--
+ALTER TABLE `tbdescuento`
+  MODIFY `descuentoid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT de la tabla `tbempleado`
+--
+ALTER TABLE `tbempleado`
+  MODIFY `empleadoid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT de la tabla `tbsupermercado`
+--
+ALTER TABLE `tbsupermercado`
+  MODIFY `supermercadoid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT de la tabla `tbtipoempleado`
+--
+ALTER TABLE `tbtipoempleado`
+  MODIFY `tipoid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT de la tabla `tbusuario`
+--
+ALTER TABLE `tbusuario`
+  MODIFY `usuarioid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

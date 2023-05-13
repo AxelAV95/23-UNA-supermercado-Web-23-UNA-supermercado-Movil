@@ -3,6 +3,11 @@
   include '../business/usuariobusiness.php';
   $usuarioBusiness = new UsuarioBusiness();
 
+  session_start();
+  if(isset($_SESSION['sesionActiva'])){
+    header("Location: index.php");
+  }
+
  
  ?>
 
