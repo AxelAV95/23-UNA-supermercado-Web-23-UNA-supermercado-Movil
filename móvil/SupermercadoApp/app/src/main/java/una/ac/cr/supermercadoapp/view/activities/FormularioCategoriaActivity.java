@@ -66,6 +66,18 @@ public class FormularioCategoriaActivity extends AppCompatActivity {
                     campoNombre.requestFocus();
                     Toasty.info(getApplicationContext(), "Ingrese un nombre", Toast.LENGTH_SHORT, true).show();
                 }else{
+                    String nombre = campoNombre.getText().toString().trim();
+                    if (nombre.isEmpty()) {
+                        campoNombre.setError("El nombre no puede estar vacío");
+                        campoNombre.requestFocus();
+                        return;
+                    }
+                    if (!nombre.matches("[a-zA-ZáéíóúÁÉÍÓÚñÑ ]+")) {
+                        campoNombre.setError("El nombre solo puede contener letras");
+                        campoNombre.requestFocus();
+                        return;
+                    }
+
                     if(intent.getExtras().getString("metodo").equals("agregar")){
                         Categoria categoria = new Categoria(campoNombre.getText().toString());
                         //método de agregar
