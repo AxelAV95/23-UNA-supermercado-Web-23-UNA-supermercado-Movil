@@ -164,7 +164,15 @@
   }
   echo "</script>";
 
-  
+  if ($_GET['error'] == "dbError") {
+    echo '<script>';
+    echo 'Swal.fire({';
+    echo "  icon: 'error',";
+    echo "  title: 'Error de inserción de categoría',";
+    echo "  text: 'Ha ocurrido un error al insertar la categoría.',";
+    echo '});';
+    echo '</script>';
+  }
 ?>
 
 

@@ -11,7 +11,7 @@
         <div class="box-body">
           <form method="POST" action="../business/categoriaaction.php" onsubmit="return validarFormulario()">
             <div class="form-group">
-              <label>Nombre:</label>
+              <label>Descripcion:</label>
               <input type="text" class="form-control" name="categorianombre" id="categorianombre" placeholder="Ingrese categoría">
               <span id="errorMensaje" style="color: red;"></span>
             </div>

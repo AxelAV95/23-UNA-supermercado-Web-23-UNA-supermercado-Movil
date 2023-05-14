@@ -3,26 +3,26 @@
 
 	include 'categoriabusiness.php';
 	//post de insercion de categoria
-	if(isset($_POST['Insertar'])){
-		if (isset($_POST['categorianombre'])) {
-		$nombre = $_POST['categorianombre'];
-	 
-	 $categoriaBusiness = new CategoriaBusiness();
-	
-	
-	
-		$categoria = new Categoria();
-		$categoria->setNombre($nombre);
-		$resultado = $categoriaBusiness->insertarCategoria($categoria);
-	
-		if ($resultado == 1) {
-			Header("Location: ../view/categoriaview.php?success=inserted");
-		} else {
-			Header("Location: ../view/categoriaview.php?error=dbError");
-		}
-		}
-	
-	} 
+		if(isset($_POST['Insertar'])){
+			if (isset($_POST['categorianombre'])) {
+			$nombre = $_POST['categorianombre'];
+		
+		$categoriaBusiness = new CategoriaBusiness();
+		
+		
+		
+			$categoria = new Categoria();
+			$categoria->setNombre($nombre);
+			$resultado = $categoriaBusiness->insertarCategoria($categoria);
+		
+			if ($resultado == 1) {
+				Header("Location: ../view/categoriaview.php?success=inserted");
+			} else {
+				Header("Location: ../view/categoriaview.php?error=dbError");
+			}
+			}
+		
+		} 
 	
 	//metodo de actualizar categoria
 	if(isset($_POST['actualizar'])){
