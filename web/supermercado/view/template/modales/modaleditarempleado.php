@@ -15,7 +15,7 @@
 
           <div class="box-body">
 
-            <form method="POST" action="../business/empleadoaction.php"  enctype="multipart/form-data">
+            <form id="formulario-editar" method="POST" action="../business/empleadoaction.php" enctype="multipart/form-data">
             <input type="hidden" name="metodo" id="metodo" value="editar">
               <div class="form-group">
               <input type="hidden" name="empleadoid" id="empleadoid">
@@ -25,32 +25,32 @@
 
               <div class="form-group">
                 <label >Cédula:</label>
-                <input type="text" class="form-control" name="empleadocedula" id="empleadocedula" placeholder="Ingrese cédula">
+                <input type="text" class="form-control" name="empleadocedula" id="empleadocedula" placeholder="Ingrese cédula" required pattern="[0-9]+">
               </div>
 
               <div class="form-group">
                 <label >Nombre:</label>
-                <input type="text" class="form-control" name="empleadonombre" id="empleadonombre" placeholder="Ingrese nombre">
+                <input type="text" class="form-control" name="empleadonombre" id="empleadonombre" placeholder="Ingrese nombre" required pattern="[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]+">
               </div>
 
               <div class="form-group">
                 <label >Apellidos:</label>
-                <input type="text" class="form-control" name="empleadoapellidos" id="empleadoapellidos" placeholder="Ingrese apellidos">
+                <input type="text" class="form-control" name="empleadoapellidos" id="empleadoapellidos" placeholder="Ingrese apellidos" required pattern="[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]+">
               </div>
 
               <div class="form-group">
                 <label >Teléfono:</label>
-                <input type="text" class="form-control" name="empleadotelefono" id="empleadotelefono" placeholder="Ingrese teléfono">
+                <input type="text" class="form-control" name="empleadotelefono" id="empleadotelefono" placeholder="Ingrese teléfono" maxlength="8" required pattern="[0-9]{8}">
               </div>
 
               <div class="form-group">
                 <label >Dirección:</label>
-                <input type="text" class="form-control" name="empleadodireccion" id="empleadodireccion" placeholder="Ingrese direccion">
+                <input type="text" class="form-control" name="empleadodireccion" id="empleadodireccion" placeholder="Ingrese direccion" required pattern="[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]+">
               </div>
 
               <div class="form-group">
                 <label >Fecha de ingreso:</label>
-                <input type="date" class="form-control" name="empleadofechaingreso" id="empleadofechaingreso" placeholder="Ingrese fecha de ingreso">
+                <input type="date" class="form-control" name="empleadofechaingreso" id="empleadofechaingreso" placeholder="Ingrese fecha de ingreso" required>
               </div>
 
               <div class="form-group">
@@ -72,13 +72,11 @@
 
               <div class="form-group">
                 <label >Tipo de empleado:</label>
-              <!--  <input type="text" class="form-control" name="empleadotipoid" id="empleadotipoid" placeholder="Ingrese el tipo de empleado"> -->
-                <select class="tipoid form-control" name="empleadotipoid" id="empleadotipoid" >              
-                  <?php
-                  
+                <select class="tipoid form-control" name="empleadotipoid" id="empleadotipoid" required > 
+                  <?php                  
                   foreach($tipos as $tipoempleado){
                     echo ' <option value="'.$tipoempleado['tipoid'].'" class="badge badge-pill badge-warning" style="font-size: 15px;">'.$tipoempleado['tipodescripcion'].'</option>';
-                  }
+                  } 
                   ?>
                 </select>
               </div>

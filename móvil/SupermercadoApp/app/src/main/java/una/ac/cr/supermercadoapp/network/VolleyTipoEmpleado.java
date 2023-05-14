@@ -83,6 +83,7 @@ public class VolleyTipoEmpleado {
                     if(resultado == -1){
                         Toasty.error(context, "Error al insertar en la base de datos local", Toast.LENGTH_SHORT, true).show();
                     }else{
+                        Toasty.success(context, "Se registró con éxito", Toast.LENGTH_SHORT, true).show();
                         Intent returnIntent = new Intent();
                         ((Activity) context).setResult(Activity.RESULT_OK, returnIntent);
                         ((Activity) context).finish();

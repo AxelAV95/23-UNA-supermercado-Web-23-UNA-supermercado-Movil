@@ -51,9 +51,9 @@
 
               <div class="form-group">
                 <label >Tipo de empleado:</label>
-                <select class="tipoid form-control" name="empleadotipoid" id="empleadotipoid" >              
-                  <?php
+                <select class="tipoid form-control" name="empleadotipoid" id="empleadotipoid" >
                   
+                  <?php                  
                   foreach($tipos as $tipoempleado){
                     echo ' <option value="'.$tipoempleado['tipoid'].'" class="badge badge-pill badge-warning" style="font-size: 15px;">'.$tipoempleado['tipodescripcion'].'</option>';
                   }

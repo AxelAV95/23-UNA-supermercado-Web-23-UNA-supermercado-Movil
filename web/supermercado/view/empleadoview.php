@@ -144,7 +144,7 @@ $("#modalEditarEmpleado #empleadodireccion").val(empleadodireccion);
 $("#modalEditarEmpleado #empleadofechaingreso").val(empleadofechaingreso);
 $("#modalEditarEmpleado #empleadofechasalida").val(empleadofechasalida);
 $("#modalEditarEmpleado #empleadoestado").val(empleadoestado);
-$("#modalEditarEmpleado #empleadotipoid").val(empleadotipoid);
+//$("#modalEditarEmpleado #empleadotipoid").val(empleadotipoid);
 
 $.ajax({
   type: "GET",
