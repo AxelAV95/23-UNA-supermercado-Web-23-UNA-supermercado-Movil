@@ -4,19 +4,7 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="72b42910-5c48-45b3-9eba-cdd1c51b7991" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/móvil/SupermercadoApp/app/src/main/java/una/ac/cr/supermercadoapp/network/VolleyTipoEmpleado.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/móvil/SupermercadoApp/app/src/main/java/una/ac/cr/supermercadoapp/view/adapters/TipoEmpleadoAdapter.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/móvil/SupermercadoApp/app/src/main/java/una/ac/cr/supermercadoapp/view/interfaces/TipoEmpleadoICallback.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/móvil/SupermercadoApp/app/src/main/java/una/ac/cr/supermercadoapp/data/TipoEmpleadoData.java" beforeDir="false" afterPath="$PROJECT_DIR$/móvil/SupermercadoApp/app/src/main/java/una/ac/cr/supermercadoapp/data/TipoEmpleadoData.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/móvil/SupermercadoApp/app/src/main/java/una/ac/cr/supermercadoapp/domain/TipoEmpleado.java" beforeDir="false" afterPath="$PROJECT_DIR$/móvil/SupermercadoApp/app/src/main/java/una/ac/cr/supermercadoapp/domain/TipoEmpleado.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/móvil/SupermercadoApp/app/src/main/java/una/ac/cr/supermercadoapp/utils/NetworkUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/móvil/SupermercadoApp/app/src/main/java/una/ac/cr/supermercadoapp/utils/NetworkUtils.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/móvil/SupermercadoApp/app/src/main/java/una/ac/cr/supermercadoapp/view/activities/FormularioTipoEmpleadoActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/móvil/SupermercadoApp/app/src/main/java/una/ac/cr/supermercadoapp/view/activities/FormularioTipoEmpleadoActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/móvil/SupermercadoApp/app/src/main/java/una/ac/cr/supermercadoapp/view/activities/TipoEmpleadoActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/móvil/SupermercadoApp/app/src/main/java/una/ac/cr/supermercadoapp/view/activities/TipoEmpleadoActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/supermercado/view/dist/js/empleados.js" beforeDir="false" afterPath="$PROJECT_DIR$/web/supermercado/view/dist/js/empleados.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/supermercado/view/dist/js/tipoempleado.js" beforeDir="false" afterPath="$PROJECT_DIR$/web/supermercado/view/dist/js/tipoempleado.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/supermercado/view/template/modales/modalagregarempleado.php" beforeDir="false" afterPath="$PROJECT_DIR$/web/supermercado/view/template/modales/modalagregarempleado.php" afterDir="false" />
-    </list>
+    <list default="true" id="72b42910-5c48-45b3-9eba-cdd1c51b7991" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -27,6 +15,9 @@
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
   </component>
   <component name="ProjectId" id="2PRrvFaNIaMXgwYRFWzkLVZlRIV" />
   <component name="ProjectViewState">

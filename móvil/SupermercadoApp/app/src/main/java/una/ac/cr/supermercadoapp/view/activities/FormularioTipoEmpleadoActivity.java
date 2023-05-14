@@ -61,6 +61,18 @@ public class FormularioTipoEmpleadoActivity extends AppCompatActivity {
                     campoDescripcion.requestFocus();
                     Toasty.info(getApplicationContext(), "Ingrese una descripción", Toast.LENGTH_SHORT, true).show();
                 }else{
+                    String nombre = campoDescripcion.getText().toString().trim();
+                    if (nombre.isEmpty()) {
+                        campoDescripcion.setError("La descripción no puede estar vacía");
+                        campoDescripcion.requestFocus();
+                        return;
+                    }
+                    if (!nombre.matches("[a-zA-ZáéíóúÁÉÍÓÚñÑ ]+")) {
+                        campoDescripcion.setError("La descripción solo puede contener letras");
+                        campoDescripcion.requestFocus();
+                        return;
+                    }
+
                     if(intent.getExtras().getString("metodo").equals("agregar")){
                         TipoEmpleado tipoEmpleado1 = new TipoEmpleado(campoDescripcion.getText().toString());
                         //método de agregar
