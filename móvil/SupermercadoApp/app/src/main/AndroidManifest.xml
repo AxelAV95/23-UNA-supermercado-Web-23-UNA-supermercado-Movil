@@ -35,6 +35,9 @@
         <activity
             android:name=".view.activities.ReporteActivity"
             android:exported="false" />
+	<activity
+            android:name=".view.activities.FormularioProveedorActivity"
+            android:exported="false" />
         <activity
             android:name=".view.activities.ProveedorActivity"
             android:exported="false" />
