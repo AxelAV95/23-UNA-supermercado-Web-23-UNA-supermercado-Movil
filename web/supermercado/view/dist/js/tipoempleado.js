@@ -41,6 +41,12 @@ var Toast = Swal.mixin({
                     title: '<div style=margin-top:0.5rem;>Ingresar descripción.</div>'
               })
         
+    }else if(!/^[a-zA-Z\s]*$/.test(descripcion.value)){
+      $("#formulario-insertar div").children().get(2).focus()
+        Toast.fire({
+                    icon: 'warning',
+                    title: '<div style=margin-top:0.5rem;>La descripción ingresada contiene caracteres no válidos, ingrese solo texto.</div>'
+              })
     }else{
         var data = $("#formulario-insertar").serialize();
 
@@ -83,6 +89,12 @@ var Toast = Swal.mixin({
         Toast.fire({
                     icon: 'warning',
                     title: '<div style=margin-top:0.5rem;>Ingresar descripción.</div>'
+              })
+    }else if(!/^[a-zA-Z\s]*$/.test(descripcion.value)){
+      $("#formulario-editar div").children().get(3).focus()
+        Toast.fire({
+                    icon: 'warning',
+                    title: '<div style=margin-top:0.5rem;>La descripción ingresada contiene caracteres no válidos, ingrese solo texto.</div>'
               })
     }else{
         var data = $("#formulario-editar").serialize();

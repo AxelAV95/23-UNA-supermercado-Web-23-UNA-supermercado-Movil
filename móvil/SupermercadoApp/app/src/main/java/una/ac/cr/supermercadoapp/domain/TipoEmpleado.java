@@ -14,6 +14,10 @@ public class TipoEmpleado implements Serializable {
         this.descripcion = descripcion;
     }
 
+    public TipoEmpleado(String descripcion) {
+        this.descripcion = descripcion;
+    }
+
     public int getId() {
         return id;
     }
@@ -22,11 +26,11 @@ public class TipoEmpleado implements Serializable {
         this.id = id;
     }
 
-    public String getDescripcion() {
+    public String getTipoEmpleadoDescripcion() {
         return descripcion;
     }
 
-    public void setDescripcion(String descripcion) {
+    public void setTipoEmpleadoDescripcion(String descripcion) {
         this.descripcion = descripcion;
     }
 }

@@ -14,7 +14,7 @@
         <div class="modal-body">
 
           <div class="box-body">
-            <form method="POST" action="../business/empleadoaction.php"  enctype="multipart/form-data">
+            <form id="formulario-insertar" method="POST" action="../business/empleadoaction.php"  enctype="multipart/form-data">
            <input type="hidden" name="metodo" id="metodo" value="agregar">
            <input type="hidden" name="empleadofechasalida" id="empleadofechasalida" value="0000-00-00">
            <input type="hidden" name="empleadoestado" id="empleadoestado" value="1">

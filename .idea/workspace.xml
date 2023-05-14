@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="NONE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="72b42910-5c48-45b3-9eba-cdd1c51b7991" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/móvil/SupermercadoApp/app/src/main/java/una/ac/cr/supermercadoapp/network/VolleyTipoEmpleado.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/móvil/SupermercadoApp/app/src/main/java/una/ac/cr/supermercadoapp/view/adapters/TipoEmpleadoAdapter.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/móvil/SupermercadoApp/app/src/main/java/una/ac/cr/supermercadoapp/view/interfaces/TipoEmpleadoICallback.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/móvil/SupermercadoApp/app/src/main/java/una/ac/cr/supermercadoapp/data/TipoEmpleadoData.java" beforeDir="false" afterPath="$PROJECT_DIR$/móvil/SupermercadoApp/app/src/main/java/una/ac/cr/supermercadoapp/data/TipoEmpleadoData.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/móvil/SupermercadoApp/app/src/main/java/una/ac/cr/supermercadoapp/domain/TipoEmpleado.java" beforeDir="false" afterPath="$PROJECT_DIR$/móvil/SupermercadoApp/app/src/main/java/una/ac/cr/supermercadoapp/domain/TipoEmpleado.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/móvil/SupermercadoApp/app/src/main/java/una/ac/cr/supermercadoapp/utils/NetworkUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/móvil/SupermercadoApp/app/src/main/java/una/ac/cr/supermercadoapp/utils/NetworkUtils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/móvil/SupermercadoApp/app/src/main/java/una/ac/cr/supermercadoapp/view/activities/FormularioTipoEmpleadoActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/móvil/SupermercadoApp/app/src/main/java/una/ac/cr/supermercadoapp/view/activities/FormularioTipoEmpleadoActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/móvil/SupermercadoApp/app/src/main/java/una/ac/cr/supermercadoapp/view/activities/TipoEmpleadoActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/móvil/SupermercadoApp/app/src/main/java/una/ac/cr/supermercadoapp/view/activities/TipoEmpleadoActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/supermercado/view/dist/js/empleados.js" beforeDir="false" afterPath="$PROJECT_DIR$/web/supermercado/view/dist/js/empleados.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/supermercado/view/dist/js/tipoempleado.js" beforeDir="false" afterPath="$PROJECT_DIR$/web/supermercado/view/dist/js/tipoempleado.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/supermercado/view/template/modales/modalagregarempleado.php" beforeDir="false" afterPath="$PROJECT_DIR$/web/supermercado/view/template/modales/modalagregarempleado.php" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectId" id="2PRrvFaNIaMXgwYRFWzkLVZlRIV" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.cidr.known.project.marker&quot;: &quot;true&quot;,
+    &quot;cidr.known.project.marker&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/xampp/htdocs/23-UNA-supermercado-Web-23-UNA-supermercado-Movil&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;AndroidSdkUpdater&quot;
+  }
+}</component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\xampp\htdocs\23-UNA-supermercado-Web-23-UNA-supermercado-Movil\móvil\SupermercadoApp\app\src\main\java\una\ac\cr\supermercadoapp\view\interfaces" />
+      <recent name="C:\xampp\htdocs\23-UNA-supermercado-Web-23-UNA-supermercado-Movil\móvil\SupermercadoApp\app\src\main\java\una\ac\cr\supermercadoapp\view\adapters" />
+      <recent name="C:\xampp\htdocs\23-UNA-supermercado-Web-23-UNA-supermercado-Movil\móvil\SupermercadoApp\app\src\main\java\una\ac\cr\supermercadoapp\network" />
+    </key>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="72b42910-5c48-45b3-9eba-cdd1c51b7991" name="Changes" comment="" />
+      <created>1683430963353</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1683430963353</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+</project>
