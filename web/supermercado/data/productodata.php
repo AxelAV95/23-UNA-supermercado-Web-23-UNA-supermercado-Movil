@@ -2,11 +2,10 @@
     include_once 'data.php';
     if (is_file("../domain/producto.php")){
         include ("../domain/producto.php");
-        include ("../domain/productom.php");
-
+       
     }else{
         include ("../../domain/producto.php");
-        include ("../../domain/productom.php");
+        
 
     }
 	//include '../../domain/producto.php';

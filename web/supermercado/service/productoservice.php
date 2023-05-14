@@ -12,7 +12,7 @@
 		$data = json_decode($json);
 
 		if($data->metodo == "insertar"){
-			$producto = new ProductoM();
+			$producto = new Producto();
 			$producto->setNombre($data->nombre);
 			$producto->setPrecioProducto($data->precio);
 			$producto->setEstadoProducto($data->estado);
@@ -36,7 +36,7 @@
 		$json = file_get_contents('php://input');
 		$data = json_decode($json);
 
-        $producto = new ProductoM();
+        $producto = new Producto();
 			$producto->setNombre($data->nombre);
 			$producto->setPrecioProducto($data->precio);
 			$producto->setEstadoProducto($data->estado);

@@ -22,8 +22,14 @@
 		
 
 		
-	    	$producto = new Producto(0,$nombre,$precio,$estado,$fecha,$stock,$categoria,$proveedor);				 
-			
+	    	$producto = new Producto();				 
+			$producto->setNombre($nombre);
+			$producto->setPrecioProducto($precio);
+			$producto->setEstadoProducto($estado);
+            $producto->setProductoFechaIngresoProducto($fecha);
+			$producto->setStockProducto($stock);
+			$producto->setCategoriaProducto($categoria);
+			$producto->setProductoproveedor($proveedor);
 			
 	    	$resultado = $productoBusiness->insertarProducto($producto);
 
