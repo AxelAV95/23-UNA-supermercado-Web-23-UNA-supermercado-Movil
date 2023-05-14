@@ -10,8 +10,8 @@
 			$proveedorBusiness = new ProveedorBusiness();
 			$nombre = $_POST['proveedornombre'];
 			$direccion = $_POST['proveedordireccion'];
-            $correo = $_POST['proveedorcorreo'];
-            $telefono = $_POST['proveedortelefono'];
+         		$correo = $_POST['proveedorcorreo'];
+                        $telefono = $_POST['proveedortelefono'];
 			$provincia = $_POST['proveedorprovincia'];
          //   $latitud = $_POST['proveedorlat'];
          //   $longitud = $_POST['proveedorlong'];
@@ -46,13 +46,13 @@
 									$longitud = -83.0359600;
 									break;
 		 }
-	    	$proveedor = new Proveedor();
+	    		$proveedor = new Proveedor();
 			$proveedor->setNombre($nombre);	 
 			$proveedor->setDireccion($direccion);			   		    	
-	    	$proveedor->setCorreo($correo);
+	    		$proveedor->setCorreo($correo);
 			$proveedor->setTelefono($telefono);
 			$proveedor->setLatitud($latitud);
-            $proveedor->setLongitud($longitud);
+           		$proveedor->setLongitud($longitud);
 			
 			
 	    	$resultado = $proveedorBusiness->insertarproveedor($proveedor);
@@ -72,20 +72,20 @@
 			$id = $_POST['proveedorid'];
 			$nombre = $_POST['proveedornombre'];
 			$direccion = $_POST['proveedordireccion'];
-            $correo = $_POST['proveedorcorreo'];
-            $telefono = $_POST['proveedortelefono'];
-            $latitud = $_POST['proveedorlat'];
-            $longitud = $_POST['proveedorlong'];			
+            		$correo = $_POST['proveedorcorreo'];
+            		$telefono = $_POST['proveedortelefono'];
+           		$latitud = $_POST['proveedorlat'];
+          		$longitud = $_POST['proveedorlong'];			
 
 				$proveedorBusiness = new ProveedorBusiness();
 				$proveedor = new Proveedor(); 
 				$proveedor->setId($id);
 				$proveedor->setNombre($nombre);
-	    		$proveedor->setDireccion($direccion);
-                $proveedor->setCorreo($correo);
-                $proveedor->setTelefono($telefono);
+	    			$proveedor->setDireccion($direccion);
+              			$proveedor->setCorreo($correo);
+              			$proveedor->setTelefono($telefono);
 				$proveedor->setLatitud($latitud);
-                $proveedor->setLongitud($longitud);
+               			$proveedor->setLongitud($longitud);
 				
 	    		$resultado = $proveedorBusiness->modificarproveedor($proveedor);
 
