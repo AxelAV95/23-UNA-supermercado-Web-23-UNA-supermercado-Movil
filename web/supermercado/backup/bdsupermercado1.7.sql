@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 15-05-2023 a las 04:58:32
+-- Tiempo de generación: 15-05-2023 a las 05:46:18
 -- Versión del servidor: 10.4.20-MariaDB
 -- Versión de PHP: 7.4.21
 
@@ -427,7 +427,7 @@ CREATE TABLE `tbempleado` (
 
 INSERT INTO `tbempleado` (`empleadoid`, `empleadocedula`, `empleadonombre`, `empleadoapellidos`, `empleadotelefono`, `empleadodireccion`, `empleadofechaingreso`, `empleadofechasalida`, `empleadoestado`, `empleadotipoid`) VALUES
 (1, 1010101, 'Juan', 'Pérez', 88888888, 'San José', '2022-05-13', NULL, 1, 1),
-(2, 2020202, 'María', 'Rodríguez', 77777777, 'Cartago', '2022-04-15', NULL, 1, 2),
+(2, 12345678, 'María', 'Rodríguez', 77777777, 'Cartago', '2022-04-15', NULL, 1, 2),
 (3, 3030303, 'Pedro', 'González', 66666666, 'Heredia', '2022-03-25', NULL, 1, 1),
 (4, 4040404, 'Ana', 'Martínez', 55555555, 'Alajuela', '2022-02-28', NULL, 1, 2),
 (5, 5050505, 'Carlos', 'Fernández', 44444444, 'Guanacaste', '2022-01-10', NULL, 1, 1);
