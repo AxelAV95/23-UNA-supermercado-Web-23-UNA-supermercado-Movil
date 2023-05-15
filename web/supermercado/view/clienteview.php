@@ -105,7 +105,8 @@
                            echo '<td>'.$cliente['clientedireccion'].'</td>';
                            echo '<td>'.$cliente['clientetelefono'].'</td>';
                            echo '<td>'.$cliente['clientecorreo'].'</td>';
-                           echo '<td>'.$cliente['clientefechaafiliacion'].'</td>';
+                           //echo '<td>'.$cliente['clientefechaafiliacion'].'</td>';
+                           echo '<td>'.date('d-m-Y', strtotime($cliente['clientefechaafiliacion'])).'</td>';
                            echo '<td>';
                            echo '<span class="badge badge-light">'.$membresiabusiness->getNombreMembresia($cliente['clientetipomembresia'])[0]['membresiadescripcion'].'</span>';
                            echo '</td>';                

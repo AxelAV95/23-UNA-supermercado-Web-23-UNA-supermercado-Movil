@@ -1,3 +1,4 @@
+
 <div id="modalAgregarTipo" class="modal fade" role="dialog">
   
   <div class="modal-dialog">
@@ -15,14 +16,14 @@
 
           <div class="box-body">
 
-            <form id="formulario-insertar"  >
+            <form id="formulario-insertar" onsubmit="return validarFormulario();">
            
-
               <div class="form-group">
-                <input type="hidden" name="metodo" value="agregar">
-                <label >Descripción:</label>
+                <input type="hidden" name="metodo" value="agregar" onsubmit="return validarFormulario();">
+    
+                <label>Descripción:</label>
                 <input type="text" class="form-control" name="membresiadescripcion" id="membresiadescripcion" placeholder="Ingrese tipo de membresía">
-               
+  </div>   
               </div>
                          
              <center><button type="button" name="insertar" id="insertar" class="btn btn-primary">Insertar</button></center> 
@@ -36,3 +37,5 @@
   </div>
 
 </div>
+<script src="dist/js/validarMembresia.js"></script>
+

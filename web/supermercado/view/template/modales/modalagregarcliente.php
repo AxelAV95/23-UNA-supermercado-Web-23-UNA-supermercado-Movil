@@ -15,7 +15,7 @@
         <div class="modal-body">
 
           <div class="box-body">
-          <form method="POST" action="../business/clienteaction.php"  enctype="multipart/form-data">
+          <form method="POST" action="../business/clienteaction.php"  enctype="multipart/form-data" onsubmit="return validarFormulario();">
 
             <div class="form-group">
             <input type="hidden" name="accion" id="accion" value="agregar">
@@ -79,3 +79,4 @@
   </div>
 
 </div>
+<script src="dist/js/validarCliente.js"></script>
