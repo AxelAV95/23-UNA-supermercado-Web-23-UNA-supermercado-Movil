@@ -10,15 +10,8 @@
         private $productocategoria;
         private $productoproveedor;
 
-        public function __construct($id, $nombre, $precio,  $estado, $fechaIngreso, $stock,  $categoria, $productoproveedor) {
-            $this->productoid = $id;
-            $this->productonombre = $nombre;
-            $this->productoprecio = $precio;
-            $this->productoestado = $estado;
-            $this->productocategoria = $categoria;
-            $this->productoproveedor = $productoproveedor;
-            $this->productoFechaIngresoProducto = $fechaIngreso;
-            $this->stockProducto = $stock;
+        public function __construct() {
+         
         }
 
         function setIdProducto($id){
