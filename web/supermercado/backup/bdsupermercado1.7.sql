@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 15-05-2023 a las 05:46:18
+-- Tiempo de generación: 15-05-2023 a las 06:05:21
 -- Versión del servidor: 10.4.20-MariaDB
 -- Versión de PHP: 7.4.21
 
@@ -257,6 +257,12 @@ END$$
 
 DROP PROCEDURE IF EXISTS `obtenerClientes`$$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `obtenerClientes` ()  SELECT * FROM `tbcliente`$$
+
+DROP PROCEDURE IF EXISTS `obtenerClientesMembresia`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `obtenerClientesMembresia` ()  SELECT tbm.membresiadescripcion, COUNT(tb.clienteid) as total
+FROM tbmembresia tbm
+JOIN tbcliente tb ON tbm.membresiaid = tb.clientetipomembresia
+GROUP BY tbm.membresiadescripcion$$
 
 DROP PROCEDURE IF EXISTS `obtenerDatosSesion`$$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `obtenerDatosSesion` (IN `cedula` INT)  SELECT * FROM tbempleado INNER JOIN tbusuario ON tbempleado.empleadoid = tbusuario.usuarioempleadoid INNER JOIN tbtipousuario ON tbusuario.usuariotipo = tbtipousuario.tipoid WHERE tbempleado.empleadocedula = cedula$$
@@ -598,7 +604,7 @@ CREATE TABLE `tbusuario` (
 
 INSERT INTO `tbusuario` (`usuarioid`, `usuariopassword`, `usuarioempleadoid`, `usuariotipo`) VALUES
 (9, '$2y$10$cj9AiGyPMjYR5gSyipNJF.KT0MZcUpfuzOZN2ah7gsjw0gNNAlJcW', 2, 5),
-(11, '$2y$10$bjBFI.HfwTm0Z6ln5TmlveDFYbDdErgAfQ9BR..ND2/suWlKEskja', 1, 2);
+(11, '$2y$10$eB4NyyumS6rTKbOdltTkDem0B5s7zidoEmhp8x2aI7FQfLW26I45G', 1, 2);
 
 --
 -- Índices para tablas volcadas
