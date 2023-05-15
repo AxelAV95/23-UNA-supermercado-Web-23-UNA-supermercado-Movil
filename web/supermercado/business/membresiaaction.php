@@ -5,8 +5,9 @@ include 'membresiabusiness.php';
 	if(isset($_POST['metodo']) && $_POST['metodo'] == "agregar" && isset($_POST['membresiadescripcion'])){
 		$membresiadescripcion = $_POST['membresiadescripcion'];
 		$membresiaBusiness = new MembresiaBusiness();
-		$membresia = new Membresia(0,$membresiadescripcion);
-	
+		$membresia = new Membresia();
+        $membresia->setMembresiadescripcion($membresiadescripcion);
+				
 		$resultado = $membresiaBusiness->insertarMembresia($membresia);
 
 		if($resultado == 1){
@@ -19,8 +20,10 @@ include 'membresiabusiness.php';
 }else if(isset($_POST['metodo']) && $_POST['metodo'] == "actualizar" && isset($_POST['membresiadescripcion']) && isset($_POST['membresiaid']) ){
     $membresiaid = $_POST['membresiaid'];
     $membresiadescripcion = $_POST['membresiadescripcion'];
-
-	$membresia = new Membresia($membresiaid,$membresiadescripcion);
+    $membresia = new Membresia();
+    $membresia->setMembresiaid($membresiaid);
+    $membresia->setMembresiadescripcion($membresiadescripcion);
+            
 	
 	$membresiaBusiness = new MembresiaBusiness();
 

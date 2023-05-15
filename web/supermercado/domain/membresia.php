@@ -5,10 +5,8 @@
 		private $membresiaid;
 		private $membresiadescripcion;
 
-        public function __construct($membresiaid, $membresiadescripcion){
-            $this->membresiaid = $membresiaid;
-            $this->membresiadescripcion = $membresiadescripcion;
-
+        public function __construct(){
+          
         }
    
     public function getMembresiaid()
