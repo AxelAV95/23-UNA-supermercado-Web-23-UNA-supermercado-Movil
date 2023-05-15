@@ -54,6 +54,17 @@ class ProductoBusiness{
         return $this->productoData->getUltimoIdInsertado();
     }
 
+    public function obtenerProductosRecientes() {
+        return $this->productoData->obtenerProductosRecientes();
+    }
+
+    public function obtenerTotalProductos(){
+         return $this->productoData->obtenerTotalProductos();
+    }
+
+    public function obtenerTotalProductosCategoria(){
+        return $this->productoData->obtenerTotalProductosCategoria();
+    }
 
    
 

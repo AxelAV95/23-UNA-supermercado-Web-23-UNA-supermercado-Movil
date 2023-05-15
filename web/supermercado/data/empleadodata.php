@@ -16,6 +16,14 @@ class EmpleadoData extends Database{
 		return $stm->fetchAll(PDO::FETCH_ASSOC);
 	}
 
+	public function obtenerTotalEmpleados(){
+		$pdo = Database::conectar();
+		$stm = $pdo->prepare("CALL obtenerTotalEmpleados");
+		$stm->execute();
+		Database::desconectar();
+		return $stm->fetchAll(PDO::FETCH_ASSOC)[0]['total'];
+	}
+
 	//INSERTAR NUEVO EMPLEADO
 	public function insertarempleado($empleado){
 		$pdo = Database::conectar();
@@ -106,3 +114,9 @@ class EmpleadoData extends Database{
 }
 
 ?>
+
+<?php 
+	//$data = new EmpleadoData();
+
+	//print_r($data->obtenerTotalEmpleados()[0]['total']);
+ ?>

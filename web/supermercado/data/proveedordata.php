@@ -114,6 +114,60 @@ class ProveedorData extends Database{
             Database::desconectar();
             return $stm->fetchAll(PDO::FETCH_ASSOC);
         }
+
+         public function obtenerTotalProveedores(){
+            $pdo = Database::conectar();
+            $stm = $pdo->prepare("CALL obtenerTotalProveedores");
+            $stm->execute();
+            Database::desconectar();
+            return $stm->fetchAll(PDO::FETCH_ASSOC)[0]['total'];
+        }
+
+        public function obtenerTotalProductosProveedorChart() {
+            $pdo = Database::conectar();
+            $stm = $pdo->prepare("CALL obtenerTotalProductosProveedor()");
+            $stm->execute();
+
+            $proveedores = array();
+            $total = array();
+
+             while ($row = $stm->fetch(PDO::FETCH_ASSOC)) {
+                $proveedores[] = $row['proveedornombre'];
+                $total[] = $row['totalproductos'];
+            }
+             $data = array(
+                'labels' => $proveedores,
+                'datasets' => array(
+                    array(
+                        'label' => 'Total de productos suministrados por proveedor',
+                       'backgroundColor' => array(
+                            'rgb(255, 99, 132)',
+                            'rgb(54, 162, 235)',
+                            'rgb(255, 206, 86)',
+                            'rgb(75, 192, 192)',
+                            'rgb(153, 102, 255)',
+                            'rgb(255, 159, 64)'
+                        ),
+                        'borderColor' => array(
+                            'rgb(255,99,132)',
+                            'rgb(54, 162, 235)',
+                            'rgb(255, 206, 86)',
+                            'rgb(75, 192, 192)',
+                            'rgb(153, 102, 255)',
+                            'rgb(255, 159, 64)'
+                        ),
+
+                        'borderWidth' => 1,
+                        'data' => $total
+                    )
+                )
+            );
+
+            $json_data = json_encode($data);
+
+            Database::desconectar();
+            return $json_data;
+        }
 	
 }
 
@@ -121,3 +175,9 @@ class ProveedorData extends Database{
 
 
 ?>
+
+<?php 
+
+//	$data = new ProveedorData();
+//	echo $data->obtenerTotalProductosProveedorChart();
+ ?>

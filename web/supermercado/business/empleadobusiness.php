@@ -26,6 +26,9 @@ class EmpleadoBusiness{
         return $this->empleadoData->obtenerempleados();
     }
 
+    public function obtenerTotalEmpleados(){
+        return $this->empleadoData->obtenerTotalEmpleados();
+    }
 
 
 }

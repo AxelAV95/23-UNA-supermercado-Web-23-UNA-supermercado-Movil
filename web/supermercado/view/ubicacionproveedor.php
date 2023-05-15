@@ -8,8 +8,8 @@ $latitud = "";
 $longitud = "";
 $proveedornombre = "";
 foreach($proveedores as $row){
-  $latitud = $row['proveedorlat'];
-  $longitud = $row['proveedorlong'];
+ $latitud = $row['proveedorlat'];
+$longitud = $row['proveedorlong'];
   $proveedornombre = $row['proveedornombre'];
 }
 ?>
@@ -106,10 +106,11 @@ foreach($proveedores as $row){
       
           function initMap() {
   var map = new google.maps.Map(document.getElementById('map-container-google-2'), {
-    center: new google.maps.LatLng(10.3538414, -83.),
-    zoom: 8,
+    center: new google.maps.LatLng(<?php echo $latitud; ?>, <?php echo $longitud; ?>),
+    zoom: 16,
     heading: 90,
-    tilt: 45
+    tilt: 45,
+
   });
 
   var infoWindow = new google.maps.InfoWindow;
@@ -118,9 +119,10 @@ foreach($proveedores as $row){
 
 
   var marker = new google.maps.Marker({
-    map: map,
-    position: proveedorLatLng,
-  });
+  position: {lat: <?php echo $latitud; ?>, lng: <?php echo $longitud; ?>},
+  map: map,
+  title: "<?php echo $proveedornombre ?>"
+});
 
   const contentString =
     '<div id="content">' +

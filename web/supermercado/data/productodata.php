@@ -139,6 +139,70 @@
             return $stm->fetchAll(PDO::FETCH_ASSOC);
          }
 
+          public function obtenerProductosRecientes() {
+            $pdo = Database::conectar();
+            $stm = $pdo->prepare("CALL obtenerProductosRecientes()");
+            $stm->execute();
+            Database::desconectar();
+            return $stm->fetchAll(PDO::FETCH_ASSOC);
+         }
+
+         public function obtenerTotalProductos(){
+            $pdo = Database::conectar();
+            $stm = $pdo->prepare("CALL obtenerTotalProductos");
+            $stm->execute();
+            Database::desconectar();
+            return $stm->fetchAll(PDO::FETCH_ASSOC)[0]['total'];
+        }
+
+         public function obtenerTotalProductosCategoria(){
+            $pdo = Database::conectar();
+            $stm = $pdo->prepare("CALL obtenerTotalProductosCategoria");
+            $stm->execute();
+
+            $categorias = array();
+            $total = array();
+
+            while ($row = $stm->fetch(PDO::FETCH_ASSOC)) {
+                $categorias[] = $row['categorianombre'];
+                $total[] = $row['total'];
+            }
+
+            $data = array(
+                'labels' => $categorias,
+                'datasets' => array(
+                    array(
+                        'label' => 'Total de productos por categoría',
+                       'backgroundColor' => array(
+                            'rgb(255, 99, 132)',
+                            'rgb(54, 162, 235)',
+                            'rgb(255, 206, 86)',
+                            'rgb(75, 192, 192)',
+                            'rgb(153, 102, 255)',
+                            'rgb(255, 159, 64)'
+                        ),
+                        'borderColor' => array(
+                            'rgb(255,99,132)',
+                            'rgb(54, 162, 235)',
+                            'rgb(255, 206, 86)',
+                            'rgb(75, 192, 192)',
+                            'rgb(153, 102, 255)',
+                            'rgb(255, 159, 64)'
+                        ),
+
+                        'borderWidth' => 1,
+                        'data' => $total
+                    )
+                )
+            );
+
+            $json_data = json_encode($data);
+
+            Database::desconectar();
+            return $json_data;
+        }
+
+
          public function getAllTBHistorialProducto() {
             $pdo = Database::conectar();
             $stm = $pdo->prepare("CALL obtenerHistorialProducto()");
@@ -184,3 +248,9 @@
 
     }
 ?>
+
+<?php 
+
+    //$data = new ProductoData();
+   // echo $data->obtenerTotalProductosCategoria();
+ ?>
