@@ -25,7 +25,7 @@
 
               <div class="form-group">
                 <label >Cédula:</label>
-                <input type="text" class="form-control" name="empleadocedula" id="empleadocedula" placeholder="Ingrese cédula" required pattern="[0-9]+">
+                <input type="text" class="form-control" name="empleadocedula" id="empleadocedula" placeholder="Ingrese cédula" required pattern="[0-9]+" oninput="limitarLongitud(event)">
               </div>
 
               <div class="form-group">
@@ -40,7 +40,7 @@
 
               <div class="form-group">
                 <label >Teléfono:</label>
-                <input type="text" class="form-control" name="empleadotelefono" id="empleadotelefono" placeholder="Ingrese teléfono" maxlength="8" required pattern="[0-9]{8}">
+                <input type="text" class="form-control" name="empleadotelefono" id="empleadotelefono" placeholder="Ingrese teléfono" required pattern="[0-9]+" oninput="limitarLongitud(event)">
               </div>
 
               <div class="form-group">
@@ -92,3 +92,12 @@
   </div>
 
 </div>
+
+<script>
+  function limitarLongitud(event) {
+  var input = event.target;
+  if (input.value.length > 8) {
+    input.value = input.value.slice(0, 8);
+  }
+}
+</script>
