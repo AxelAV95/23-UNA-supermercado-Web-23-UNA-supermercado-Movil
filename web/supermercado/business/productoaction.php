@@ -62,8 +62,16 @@
 			
 
 				$productoBusiness = new ProductoBusiness();
-				$producto = new Producto($productoid, $productonombre,$productoprecio,$productoestado
-				,$productofechaingreso,$productostock,$productocategoriaid,$productoproveedorid);
+				
+				$producto = new Producto();			
+				$producto->setIdProducto($productoid);
+				$producto->setNombre($productonombre);
+				$producto->setPrecioProducto($productoprecio);
+				$producto->setEstadoProducto($productoestado);
+				$producto->setProductoFechaIngresoProducto($productofechaingreso);
+				$producto->setStockProducto($productostock);
+				$producto->setCategoriaProducto($productocategoriaid);
+				$producto->setProductoproveedor($productoproveedorid);
 				
 
 	    		$resultado = $productoBusiness->modificarProducto($producto);
