@@ -16,6 +16,11 @@ public class Descuento implements Serializable {
         this.membresiaid = membresiaid;
     }
 
+    public Descuento(float tarifa, int membresiaid) {
+        this.tarifa = tarifa;
+        this.membresiaid = membresiaid;
+    }
+
     public int getId() {
         return id;
     }

@@ -38,37 +38,37 @@ import java.util.ArrayList;
 
 import es.dmoral.toasty.Toasty;
 import una.ac.cr.supermercadoapp.R;
-import una.ac.cr.supermercadoapp.data.ProveedorData;
+import una.ac.cr.supermercadoapp.data.DescuentoData;
 import una.ac.cr.supermercadoapp.data.TipoEmpleadoData;
 import una.ac.cr.supermercadoapp.domain.AdministradorRed;
-import una.ac.cr.supermercadoapp.domain.Proveedor;
+import una.ac.cr.supermercadoapp.domain.Descuento;
 import una.ac.cr.supermercadoapp.domain.TipoEmpleado;
 import una.ac.cr.supermercadoapp.domain.TipoUsuario;
-import una.ac.cr.supermercadoapp.network.VolleyProveedor;
+import una.ac.cr.supermercadoapp.network.VolleyDescuento;
 import una.ac.cr.supermercadoapp.network.VolleySingleton;
 import una.ac.cr.supermercadoapp.network.VolleyTipoEmpleado;
 import una.ac.cr.supermercadoapp.network.VolleyTipoUsuario;
 import una.ac.cr.supermercadoapp.utils.MonitorRedUtils;
 import una.ac.cr.supermercadoapp.utils.NetworkUtils;
-import una.ac.cr.supermercadoapp.view.adapters.ProveedorAdapter;
+import una.ac.cr.supermercadoapp.view.adapters.DescuentoAdapter;
 import una.ac.cr.supermercadoapp.view.adapters.TipoEmpleadoAdapter;
 import una.ac.cr.supermercadoapp.view.adapters.TipoUsuarioAdapter;
-import una.ac.cr.supermercadoapp.view.interfaces.ProveedorICallback;
+import una.ac.cr.supermercadoapp.view.interfaces.DescuentoICallback;
 import una.ac.cr.supermercadoapp.view.interfaces.TipoEmpleadoICallback;
 import una.ac.cr.supermercadoapp.view.interfaces.TipoUsuarioICallback;
 
-public class ProveedorActivity extends AppCompatActivity {
+public class DescuentoActivity extends AppCompatActivity {
 
     private SharedPreferences credenciales;
-    private LottieAnimationView iconAgregar, iconProveedor;
+    private LottieAnimationView iconAgregar, iconDescuento;
 
-    private RecyclerView recyclerProveedor;
-    private RecyclerView.Adapter mAdaptadorProveedor;
-    private ArrayList<Proveedor> listaProveedores;
-    private SearchView searchProveedor;
+    private RecyclerView recyclerDescuento;
+    private RecyclerView.Adapter mAdaptadorDescuento;
+    private ArrayList<Descuento> listaDescuentos;
+    private SearchView searchDescuento;
     public static final int REQUEST_CODE = 1;
 
-    private ProveedorData proveedorData;
+    private DescuentoData descuentoData;
     public MonitorRedUtils monitorRedUtils;
 
 
@@ -103,7 +103,7 @@ public class ProveedorActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_proveedor);
+        setContentView(R.layout.activity_descuento);
         credenciales = getSharedPreferences("credenciales", Context.MODE_PRIVATE);
         String cedula  = credenciales.getString("cedula", null);
 
@@ -112,14 +112,14 @@ public class ProveedorActivity extends AppCompatActivity {
         iniciarWidgets();
         agregarEventos();
 
-        proveedorData = new ProveedorData(this);
+        descuentoData = new DescuentoData(this);
 
-        iconAgregar = findViewById(R.id.icon_add_proveedor);
+        iconAgregar = findViewById(R.id.icon_agregar_descuento);
         iconAgregar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                Intent intent = new Intent(ProveedorActivity.this, FormularioProveedorActivity.class);
+                Intent intent = new Intent(DescuentoActivity.this, FormularioDescuentoActivity.class);
                 intent.putExtra("metodo","agregar");
                 startActivity(intent);
 
@@ -130,51 +130,51 @@ public class ProveedorActivity extends AppCompatActivity {
 
 
     private void configurarRecycler() {
-        recyclerProveedor = findViewById(R.id.recycler_view_proveedor);
-        recyclerProveedor.setLayoutManager(new LinearLayoutManager(this,RecyclerView.VERTICAL,false));
-        recyclerProveedor.addItemDecoration(new HorizontalDividerItemDecoration.Builder(this)
+        recyclerDescuento = findViewById(R.id.recycler_view_descuento);
+        recyclerDescuento.setLayoutManager(new LinearLayoutManager(this,RecyclerView.VERTICAL,false));
+        recyclerDescuento.addItemDecoration(new HorizontalDividerItemDecoration.Builder(this)
                 .drawable(R.drawable.divider)
                 .size(3)
                 .margin(18,18)
                 .build());
 
         //Aquí se tendría que llenar la lista auxiliar con lo que hay en la BD del server
-        VolleyProveedor volleyProveedor = new VolleyProveedor();
+        VolleyDescuento volleyDescuento = new VolleyDescuento();
 
-        ProveedorICallback listener = new ProveedorICallback() {
+        DescuentoICallback listener = new DescuentoICallback() {
             @Override
-            public void onProveedorReceived(ArrayList<Proveedor> lista) {
-                listaProveedores = lista;
-                mAdaptadorProveedor = new ProveedorAdapter(launcher, listaProveedores, getApplicationContext());
-                ((ProveedorAdapter)mAdaptadorProveedor).setOnItemClickListener(new ProveedorAdapter.OnItemClickListener() {
+            public void onDescuentoReceived(ArrayList<Descuento> lista) {
+                listaDescuentos = lista;
+                mAdaptadorDescuento = new DescuentoAdapter(launcher, listaDescuentos, getApplicationContext());
+                ((DescuentoAdapter)mAdaptadorDescuento).setOnItemClickListener(new DescuentoAdapter.OnItemClickListener() {
                     @Override
                     public void onItemClick(int position) {
-                        volleyProveedor.eliminarProveedor(ProveedorActivity.this, listaProveedores.get(position),credenciales.getString("ip", "192.168.100.216"));
+                        volleyDescuento.eliminarDescuento(DescuentoActivity.this, listaDescuentos.get(position),credenciales.getString("ip", "192.168.100.216"));
                         actualizarLista();
 
                     }
                 });
-                ((ProveedorAdapter)mAdaptadorProveedor).setMode(Attributes.Mode.Single);
-                recyclerProveedor.setAdapter(mAdaptadorProveedor);
+                ((DescuentoAdapter)mAdaptadorDescuento).setMode(Attributes.Mode.Single);
+                recyclerDescuento.setAdapter(mAdaptadorDescuento);
 
-                recyclerProveedor.addOnScrollListener(onScrollListener);
+                recyclerDescuento.addOnScrollListener(onScrollListener);
 
             }
         };
 
-        volleyProveedor.obtenerProveedores(this,credenciales.getString("ip", "192.168.100.216"),listener);
+        volleyDescuento.obtenerDescuentos(this,credenciales.getString("ip", "192.168.100.216"),listener);
 
     }
 
 
     private void iniciarWidgets() {
         // cardViewTitulo = findViewById(R.id.contenedor_titulo);
-        searchProveedor = findViewById(R.id.barra_busqueda_proveedor);
-        searchProveedor.clearFocus();
-        iconProveedor = findViewById(R.id.icon_proveedores);
-        iconAgregar = findViewById(R.id.icon_add_proveedor);
+        searchDescuento = findViewById(R.id.barra_busqueda_te);
+        searchDescuento.clearFocus();
+        iconDescuento = findViewById(R.id.icon_ti_descuentos);
+        iconAgregar = findViewById(R.id.icon_agregar_descuento);
         int whiteColor = ContextCompat.getColor(this, R.color.white);
-        iconProveedor .addValueCallback(
+        iconDescuento .addValueCallback(
                 new KeyPath("**"),
                 LottieProperty.COLOR_FILTER,
                 new LottieValueCallback<>(new SimpleColorFilter(whiteColor)));
@@ -186,7 +186,7 @@ public class ProveedorActivity extends AppCompatActivity {
 
     private void verificarEstadoSesion(String cedula) {
         if(cedula == null){
-            Intent intent = new Intent(ProveedorActivity.this, LoginActivity.class);
+            Intent intent = new Intent(DescuentoActivity.this, LoginActivity.class);
             startActivity(intent);;
             finish();
         }
@@ -195,55 +195,55 @@ public class ProveedorActivity extends AppCompatActivity {
 
 
     private void actualizarLista() {
-        listaProveedores.clear();
-        VolleyProveedor volleyProveedor = new VolleyProveedor();
-        if(mAdaptadorProveedor == null){
+        listaDescuentos.clear();
+        VolleyDescuento volleyDescuento = new VolleyDescuento();
+        if(mAdaptadorDescuento == null){
             return;
         }else{
 
-            ProveedorICallback listener = new ProveedorICallback() {
+            DescuentoICallback listener = new DescuentoICallback() {
                 @Override
-                public void onProveedorReceived(ArrayList<Proveedor> lista) {
-                    listaProveedores = lista;
-                    ((ProveedorAdapter)mAdaptadorProveedor ).setListaProveedores(listaProveedores);
-                    mAdaptadorProveedor.notifyDataSetChanged();
+                public void onDescuentoReceived(ArrayList<Descuento> lista) {
+                    listaDescuentos = lista;
+                    ((DescuentoAdapter)mAdaptadorDescuento ).setListaDescuentos(listaDescuentos);
+                    mAdaptadorDescuento.notifyDataSetChanged();
                 }
             };
 
-            volleyProveedor.obtenerProveedores(this,credenciales.getString("ip", "192.168.100.216"),listener);
+            volleyDescuento.obtenerDescuentos(this,credenciales.getString("ip", "192.168.100.216"),listener);
 
         }
 
 
     }
 
-    public void filtrar(String dato){
-        ArrayList<Proveedor> filtrado = new ArrayList<>();
-        VolleyProveedor volleyProveedor = new VolleyProveedor();
-        ProveedorICallback listener = new ProveedorICallback() {
+    public void filtrar(Float dato){
+        ArrayList<Descuento> filtrado = new ArrayList<>();
+        VolleyDescuento volleyDescuento = new VolleyDescuento();
+        DescuentoICallback listener = new DescuentoICallback() {
             @Override
-            public void onProveedorReceived(ArrayList<Proveedor> lista) {
-                listaProveedores = lista;
-                for(Proveedor tu : listaProveedores){
-                    if(tu.getNombre().toLowerCase().contains(dato.toLowerCase())){
-                        filtrado.add(tu);
+            public void onDescuentoReceived(ArrayList<Descuento> lista) {
+                listaDescuentos = lista;
+                for(Descuento descuento : listaDescuentos){
+                    if(descuento.getTarifa()==(dato.floatValue())){
+                        filtrado.add(descuento);
                     }
                 }
 
-                listaProveedores = filtrado;
-                ((ProveedorAdapter)mAdaptadorProveedor).setListaProveedores(listaProveedores);
+                listaDescuentos = filtrado;
+                ((DescuentoAdapter)mAdaptadorDescuento).setListaDescuentos(listaDescuentos);
 
-                mAdaptadorProveedor.notifyDataSetChanged();
+                mAdaptadorDescuento.notifyDataSetChanged();
             }
         };
 
-        volleyProveedor.obtenerProveedores(this,credenciales.getString("ip", "192.168.100.216"),listener);
+        volleyDescuento.obtenerDescuentos(this,credenciales.getString("ip", "192.168.100.216"),listener);
 
 
     }
 
     private void agregarEventos() {
-        searchProveedor.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+        searchDescuento.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
                 return false;
@@ -256,7 +256,7 @@ public class ProveedorActivity extends AppCompatActivity {
                     actualizarLista();
                 }else{
                     actualizarLista();
-                    filtrar(newText);
+                    filtrar(((Float.parseFloat(newText)) ));
 
                 }
 
@@ -268,7 +268,7 @@ public class ProveedorActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                Intent intent = new Intent(ProveedorActivity.this, FormularioProveedorActivity.class);
+                Intent intent = new Intent(DescuentoActivity.this, FormularioDescuentoActivity.class);
                 intent.putExtra("metodo","agregar");
                 launcher.launch(intent);
 

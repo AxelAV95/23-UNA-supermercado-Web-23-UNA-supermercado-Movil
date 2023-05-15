@@ -29,6 +29,12 @@
         <activity
             android:name=".view.activities.ConfiguracionActivity"
             android:exported="false" />
+ 	 <activity
+            android:name=".view.activities.FormularioDescuentoActivity"
+            android:exported="false" />
+        <activity
+            android:name=".view.activities.DescuentoActivity"
+            android:exported="false" />
         <activity
             android:name=".view.activities.ClienteActivity"
             android:exported="false" />
