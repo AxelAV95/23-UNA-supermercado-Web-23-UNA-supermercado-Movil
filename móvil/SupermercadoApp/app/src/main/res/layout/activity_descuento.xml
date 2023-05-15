@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/bgtiemp"
+    android:background="@drawable/bgdesc"
     tools:context=".view.activities.DescuentoActivity">
 
 
@@ -21,7 +21,7 @@
         android:layout_marginBottom="10dp"
         app:lottie_autoPlay="true"
         app:lottie_loop="true"
-        app:lottie_rawRes="@raw/empleados" />
+        app:lottie_rawRes="@raw/clientes" />
 
     <com.airbnb.lottie.LottieAnimationView
         android:id="@+id/icon_agregar_descuento"

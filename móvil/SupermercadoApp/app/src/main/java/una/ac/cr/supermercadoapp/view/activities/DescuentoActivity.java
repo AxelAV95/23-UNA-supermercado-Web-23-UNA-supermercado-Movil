@@ -173,11 +173,6 @@ public class DescuentoActivity extends AppCompatActivity {
         searchDescuento.clearFocus();
         iconDescuento = findViewById(R.id.icon_ti_descuentos);
         iconAgregar = findViewById(R.id.icon_agregar_descuento);
-        int whiteColor = ContextCompat.getColor(this, R.color.white);
-        iconDescuento .addValueCallback(
-                new KeyPath("**"),
-                LottieProperty.COLOR_FILTER,
-                new LottieValueCallback<>(new SimpleColorFilter(whiteColor)));
 
 
     }

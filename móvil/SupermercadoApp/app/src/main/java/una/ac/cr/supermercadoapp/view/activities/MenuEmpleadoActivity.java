@@ -46,21 +46,27 @@ public class MenuEmpleadoActivity extends AppCompatActivity {
         cardProductos.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toasty.info(getApplicationContext(), "Productos", Toast.LENGTH_SHORT, true).show();
+                Intent intent = new Intent(MenuEmpleadoActivity.this,ProductoActivity.class);
+                startActivity(intent);
+                finish();
             }
         });
 
         cardCategorias.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toasty.info(getApplicationContext(), "Categorías", Toast.LENGTH_SHORT, true).show();
+                Intent intent = new Intent(MenuEmpleadoActivity.this,CategoriaActivity.class);
+                startActivity(intent);
+                finish();
             }
         });
 
         cardProveedor.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toasty.info(getApplicationContext(), "Proveedor", Toast.LENGTH_SHORT, true).show();
+                Intent intent = new Intent(MenuEmpleadoActivity.this,ProveedorActivity.class);
+                startActivity(intent);
+                finish();
             }
         });
 
@@ -74,7 +80,9 @@ public class MenuEmpleadoActivity extends AppCompatActivity {
         cardClientes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toasty.info(getApplicationContext(), "Clientes", Toast.LENGTH_SHORT, true).show();
+                Intent intent = new Intent(MenuEmpleadoActivity.this,ClienteActivity.class);
+                startActivity(intent);
+                finish();
             }
         });
 

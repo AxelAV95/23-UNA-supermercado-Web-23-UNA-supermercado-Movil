@@ -30,7 +30,7 @@ public class EmpleadoActivity extends AppCompatActivity {
     private LottieAnimationView tipoEmpleado,iconEmpleados;
 
     private PowerMenu powerMenu;
-
+    private SharedPreferences credenciales;
     private LottieAnimationView iconAgregar;
     private SearchView searchEmpleado; //buscador
 
@@ -46,9 +46,22 @@ public class EmpleadoActivity extends AppCompatActivity {
 
             }else if(item.title.equals("Menú principal")){
                 powerMenu.dismiss();
-                Intent intent = new Intent(EmpleadoActivity.this, MainActivity.class);
-                startActivity(intent);
-                finish();
+                String cedula = credenciales.getString("cedula", null);
+                String tipo = credenciales.getString("tipo",null);
+                if (cedula != null ) {
+
+                    if(tipo.equals("Administrador")){
+                        Intent intent = new Intent(EmpleadoActivity.this, MainActivity.class);
+                        startActivity(intent);
+                        finish();
+                    }else if(tipo.equals("Empleado")){
+                        Intent intent  = new Intent(EmpleadoActivity.this, MenuEmpleadoActivity.class);
+                        startActivity(intent);
+                        finish();
+                    }
+
+
+                }
             }
 
 
@@ -60,7 +73,7 @@ public class EmpleadoActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_empleado);
 
-        SharedPreferences credenciales = getSharedPreferences("credenciales", Context.MODE_PRIVATE);
+        credenciales = getSharedPreferences("credenciales", Context.MODE_PRIVATE);
         String cedula  = credenciales.getString("cedula", null);
 
         verificarEstadoSesion(cedula);

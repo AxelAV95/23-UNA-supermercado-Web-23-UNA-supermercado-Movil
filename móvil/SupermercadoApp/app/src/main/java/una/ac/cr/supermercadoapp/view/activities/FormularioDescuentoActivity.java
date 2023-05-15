@@ -89,7 +89,7 @@ public class FormularioDescuentoActivity extends AppCompatActivity {
     private void iniciarComponentes() {
         botonMetodo = findViewById(R.id.btn_metodo);
         tarifa = findViewById(R.id.form_des_tarifa);
-        membresia = findViewById(R.id.spinner_membresia);
+        //membresia = findViewById(R.id.spinner_membresia);
         spinnermembresia = findViewById(R.id.spinner_membresia);
 
     }

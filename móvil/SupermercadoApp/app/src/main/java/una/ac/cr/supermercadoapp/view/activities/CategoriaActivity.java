@@ -79,9 +79,24 @@ public class CategoriaActivity extends AppCompatActivity {
 
             if(item.title.equals("Menú principal")){
                 powerMenu.dismiss();
-                Intent intent = new Intent(CategoriaActivity.this, MainActivity.class);
-                startActivity(intent);
-                finish();
+
+                String cedula = credenciales.getString("cedula", null);
+                String tipo = credenciales.getString("tipo",null);
+                if (cedula != null ) {
+
+                    if(tipo.equals("Administrador")){
+                        Intent intent = new Intent(CategoriaActivity.this, MainActivity.class);
+                        startActivity(intent);
+                        finish();
+                    }else if(tipo.equals("Empleado")){
+                        Intent intent  = new Intent(CategoriaActivity.this, MenuEmpleadoActivity.class);
+                        startActivity(intent);
+                        finish();
+                    }
+
+
+                }
+
             }
             //Toast.makeText(getBaseContext(), item.title, Toast.LENGTH_SHORT).show();
 

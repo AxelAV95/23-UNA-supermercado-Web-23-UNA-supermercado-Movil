@@ -3,7 +3,9 @@ package una.ac.cr.supermercadoapp.view.activities;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
@@ -27,7 +29,7 @@ public class MembresiaActivity extends AppCompatActivity {
 
     private LottieAnimationView iconAgregar;
     private LottieAnimationView iconMenu;
-
+    private SharedPreferences credenciales;
     private PowerMenu powerMenu;
 
     private OnMenuItemClickListener<PowerMenuItem> onMenuItemClickListener = new OnMenuItemClickListener<PowerMenuItem>() {
@@ -36,9 +38,22 @@ public class MembresiaActivity extends AppCompatActivity {
 
             if(item.title.equals("Menú principal")){
                 powerMenu.dismiss();
-                Intent intent = new Intent(MembresiaActivity.this, MainActivity.class);
-                startActivity(intent);
-                finish();
+                String cedula = credenciales.getString("cedula", null);
+                String tipo = credenciales.getString("tipo",null);
+                if (cedula != null ) {
+
+                    if(tipo.equals("Administrador")){
+                        Intent intent = new Intent(MembresiaActivity.this, MainActivity.class);
+                        startActivity(intent);
+                        finish();
+                    }else if(tipo.equals("Empleado")){
+                        Intent intent  = new Intent(MembresiaActivity.this, MenuEmpleadoActivity.class);
+                        startActivity(intent);
+                        finish();
+                    }
+
+
+                }
             }
 
 
@@ -49,7 +64,7 @@ public class MembresiaActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_membresia);
-
+        credenciales = getSharedPreferences("credenciales", Context.MODE_PRIVATE);
         iconMenu = findViewById(R.id.icon_ver_membresias);
         int primaryColor = ContextCompat.getColor(this, R.color.primary);
         iconMenu.addValueCallback(

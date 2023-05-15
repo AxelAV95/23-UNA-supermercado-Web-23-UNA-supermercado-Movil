@@ -13,8 +13,11 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
+import android.graphics.Color;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.SearchView;
 import android.widget.Toast;
@@ -29,6 +32,10 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.daimajia.swipe.util.Attributes;
+import com.skydoves.powermenu.MenuAnimation;
+import com.skydoves.powermenu.OnMenuItemClickListener;
+import com.skydoves.powermenu.PowerMenu;
+import com.skydoves.powermenu.PowerMenuItem;
 import com.yqritc.recyclerviewflexibledivider.HorizontalDividerItemDecoration;
 
 import org.json.JSONException;
@@ -66,6 +73,8 @@ public class ProveedorActivity extends AppCompatActivity {
     private RecyclerView.Adapter mAdaptadorProveedor;
     private ArrayList<Proveedor> listaProveedores;
     private SearchView searchProveedor;
+    private PowerMenu powerMenu;
+
     public static final int REQUEST_CODE = 1;
 
     private ProveedorData proveedorData;
@@ -100,6 +109,33 @@ public class ProveedorActivity extends AppCompatActivity {
         }
     };
 
+    private OnMenuItemClickListener<PowerMenuItem> onMenuItemClickListener = new OnMenuItemClickListener<PowerMenuItem>() {
+        @Override
+        public void onItemClick(int position, PowerMenuItem item) {
+
+           if(item.title.equals("Menú principal")){
+                powerMenu.dismiss();
+               String cedula = credenciales.getString("cedula", null);
+               String tipo = credenciales.getString("tipo",null);
+               if (cedula != null ) {
+
+                   if(tipo.equals("Administrador")){
+                       Intent intent = new Intent(ProveedorActivity.this, MainActivity.class);
+                       startActivity(intent);
+                       finish();
+                   }else if(tipo.equals("Empleado")){
+                       Intent intent  = new Intent(ProveedorActivity.this, MenuEmpleadoActivity.class);
+                       startActivity(intent);
+                       finish();
+                   }
+
+
+               }
+            }
+            //Toast.makeText(getBaseContext(), item.title, Toast.LENGTH_SHORT).show();
+        }
+    };
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -114,7 +150,23 @@ public class ProveedorActivity extends AppCompatActivity {
 
         proveedorData = new ProveedorData(this);
 
+        powerMenu = new PowerMenu.Builder(this)
+
+                .addItem(new PowerMenuItem("Menú principal", false)) // add an item.
+                .setAnimation(MenuAnimation.SHOWUP_BOTTOM_RIGHT) // Animation start point (TOP | LEFT).
+                .setMenuRadius(10f) // sets the corner radius.
+                .setMenuShadow(10f) // sets the shadow.
+                .setTextColor(ContextCompat.getColor(this, R.color.dark_gray))
+                .setTextGravity(Gravity.CENTER)
+                .setTextTypeface(Typeface.create("sans-serif-medium", Typeface.BOLD))
+                .setSelectedTextColor(Color.WHITE)
+                .setMenuColor(Color.WHITE)
+                .setSelectedMenuColor(ContextCompat.getColor(getApplicationContext(), R.color.black))
+                .setOnMenuItemClickListener(onMenuItemClickListener)
+                .build();
+
         iconAgregar = findViewById(R.id.icon_add_proveedor);
+        iconProveedor = findViewById(R.id.icon_ver_proveedor);
         iconAgregar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -123,6 +175,17 @@ public class ProveedorActivity extends AppCompatActivity {
                 intent.putExtra("metodo","agregar");
                 startActivity(intent);
 
+            }
+        });
+
+        iconProveedor.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (powerMenu.isShowing()) {
+                    powerMenu.dismiss();
+                    return;
+                }
+                powerMenu.showAsDropDown(view);
             }
         });
     }
@@ -173,11 +236,7 @@ public class ProveedorActivity extends AppCompatActivity {
         searchProveedor.clearFocus();
         iconProveedor = findViewById(R.id.icon_proveedores);
         iconAgregar = findViewById(R.id.icon_add_proveedor);
-        int whiteColor = ContextCompat.getColor(this, R.color.white);
-        iconProveedor .addValueCallback(
-                new KeyPath("**"),
-                LottieProperty.COLOR_FILTER,
-                new LottieValueCallback<>(new SimpleColorFilter(whiteColor)));
+
 
 
     }
