@@ -55,7 +55,7 @@ public class VolleyProveedor {
                         String proveedorlongitud = jsonObject.getString("proveedorlong");
                         listaProveedores.add(new Proveedor( Integer.parseInt(proveedorid),proveedornombre,proveedordireccion,proveedortelefono,proveedorcorreo,
                                 proveedorlatitud,proveedorlongitud));
-                        Log.d("Proveedor =>", listaProveedores.toString());
+
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -102,10 +102,11 @@ public class VolleyProveedor {
                     if(resultado == -1){
                         Toasty.error(context, "Error al insertar en la base de datos local", Toast.LENGTH_SHORT, true).show();
                     }else{
-                        Intent returnIntent = new Intent();
-                        ((Activity) context).setResult(Activity.RESULT_OK, returnIntent);
-                        ((Activity) context).finish();
-                    }
+                    Toasty.success(context, "Se registró con éxito", Toast.LENGTH_SHORT, true).show();
+                    Intent returnIntent = new Intent();
+                    ((Activity) context).setResult(Activity.RESULT_OK, returnIntent);
+                    ((Activity) context).finish();
+                }
 
                 }else{
                     long resultado = proveedorData.insertarProveedor(new Proveedor(proveedor.getNombre(),proveedor.getDireccion(),proveedor.getTelefono(),
@@ -129,12 +130,14 @@ public class VolleyProveedor {
         JSONObject proveedorJson = new JSONObject();
         try {
             proveedorJson.put("metodo", "insertar");
-            proveedorJson.put("nombre",proveedor.getNombre());
-            proveedorJson.put("direccion",proveedor.getDireccion());
-            proveedorJson.put("telefono",proveedor.getTelefono());
-            proveedorJson.put("correo",proveedor.getCorreo());
-            proveedorJson.put("latitud",proveedor.getLatitud());
-            proveedorJson.put("longitud",proveedor.getLongitud());
+            proveedorJson.put("proveedorid",proveedor.getId());
+            proveedorJson.put("proveedornombre",proveedor.getNombre());
+            proveedorJson.put("proveedordireccion",proveedor.getDireccion());
+            proveedorJson.put("proveedorcorreo",proveedor.getCorreo());
+            proveedorJson.put("proveedortelefono",proveedor.getTelefono());
+
+          //  proveedorJson.put("latitud",proveedor.getLatitud());
+          //  proveedorJson.put("longitud",proveedor.getLongitud());
         } catch (JSONException e) {
             throw new RuntimeException(e);
         }
@@ -161,7 +164,7 @@ public class VolleyProveedor {
             @Override
             public void onErrorResponse(VolleyError error) {
                 Log.e("anyText",error.toString());
-                Toasty.error(context, "Error al actualizar", Toast.LENGTH_SHORT, true).show();
+                Toasty.error(context, "Error al actualizar el proveedor", Toast.LENGTH_SHORT, true).show();
             }
         });
 

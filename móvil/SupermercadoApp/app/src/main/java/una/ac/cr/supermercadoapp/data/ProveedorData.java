@@ -16,6 +16,13 @@ public class ProveedorData {
         helper = new SupermercadoDBHelper(context);
     }
 
+    public Cursor obtenerProveedores(){
+        db = helper.getReadableDatabase();
+        Cursor cursor  = db.rawQuery(DBUtils.CONSULTAR_PROVEEDOR, null);
+        return cursor;
+    }
+
+
     public long insertarProveedor(Proveedor proveedor){
         db = helper.getWritableDatabase();
         ContentValues valores = new ContentValues();
@@ -28,27 +35,26 @@ public class ProveedorData {
         return db.insert(DBUtils.PROVEEDOR,null,valores);
     }
 
+    public int eliminarProveedor(Proveedor proveedor){
+        db = helper.getWritableDatabase();
+        return db.delete(DBUtils.PROVEEDOR,"proveedorid = ?",new String[]{String.valueOf(proveedor.getId())});
+    }
+
     public int actualizarProveedor(Proveedor proveedor){
         db = helper.getWritableDatabase();
         ContentValues valores = new ContentValues();
+        valores.put("proveedorid",proveedor.getId());
         valores.put("proveedornombre",proveedor.getNombre());
         valores.put("proveedordireccion",proveedor.getDireccion());
         valores.put("proveedortelefono",proveedor.getTelefono());
         valores.put("proveedorcorreo",proveedor.getCorreo());
         valores.put("proveedorlat",proveedor.getLatitud());
         valores.put("proveedorlong",proveedor.getLongitud());
-        return db.update(DBUtils.PROVEEDOR, valores, "proveedoridid = ?",new String[]{String.valueOf(proveedor.getId())});
+        return db.update(DBUtils.PROVEEDOR, valores, "proveedorid = ?",new String[]{String.valueOf(proveedor.getId())});
     }
 
-    public int eliminarProveedor(Proveedor proveedor){
-        db = helper.getWritableDatabase();
-        return db.delete(DBUtils.PROVEEDOR,"proveedorid = ?",new String[]{String.valueOf(proveedor.getId())});
-    }
 
-    public Cursor obtenerProveedores() {
-        db = helper.getReadableDatabase();
-        Cursor cursor = db.rawQuery(DBUtils.CONSULTAR_PROVEEDOR, null);
-        return cursor;
-    }
+
+
 
 }
