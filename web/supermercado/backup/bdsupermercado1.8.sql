@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.0
+-- version 5.1.1
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 16-05-2023 a las 04:43:17
--- Versión del servidor: 10.4.27-MariaDB
--- Versión de PHP: 7.4.33
+-- Tiempo de generación: 16-05-2023 a las 05:13:45
+-- Versión del servidor: 10.4.20-MariaDB
+-- Versión de PHP: 7.4.21
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -28,14 +28,14 @@ DELIMITER $$
 -- Procedimientos
 --
 DROP PROCEDURE IF EXISTS `actualizarInformacionSupermercado`$$
-CREATE DEFINER=`root`@`localhost` PROCEDURE `actualizarInformacionSupermercado` (IN `nombre` VARCHAR(255), IN `telefono` INT, IN `correo` VARCHAR(255), IN `direccion` VARCHAR(255), IN `logo` VARCHAR(255), IN `id` INT)   UPDATE `tbsupermercado` SET `supermercadonombre`= nombre,`supermercadotelefono`= telefono,`supermercadocorreo`=correo,
+CREATE DEFINER=`root`@`localhost` PROCEDURE `actualizarInformacionSupermercado` (IN `nombre` VARCHAR(255), IN `telefono` INT, IN `correo` VARCHAR(255), IN `direccion` VARCHAR(255), IN `logo` VARCHAR(255), IN `id` INT)  UPDATE `tbsupermercado` SET `supermercadonombre`= nombre,`supermercadotelefono`= telefono,`supermercadocorreo`=correo,
 `supermercadodireccion`=direccion,`supermercadologo`= logo WHERE `supermercadoid` = id$$
 
 DROP PROCEDURE IF EXISTS `actualizarTipoEmpleado`$$
-CREATE DEFINER=`root`@`localhost` PROCEDURE `actualizarTipoEmpleado` (IN `id` INT, IN `descripcion` VARCHAR(255))   UPDATE `tbtipoempleado` SET `tipodescripcion`= descripcion WHERE `tipoid` = id$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `actualizarTipoEmpleado` (IN `id` INT, IN `descripcion` VARCHAR(255))  UPDATE `tbtipoempleado` SET `tipodescripcion`= descripcion WHERE `tipoid` = id$$
 
 DROP PROCEDURE IF EXISTS `eliminarCategoria`$$
-CREATE DEFINER=`root`@`localhost` PROCEDURE `eliminarCategoria` (IN `id` INT)   BEGIN
+CREATE DEFINER=`root`@`localhost` PROCEDURE `eliminarCategoria` (IN `id` INT)  BEGIN
     DECLARE error INT;
     DECLARE EXIT HANDLER FOR SQLEXCEPTION
     BEGIN
@@ -51,24 +51,25 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `eliminarCategoria` (IN `id` INT)   
 END$$
 
 DROP PROCEDURE IF EXISTS `eliminarCliente`$$
-CREATE DEFINER=`root`@`localhost` PROCEDURE `eliminarCliente` (IN `id` INT(11))   DELETE FROM `tbcliente` WHERE `clienteid` = id$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `eliminarCliente` (IN `id` INT(11))  DELETE FROM `tbcliente` WHERE `clienteid` = id$$
 
 DROP PROCEDURE IF EXISTS `eliminarDescuento`$$
-CREATE DEFINER=`root`@`localhost` PROCEDURE `eliminarDescuento` (IN `id` INT(11))   DELETE FROM `tbdescuento` WHERE `descuentoid` = id$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `eliminarDescuento` (IN `id` INT(11))  DELETE FROM `tbdescuento` WHERE `descuentoid` = id$$
 
 DROP PROCEDURE IF EXISTS `eliminarempleado`$$
-CREATE DEFINER=`root`@`localhost` PROCEDURE `eliminarempleado` (IN `id` INT)   DELETE FROM `tbempleado` WHERE `empleadoid` = id$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `eliminarempleado` (IN `id` INT)  DELETE FROM `tbempleado` WHERE `empleadoid` = id$$
 
 DROP PROCEDURE IF EXISTS `eliminarMembresias`$$
-CREATE DEFINER=`root`@`localhost` PROCEDURE `eliminarMembresias` (IN `id` INT)   DELETE FROM `tbmembresia` WHERE `membresiaid` = id$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `eliminarMembresias` (IN `id` INT)  DELETE FROM `tbmembresia` WHERE `membresiaid` = id$$
 
 DROP PROCEDURE IF EXISTS `eliminarProducto`$$
-CREATE DEFINER=`root`@`localhost` PROCEDURE `eliminarProducto` (IN `p_id` INT)   BEGIN
+CREATE DEFINER=`root`@`localhost` PROCEDURE `eliminarProducto` (IN `p_id` INT)  BEGIN
   DELETE FROM tbproducto WHERE productoid = p_id;
 END$$
 
 DROP PROCEDURE IF EXISTS `eliminarProveedor`$$
-CREATE DEFINER=`root`@`localhost` PROCEDURE `eliminarProveedor` (IN `id` INT(20))  NO SQL BEGIN
+CREATE DEFINER=`root`@`localhost` PROCEDURE `eliminarProveedor` (IN `id` INT(20))  NO SQL
+BEGIN
 	DECLARE error INT;
 	DECLARE EXIT HANDLER FOR SQLEXCEPTION
     BEGIN
@@ -85,16 +86,16 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `eliminarProveedor` (IN `id` INT(20)
 END$$
 
 DROP PROCEDURE IF EXISTS `eliminarTipoEmpleado`$$
-CREATE DEFINER=`root`@`localhost` PROCEDURE `eliminarTipoEmpleado` (IN `id` INT)   DELETE FROM `tbtipoempleado` WHERE `tipoid` = id$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `eliminarTipoEmpleado` (IN `id` INT)  DELETE FROM `tbtipoempleado` WHERE `tipoid` = id$$
 
 DROP PROCEDURE IF EXISTS `eliminarTipoUsuario`$$
-CREATE DEFINER=`root`@`localhost` PROCEDURE `eliminarTipoUsuario` (IN `id` INT)   DELETE FROM `tbtipousuario` WHERE `tipoid` = id$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `eliminarTipoUsuario` (IN `id` INT)  DELETE FROM `tbtipousuario` WHERE `tipoid` = id$$
 
 DROP PROCEDURE IF EXISTS `eliminarUsuario`$$
-CREATE DEFINER=`root`@`localhost` PROCEDURE `eliminarUsuario` (IN `id` INT)   DELETE FROM `tbusuario` WHERE `usuarioid` = id$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `eliminarUsuario` (IN `id` INT)  DELETE FROM `tbusuario` WHERE `usuarioid` = id$$
 
 DROP PROCEDURE IF EXISTS `insertarCategoria`$$
-CREATE DEFINER=`root`@`localhost` PROCEDURE `insertarCategoria` (IN `nombre` VARCHAR(50))   BEGIN
+CREATE DEFINER=`root`@`localhost` PROCEDURE `insertarCategoria` (IN `nombre` VARCHAR(50))  BEGIN
     DECLARE descripcion_count INT;
     SET descripcion_count = (SELECT COUNT(*) FROM tbcategoria WHERE categorianombre = nombre);
 
@@ -109,19 +110,19 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `insertarCategoria` (IN `nombre` VAR
 END$$
 
 DROP PROCEDURE IF EXISTS `insertarCliente`$$
-CREATE DEFINER=`root`@`localhost` PROCEDURE `insertarCliente` (IN `id` INT(11), IN `nombre` VARCHAR(250), IN `apellidos` VARCHAR(250), IN `cedula` INT(11), IN `direccion` VARCHAR(250), IN `telefono` INT(11), IN `correo` VARCHAR(250), IN `fechaafiliacion` VARCHAR(250), IN `tipomembresia` INT(11))   INSERT INTO `tbcliente`(`clienteid`, `clientenombre`, `clienteapellidos`, `clientecedula`, `clientedireccion`, `clientetelefono`, `clientecorreo`, `clientefechaafiliacion`, `clientetipomembresia`) VALUES (id,nombre,apellidos,cedula,direccion,telefono,correo,fechaafiliacion,tipomembresia)$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `insertarCliente` (IN `id` INT(11), IN `nombre` VARCHAR(250), IN `apellidos` VARCHAR(250), IN `cedula` INT(11), IN `direccion` VARCHAR(250), IN `telefono` INT(11), IN `correo` VARCHAR(250), IN `fechaafiliacion` VARCHAR(250), IN `tipomembresia` INT(11))  INSERT INTO `tbcliente`(`clienteid`, `clientenombre`, `clienteapellidos`, `clientecedula`, `clientedireccion`, `clientetelefono`, `clientecorreo`, `clientefechaafiliacion`, `clientetipomembresia`) VALUES (id,nombre,apellidos,cedula,direccion,telefono,correo,fechaafiliacion,tipomembresia)$$
 
 DROP PROCEDURE IF EXISTS `insertarDescuento`$$
-CREATE DEFINER=`root`@`localhost` PROCEDURE `insertarDescuento` (IN `id` INT(11), IN `tarifa` FLOAT(11), IN `tipomembresia` INT(11))   INSERT INTO `tbdescuento` (`descuentoid`, `descuentotarifa`, `descuentomembresiaid`) VALUES (id, tarifa, tipomembresia)$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `insertarDescuento` (IN `id` INT(11), IN `tarifa` FLOAT(11), IN `tipomembresia` INT(11))  INSERT INTO `tbdescuento` (`descuentoid`, `descuentotarifa`, `descuentomembresiaid`) VALUES (id, tarifa, tipomembresia)$$
 
 DROP PROCEDURE IF EXISTS `insertarempleado`$$
-CREATE DEFINER=`root`@`localhost` PROCEDURE `insertarempleado` (IN `id` INT, IN `cedula` INT, IN `nombre` VARCHAR(255), IN `apellidos` VARCHAR(255), IN `telefono` INT, IN `direccion` VARCHAR(255), IN `fechaingreso` DATE, IN `fechasalida` DATE, IN `estado` INT, IN `tipoempleado` INT)   INSERT INTO `tbempleado`(`empleadoid`,`empleadocedula`, `empleadonombre`,`empleadoapellidos`, `empleadotelefono`,`empleadodireccion`, `empleadofechaingreso`,`empleadofechasalida`, `empleadoestado`,`empleadotipoid`) VALUES (id,cedula,nombre,apellidos,telefono,direccion,fechaingreso,fechasalida,estado,tipoempleado)$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `insertarempleado` (IN `id` INT, IN `cedula` INT, IN `nombre` VARCHAR(255), IN `apellidos` VARCHAR(255), IN `telefono` INT, IN `direccion` VARCHAR(255), IN `fechaingreso` DATE, IN `fechasalida` DATE, IN `estado` INT, IN `tipoempleado` INT)  INSERT INTO `tbempleado`(`empleadoid`,`empleadocedula`, `empleadonombre`,`empleadoapellidos`, `empleadotelefono`,`empleadodireccion`, `empleadofechaingreso`,`empleadofechasalida`, `empleadoestado`,`empleadotipoid`) VALUES (id,cedula,nombre,apellidos,telefono,direccion,fechaingreso,fechasalida,estado,tipoempleado)$$
 
 DROP PROCEDURE IF EXISTS `insertarMembresia`$$
-CREATE DEFINER=`root`@`localhost` PROCEDURE `insertarMembresia` (IN `membresiaid` INT, IN `membresiadescripcion` VARCHAR(250))   INSERT INTO `tbmembresia` (`membresiaid`, `membresiadescripcion`) VALUES (membresiaid,membresiadescripcion)$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `insertarMembresia` (IN `membresiaid` INT, IN `membresiadescripcion` VARCHAR(250))  INSERT INTO `tbmembresia` (`membresiaid`, `membresiadescripcion`) VALUES (membresiaid,membresiadescripcion)$$
 
 DROP PROCEDURE IF EXISTS `insertarProducto`$$
-CREATE DEFINER=`root`@`localhost` PROCEDURE `insertarProducto` (IN `p_id` INT, IN `p_nombre` VARCHAR(100), IN `p_precio` DECIMAL(10,2), IN `p_fecha_ingreso` DATE, IN `p_stock` INT, IN `p_estado` VARCHAR(50), IN `p_categoria_id` INT, IN `p_proveedor_id` INT)   BEGIN
+CREATE DEFINER=`root`@`localhost` PROCEDURE `insertarProducto` (IN `p_id` INT, IN `p_nombre` VARCHAR(100), IN `p_precio` DECIMAL(10,2), IN `p_fecha_ingreso` DATE, IN `p_stock` INT, IN `p_estado` VARCHAR(50), IN `p_categoria_id` INT, IN `p_proveedor_id` INT)  BEGIN
   DECLARE nombre_existente INT;
 
   -- Verificar si el nombre de producto ya existe en la tabla
@@ -140,7 +141,8 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `insertarProducto` (IN `p_id` INT, I
 END$$
 
 DROP PROCEDURE IF EXISTS `insertarProveedor`$$
-CREATE DEFINER=`root`@`localhost` PROCEDURE `insertarProveedor` (IN `id` INT(20), IN `nombre` VARCHAR(255), IN `direccion` VARCHAR(255), IN `correo` VARCHAR(255), IN `telefono` INT(20), IN `latitud` VARCHAR(255), IN `longitud` VARCHAR(255))  NO SQL BEGIN
+CREATE DEFINER=`root`@`localhost` PROCEDURE `insertarProveedor` (IN `id` INT(20), IN `nombre` VARCHAR(255), IN `direccion` VARCHAR(255), IN `correo` VARCHAR(255), IN `telefono` INT(20), IN `latitud` VARCHAR(255), IN `longitud` VARCHAR(255))  NO SQL
+BEGIN
 	DECLARE error INT;
 	DECLARE EXIT HANDLER FOR SQLEXCEPTION
     BEGIN
@@ -157,16 +159,16 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `insertarProveedor` (IN `id` INT(20)
 END$$
 
 DROP PROCEDURE IF EXISTS `insertarTipoEmpleado`$$
-CREATE DEFINER=`root`@`localhost` PROCEDURE `insertarTipoEmpleado` (IN `id` INT, IN `descripcion` VARCHAR(150))   INSERT INTO `tbtipoempleado`(`tipoid`, `tipodescripcion`) VALUES (id,descripcion)$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `insertarTipoEmpleado` (IN `id` INT, IN `descripcion` VARCHAR(150))  INSERT INTO `tbtipoempleado`(`tipoid`, `tipodescripcion`) VALUES (id,descripcion)$$
 
 DROP PROCEDURE IF EXISTS `insertarTipoUsuario`$$
-CREATE DEFINER=`root`@`localhost` PROCEDURE `insertarTipoUsuario` (IN `id` INT, IN `descripcion` VARCHAR(255))   INSERT INTO `tbtipousuario`(`tipoid`, `tipodescripcion`) VALUES (id,descripcion)$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `insertarTipoUsuario` (IN `id` INT, IN `descripcion` VARCHAR(255))  INSERT INTO `tbtipousuario`(`tipoid`, `tipodescripcion`) VALUES (id,descripcion)$$
 
 DROP PROCEDURE IF EXISTS `insertarUsuario`$$
-CREATE DEFINER=`root`@`localhost` PROCEDURE `insertarUsuario` (IN `pass` VARCHAR(255), IN `empleado` INT, IN `tipo` INT)   INSERT INTO `tbusuario`(`usuariopassword`, `usuarioempleadoid`, `usuariotipo`) VALUES (pass,empleado,tipo)$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `insertarUsuario` (IN `pass` VARCHAR(255), IN `empleado` INT, IN `tipo` INT)  INSERT INTO `tbusuario`(`usuariopassword`, `usuarioempleadoid`, `usuariotipo`) VALUES (pass,empleado,tipo)$$
 
 DROP PROCEDURE IF EXISTS `modificarCategoria`$$
-CREATE DEFINER=`root`@`localhost` PROCEDURE `modificarCategoria` (IN `id` INT, IN `nombre` VARCHAR(255))   BEGIN
+CREATE DEFINER=`root`@`localhost` PROCEDURE `modificarCategoria` (IN `id` INT, IN `nombre` VARCHAR(255))  BEGIN
     DECLARE error INT;
     DECLARE EXIT HANDLER FOR SQLEXCEPTION
     BEGIN
@@ -190,13 +192,13 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `modificarCategoria` (IN `id` INT, I
 END$$
 
 DROP PROCEDURE IF EXISTS `modificarCliente`$$
-CREATE DEFINER=`root`@`localhost` PROCEDURE `modificarCliente` (IN `nombre` VARCHAR(250), IN `apellidos` VARCHAR(250), IN `cedula` INT(11), IN `direccion` VARCHAR(250), IN `telefono` INT(11), IN `correo` VARCHAR(250), IN `fecha` VARCHAR(250), IN `tipomembresia` INT(11), IN `id` INT(11))   UPDATE `tbcliente` SET `clientenombre`= nombre, `clienteapellidos`= apellidos, `clientecedula`= cedula, `clientedireccion`= direccion, `clientetelefono`= telefono, `clientecorreo`= correo, `clientefechaafiliacion`= fecha, `clientetipomembresia`= tipomembresia WHERE `clienteid` = id$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `modificarCliente` (IN `nombre` VARCHAR(250), IN `apellidos` VARCHAR(250), IN `cedula` INT(11), IN `direccion` VARCHAR(250), IN `telefono` INT(11), IN `correo` VARCHAR(250), IN `fecha` VARCHAR(250), IN `tipomembresia` INT(11), IN `id` INT(11))  UPDATE `tbcliente` SET `clientenombre`= nombre, `clienteapellidos`= apellidos, `clientecedula`= cedula, `clientedireccion`= direccion, `clientetelefono`= telefono, `clientecorreo`= correo, `clientefechaafiliacion`= fecha, `clientetipomembresia`= tipomembresia WHERE `clienteid` = id$$
 
 DROP PROCEDURE IF EXISTS `modificarDescuento`$$
-CREATE DEFINER=`root`@`localhost` PROCEDURE `modificarDescuento` (IN `tarifa` FLOAT(7), IN `membresiaid` INT(11), IN `id` INT(11))   UPDATE `tbdescuento` SET `descuentotarifa`= tarifa, `descuentomembresiaid`= membresiaid WHERE `descuentoid` = id$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `modificarDescuento` (IN `tarifa` FLOAT(7), IN `membresiaid` INT(11), IN `id` INT(11))  UPDATE `tbdescuento` SET `descuentotarifa`= tarifa, `descuentomembresiaid`= membresiaid WHERE `descuentoid` = id$$
 
 DROP PROCEDURE IF EXISTS `modificarempleado`$$
-CREATE DEFINER=`root`@`localhost` PROCEDURE `modificarempleado` (IN `id` INT, IN `cedula` INT, IN `nombre` VARCHAR(255), IN `apellidos` VARCHAR(255), IN `telefono` INT, IN `direccion` VARCHAR(255), IN `fechaingreso` DATE, IN `fechasalida` DATE, IN `estado` INT, IN `tipoempleado` INT)   UPDATE `tbempleado` SET `empleadocedula`= cedula,
+CREATE DEFINER=`root`@`localhost` PROCEDURE `modificarempleado` (IN `id` INT, IN `cedula` INT, IN `nombre` VARCHAR(255), IN `apellidos` VARCHAR(255), IN `telefono` INT, IN `direccion` VARCHAR(255), IN `fechaingreso` DATE, IN `fechasalida` DATE, IN `estado` INT, IN `tipoempleado` INT)  UPDATE `tbempleado` SET `empleadocedula`= cedula,
 `empleadonombre`= nombre,
 `empleadoapellidos`= apellidos,
 `empleadotelefono`= telefono,
@@ -208,10 +210,10 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `modificarempleado` (IN `id` INT, IN
 WHERE `empleadoid` = id$$
 
 DROP PROCEDURE IF EXISTS `modificarMembresia`$$
-CREATE DEFINER=`root`@`localhost` PROCEDURE `modificarMembresia` (IN `descripcion` VARCHAR(250), IN `id` INT)   UPDATE `tbmembresia` SET `membresiadescripcion`= descripcion WHERE `membresiaid` = id$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `modificarMembresia` (IN `descripcion` VARCHAR(250), IN `id` INT)  UPDATE `tbmembresia` SET `membresiadescripcion`= descripcion WHERE `membresiaid` = id$$
 
 DROP PROCEDURE IF EXISTS `modificarProducto`$$
-CREATE DEFINER=`root`@`localhost` PROCEDURE `modificarProducto` (IN `p_id` INT, IN `p_nombre` VARCHAR(255), IN `p_precio` DECIMAL(10,2), IN `p_fecha_ingreso` DATE, IN `p_stock` INT, IN `p_estado` VARCHAR(50), IN `p_categoria_id` INT, IN `p_proveedor_id` INT)   BEGIN
+CREATE DEFINER=`root`@`localhost` PROCEDURE `modificarProducto` (IN `p_id` INT, IN `p_nombre` VARCHAR(255), IN `p_precio` DECIMAL(10,2), IN `p_fecha_ingreso` DATE, IN `p_stock` INT, IN `p_estado` VARCHAR(50), IN `p_categoria_id` INT, IN `p_proveedor_id` INT)  BEGIN
     DECLARE error INT;
     DECLARE EXIT HANDLER FOR SQLEXCEPTION
     BEGIN
@@ -244,7 +246,8 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `modificarProducto` (IN `p_id` INT, 
 END$$
 
 DROP PROCEDURE IF EXISTS `modificarProveedor`$$
-CREATE DEFINER=`root`@`localhost` PROCEDURE `modificarProveedor` (IN `id` INT(20), IN `nombre` VARCHAR(255), IN `direccion` VARCHAR(255), IN `correo` VARCHAR(255), IN `telefono` INT(20), IN `latitud` VARCHAR(255), IN `longitud` VARCHAR(255))  NO SQL BEGIN
+CREATE DEFINER=`root`@`localhost` PROCEDURE `modificarProveedor` (IN `id` INT(20), IN `nombre` VARCHAR(255), IN `direccion` VARCHAR(255), IN `correo` VARCHAR(255), IN `telefono` INT(20), IN `latitud` VARCHAR(255), IN `longitud` VARCHAR(255))  NO SQL
+BEGIN
 	DECLARE error INT;
 	DECLARE EXIT HANDLER FOR SQLEXCEPTION
     BEGIN
@@ -262,98 +265,100 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `modificarProveedor` (IN `id` INT(20
 END$$
 
 DROP PROCEDURE IF EXISTS `modificarTipoUsuario`$$
-CREATE DEFINER=`root`@`localhost` PROCEDURE `modificarTipoUsuario` (IN `descripcion` VARCHAR(255), IN `id` INT)   UPDATE `tbtipousuario` SET `tipodescripcion`= descripcion WHERE `tipoid` = id$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `modificarTipoUsuario` (IN `descripcion` VARCHAR(255), IN `id` INT)  UPDATE `tbtipousuario` SET `tipodescripcion`= descripcion WHERE `tipoid` = id$$
 
 DROP PROCEDURE IF EXISTS `modificarUsuario`$$
-CREATE DEFINER=`root`@`localhost` PROCEDURE `modificarUsuario` (IN `pass` VARCHAR(255), IN `tipo` INT, IN `id` INT)   UPDATE `tbusuario` SET `usuariopassword`= pass, `usuariotipo`= tipo WHERE `usuarioid` = id$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `modificarUsuario` (IN `pass` VARCHAR(255), IN `tipo` INT, IN `id` INT)  UPDATE `tbusuario` SET `usuariopassword`= pass, `usuariotipo`= tipo WHERE `usuarioid` = id$$
 
 DROP PROCEDURE IF EXISTS `obtenerCategoriaNombre`$$
-CREATE DEFINER=`root`@`localhost` PROCEDURE `obtenerCategoriaNombre` (IN `categoria_id` INT)   SELECT categorianombre FROM tbcategoria where categoriaid = categoria_id$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `obtenerCategoriaNombre` (IN `categoria_id` INT)  SELECT categorianombre FROM tbcategoria where categoriaid = categoria_id$$
 
 DROP PROCEDURE IF EXISTS `obtenerCategoriaPorId`$$
-CREATE DEFINER=`root`@`localhost` PROCEDURE `obtenerCategoriaPorId` (IN `id` INT)   BEGIN
+CREATE DEFINER=`root`@`localhost` PROCEDURE `obtenerCategoriaPorId` (IN `id` INT)  BEGIN
     SELECT * FROM `tbcategoria` WHERE `categoriaid` = id;
 END$$
 
 DROP PROCEDURE IF EXISTS `obtenerCategorias`$$
-CREATE DEFINER=`root`@`localhost` PROCEDURE `obtenerCategorias` ()   BEGIN
+CREATE DEFINER=`root`@`localhost` PROCEDURE `obtenerCategorias` ()  BEGIN
     SELECT * FROM `tbcategoria`;
 END$$
 
 DROP PROCEDURE IF EXISTS `obtenerClientes`$$
-CREATE DEFINER=`root`@`localhost` PROCEDURE `obtenerClientes` ()   SELECT * FROM `tbcliente`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `obtenerClientes` ()  SELECT * FROM `tbcliente`$$
 
 DROP PROCEDURE IF EXISTS `obtenerClientesMembresia`$$
-CREATE DEFINER=`root`@`localhost` PROCEDURE `obtenerClientesMembresia` ()   SELECT tbm.membresiadescripcion, COUNT(tb.clienteid) as total
+CREATE DEFINER=`root`@`localhost` PROCEDURE `obtenerClientesMembresia` ()  SELECT tbm.membresiadescripcion, COUNT(tb.clienteid) as total
 FROM tbmembresia tbm
 JOIN tbcliente tb ON tbm.membresiaid = tb.clientetipomembresia
 GROUP BY tbm.membresiadescripcion$$
 
 DROP PROCEDURE IF EXISTS `obtenerDatosSesion`$$
-CREATE DEFINER=`root`@`localhost` PROCEDURE `obtenerDatosSesion` (IN `cedula` INT)   SELECT * FROM tbempleado INNER JOIN tbusuario ON tbempleado.empleadoid = tbusuario.usuarioempleadoid INNER JOIN tbtipousuario ON tbusuario.usuariotipo = tbtipousuario.tipoid WHERE tbempleado.empleadocedula = cedula$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `obtenerDatosSesion` (IN `cedula` INT)  SELECT * FROM tbempleado INNER JOIN tbusuario ON tbempleado.empleadoid = tbusuario.usuarioempleadoid INNER JOIN tbtipousuario ON tbusuario.usuariotipo = tbtipousuario.tipoid WHERE tbempleado.empleadocedula = cedula$$
 
 DROP PROCEDURE IF EXISTS `obtenerDescuentos`$$
-CREATE DEFINER=`root`@`localhost` PROCEDURE `obtenerDescuentos` ()   SELECT * FROM `tbdescuento`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `obtenerDescuentos` ()  SELECT * FROM `tbdescuento`$$
 
 DROP PROCEDURE IF EXISTS `obtenerempleados`$$
-CREATE DEFINER=`root`@`localhost` PROCEDURE `obtenerempleados` ()   SELECT * FROM `tbempleado` 
+CREATE DEFINER=`root`@`localhost` PROCEDURE `obtenerempleados` ()  SELECT * FROM `tbempleado` 
 INNER JOIN tbtipoempleado ON tbempleado.empleadotipoid = tbtipoempleado.tipoid$$
 
 DROP PROCEDURE IF EXISTS `obtenerInformacionSupermercado`$$
-CREATE DEFINER=`root`@`localhost` PROCEDURE `obtenerInformacionSupermercado` ()   SELECT * FROM tbsupermercado$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `obtenerInformacionSupermercado` ()  SELECT * FROM tbsupermercado$$
 
 DROP PROCEDURE IF EXISTS `obtenerMembresiaNombre`$$
-CREATE DEFINER=`root`@`localhost` PROCEDURE `obtenerMembresiaNombre` (IN `id` INT(11))   BEGIN
+CREATE DEFINER=`root`@`localhost` PROCEDURE `obtenerMembresiaNombre` (IN `id` INT(11))  BEGIN
     SELECT * FROM `tbmembresia` WHERE `membresiaid` = id;
 END$$
 
 DROP PROCEDURE IF EXISTS `obtenerMembresias`$$
-CREATE DEFINER=`root`@`localhost` PROCEDURE `obtenerMembresias` ()   SELECT * FROM `tbmembresia`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `obtenerMembresias` ()  SELECT * FROM `tbmembresia`$$
 
 DROP PROCEDURE IF EXISTS `obtenerProductosRecientes`$$
-CREATE DEFINER=`root`@`localhost` PROCEDURE `obtenerProductosRecientes` ()   SELECT `productoid`, `productonombre`, `productoprecio`, `productofechaingreso`, `productostock`, `productoestado`, `productocategoriaid`, `productoproveedorid` FROM `tbproducto` WHERE 1 ORDER BY `productofechaingreso` DESC LIMIT 10$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `obtenerProductosRecientes` ()  SELECT `productoid`, `productonombre`, `productoprecio`, `productofechaingreso`, `productostock`, `productoestado`, `productocategoriaid`, `productoproveedorid` FROM `tbproducto` WHERE 1 ORDER BY `productofechaingreso` DESC LIMIT 10$$
 
 DROP PROCEDURE IF EXISTS `obtenerProveedores`$$
-CREATE DEFINER=`root`@`localhost` PROCEDURE `obtenerProveedores` ()  NO SQL SELECT * FROM `tbproveedor`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `obtenerProveedores` ()  NO SQL
+SELECT * FROM `tbproveedor`$$
 
 DROP PROCEDURE IF EXISTS `obtenerProveedorNombre`$$
-CREATE DEFINER=`root`@`localhost` PROCEDURE `obtenerProveedorNombre` (IN `proveedor_id` INT)   SELECT proveedornombre FROM tbproveedor WHERE proveedorid = proveedor_id$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `obtenerProveedorNombre` (IN `proveedor_id` INT)  SELECT proveedornombre FROM tbproveedor WHERE proveedorid = proveedor_id$$
 
 DROP PROCEDURE IF EXISTS `obtenerproveerdorid`$$
-CREATE DEFINER=`root`@`localhost` PROCEDURE `obtenerproveerdorid` (IN `id` INT(20))  NO SQL SELECT * FROM `tbproveedor` WHERE `proveedorid`= id$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `obtenerproveerdorid` (IN `id` INT(20))  NO SQL
+SELECT * FROM `tbproveedor` WHERE `proveedorid`= id$$
 
 DROP PROCEDURE IF EXISTS `obtenerTipoEmpleado`$$
-CREATE DEFINER=`root`@`localhost` PROCEDURE `obtenerTipoEmpleado` ()   SELECT * FROM `tbtipoempleado`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `obtenerTipoEmpleado` ()  SELECT * FROM `tbtipoempleado`$$
 
 DROP PROCEDURE IF EXISTS `obtenerTipoUsuario`$$
-CREATE DEFINER=`root`@`localhost` PROCEDURE `obtenerTipoUsuario` ()   SELECT * FROM `tbtipousuario`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `obtenerTipoUsuario` ()  SELECT * FROM `tbtipousuario`$$
 
 DROP PROCEDURE IF EXISTS `obtenerTotalEmpleados`$$
-CREATE DEFINER=`root`@`localhost` PROCEDURE `obtenerTotalEmpleados` ()   SELECT COUNT(*) as total FROM `tbempleado`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `obtenerTotalEmpleados` ()  SELECT COUNT(*) as total FROM `tbempleado`$$
 
 DROP PROCEDURE IF EXISTS `obtenerTotalProductos`$$
-CREATE DEFINER=`root`@`localhost` PROCEDURE `obtenerTotalProductos` ()   SELECT COUNT(*) as total FROM `tbproducto`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `obtenerTotalProductos` ()  SELECT COUNT(*) as total FROM `tbproducto`$$
 
 DROP PROCEDURE IF EXISTS `obtenerTotalProductosCategoria`$$
-CREATE DEFINER=`root`@`localhost` PROCEDURE `obtenerTotalProductosCategoria` ()   SELECT c.categoriaid, c.categorianombre, COUNT(p.productoid) as total FROM tbcategoria c LEFT JOIN tbproducto p ON c.categoriaid = p.productocategoriaid GROUP BY c.categoriaid, c.categorianombre$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `obtenerTotalProductosCategoria` ()  SELECT c.categoriaid, c.categorianombre, COUNT(p.productoid) as total FROM tbcategoria c LEFT JOIN tbproducto p ON c.categoriaid = p.productocategoriaid GROUP BY c.categoriaid, c.categorianombre$$
 
 DROP PROCEDURE IF EXISTS `obtenerTotalProductosProveedor`$$
-CREATE DEFINER=`root`@`localhost` PROCEDURE `obtenerTotalProductosProveedor` ()   SELECT tbproveedor.proveedorid, tbproveedor.proveedornombre, COUNT(tbproducto.productoid) AS totalproductos
+CREATE DEFINER=`root`@`localhost` PROCEDURE `obtenerTotalProductosProveedor` ()  SELECT tbproveedor.proveedorid, tbproveedor.proveedornombre, COUNT(tbproducto.productoid) AS totalproductos
 FROM tbproveedor
 JOIN tbproducto ON tbproveedor.proveedorid = tbproducto.productoproveedorid
 GROUP BY tbproveedor.proveedorid$$
 
 DROP PROCEDURE IF EXISTS `obtenerTotalProveedores`$$
-CREATE DEFINER=`root`@`localhost` PROCEDURE `obtenerTotalProveedores` ()   SELECT COUNT(*) as total FROM `tbproveedor`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `obtenerTotalProveedores` ()  SELECT COUNT(*) as total FROM `tbproveedor`$$
 
 DROP PROCEDURE IF EXISTS `obtenerUsuarios`$$
-CREATE DEFINER=`root`@`localhost` PROCEDURE `obtenerUsuarios` ()   SELECT * FROM `tbusuario` INNER JOIN tbempleado ON tbusuario.usuarioempleadoid = tbempleado.empleadoid INNER JOIN tbtipousuario ON tbusuario.usuariotipo = tbtipousuario.tipoid$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `obtenerUsuarios` ()  SELECT * FROM `tbusuario` INNER JOIN tbempleado ON tbusuario.usuarioempleadoid = tbempleado.empleadoid INNER JOIN tbtipousuario ON tbusuario.usuariotipo = tbtipousuario.tipoid$$
 
 DROP PROCEDURE IF EXISTS `verificarCuentaUsuario`$$
-CREATE DEFINER=`root`@`localhost` PROCEDURE `verificarCuentaUsuario` (IN `cedula` INT)   SELECT * FROM `tbusuario` INNER JOIN tbempleado ON tbusuario.usuarioempleadoid = tbempleado.empleadoid WHERE tbempleado.empleadocedula = cedula$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `verificarCuentaUsuario` (IN `cedula` INT)  SELECT * FROM `tbusuario` INNER JOIN tbempleado ON tbusuario.usuarioempleadoid = tbempleado.empleadoid WHERE tbempleado.empleadocedula = cedula$$
 
 DROP PROCEDURE IF EXISTS `verificarEmpleado`$$
-CREATE DEFINER=`root`@`localhost` PROCEDURE `verificarEmpleado` (IN `id` INT)   SELECT * FROM `tbusuario` WHERE `usuarioempleadoid` = id$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `verificarEmpleado` (IN `id` INT)  SELECT * FROM `tbusuario` WHERE `usuarioempleadoid` = id$$
 
 DELIMITER ;
 
@@ -367,7 +372,7 @@ DROP TABLE IF EXISTS `tbcategoria`;
 CREATE TABLE `tbcategoria` (
   `categoriaid` int(11) NOT NULL,
   `categorianombre` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Volcado de datos para la tabla `tbcategoria`
@@ -397,7 +402,7 @@ CREATE TABLE `tbcliente` (
   `clientecorreo` varchar(255) NOT NULL,
   `clientefechaafiliacion` date NOT NULL,
   `clientetipomembresia` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Volcado de datos para la tabla `tbcliente`
@@ -421,14 +426,18 @@ CREATE TABLE `tbdescuento` (
   `descuentoid` int(11) NOT NULL,
   `descuentotarifa` float NOT NULL,
   `descuentomembresiaid` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Volcado de datos para la tabla `tbdescuento`
 --
 
 INSERT INTO `tbdescuento` (`descuentoid`, `descuentotarifa`, `descuentomembresiaid`) VALUES
-(1, 0, 0);
+(1, 15, 1),
+(2, 10, 3),
+(3, 5, 5),
+(4, 20, 2),
+(5, 12, 4);
 
 -- --------------------------------------------------------
 
@@ -448,7 +457,7 @@ CREATE TABLE `tbempleado` (
   `empleadofechasalida` date DEFAULT NULL,
   `empleadoestado` int(11) NOT NULL,
   `empleadotipoid` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Volcado de datos para la tabla `tbempleado`
@@ -471,7 +480,7 @@ DROP TABLE IF EXISTS `tbmembresia`;
 CREATE TABLE `tbmembresia` (
   `membresiaid` int(11) NOT NULL,
   `membresiadescripcion` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Volcado de datos para la tabla `tbmembresia`
@@ -500,7 +509,7 @@ CREATE TABLE `tbproducto` (
   `productoestado` int(11) NOT NULL,
   `productocategoriaid` int(11) NOT NULL,
   `productoproveedorid` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Volcado de datos para la tabla `tbproducto`
@@ -528,7 +537,7 @@ CREATE TABLE `tbproveedor` (
   `proveedorcorreo` varchar(255) NOT NULL,
   `proveedorlat` varchar(255) DEFAULT NULL,
   `proveedorlong` varchar(255) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Volcado de datos para la tabla `tbproveedor`
@@ -555,7 +564,7 @@ CREATE TABLE `tbsupermercado` (
   `supermercadocorreo` varchar(255) DEFAULT NULL,
   `supermercadodireccion` varchar(255) DEFAULT NULL,
   `supermercadologo` varchar(255) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Volcado de datos para la tabla `tbsupermercado`
@@ -574,7 +583,7 @@ DROP TABLE IF EXISTS `tbtipoempleado`;
 CREATE TABLE `tbtipoempleado` (
   `tipoid` int(11) NOT NULL,
   `tipodescripcion` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Volcado de datos para la tabla `tbtipoempleado`
@@ -597,7 +606,7 @@ DROP TABLE IF EXISTS `tbtipousuario`;
 CREATE TABLE `tbtipousuario` (
   `tipoid` int(11) NOT NULL,
   `tipodescripcion` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Volcado de datos para la tabla `tbtipousuario`
@@ -619,7 +628,7 @@ CREATE TABLE `tbusuario` (
   `usuariopassword` varchar(255) NOT NULL,
   `usuarioempleadoid` int(11) NOT NULL,
   `usuariotipo` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Volcado de datos para la tabla `tbusuario`
@@ -719,7 +728,7 @@ ALTER TABLE `tbcliente`
 -- AUTO_INCREMENT de la tabla `tbdescuento`
 --
 ALTER TABLE `tbdescuento`
-  MODIFY `descuentoid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `descuentoid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT de la tabla `tbempleado`
