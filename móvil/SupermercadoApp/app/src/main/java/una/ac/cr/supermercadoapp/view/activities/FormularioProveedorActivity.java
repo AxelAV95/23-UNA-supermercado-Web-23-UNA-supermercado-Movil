@@ -52,7 +52,6 @@ public class FormularioProveedorActivity extends AppCompatActivity {
 
         SharedPreferences credenciales = getSharedPreferences("credenciales", Context.MODE_PRIVATE);
         String cedula  = credenciales.getString("cedula", null);
-
         proveedorData = new ProveedorData(this);
 
         verificarEstadoSesion(cedula);
@@ -67,7 +66,7 @@ public class FormularioProveedorActivity extends AppCompatActivity {
             nombre.setText(mProveedor.getNombre());
             direccion.setText(mProveedor.getDireccion());
             correo.setText(mProveedor.getCorreo());
-            telefono.setText(mProveedor.getTelefono());
+           // telefono.setText(mProveedor.getTelefono());
             latitud.setText(mProveedor.getLatitud());
             longitud.setText(mProveedor.getLongitud());
 
@@ -86,7 +85,7 @@ public class FormularioProveedorActivity extends AppCompatActivity {
                             Toasty.info(getApplicationContext(), "Ingrese una dirección", Toast.LENGTH_SHORT, true).show();
 
 
-                    }else if(telefono.getText().toString().equals("")){
+                    }else if(telefono.getText().toString().equals("0")){
                         telefono.requestFocus();
                     Toasty.info(getApplicationContext(), "Ingrese un teléfono", Toast.LENGTH_SHORT, true).show();
 
@@ -107,13 +106,24 @@ public class FormularioProveedorActivity extends AppCompatActivity {
 
 
                     }else{
+                    String nombr = nombre.getText().toString().trim();
+                    if (nombr.isEmpty()) {
+                        nombre.setError("El nombre no puede estar vacío");
+                        nombre.requestFocus();
+                        return;
+                    }
+                    if (!nombr.matches("[a-zA-ZáéíóúÁÉÍÓÚñÑ ]+")) {
+                        nombre.setError("El nombre solo puede contener letras");
+                        nombre.requestFocus();
+                        return;
+                    }
                          if(intent.getExtras().getString("metodo").equals("agregar")){
-                        Proveedor proveedor = new Proveedor(nombre.getText().toString(),direccion.getText().toString(),Integer.parseInt(telefono.getText().toString()),
+                        Proveedor proveedor1 = new Proveedor(nombre.getText().toString(),direccion.getText().toString(),Integer.parseInt(telefono.getText().toString()),
                                 correo.getText().toString(),latitud.getText().toString(),longitud.getText().toString());
                         //método de agregar
                         if(verificarConexion()){
                             //agrega a la base de datos del servidor
-                            volleyProveedor.insertarProveedor(FormularioProveedorActivity.this,proveedor,credenciales.getString("ip", "192.168.100.16"));
+                            volleyProveedor.insertarProveedor(FormularioProveedorActivity.this,proveedor1,credenciales.getString("ip", "192.168.100.216"));
                         }else{
                             //agrega a la base de datos móvil
                             if(proveedorData.insertarProveedor(new Proveedor(nombre.getText().toString(),direccion.getText().toString(),Integer.parseInt(telefono.getText().toString()),correo.getText().toString(),
@@ -127,9 +137,9 @@ public class FormularioProveedorActivity extends AppCompatActivity {
 
                     }else if(intent.getExtras().getString("metodo").equals("actualizar")){
                         //método de actualizar
-                        Proveedor proveedor = new Proveedor(nombre.getText().toString(),direccion.getText().toString(),Integer.parseInt(telefono.getText().toString()),correo.getText().toString(),
+                        Proveedor proveedor1 = new Proveedor(nombre.getText().toString(),direccion.getText().toString(),Integer.parseInt(telefono.getText().toString()),correo.getText().toString(),
                                 latitud.getText().toString(),longitud.getText().toString());
-                        volleyProveedor.actualizarProveedor(FormularioProveedorActivity.this,proveedor,credenciales.getString("ip", "192.168.100.216"));
+                        volleyProveedor.actualizarProveedor(FormularioProveedorActivity.this,proveedor1,credenciales.getString("ip", "192.168.100.216"));
 
                     }
                 }
@@ -138,6 +148,12 @@ public class FormularioProveedorActivity extends AppCompatActivity {
 
         Slidr.attach(this);
 
+    }
+
+    public boolean verificarConexion(){
+        ConnectivityManager manager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkCapabilities capabilities = manager.getNetworkCapabilities(manager.getActiveNetwork());
+        return (capabilities != null && capabilities.hasCapability(NetworkCapabilities.NET_CAPABILITY_INTERNET));
     }
 
     private void agregarEventos() {
@@ -149,8 +165,8 @@ public class FormularioProveedorActivity extends AppCompatActivity {
         botonMetodo = findViewById(R.id.btn_metodo);
         nombre = findViewById(R.id.nombre);
         direccion = findViewById(R.id.direccion);
-        correo = findViewById(R.id.correo);
         telefono = findViewById(R.id.telefono);
+        correo = findViewById(R.id.correo);
         latitud = findViewById(R.id.latitud);
         longitud = findViewById(R.id.longitud);
     }
@@ -163,11 +179,5 @@ public class FormularioProveedorActivity extends AppCompatActivity {
         }
     }
 
-    public boolean verificarConexion(){
-        ConnectivityManager manager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
-        NetworkCapabilities capabilities = manager.getNetworkCapabilities(manager.getActiveNetwork());
-        return (capabilities != null && capabilities.hasCapability(NetworkCapabilities.NET_CAPABILITY_INTERNET));
 
-
-    }
 }

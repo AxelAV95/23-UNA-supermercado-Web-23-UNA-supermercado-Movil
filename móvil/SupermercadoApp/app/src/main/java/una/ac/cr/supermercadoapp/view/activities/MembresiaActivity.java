@@ -137,7 +137,7 @@ public class MembresiaActivity extends AppCompatActivity {
 
                     Intent intent = new Intent(MembresiaActivity.this, FormularioMembresiaActivity.class);
                     intent.putExtra("metodo","agregar");
-                    startActivity(intent);
+                    launcher.launch(intent);
 
                 }
             });

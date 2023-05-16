@@ -74,20 +74,7 @@ public class FormularioMembresiaActivity extends AppCompatActivity {
                         Membresia membresia1 = new Membresia(campoDescripcion.getText().toString());
                         //método de agregar
                          volleyMembresia.insertarMembresia(FormularioMembresiaActivity.this, membresia1,credenciales.getString("ip", "192.168.100.216"));
-                         Intent intent1 = new Intent(FormularioMembresiaActivity.this,MembresiaActivity.class);
-                         startActivity(intent1);
-                        if(verificarConexion()){
-                            //agrega a la base de datos del servidor
 
-                        }else{
-                            //agrega a la base de datos móvil
-                            if(membresiaData.insertarMembresia(new Membresia(campoDescripcion.getText().toString())) == -1){
-                                Toasty.error(getApplicationContext(), "Error al insertar en la base de datos móvil", Toast.LENGTH_SHORT, true).show();
-                            }else{
-                                Toasty.success(getApplicationContext(), "Insertado con éxito en la base de datos móvil", Toast.LENGTH_SHORT, true).show();
-                            }
-                            finish();
-                        }
 
                     }else if(intent.getExtras().getString("metodo").equals("actualizar")){
                         //método de actualizar

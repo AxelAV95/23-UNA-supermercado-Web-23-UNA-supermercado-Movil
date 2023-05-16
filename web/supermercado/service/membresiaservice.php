@@ -19,8 +19,9 @@
 			$membresiaBusiness = new MembresiaBusiness();
 			if($data->metodo == "insertar"){
 			
-
-				$resultado = $membresiaBusiness->insertarMembresia(new Membresia(0,$data->descripcion));
+				$membresia = new Membresia();
+				$membresia->setMembresiadescripcion($data->descripcion);
+				$resultado = $membresiaBusiness->insertarMembresia($membresia);
 	
 				if($resultado == 1){
 						echo json_encode(array("statusCode"=>200));	
@@ -37,7 +38,10 @@
 		$data = json_decode($json);
 
 		$membresiaBusiness = new MembresiaBusiness();
-		$resultado = $membresiaBusiness->modificarMembresia(new Membresia($data->id,$data->descripcion));
+		$membresia = new Membresia();
+		$membresia->setMembresiaid($data->id);
+		$membresia->setMembresiadescripcion($data->descripcion);
+		$resultado = $membresiaBusiness->modificarMembresia($membresia);
 
 
 	    if($resultado == 1){
