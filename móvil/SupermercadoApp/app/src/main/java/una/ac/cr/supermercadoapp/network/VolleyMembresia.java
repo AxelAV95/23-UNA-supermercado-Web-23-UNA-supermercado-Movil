@@ -77,7 +77,7 @@ public class VolleyMembresia {
                 MembresiaData membresiaData = new MembresiaData(context);
                 if(response.optString("statusCode").toString().equals("200")){
 
-                        Toasty.success(context, "Se registró con éxito", Toast.LENGTH_SHORT, true).show();
+                       // Toasty.success(context, "Se registró con éxito", Toast.LENGTH_SHORT, true).show();
                         Intent returnIntent = new Intent();
                         ((Activity) context).setResult(Activity.RESULT_OK, returnIntent);
                         ((Activity) context).finish();
@@ -103,7 +103,7 @@ public class VolleyMembresia {
     public void actualizarMembresia(Context context,Membresia membresia, String IP){
         JSONObject membresiaJson = new JSONObject();
         try {
-            membresiaJson.put("metodo", "insertar");
+           
             membresiaJson.put("id",membresia.getId());
             membresiaJson.put("descripcion",membresia.getDescripcion());
 
