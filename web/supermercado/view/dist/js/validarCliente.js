@@ -9,7 +9,7 @@ function validarFormulario() {
   var clientefechaafiliacion = document.getElementById('clientefechaafiliacion').value;
 
   // Validar que todos los campos estén llenos
-  if (clientenombre === '' || clienteapellidos === '' || clientecedula === '' || clientedireccion === '' || clientetelefono === ' ' || clientecorreo=== ' ' || clientefechaafiliacion === ' '|| clientefechaafiliacion ==='' || clientetipomembresia === 'Seleccione la membresía' ) {
+  if (clientenombre === ''|| clienteapellidos === ''|| clientecedula === ''|| clientedireccion === ''|| clientetelefono === ''|| clientefechaafiliacion ==='' || clientetipomembresia === 'Seleccione la membresía') {
     Swal.fire({
       icon: 'error',
       title: 'Campos incompletos',
@@ -43,8 +43,6 @@ return false;
 if (!validarCorreo(clientecorreo)) {
   return false;
 }
-
-
   // El formulario se envía si pasa todas las validaciones
   return true;
 }
