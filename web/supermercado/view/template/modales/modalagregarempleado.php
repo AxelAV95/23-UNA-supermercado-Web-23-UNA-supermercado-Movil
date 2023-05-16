@@ -21,7 +21,7 @@
 
               <div class="form-group">
                 <label >Cédula:</label>
-                <input type="text" class="form-control" name="empleadocedula" id="empleadocedula" placeholder="Ingrese cédula" oninput="limitarLongitud(event)">
+                <input type="text" class="form-control" name="empleadocedula" id="empleadocedula" placeholder="Ingrese cédula" oninput="limitarLongitud(event, 9)">
               </div>
 
               <div class="form-group">
@@ -36,7 +36,7 @@
 
               <div class="form-group">
                 <label >Teléfono:</label>
-                <input type="text" class="form-control" name="empleadotelefono" id="empleadotelefono" placeholder="Ingrese teléfono" oninput="limitarLongitud(event)">
+                <input type="text" class="form-control" name="empleadotelefono" id="empleadotelefono" placeholder="Ingrese teléfono" oninput="limitarLongitud(event, 8)">
               </div>
 
               <div class="form-group">
@@ -74,10 +74,11 @@
 </div>
 
 <script>
-  function limitarLongitud(event) {
+  function limitarLongitud(event, maxCaracteres) {
   var input = event.target;
-  if (input.value.length > 8) {
-    input.value = input.value.slice(0, 8);
+  if (input.value.length > maxCaracteres) {
+    input.value = input.value.slice(0, maxCaracteres);
   }
 }
+
 </script>

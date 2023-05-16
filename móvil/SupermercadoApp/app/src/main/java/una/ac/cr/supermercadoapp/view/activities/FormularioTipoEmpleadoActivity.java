@@ -76,9 +76,13 @@ public class FormularioTipoEmpleadoActivity extends AppCompatActivity {
                     if(intent.getExtras().getString("metodo").equals("agregar")){
                         TipoEmpleado tipoEmpleado1 = new TipoEmpleado(campoDescripcion.getText().toString());
                         //método de agregar
+                        volleyTipoEmpleado.insertarTipoEmpleado(FormularioTipoEmpleadoActivity.this,tipoEmpleado1,credenciales.getString("ip", "192.168.100.216"));
+                        Intent intent1 = new Intent(FormularioTipoEmpleadoActivity.this, TipoEmpleadoActivity.class);
+                        startActivity(intent1);
+
                         if(verificarConexion()){
                             //agrega a la base de datos del servidor
-                            volleyTipoEmpleado.insertarTipoEmpleado(FormularioTipoEmpleadoActivity.this, tipoEmpleado1,credenciales.getString("ip", "192.168.100.216"));
+                          //  volleyTipoEmpleado.insertarTipoEmpleado(FormularioTipoEmpleadoActivity.this, tipoEmpleado1,credenciales.getString("ip", "192.168.100.216"));
                         }else{
                             //agrega a la base de datos móvil
                             if(tipoEmpleadoData.insertarTipoEmpleado(new TipoEmpleado(campoDescripcion.getText().toString())) == -1){
