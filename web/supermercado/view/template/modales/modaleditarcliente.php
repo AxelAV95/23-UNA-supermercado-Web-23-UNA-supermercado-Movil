@@ -33,24 +33,24 @@
 
               <div class="form-group">
                 <label >Nombre:</label>
-                <input type="text" class="form-control" name="clientenombre" id="clientenombre" placeholder="Ingrese nombre">
+                <input type="text" class="form-control" name="clientenombre" id="clientenombre" placeholder="Ingrese nombre" required pattern="^[A-Za-z\s]+$" title="Solo se permiten letras">
                 <label >Apellidos:</label>
-                <input type="text" class="form-control" name="clienteapellidos" id="clienteapellidos" placeholder="Ingrese Apellidos">
+                <input type="text" class="form-control" name="clienteapellidos" id="clienteapellidos" placeholder="Ingrese Apellidos"  required pattern="^[A-Za-z\s]+$" title="Solo se permiten letras">
                 <label >Cédula:</label>
-                <input type="number" class="form-control" name="clientecedula" id="clientecedula" placeholder="Ingrese cédula">
+                <input type="number" class="form-control" name="clientecedula" id="clientecedula" placeholder="Ingrese cédula" maxlength="9" pattern="\d{9}" required>
                 <label >Dirección:</label>
-                <input type="text" class="form-control" name="clientedireccion" id="clientedireccion" placeholder="Ingrese dirección">
+                <input type="text" class="form-control" name="clientedireccion" id="clientedireccion" placeholder="Ingrese dirección" required pattern="[A-Za-z0-9\s]+" title="Solo se permiten letras y números">
                 <label >Télefono:</label>
-                <input type="number" class="form-control" name="clientetelefono" id="clientetelefono" placeholder="Ingrese télefono">
+                <input type="number" class="form-control" name="clientetelefono" id="clientetelefono" placeholder="Ingrese télefono"  maxlength="8" pattern="\d{9}" required>
                 <label >Correo:</label>
-                <input type="text" class="form-control" name="clientecorreo" id="clientecorreo" placeholder="Ingrese correo">
+                <input type="email" class="form-control" name="clientecorreo" id="clientecorreo" placeholder="Ingrese correo" required>
                 </div>
        
        
                 <div class="form-group">
                 <label>Tipo de membresía:</label>
-        <select class="clientetipomembresia form-control" name="clientetipomembresia" id="clientetipomembresia">
-        <option selected>Seleccione la membresía</option>
+        <select class="clientetipomembresia form-control" name="clientetipomembresia" id="clientetipomembresia" required>
+        <option value="" selected disabled>Seleccione la membresía</option>
         <?php 
                 
                 foreach($membresias as $membresia){

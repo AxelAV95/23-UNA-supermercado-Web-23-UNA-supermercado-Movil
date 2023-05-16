@@ -328,45 +328,41 @@ if(descripcion.value  == ""){
 });
 
 $(".tabla-categorias tbody").on("click", "button.btnEliminarCategoria", function(){
+  
   var clienteid = $(this).attr("clienteid");
-Swal.fire({
-      title: '¿Desea eliminar este cliente?',
-      showDenyButton: true,
-      showCancelButton: false,
-      confirmButtonText: 'Sí',
-      denyButtonText: `Cancelar`,
-    }).then((result) => {
-     
-      if (result.isConfirmed) {
-        let requestUrl ="../business/clienteaction.php?metodo=eliminar&clienteid="+clienteid;
-        console.log(requestUrl)
-        $.ajax({
-        url: requestUrl ,
+  Swal.fire({
+    title: '¿Desea eliminar este cliente?',
+    showDenyButton: true,
+    showCancelButton: false,
+    confirmButtonText: 'Sí',
+    denyButtonText: `Cancelar`,
+  }).then((result) => {
+    if (result.isConfirmed) {
+      let requestUrl = "../business/clienteaction.php?metodo=eliminar&clienteid=" + clienteid;
+      console.log(requestUrl);
+      $.ajax({
+        url: requestUrl,
         type: "GET",
-        
         success: function(dataResult){
           var dataResult = JSON.parse(dataResult);
-          if(dataResult.statusCode==200){
-                Toast.fire({
-                    icon: 'success',
-                    title: '<div style=margin-top:0.5rem;>Eliminado con éxito.</div>'
-              });
-                 
-                
-                 $('#categorias').DataTable().ajax.reload();
-                                             
-          }else{
-                 Toast.fire({
-                    icon: 'error',
-                    title: '<div style=margin-top:0.5rem;>Error al efectuar la operación.</div>'
-              })
-      
+          if(dataResult.statusCode == 200){
+            Toast.fire({
+              icon: 'success',
+              title: '<div style="margin-top:0.5rem;">Eliminado con éxito.</div>'
+            });
+            $('.tabla-categorias').DataTable().ajax.reload();
+            
+            location.reload(); // Refrescar la pantalla
+          } else {
+            Toast.fire({
+              icon: 'error',
+              title: '<div style="margin-top:0.5rem;">Error al efectuar la operación.</div>'
+            });
           }
         }
       });
-
-      } 
-    })
+    } 
+  });
 });
 
 
@@ -468,6 +464,8 @@ $(".nuevaImagen").change(function(){
 
     }
 })
+
+
 </script>
 
 </body>

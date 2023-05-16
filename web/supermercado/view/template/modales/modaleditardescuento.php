@@ -27,14 +27,14 @@
 
               <div class="form-group">
                 <label >Tarifa:</label>
-                <input type="text" class="form-control" name="descuentotarifa" id="descuentotarifa" placeholder="Ingrese Tarifa">
+                <input type="number" class="form-control" name="descuentotarifa" id="descuentotarifa" placeholder="Ingrese tarifa" required pattern="^\d{1,11}(\.\d{1,2})?$" step="0.01" maxlength="11">
                 </div>
        
        
                 <div class="form-group">
                 <label>Tipo de membresía:</label>
         <select class="descuentomembresiaid form-control" name="descuentomembresiaid" id="descuentomembresiaid">
-        <option selected>Seleccione la membresía</option>
+        <option value="" selected disabled>Seleccione la membresía</option>
         <?php 
                 
                 foreach($membresias as $membresia){

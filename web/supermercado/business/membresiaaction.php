@@ -4,10 +4,10 @@ include 'membresiabusiness.php';
 
 	if(isset($_POST['metodo']) && $_POST['metodo'] == "agregar" && isset($_POST['membresiadescripcion'])){
 		$membresiadescripcion = $_POST['membresiadescripcion'];
-		$membresiaBusiness = new MembresiaBusiness();
+	
 		$membresia = new Membresia();
         $membresia->setMembresiadescripcion($membresiadescripcion);
-				
+        $membresiaBusiness = new MembresiaBusiness();
 		$resultado = $membresiaBusiness->insertarMembresia($membresia);
 
 		if($resultado == 1){

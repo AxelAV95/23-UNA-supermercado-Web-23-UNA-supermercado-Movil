@@ -15,7 +15,7 @@
         <div class="modal-body">
 
           <div class="box-body">
-          <form method="POST" action="../business/descuentoaction.php"  enctype="multipart/form-data"  onsubmit="return validarFormulario();">
+          <form method="POST" action="../business/descuentoaction.php"  enctype="multipart/form-data">
 
             <div class="form-group">
             <input type="hidden" name="accion" id="accion" value="agregar">
@@ -27,28 +27,24 @@
 
               <div class="form-group">
                 <label >Tarifa:</label>
-                <input type="number" class="form-control" name="descuentotarifa" id="descuentotarifa" placeholder="Ingrese tarifa">
+                <input type="number" class="form-control" name="descuentotarifa" id="descuentotarifa" placeholder="Ingrese tarifa" required pattern="^\d{1,11}(\.\d{1,2})?$" step="0.01" maxlength="11">
         
                 </div>
        
-       
                 <div class="form-group">
                 <label>Tipo de membresía:</label>
-        <select class="descuentomembresiaid form-control" name="descuentomembresiaid" id="descuentomembresiaid">
-        <option selected>Seleccione la membresía</option>
-        <?php 
-                
-                foreach($membresias as $membresia){
+                <select class="descuentomembresiaid form-control" name="descuentomembresiaid" id="descuentomembresiaid" required>
+                <option value="" selected disabled>Seleccione la membresía</option>
+    <?php 
+        foreach($membresias as $membresia) {
+          if ($categoria['membresiaid'] == $membresia['membresiaid']) {
+            echo '<option value="'.$membresia['membresiaid'].'" class="badge badge-pill badge-warning" style="font-size: 15px; "selected>'.$membresia['membresiadescripcion'].'</option>';
+        } else {
+          echo '<option value="'.$membresia['membresiaid'].'" class="badge badge-pill badge-warning" style="font-size: 15px;">'.$membresia['membresiadescripcion'].'</option>';
+        }
+      }
 
-                  echo '<script>var idc = $("#descuentomembresiaid").val()</script>';
-                  echo $variable = "<script>document.write(idc)</script>";
-                  if($categoria['membresiaid'] == $variable){
-                      echo ' <option value="'.$membresia['membresiaid'].'" class="badge badge-pill badge-warning" style="font-size: 15px;" selected>'.$membresia['membresiadescripcion'].'</option>';
-                  }else{
-                      echo ' <option value="'.$membresia['membresiaid'].'" class="badge badge-pill badge-warning" style="font-size: 15px;">'.$membresia['membresiadescripcion'].'</option>';
-                  }
-                  
-                }?>
+    ?>
 </select>
               </div>
               
