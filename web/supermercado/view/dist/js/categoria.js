@@ -28,14 +28,15 @@ $(document).on("submit", "#modalEditarCategoria form", function(e){
             title: 'Error',
             text: 'El nombre de la categoría no puede estar vacío.'
         });
-    } else if (!/^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$/.test(categoriaNombre)) {
-        e.preventDefault();
-        Swal.fire({
-            icon: 'error',
-            title: 'Error',
-            text: 'El nombre de la categoría solo puede contener letras y espacios.'
-        });
-    }
+    }else if (!/^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$/.test(categoriaNombre)) {
+      e.preventDefault();
+      Swal.fire({
+          icon: 'error',
+          title: 'Error',
+          text: 'El nombre de la categoría solo puede contener letras y espacios.'
+      });
+  }
+  
 });
 
 });

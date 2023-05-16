@@ -292,15 +292,17 @@ function validarFormularioEditar() {
   }
 
   // Validar que el nombre solo contenga letras
-  var letras = /^[A-Za-z\s]+$/;
-  if (!nombre.match(letras)) {
-    Swal.fire({
-      icon: "error",
-      title: "Nombre inválido",
-      text: "El nombre solo debe contener letras.",
-    });
-    return false;
-  }
+  var letras = /^[A-Za-zñÑ\s]+$/;
+
+if (!nombre.match(letras)) {
+  Swal.fire({
+    icon: "error",
+    title: "Nombre inválido",
+    text: "El nombre solo debe contener letras.",
+  });
+  return false;
+}
+
 
   // Validar que el precio y el stock solo contengan números
   var numeros = /^[0-9]+$/;

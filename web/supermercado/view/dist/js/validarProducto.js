@@ -15,9 +15,10 @@ function validarFormulario() {
       });
       return false;
     }
-  
-    // Validar que el nombre solo contenga letras
-    var letras = /^[A-Za-z\s]+$/;
+      
+      // Validar que el nombre solo contenga letras
+    var letras = /^[A-Za-zñÑ\s]+$/;
+
     if (!nombre.match(letras)) {
       Swal.fire({
         icon: 'error',
@@ -26,6 +27,7 @@ function validarFormulario() {
       });
       return false;
     }
+
   
    // Validar que el precio y el stock solo contengan números
 var numeros = /^[0-9]{1,6}$/;
