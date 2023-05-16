@@ -15,7 +15,7 @@
         <div class="modal-body">
 
           <div class="box-body">
-          <form method="POST" action="../business/clienteaction.php"  enctype="multipart/form-data" onsubmit="return validarFormulario();">
+          <form method="POST" action="../business/clienteaction.php"  enctype="multipart/form-data" >
 
             <div class="form-group">
             <input type="hidden" name="accion" id="accion" value="agregar">
@@ -32,25 +32,25 @@
 
               <div class="form-group">
                 <label >Nombre:</label>
-                <input type="text" class="form-control" name="clientenombre" id="clientenombre" placeholder="Ingrese nombre">
+                <input type="text" class="form-control" name="clientenombre" id="clientenombre" placeholder="Ingrese nombre" required>
                 <label >Apellidos:</label>
-                <input type="text" class="form-control" name="clienteapellidos" id="clienteapellidos" placeholder="Ingrese Apellidos">
+                <input type="text" class="form-control" name="clienteapellidos" id="clienteapellidos" placeholder="Ingrese Apellidos" required>
                 <label >Cédula:</label>
-                <input type="number" class="form-control" name="clientecedula" id="clientecedula" placeholder="Ingrese cédula">
+                <input type="number" class="form-control" name="clientecedula" id="clientecedula" placeholder="Ingrese cédula" maxlength="9" pattern="\d{9}" required>
                 <label >Dirección:</label>
-                <input type="text" class="form-control" name="clientedireccion" id="clientedireccion" placeholder="Ingrese dirección">
+                <input type="text" class="form-control" name="clientedireccion" id="clientedireccion" placeholder="Ingrese dirección" required>
                 <label >Télefono:</label>
-                <input type="number" class="form-control" name="clientetelefono" id="clientetelefono" placeholder="Ingrese télefono">
+                <input type="number" class="form-control" name="clientetelefono" id="clientetelefono" placeholder="Ingrese télefono" required>
                 <label >Correo:</label>
-                <input type="text" class="form-control" name="clientecorreo" id="clientecorreo" placeholder="Ingrese correo">
+                <input type="text" class="form-control" name="clientecorreo" id="clientecorreo" placeholder="Ingrese correo" required>
                 <label>Fecha de afiliación:</label>
-                <input type="date" class="form-control" name="clientefechaafiliacion" id="clientefechaafiliacion" placeholder="Ingrese fecha de afiliación" value="<?php echo $clientefechaafiliacion; ?>">
+                <input type="date" class="form-control" name="clientefechaafiliacion" id="clientefechaafiliacion" placeholder="Ingrese fecha de afiliación" value="<?php echo $clientefechaafiliacion; ?>" required>
                 </div>
        
        
                 <div class="form-group">
                 <label>Tipo de membresía:</label>
-        <select class="clientetipomembresia form-control" name="clientetipomembresia" id="clientetipomembresia">
+        <select class="clientetipomembresia form-control" name="clientetipomembresia" id="clientetipomembresia" required>
         <option selected>Seleccione la membresía</option>
         <?php 
                 
@@ -80,3 +80,20 @@
 
 </div>
 <script src="dist/js/validarCliente.js"></script>
+<script>
+const clientecedulaInput = document.getElementById("clientecedula");
+
+clientecedulaInput.addEventListener("input", function() {
+  if (this.value.length >= 9) {
+    this.value = this.value.slice(0, 9); // Limitar a 9 caracteres
+    this.blur(); // Desenfocar el campo para evitar la edición adicional
+  }
+});
+
+var inputValue = input.value.trim();
+if (inputValue === "") {
+        document.getElementById("errorMensaje").textContent = "El campo no puede estar vacío";
+        input.classList.add("is-invalid");
+        return false; // Previene el envío del formulario
+      }
+</script>

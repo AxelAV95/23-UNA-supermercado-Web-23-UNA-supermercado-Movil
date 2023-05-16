@@ -7,9 +7,9 @@ function validarFormulario() {
   var clientetelefono = document.getElementById('clientetelefono').value;
   var clientecorreo = document.getElementById('clientecorreo').value;
   var clientefechaafiliacion = document.getElementById('clientefechaafiliacion').value;
-
+  var clientetipomembresia = document.getElementById('clientetipomembresia').value;
   // Validar que todos los campos estén llenos
-  if (clientenombre === ''|| clienteapellidos === ''|| clientecedula === ''|| clientedireccion === ''|| clientetelefono === ''|| clientefechaafiliacion ==='' || clientetipomembresia === 'Seleccione la membresía') {
+  if (clientenombre === ''|| clienteapellidos === ''|| clientecedula === ''|| clientedireccion === ''|| clientetelefono === ''|| clientefechaafiliacion ==='') {
     Swal.fire({
       icon: 'error',
       title: 'Campos incompletos',
@@ -47,16 +47,4 @@ if (!validarCorreo(clientecorreo)) {
   return true;
 }
 
-function validarCorreo(correo) {
-  var expresionRegular = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,4})+$/;
-  if (expresionRegular.test(correo)) {
-    return true;
-  } else {
-    Swal.fire({
-      icon: 'error',
-      title: 'Correo inválido',
-      text: 'Por favor, ingrese un correo electrónico válido.',
-    });
-    return false;
-  }
-}
+
