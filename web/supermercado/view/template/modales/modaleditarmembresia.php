@@ -25,7 +25,8 @@
 
               <div class="form-group">
                 <label >Descripción:</label>
-                <input type="text" class="form-control" name="membresiadescripcion" id="membresiadescripcion" placeholder="Ingrese tipo de membresía">
+                <input type="text" class="form-control" name="membresiadescripcion" id="membresiadescripcion" placeholder="Ingrese tipo de membresía" required pattern="^[A-Za-z\s]+$" title="Solo se permiten letras y espacios">
+
                
               </div>
               

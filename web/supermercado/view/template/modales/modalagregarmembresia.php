@@ -16,13 +16,16 @@
 
           <div class="box-body">
 
-            <form id="formulario-insertar" onsubmit="return validarFormulario();">
+          <form id="formulario-insertar" method="POST" action="../business/membresiaaction.php"  enctype="multipart/form-data" >
            
               <div class="form-group">
-                <input type="hidden" name="metodo" value="agregar" onsubmit="return validarFormulario();">
-    
-                <label>Descripción:</label>
-                <input type="text" class="form-control" name="membresiadescripcion" id="membresiadescripcion" placeholder="Ingrese tipo de membresía">
+                <input type="hidden" name="metodo" value="agregar">
+    <div>
+
+                 <label>Descripción:</label>
+                <input type="text" class="form-control" name="membresiadescripcion" id="membresiadescripcion" placeholder="Ingrese tipo de membresía" required required pattern="^[A-Za-z\s]+$" title="Solo se permiten letras">
+   
+                
   </div>   
               </div>
                          
@@ -37,5 +40,19 @@
   </div>
 
 </div>
-<script src="dist/js/validarMembresia.js"></script>
+<script>
+  document.getElementById('formulario-insertar').addEventListener('submit', function(event) {
+    var descripcion = document.getElementById('membresiadescripcion').value;
+
+    // Validar que solo se ingresen letras
+    var letras = /^[A-Za-z\s]+$/;
+    if (!letras.test(descripcion)) {
+      event.preventDefault(); // Evitar el envío del formulario
+
+      // Mostrar alerta de error
+      alert('Solo se permiten letras en el campo de descripción.');
+    }
+  });
+</script>
+
 
