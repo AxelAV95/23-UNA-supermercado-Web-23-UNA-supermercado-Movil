@@ -264,7 +264,7 @@
 
             </LinearLayout>
         </androidx.cardview.widget.CardView>
-
+        <!---
         <androidx.cardview.widget.CardView
             android:id="@+id/cardv_reportes"
             android:layout_width="wrap_content"
@@ -312,13 +312,13 @@
 
             </LinearLayout>
         </androidx.cardview.widget.CardView>
-
+        -->
         <androidx.cardview.widget.CardView
             android:id="@+id/cardv_clientes"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_row="3"
-            app:layout_column="0"
+            app:layout_row="2"
+            app:layout_column="1"
             app:layout_gravity="fill"
             app:layout_rowWeight="1"
             app:layout_columnWeight="1"
@@ -377,6 +377,7 @@
         app:tbm_menuAnchor="bottom"
         >
 
+        <!--
         <ImageView
             android:id="@+id/icon_cuenta"
             android:layout_width="0dp"
@@ -386,7 +387,7 @@
             android:paddingBottom="10dp"
             android:src="@drawable/cuenta"
             android:contentDescription="@string/content_cuenta"
-            />
+            />-->
 
         <ImageView
             android:id="@+id/icon_configuracion"

@@ -19,9 +19,12 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 
 import es.dmoral.toasty.Toasty;
+import una.ac.cr.supermercadoapp.data.BackupData;
 import una.ac.cr.supermercadoapp.data.TipoUsuarioData;
 import una.ac.cr.supermercadoapp.domain.TipoUsuario;
 import una.ac.cr.supermercadoapp.utils.NetworkUtils;
@@ -81,6 +84,19 @@ public class VolleyTipoUsuario {
                 TipoUsuarioData tipoUsuarioData = new TipoUsuarioData(context);
                     if(response.optString("statusCode").toString().equals("200")){
 
+                        //Código para respaldar en un archivo json
+                        JSONObject tipoUsuarioRespaldo = new JSONObject();
+                        try {
+
+                            tipoUsuarioRespaldo.put("descripcion",tipoUsuario.getDescripcion());
+
+                        } catch (JSONException e) {
+                            throw new RuntimeException(e);
+                        }
+
+                        //Se llama el método
+                        new BackupData().respaldarJson(tipoUsuarioRespaldo.toString(), context, "tipousuario.json");
+
 
                         long resultado = tipoUsuarioData.insertarTipoUsuario(new TipoUsuario(tipoUsuario.getDescripcion(),0));
                         if(resultado == -1){
@@ -107,6 +123,9 @@ public class VolleyTipoUsuario {
 
         VolleySingleton.getVolleySingleton(context).addToRequestQueue(jsonObjectRequest);
     }
+
+
+
 
     public void actualizarUsuario(Context context,TipoUsuario tipoUsuario, String IP){
         JSONObject tipoUsuarioJson = new JSONObject();

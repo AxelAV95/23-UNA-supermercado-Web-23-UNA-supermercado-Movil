@@ -30,6 +30,7 @@ import java.util.ArrayList;
 
 import at.favre.lib.crypto.bcrypt.BCrypt;
 import es.dmoral.toasty.Toasty;
+import una.ac.cr.supermercadoapp.data.BackupData;
 import una.ac.cr.supermercadoapp.data.TipoUsuarioData;
 import una.ac.cr.supermercadoapp.domain.Empleado;
 import una.ac.cr.supermercadoapp.domain.TipoUsuario;
@@ -262,6 +263,20 @@ public class VolleyUsuario {
             public void onResponse(JSONObject response) {
                 TipoUsuarioData tipoUsuarioData = new TipoUsuarioData(context);
                 if(response.optString("statusCode").toString().equals("200")){
+
+                    JSONObject usuarioRespaldo = new JSONObject();
+                    try {
+
+                        usuarioRespaldo.put("password",usuario.getPassword());
+                        usuarioRespaldo.put("empleadoid",usuario.getEmpleadoId());
+                        usuarioRespaldo.put("tipoid",usuario.getUsuarioTipo());
+
+                    } catch (JSONException e) {
+                        throw new RuntimeException(e);
+                    }
+
+                    //Se llama el método
+                    new BackupData().respaldarJson(usuarioRespaldo.toString(), context, "usuario.json");
 
                     Intent returnIntent = new Intent();
                     ((Activity) context).setResult(Activity.RESULT_OK, returnIntent);

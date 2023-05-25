@@ -1,9 +1,13 @@
 
  <?php 
+
+
    include 'template/sesion.php';
     include '../business/productobusiness.php';
      include '../business/empleadobusiness.php';
      include '../business/proveedorbusiness.php';
+
+     
   
      $productoBusiness = new ProductoBusiness();
      $empleadoBusiness = new EmpleadoBusiness();
@@ -23,7 +27,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Nombre del supermercado</title>
+  <title><?php echo $_SESSION['nombresuper'] ?></title>
 
   <?php include 'template/dependenciascss.php' ?>
   <link rel="stylesheet" type="text/css" href="plugins/chart.js/Chart.min.css">

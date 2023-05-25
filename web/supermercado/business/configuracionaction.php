@@ -73,11 +73,13 @@
 		
 
 		$_SESSION['logo'] = $rutaDB;
-
+		$_SESSION['nombresuper'] = $nombre;
 
 		$resultado = $configuracionBusiness->actualizarInformacion($id,$nombre,$telefono,$correo,$direccion,$rutaDB);	
 		if($resultado == 1){
+	    	
 	    	echo json_encode(array("statusCode"=>200));	
+
 	    }else{
 	    	echo json_encode(array("statusCode"=>400));	
 	    }

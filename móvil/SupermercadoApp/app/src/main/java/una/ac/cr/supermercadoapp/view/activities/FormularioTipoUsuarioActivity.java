@@ -65,6 +65,9 @@ public class FormularioTipoUsuarioActivity extends AppCompatActivity {
                 if(campoDescripcion.getText().toString().equals("")){
                     campoDescripcion.requestFocus();
                     Toasty.info(getApplicationContext(), "Ingrese una descripción", Toast.LENGTH_SHORT, true).show();
+                }else if (!campoDescripcion.getText().toString().matches("^[A-Za-z ]+$")) {
+                    campoDescripcion.requestFocus();
+                    Toasty.info(getApplicationContext(), "Ingrese una descripción válida", Toast.LENGTH_SHORT, true).show();
                 }else{
                     if(intent.getExtras().getString("metodo").equals("agregar")){
                         TipoUsuario tipoUsuario = new TipoUsuario(campoDescripcion.getText().toString());

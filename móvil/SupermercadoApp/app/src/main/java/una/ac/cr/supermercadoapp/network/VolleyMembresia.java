@@ -103,7 +103,7 @@ public class VolleyMembresia {
     public void actualizarMembresia(Context context,Membresia membresia, String IP){
         JSONObject membresiaJson = new JSONObject();
         try {
-           
+
             membresiaJson.put("id",membresia.getId());
             membresiaJson.put("descripcion",membresia.getDescripcion());
 

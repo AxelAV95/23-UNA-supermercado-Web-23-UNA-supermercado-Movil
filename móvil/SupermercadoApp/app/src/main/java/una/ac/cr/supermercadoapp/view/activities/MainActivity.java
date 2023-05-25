@@ -1,10 +1,13 @@
 package una.ac.cr.supermercadoapp.view.activities;
 
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 import androidx.core.content.res.ResourcesCompat;
 import androidx.lifecycle.Observer;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -49,11 +52,25 @@ public class MainActivity extends AppCompatActivity {
                // Toast.makeText(getApplicationContext(),"Sincronizando",Toast.LENGTH_SHORT).show();
 
             }else{
-                Toasty.error(getApplicationContext(), "Sin conexión", Toast.LENGTH_SHORT, true).show();
+//                Toasty.error(getApplicationContext(), "Sin conexión", Toast.LENGTH_SHORT, true).show();
 
             }
         }
     };
+
+    ActivityResultLauncher<Intent> launcher = registerForActivityResult(
+            new ActivityResultContracts.StartActivityForResult(),
+            result -> {
+                if (result.getResultCode() == Activity.RESULT_OK) {
+                    Toasty.success(this, "Agregado con éxito", Toast.LENGTH_SHORT, true).show();
+
+                }
+                else if(result.getResultCode() == 200){
+                    Toasty.success(this, "Actualizado con éxito", Toast.LENGTH_SHORT, true).show();
+
+                }
+            }
+    );
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,7 +93,7 @@ public class MainActivity extends AppCompatActivity {
         monitorRedUtils.verificarEstadoRed();
         monitorRedUtils.registrarEventosCallbackRed();
 
-        AdministradorRed.getInstance().getEstadoConectividad().observe(this,observadoEstadoRed);
+      //  AdministradorRed.getInstance().getEstadoConectividad().observe(this,observadoEstadoRed);
     }
 
     private void verificarEstadoSesion(String cedula) {
@@ -140,6 +157,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        /*
         cardReportes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -147,7 +165,7 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
                 finish();
             }
-        });
+        });*/
 
         cardClientes.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -162,17 +180,16 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this,ConfiguracionActivity.class);
-                startActivity(intent);
-                finish();
+                launcher.launch(intent);
             }
         });
 
-        iconCuenta.setOnClickListener(new View.OnClickListener() {
+        /*iconCuenta.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Toasty.info(getApplicationContext(), "Cuenta del usuario", Toast.LENGTH_SHORT, true).show();
             }
-        });
+        });*/
 
         iconLogOut.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -199,10 +216,10 @@ public class MainActivity extends AppCompatActivity {
         cardCategorias = findViewById(R.id.cardv_categorias);
         cardProveedor = findViewById(R.id.cardv_proveedores);
         cardUsuarios = findViewById(R.id.cardv_usuarios);
-        cardReportes = findViewById(R.id.cardv_reportes);
+   //     cardReportes = findViewById(R.id.cardv_reportes);
         cardClientes = findViewById(R.id.cardv_clientes);
         iconLogOut = findViewById(R.id.icon_logout);
-        iconCuenta = findViewById(R.id.icon_cuenta);
+//        iconCuenta = findViewById(R.id.icon_cuenta);
         iconConfig = findViewById(R.id.icon_configuracion);
     }
 
@@ -235,10 +252,10 @@ public class MainActivity extends AppCompatActivity {
                         .duration(700)
                         .repeat(0)
                         .playOn(cardUsuarios);
-                YoYo.with(Techniques.RubberBand)
+              /*  YoYo.with(Techniques.RubberBand)
                         .duration(700)
                         .repeat(0)
-                        .playOn(cardReportes);
+                        .playOn(cardReportes);*/
                 YoYo.with(Techniques.RubberBand)
                         .duration(700)
                         .repeat(0)

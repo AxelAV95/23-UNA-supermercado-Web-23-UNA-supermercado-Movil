@@ -123,10 +123,10 @@ public class MenuEmpleadoActivity extends AppCompatActivity {
         cardProductos = findViewById(R.id.cardv_productos_emp);
         cardCategorias = findViewById(R.id.cardv_categorias_emp);
         cardProveedor = findViewById(R.id.cardv_proveedores_emp);
-        cardReportes = findViewById(R.id.cardv_reportes_emp);
+       // cardReportes = findViewById(R.id.cardv_reportes_emp);
         cardClientes = findViewById(R.id.cardv_clientes_emp);
         iconLogOut = findViewById(R.id.icon_logout_emp);
-        iconCuenta = findViewById(R.id.icon_cuenta_emp);
+        //iconCuenta = findViewById(R.id.icon_cuenta_emp);
 
     }
 
@@ -161,10 +161,10 @@ public class MenuEmpleadoActivity extends AppCompatActivity {
                         .repeat(0)
                         .playOn(cardProveedor);
 
-                YoYo.with(Techniques.RubberBand)
+                /*YoYo.with(Techniques.RubberBand)
                         .duration(700)
                         .repeat(0)
-                        .playOn(cardReportes);
+                        .playOn(cardReportes);*/
                 YoYo.with(Techniques.RubberBand)
                         .duration(700)
                         .repeat(0)
