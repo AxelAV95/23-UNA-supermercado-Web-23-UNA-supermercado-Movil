@@ -37,6 +37,8 @@
 		$data = json_decode($json);
 
         $producto = new Producto();
+		$producto ->setIdProducto($data->productoid);		
+		
 			$producto->setNombre($data->nombre);
 			$producto->setPrecioProducto($data->precio);
 			$producto->setEstadoProducto($data->estado);

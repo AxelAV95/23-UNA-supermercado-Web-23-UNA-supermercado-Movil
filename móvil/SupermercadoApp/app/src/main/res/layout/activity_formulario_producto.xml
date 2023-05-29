@@ -169,18 +169,33 @@
                             android:hint="Stock"
                             />
                     </com.wrapp.floatlabelededittext.FloatLabeledEditText>
-                    <Spinner
+
+
+                    <com.toptoche.searchablespinnerlibrary.SearchableSpinner
                         android:id="@+id/spinner_estado_prod"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content" />
-                    <Spinner
+                        android:textSize="20dp"
+                        android:padding="10dp"
+                        android:background="@drawable/border_template"
+                        android:layout_marginBottom="20dp"
+                        android:layout_height="wrap_content"/>
+                    <com.toptoche.searchablespinnerlibrary.SearchableSpinner
                         android:id="@+id/spinner_categoria_prod"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content" />
-                    <Spinner
+                        android:textSize="20dp"
+                        android:padding="10dp"
+                        android:background="@drawable/border_template"
+                        android:layout_marginBottom="20dp"
+                        android:layout_height="wrap_content"/>
+
+                    <com.toptoche.searchablespinnerlibrary.SearchableSpinner
                         android:id="@+id/spinner_proveedor"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content" />
+
+                        android:padding="10dp"
+                        android:background="@drawable/border_template"
+                        android:layout_marginBottom="10dp"
+                        android:layout_height="wrap_content"/>
                 </LinearLayout>
             </ScrollView>
 

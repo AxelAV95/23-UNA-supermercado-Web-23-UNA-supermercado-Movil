@@ -6,17 +6,82 @@ public class Producto implements Serializable {
 
     private int id;
     private String nombre;
-    private float precio;
+    private double precio;
     private String fechaIngreso;
     private int stock;
     private int estado;
     private int categoriaid;
     private int proveedorid;
 
+    public Categoria getCategoria() {
+        return categoria;
+    }
+
+    public void setCategoria(Categoria categoria) {
+        this.categoria = categoria;
+    }
+
+    public Proveedor getProveedor() {
+        return proveedor;
+    }
+
+    public void setProveedor(Proveedor proveedor) {
+        this.proveedor = proveedor;
+    }
+
+    private Categoria categoria;
+    private Proveedor proveedor;
     public Producto()  {
     }
 
-    public Producto(int id, String nombre, float precio, String fechaIngreso, int stock, int estado, int categoriaid, int proveedorid) {
+    public Producto(String nombre, double precio, String fechaIngreso, int stock, int estado, int categoriaid, int proveedorid) {
+        this.nombre = nombre;
+        this.precio = precio;
+        this.fechaIngreso = fechaIngreso;
+        this.stock = stock;
+        this.estado = estado;
+        this.categoriaid = categoriaid;
+        this.proveedorid = proveedorid;
+    }
+
+    public Producto(int id, String nombre, double precio, String fechaIngreso, int stock, int estado, int categoriaid, int proveedorid, Categoria categoria, Proveedor proveedor) {
+        this.id = id;
+        this.nombre = nombre;
+        this.precio = precio;
+        this.fechaIngreso = fechaIngreso;
+        this.stock = stock;
+        this.estado = estado;
+        this.categoriaid = categoriaid;
+        this.proveedorid = proveedorid;
+        this.categoria = categoria;
+        this.proveedor = proveedor;
+    }
+
+    public Producto(int id, String nombre, double precio, String fechaIngreso, int stock, int estado, int categoriaid, int proveedorid, Proveedor proveedor) {
+        this.id = id;
+        this.nombre = nombre;
+        this.precio = precio;
+        this.fechaIngreso = fechaIngreso;
+        this.stock = stock;
+        this.estado = estado;
+        this.categoriaid = categoriaid;
+        this.proveedorid = proveedorid;
+        this.proveedor = proveedor;
+    }
+
+    public Producto(int id, String nombre, double precio, String fechaIngreso, int stock, int estado, int categoriaid, int proveedorid, Categoria categoria) {
+        this.id = id;
+        this.nombre = nombre;
+        this.precio = precio;
+        this.fechaIngreso = fechaIngreso;
+        this.stock = stock;
+        this.estado = estado;
+        this.categoriaid = categoriaid;
+        this.proveedorid = proveedorid;
+        this.categoria = categoria;
+    }
+
+    public Producto(int id, String nombre, double precio, String fechaIngreso, int stock, int estado, int categoriaid, int proveedorid) {
         this.id = id;
         this.nombre = nombre;
         this.precio = precio;
@@ -43,11 +108,11 @@ public class Producto implements Serializable {
         this.nombre = nombre;
     }
 
-    public float getPrecio() {
+    public double getPrecio() {
         return precio;
     }
 
-    public void setPrecio(float precio) {
+    public void setPrecio(double precio) {
         this.precio = precio;
     }
 
