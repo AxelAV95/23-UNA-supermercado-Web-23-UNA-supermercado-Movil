@@ -4,7 +4,7 @@ pipeline{
 	stages{
 		stage('Test selenium'){
 			steps{
-				sh 'npx selenium-side-runner -c "browserName=chrome" SupermercadoWebTesting.side'
+				 bat 'start /B npx selenium-side-runner -c "browserName=chrome" SupermercadoWebTesting.side'
 			}
 		}
 	}
