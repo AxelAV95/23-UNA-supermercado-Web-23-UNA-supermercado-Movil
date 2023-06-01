@@ -4,7 +4,7 @@ pipeline{
 	stages{
 		stage('Test selenium'){
 			steps{
-				sh 'selenium-side-runner -c "browserName=chrome" /web/supemercado/SupermercadoWebTesting.side'
+				sh 'selenium-side-runner -c "browserName=chrome" SupermercadoWebTesting.side'
 			}
 		}
 	}
