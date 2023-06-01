@@ -10,16 +10,11 @@ pipeline{
 
 		stage('Test Python') {
 		    steps {
-			bat '''
-			    rem Create a virtual environment
-			    python -m venv venv
-			    venv\\Scripts\\activate.bat
-
+			 bat '''
 			    rem Install dependencies
-			    pip install -r requirements.txt
-
+			    python -m pip install -r requirements.txt
 			    rem Run the test using pytest
-			    pytest iniciar.py
+			    python -m pytest iniciar.py
 			'''
 		    }
         	}
