@@ -4,7 +4,7 @@ pipeline{
 	stages{
 		stage('Test selenium'){
 			steps{
-				 bat 'selenium-side-runner Testing.side'
+				  bat 'start /B npx selenium-side-runner -c "browserName=chrome" Testing.side'
 			}
 		}
 	}
