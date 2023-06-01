@@ -10,11 +10,8 @@ pipeline{
 
 		stage('Test Python') {
 		    steps {
-			 bat '''
-			    rem Install dependencies
-			    python -m pip install -r requirements.txt
-			    rem Run the test using pytest
-			    python -m pytest iniciar.py
+			 bat '''			   
+			    python.exe -m pytest sesion.py
 			'''
 		    }
         	}
