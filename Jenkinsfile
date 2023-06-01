@@ -4,7 +4,7 @@ pipeline{
 	stages{
 		stage('Test selenium'){
 			steps{
-				 bat 'start /B selenium-side-runner Testing.side'
+				 bat 'selenium-side-runner Testing.side'
 			}
 		}
 	}
