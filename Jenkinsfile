@@ -11,7 +11,7 @@ pipeline{
 		stage('Test Python') {
 		    steps {
 			 bat '''			   
-			    python.exe -m pytest sesion.py
+			    C:\Users\AxelAV\AppData\Local\Programs\Python\Python311\python.exe -m pytest sesion.py
 			'''
 		    }
         	}
