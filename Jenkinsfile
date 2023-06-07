@@ -15,6 +15,22 @@ pipeline{
 			'''
 		    }
         	}
+		
+		 stage('Deploy to FTP') {
+		    steps {
+			sh '''
+			    git config git-ftp.url "ftp://192.168.100.252"
+			    git config git-ftp.user "ftptest"
+			    git config git-ftp.password "admin"
+			    git ftp push
+			    git ftp init 
+			    echo "new content" >> index.txt
+			    git commit index.txt -m "Add new content"
+			    git push
+			    git ftp push
+			'''
+		    }
+        }
         
 	}
 }
