@@ -99,10 +99,10 @@ class EmpleadoData extends Database{
 	}
 
 
-	public function eliminarempleado($empleado){
+	public function eliminarempleado($id){
 		$pdo = Database::conectar();
 		$stm = $pdo->prepare("CALL eliminarempleado(?)");
-		$stm->bindParam(1, $empleado, PDO::PARAM_INT);
+		$stm->bindParam(1, $id, PDO::PARAM_INT);
 		$resultado = $stm->execute();
 		Database::desconectar();
 
