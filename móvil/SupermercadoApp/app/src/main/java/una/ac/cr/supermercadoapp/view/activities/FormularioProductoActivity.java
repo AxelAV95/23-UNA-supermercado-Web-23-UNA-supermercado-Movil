@@ -264,6 +264,7 @@ public class FormularioProductoActivity extends AppCompatActivity {
                             listaProveedores.get(spinnerProveedor.getSelectedItemPosition() - 1).getId());
                     volleyProducto.insertarProducto(FormularioProductoActivity.this, producto,
                             credenciales.getString("ip", "192.168.100.216"));
+
                 } else if (intent.getExtras().getString("metodo").equals("actualizar")) {
                     Producto productoActualizado = new Producto(producto.getId(), campoNombre.getText().toString(),
                             Double.parseDouble(campoPrecio.getText().toString()), campoFecha.getText().toString(),

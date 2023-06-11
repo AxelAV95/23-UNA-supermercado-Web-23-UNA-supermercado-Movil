@@ -4,7 +4,6 @@ import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
-import androidx.lifecycle.Observer;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -12,7 +11,6 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.database.Cursor;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -24,33 +22,19 @@ import com.airbnb.lottie.LottieProperty;
 import com.airbnb.lottie.SimpleColorFilter;
 import com.airbnb.lottie.model.KeyPath;
 import com.airbnb.lottie.value.LottieValueCallback;
-import com.android.volley.Request;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonObjectRequest;
 import com.daimajia.swipe.util.Attributes;
 import com.yqritc.recyclerviewflexibledivider.HorizontalDividerItemDecoration;
-
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.util.ArrayList;
 
 import es.dmoral.toasty.Toasty;
 import una.ac.cr.supermercadoapp.R;
 import una.ac.cr.supermercadoapp.data.TipoEmpleadoData;
-import una.ac.cr.supermercadoapp.domain.AdministradorRed;
 import una.ac.cr.supermercadoapp.domain.TipoEmpleado;
-import una.ac.cr.supermercadoapp.domain.TipoUsuario;
-import una.ac.cr.supermercadoapp.network.VolleySingleton;
 import una.ac.cr.supermercadoapp.network.VolleyTipoEmpleado;
-import una.ac.cr.supermercadoapp.network.VolleyTipoUsuario;
 import una.ac.cr.supermercadoapp.utils.MonitorRedUtils;
-import una.ac.cr.supermercadoapp.utils.NetworkUtils;
 import una.ac.cr.supermercadoapp.view.adapters.TipoEmpleadoAdapter;
-import una.ac.cr.supermercadoapp.view.adapters.TipoUsuarioAdapter;
 import una.ac.cr.supermercadoapp.view.interfaces.TipoEmpleadoICallback;
-import una.ac.cr.supermercadoapp.view.interfaces.TipoUsuarioICallback;
 
 public class TipoEmpleadoActivity extends AppCompatActivity {
 
