@@ -116,23 +116,6 @@ public class FormularioProductoActivity extends AppCompatActivity {
         estadoAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerEstado.setAdapter(estadoAdapter);
         volleyProveedor = new VolleyProveedor();
-        ProveedorICallback listener2 = new ProveedorICallback() {
-            @Override
-            public void onProveedorReceived(ArrayList<Proveedor> lista) {
-                listaProveedores = lista;
-                listaProveedorString.add("Proveedor");
-
-                for (Proveedor tu : listaProveedores) {
-                    listaProveedorString.add(tu.getNombre());
-                }
-                ArrayAdapter<String> proveedorAdapter = new ArrayAdapter<String>(getApplicationContext(), R.layout.simple_spinner_item, listaProveedorString);
-
-                proveedorAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                spinnerProveedor.setAdapter(proveedorAdapter);
-            }
-        };
-
-        volleyProveedor.obtenerProveedores(this, credenciales.getString("ip", "192.168.100.216"), listener2);
 
         volleyProducto = new VolleyProducto();
         volleyCategoria = new VolleyCategoria();
@@ -204,7 +187,7 @@ public class FormularioProductoActivity extends AppCompatActivity {
                 }
             };
 
-            volleyProveedor.obtenerProveedores(this, credenciales.getString("ip", "192.168.100.216"), listener2);
+            volleyProveedor.obtenerProveedores(this, credenciales.getString("ip", "192.168.100.216"), listener3);
         } else if (intent.getExtras().getString("metodo").equals("actualizar")) {
             producto = (Producto) getIntent().getSerializableExtra("producto");
             botonMetodo.setText("Actualizar");
