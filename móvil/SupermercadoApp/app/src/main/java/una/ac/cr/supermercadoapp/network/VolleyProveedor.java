@@ -129,15 +129,16 @@ public class VolleyProveedor {
     public void actualizarProveedor(Context context,Proveedor proveedor, String IP){
         JSONObject proveedorJson = new JSONObject();
         try {
-            proveedorJson.put("metodo", "insertar");
-            proveedorJson.put("proveedorid",proveedor.getId());
-            proveedorJson.put("proveedornombre",proveedor.getNombre());
-            proveedorJson.put("proveedordireccion",proveedor.getDireccion());
-            proveedorJson.put("proveedorcorreo",proveedor.getCorreo());
-            proveedorJson.put("proveedortelefono",proveedor.getTelefono());
 
-          //  proveedorJson.put("latitud",proveedor.getLatitud());
-          //  proveedorJson.put("longitud",proveedor.getLongitud());
+            proveedorJson.put("id",proveedor.getId());
+            proveedorJson.put("nombre",proveedor.getNombre());
+            proveedorJson.put("direccion",proveedor.getDireccion());
+            proveedorJson.put("correo",proveedor.getCorreo());
+            proveedorJson.put("telefono",proveedor.getTelefono());
+
+            proveedorJson.put("latitud",proveedor.getLatitud());
+            proveedorJson.put("longitud",proveedor.getLongitud());
+
         } catch (JSONException e) {
             throw new RuntimeException(e);
         }
@@ -145,27 +146,23 @@ public class VolleyProveedor {
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.PUT, NetworkUtils.HTTP+IP+NetworkUtils.RUTA_PROVEEDOR,  proveedorJson , new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
-
                 if(response.optString("statusCode").toString().equals("200")){
-
                     Intent returnIntent = new Intent();
                     ((Activity) context).setResult(200, returnIntent);
                     ((Activity) context).finish();
-
                 }else{
                     Intent returnIntent = new Intent();
                     ((Activity) context).setResult(400, returnIntent);
                     ((Activity) context).finish();
-
                 }
-
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Log.e("anyText",error.toString());
-                Toasty.error(context, "Error al actualizar el proveedor", Toast.LENGTH_SHORT, true).show();
-            }
+
+                    Log.e("anyText",error.toString());
+                    Toasty.error(context, "Error al actualizar el registro con el ID "+proveedor.getId()+" "+proveedor.getNombre(), Toast.LENGTH_SHORT, true).show();
+                }
         });
 
         VolleySingleton.getVolleySingleton(context).addToRequestQueue(jsonObjectRequest);
@@ -199,4 +196,5 @@ public class VolleyProveedor {
         VolleySingleton.getVolleySingleton(context).addToRequestQueue(jsonObjectRequest);
     }
 }
+
 

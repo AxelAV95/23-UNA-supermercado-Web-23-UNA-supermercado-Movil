@@ -127,9 +127,9 @@ public class FormularioProveedorActivity extends AppCompatActivity {
 
                     }else if(intent.getExtras().getString("metodo").equals("actualizar")){
                         //método de actualizar
-                        Proveedor proveedor = new Proveedor(nombre.getText().toString(),direccion.getText().toString(),Integer.parseInt(telefono.getText().toString()),correo.getText().toString(),
+                        Proveedor proveedorActualizado = new Proveedor(mProveedor.getId(),nombre.getText().toString(),direccion.getText().toString(),Integer.parseInt(telefono.getText().toString()),correo.getText().toString(),
                                 latitud.getText().toString(),longitud.getText().toString());
-                        volleyProveedor.actualizarProveedor(FormularioProveedorActivity.this,proveedor,credenciales.getString("ip", "192.168.100.216"));
+                        volleyProveedor.actualizarProveedor(FormularioProveedorActivity.this,proveedorActualizado,credenciales.getString("ip", "192.168.100.216"));
 
                     }
                 }

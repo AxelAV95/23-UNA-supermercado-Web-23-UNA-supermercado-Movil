@@ -275,7 +275,6 @@ public class ProveedorActivity extends AppCompatActivity {
 
 
     }
-
     public void filtrar(String dato){
         ArrayList<Proveedor> filtrado = new ArrayList<>();
         VolleyProveedor volleyProveedor = new VolleyProveedor();

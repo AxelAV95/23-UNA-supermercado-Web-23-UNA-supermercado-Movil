@@ -44,7 +44,7 @@
 		$proveedor ->setLongitud($data->longitud);
 		$proveedorBusiness = new ProveedorBusiness();
 
-		$resultado = $proveedorBusiness->actualizar($proveedor);
+		$resultado = $proveedorBusiness->modificarproveedor($proveedor);
 
 		if($resultado == 1){
 	    		echo json_encode(array("statusCode"=>200));	
