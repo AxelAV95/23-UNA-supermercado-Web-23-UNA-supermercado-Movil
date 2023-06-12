@@ -7,12 +7,11 @@
 
         private $descuentomembresiaid;
 
-        public function __construct($descuentoid, $descuentotarifa, $descuentomembresiaid){
-            $this->descuentoid = $descuentoid;
-            $this->descuentotarifa = $descuentotarifa;
-            $this->descuentomembresiaid = $descuentomembresiaid;
-
+     
+        public function __construct() {
+         
         }
+
    
     public function getDescuentoid()
     {

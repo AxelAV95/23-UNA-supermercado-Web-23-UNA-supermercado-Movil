@@ -65,7 +65,7 @@ public class DescuentoAdapter extends RecyclerSwipeAdapter<DescuentoAdapter.View
 
     @Override
     public void onBindViewHolder(ViewHolderDescuento viewHolder, @SuppressLint("RecyclerView") int position) {
-        Float item = listaDescuentos.get(position).getTarifa();
+        double item = listaDescuentos.get(position).getTarifa();
         viewHolder.swipeLayout.setShowMode(SwipeLayout.ShowMode.LayDown);
         viewHolder.swipeLayout.setOnDoubleClickListener(new SwipeLayout.DoubleClickListener() {
             @Override
@@ -74,7 +74,7 @@ public class DescuentoAdapter extends RecyclerSwipeAdapter<DescuentoAdapter.View
                         .with(viewHolder.itemView.getContext())
                         .setTitle("Detalles")
                         .setBackgroundColor(Color.parseColor("#262943"))
-                        .setMessage("\nID: " + listaDescuentos.get(position).getId() + "\nTarifa: " + listaDescuentos.get(position).getTarifa() + "\n\n\n")
+                        .setMessage("\nID: " + listaDescuentos.get(position).getId() + "\nTarifa: " + listaDescuentos.get(position).getTarifa() + "\n"  +"Membresía: "+listaDescuentos.get(position).getMembresia().getDescripcion())
                         .setAnimation(Animation.POP)
                         .setIcon(R.drawable.usuarioicon, View.VISIBLE)
                         .setPositiveBtnBackground(Color.parseColor("#ffffff"))
@@ -97,8 +97,7 @@ public class DescuentoAdapter extends RecyclerSwipeAdapter<DescuentoAdapter.View
                 Intent intent = new Intent(v.getContext(), FormularioDescuentoActivity.class);
                 intent.putExtra("metodo","actualizar");
                 intent.putExtra("descuento",listaDescuentos.get(position));
-                //System.out.println(listaDescuentos.get(position).getTarifa());
-                //  v.getContext().startActivity(intent);
+
                 activityResultLauncher.launch(intent);
             }
         });
@@ -129,7 +128,6 @@ public class DescuentoAdapter extends RecyclerSwipeAdapter<DescuentoAdapter.View
         public ViewHolderDescuento(@NonNull View itemView,  DescuentoAdapter.OnItemClickListener listener) {
             super(itemView);
             swipeLayout = (SwipeLayout) itemView.findViewById(R.id.swipe);
-
             textViewData = (TextView) itemView.findViewById(R.id.text_data);
             buttonDelete =  itemView.findViewById(R.id.delete);
             btnUpdate = itemView.findViewById(R.id.update);
@@ -150,4 +148,5 @@ public class DescuentoAdapter extends RecyclerSwipeAdapter<DescuentoAdapter.View
 
     }
 }
+
 

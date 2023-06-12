@@ -4,7 +4,7 @@
 
 	if($_SERVER['REQUEST_METHOD'] == "GET"){
 		$descuentoBusiness = new DescuentoBusiness();
-  		$descuentos = $descuentoBusiness->obtener();
+  		$descuentos = $descuentoBusiness->getAllTBDescuentos();
   		echo json_encode($descuentos);
 	
 
@@ -14,13 +14,15 @@
 		$data = json_decode($json);
 
 		if($data->metodo == "insertar"){
-		//	$descuento = new Descuento();
-		//	$descuento->setTarifa($data->tarifa);
-			$descuento->setMembresiaId($data->membresiaid);
+			$descuento = new Descuento();
+			$descuento->setDescuentotarifa($data->tarifa);
+			$descuento->setDescuentomembresiaid($data->membresiaid);
+			
+			
 
-			$descuentoBusiness = new DescuentoBusiness();
+			$descuentobusiness = new DescuentoBusiness();
 
-			$resultado = $descuentoBusiness->insertarDescuento(new Descuento(0,$data->tarifa,$data->membresiaid));
+			$resultado = $descuentobusiness->insertarDescuento($descuento);
 
 			if($resultado == 1){
 		    		echo json_encode(array("statusCode"=>200));	
@@ -33,13 +35,9 @@
 	}else if($_SERVER['REQUEST_METHOD'] == "PUT"){
 		$json = file_get_contents('php://input');
 		$data = json_decode($json);
-
-		//$descuento = new Descuento();
-		//$descuento->setId($data->id);
-		//$descuento->setTarifa($data->tarifa);
+		
 		$descuentoBusiness = new DescuentoBusiness();
-
-		$resultado = $descuentoBusiness->actualizar(new Descuento($data->descuentoid,$data->descuentotarifa,$data->descuentomembresiaid));
+		$resultado = $descuentoBusiness->modificarDescuento(new Descuento($data->id,$data->tarifa,$data->membresiaid));
 
 		if($resultado == 1){
 	    		echo json_encode(array("statusCode"=>200));	

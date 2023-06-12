@@ -1,9 +1,14 @@
 package una.ac.cr.supermercadoapp.network;
 
+import static android.content.Context.MODE_PRIVATE;
+
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -17,16 +22,22 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Date;
 
+import at.favre.lib.crypto.bcrypt.BCrypt;
 import es.dmoral.toasty.Toasty;
+import una.ac.cr.supermercadoapp.data.BackupData;
 import una.ac.cr.supermercadoapp.data.DescuentoData;
-import una.ac.cr.supermercadoapp.data.TipoEmpleadoData;
+import una.ac.cr.supermercadoapp.data.ProductoData;
 import una.ac.cr.supermercadoapp.domain.Categoria;
 import una.ac.cr.supermercadoapp.domain.Descuento;
-import una.ac.cr.supermercadoapp.domain.TipoEmpleado;
+import una.ac.cr.supermercadoapp.domain.Producto;
+import una.ac.cr.supermercadoapp.domain.Proveedor;
+
 import una.ac.cr.supermercadoapp.utils.NetworkUtils;
+
 import una.ac.cr.supermercadoapp.view.interfaces.DescuentoICallback;
-import una.ac.cr.supermercadoapp.view.interfaces.TipoEmpleadoICallback;
+import una.ac.cr.supermercadoapp.view.interfaces.ProductoICallback;
 
 public class VolleyDescuento {
     private ArrayList<Descuento> listaDescuentos;
@@ -66,35 +77,44 @@ public class VolleyDescuento {
 
 
 
-    public void insertarDescuento(Context context, Descuento descuento, String IP){
+
+    //agregar un producto
+    public void insertarDescuento(Context context,Descuento descuento, String IP){
         JSONObject descuentoJson = new JSONObject();
         try {
             descuentoJson.put("metodo", "insertar");
-            descuentoJson.put("descuentotarifa",descuento.getTarifa());
-            descuentoJson.put("descuentomembresiaid",descuento.getMembresiaid());
+            descuentoJson.put("tarifa",descuento.getTarifa());
+            descuentoJson.put("membresiaid",descuento.getMembresiaid());
+
+
         } catch (JSONException e) {
             throw new RuntimeException(e);
         }
 
-        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, NetworkUtils.HTTP+IP+NetworkUtils.RUTA_DESCUENTO,  descuentoJson , new Response.Listener<JSONObject>() {
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, una.ac.cr.supermercadoapp.utils.NetworkUtils.HTTP+IP+ NetworkUtils.RUTA_DESCUENTO,  descuentoJson , new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
                 DescuentoData descuentoData = new DescuentoData(context);
                 if(response.optString("statusCode").toString().equals("200")){
 
+                    JSONObject descuentoRespaldo = new JSONObject();
+                    try {
 
-                    long resultado = descuentoData.insertarDescuento(new Descuento(descuento.getTarifa(),descuento.getMembresiaid()));
-                    if(resultado == -1){
-                        Toasty.error(context, "Error al insertar en la base de datos local", Toast.LENGTH_SHORT, true).show();
-                    }else{
-                        Toasty.success(context, "Se registró con éxito", Toast.LENGTH_SHORT, true).show();
-                        Intent returnIntent = new Intent();
-                        ((Activity) context).setResult(Activity.RESULT_OK, returnIntent);
-                        ((Activity) context).finish();
+                        descuentoRespaldo.put("tarifa",descuento.getTarifa());
+                        descuentoRespaldo.put("membresiaid",descuento.getMembresiaid());
+
+                    } catch (JSONException e) {
+                        throw new RuntimeException(e);
                     }
 
+                    //Se llama el método
+                    new BackupData().respaldarJson(descuentoRespaldo.toString(), context, "descuento.json");
+
+                    Intent returnIntent = new Intent();
+                    ((Activity) context).setResult(Activity.RESULT_OK, returnIntent);
+                    ((Activity) context).finish();
+
                 }else{
-                    long resultado = descuentoData.insertarDescuento(new Descuento(descuento.getTarifa(),descuento.getMembresiaid()));
                     Toasty.error(context, "Error al insertar", Toast.LENGTH_SHORT, true).show();
                 }
 
@@ -103,28 +123,26 @@ public class VolleyDescuento {
             @Override
             public void onErrorResponse(VolleyError error) {
                 Log.e("anyText",error.toString());
-                Toasty.error(context, "Error al insertar vacio", Toast.LENGTH_SHORT, true).show();
+                Toasty.error(context, "Error al insertar", Toast.LENGTH_SHORT, true).show();
             }
         });
 
         VolleySingleton.getVolleySingleton(context).addToRequestQueue(jsonObjectRequest);
     }
+    //modificar un producto
+    public void actualizarDescuento(Context context,Descuento descuento, String IP){
 
-
-
-    public void actualizarDescuento(Context context, Descuento descuento, String IP){
         JSONObject descuentoJson = new JSONObject();
         try {
-            descuentoJson.put("metodo", "insertar");
-            descuentoJson.put("descuentoid",descuento.getId());
-            descuentoJson.put("descuentotarifa",descuento.getTarifa());
-            descuentoJson.put("descuentomembresiaid",descuento.getMembresiaid());
+            descuentoJson.put("id",descuento.getId());
+            descuentoJson.put("tarifa",descuento.getTarifa());
+            descuentoJson.put("membresiaid",descuento.getMembresiaid());
 
         } catch (JSONException e) {
             throw new RuntimeException(e);
         }
 
-        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.PUT, NetworkUtils.HTTP+IP+NetworkUtils.RUTA_DESCUENTO,  descuentoJson, new Response.Listener<JSONObject>() {
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.PUT, una.ac.cr.supermercadoapp.utils.NetworkUtils.HTTP+IP+ NetworkUtils.RUTA_DESCUENTO,  descuentoJson , new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
 
@@ -153,11 +171,10 @@ public class VolleyDescuento {
         VolleySingleton.getVolleySingleton(context).addToRequestQueue(jsonObjectRequest);
     }
 
-
-
+    //eliminar un producto
     public void eliminarDescuento(Context context,Descuento descuento, String IP){
 
-        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.DELETE, NetworkUtils.HTTP+IP+NetworkUtils.RUTA_DESCUENTO+"?id="+descuento.getId(),  null , new Response.Listener<JSONObject>() {
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.DELETE, una.ac.cr.supermercadoapp.utils.NetworkUtils.HTTP+IP+ NetworkUtils.RUTA_DESCUENTO+"?id="+descuento.getId(),  null , new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
 
@@ -183,10 +200,5 @@ public class VolleyDescuento {
         VolleySingleton.getVolleySingleton(context).addToRequestQueue(jsonObjectRequest);
     }
 
-
-
-
-
 }
-
 

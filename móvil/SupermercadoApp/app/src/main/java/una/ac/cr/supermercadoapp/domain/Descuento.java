@@ -4,19 +4,25 @@ import java.io.Serializable;
 
 public class Descuento implements Serializable {
     private int id;
-    private float tarifa;
+    private double tarifa;
     private int membresiaid;
-
+    public Membresia getMembresia() {
+        return membresia;
+    }
+    public void setMembresia(Membresia membresia) {
+        this.membresia = membresia;
+    }
+    private Membresia membresia;
     public Descuento() {
     }
 
-    public Descuento(int id, float tarifa, int membresiaid) {
+    public Descuento(int id, double tarifa, int membresiaid) {
         this.id = id;
         this.tarifa = tarifa;
         this.membresiaid = membresiaid;
     }
 
-    public Descuento(float tarifa, int membresiaid) {
+    public Descuento(double tarifa, int membresiaid) {
         this.tarifa = tarifa;
         this.membresiaid = membresiaid;
     }
@@ -29,7 +35,7 @@ public class Descuento implements Serializable {
         this.id = id;
     }
 
-    public float getTarifa() {
+    public double getTarifa() {
         return tarifa;
     }
 

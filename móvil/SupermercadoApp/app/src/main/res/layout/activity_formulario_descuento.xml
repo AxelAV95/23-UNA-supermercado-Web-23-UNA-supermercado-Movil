@@ -28,7 +28,6 @@
         />
 
 
-
     <TextView
         android:id="@+id/textView"
         android:layout_below="@id/waves"
@@ -41,12 +40,12 @@
         android:textStyle="bold"
         android:layout_marginRight="10dp"
         android:layout_marginLeft="10dp"
-        android:text="Formulario Descuento"
+        android:text="Descuento"
 
         />
 
     <com.airbnb.lottie.LottieAnimationView
-        android:id="@+id/icon_icon_users"
+        android:id="@+id/icon_icon_descuentos"
         android:layout_width="70dp"
         android:layout_height="70dp"
         android:layout_below="@id/textView"
@@ -57,7 +56,7 @@
         android:layout_marginBottom="5dp"
         app:lottie_autoPlay="true"
         app:lottie_loop="true"
-        app:lottie_rawRes="@raw/usuarios" />
+        app:lottie_rawRes="@raw/clientes" />
 
     <androidx.cardview.widget.CardView
         android:id="@+id/formulario_agregar_descuento"
@@ -73,7 +72,7 @@
 
         app:cardBackgroundColor="#FFFFFF"
         app:cardUseCompatPadding="true"
-        android:layout_below="@id/icon_icon_users"
+        android:layout_below="@id/icon_icon_descuentos"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
         >
@@ -88,32 +87,30 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical" >
 
-                    <com.wrapp.floatlabelededittext.FloatLabeledEditText
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/dosis"
 
-                        >
+            <com.wrapp.floatlabelededittext.FloatLabeledEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/dosis"
+                >
 
                         <EditText
                             android:id="@+id/form_des_tarifa"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_margin="10dp"
-
+                            android:inputType="numberDecimal"
                             android:ems="10"
                             android:fontFamily="@font/dosis"
                             android:hint="Tarifa" />
 
-
-
                     </com.wrapp.floatlabelededittext.FloatLabeledEditText>
-
 
                     <com.toptoche.searchablespinnerlibrary.SearchableSpinner
                         android:id="@+id/spinner_membresia"

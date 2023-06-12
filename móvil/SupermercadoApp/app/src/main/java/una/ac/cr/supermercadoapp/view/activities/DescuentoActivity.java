@@ -13,13 +13,17 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
+import android.graphics.Color;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.SearchView;
 import android.widget.Toast;
 
 import com.airbnb.lottie.LottieAnimationView;
+import com.skydoves.powermenu.OnMenuItemClickListener;
 import com.airbnb.lottie.LottieProperty;
 import com.airbnb.lottie.SimpleColorFilter;
 import com.airbnb.lottie.model.KeyPath;
@@ -29,6 +33,9 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.daimajia.swipe.util.Attributes;
+import com.skydoves.powermenu.MenuAnimation;
+import com.skydoves.powermenu.PowerMenu;
+import com.skydoves.powermenu.PowerMenuItem;
 import com.yqritc.recyclerviewflexibledivider.HorizontalDividerItemDecoration;
 
 import org.json.JSONException;
@@ -39,21 +46,26 @@ import java.util.ArrayList;
 import es.dmoral.toasty.Toasty;
 import una.ac.cr.supermercadoapp.R;
 import una.ac.cr.supermercadoapp.data.DescuentoData;
+import una.ac.cr.supermercadoapp.data.ProductoData;
 import una.ac.cr.supermercadoapp.data.TipoEmpleadoData;
 import una.ac.cr.supermercadoapp.domain.AdministradorRed;
 import una.ac.cr.supermercadoapp.domain.Descuento;
+import una.ac.cr.supermercadoapp.domain.Producto;
 import una.ac.cr.supermercadoapp.domain.TipoEmpleado;
 import una.ac.cr.supermercadoapp.domain.TipoUsuario;
 import una.ac.cr.supermercadoapp.network.VolleyDescuento;
+import una.ac.cr.supermercadoapp.network.VolleyProducto;
 import una.ac.cr.supermercadoapp.network.VolleySingleton;
 import una.ac.cr.supermercadoapp.network.VolleyTipoEmpleado;
 import una.ac.cr.supermercadoapp.network.VolleyTipoUsuario;
 import una.ac.cr.supermercadoapp.utils.MonitorRedUtils;
 import una.ac.cr.supermercadoapp.utils.NetworkUtils;
 import una.ac.cr.supermercadoapp.view.adapters.DescuentoAdapter;
+import una.ac.cr.supermercadoapp.view.adapters.ProductoAdapter;
 import una.ac.cr.supermercadoapp.view.adapters.TipoEmpleadoAdapter;
 import una.ac.cr.supermercadoapp.view.adapters.TipoUsuarioAdapter;
 import una.ac.cr.supermercadoapp.view.interfaces.DescuentoICallback;
+import una.ac.cr.supermercadoapp.view.interfaces.ProductoICallback;
 import una.ac.cr.supermercadoapp.view.interfaces.TipoEmpleadoICallback;
 import una.ac.cr.supermercadoapp.view.interfaces.TipoUsuarioICallback;
 
@@ -70,9 +82,35 @@ public class DescuentoActivity extends AppCompatActivity {
 
     private DescuentoData descuentoData;
     public MonitorRedUtils monitorRedUtils;
+    private PowerMenu powerMenu;
+
+    private OnMenuItemClickListener<PowerMenuItem> onMenuItemClickListener = new OnMenuItemClickListener<PowerMenuItem>() {
+        @Override
+        public void onItemClick(int position, PowerMenuItem item) {
+
+            if(item.title.equals("Menú principal")){
+                powerMenu.dismiss();
+                String cedula = credenciales.getString("cedula", null);
+                String tipo = credenciales.getString("tipo",null);
+                if (cedula != null ) {
+
+                    if(tipo.equals("Administrador")){
+                        Intent intent = new Intent(DescuentoActivity.this, MainActivity.class);
+                        startActivity(intent);
+                        finish();
+                    }else if(tipo.equals("Empleado")){
+                        Intent intent  = new Intent(DescuentoActivity.this, MenuEmpleadoActivity.class);
+                        startActivity(intent);
+                        finish();
+                    }
 
 
-    //API para manejar la iniciación de actividades y la recepción de resultados de actividades
+                }
+            }
+
+
+        }
+    };
     ActivityResultLauncher<Intent> launcher = registerForActivityResult(
             new ActivityResultContracts.StartActivityForResult(),
             result -> {
@@ -83,6 +121,8 @@ public class DescuentoActivity extends AppCompatActivity {
                 else if(result.getResultCode() == 200){
                     Toasty.success(this, "Actualizado con éxito", Toast.LENGTH_SHORT, true).show();
                     actualizarLista();
+                }else if(result.getResultCode() == 400){
+                    Toasty.error(this, "Error al actualizar", Toast.LENGTH_SHORT, true).show();
                 }
             }
     );
@@ -104,27 +144,56 @@ public class DescuentoActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_descuento);
+        descuentoData = new DescuentoData(this);
+        listaDescuentos = new ArrayList<>();
+
         credenciales = getSharedPreferences("credenciales", Context.MODE_PRIVATE);
         String cedula  = credenciales.getString("cedula", null);
+
+        if(cedula == null){
+            Intent intent = new Intent(DescuentoActivity.this, LoginActivity.class);
+            startActivity(intent);;
+            finish();
+        }
 
         verificarEstadoSesion(cedula);
         configurarRecycler();
         iniciarWidgets();
         agregarEventos();
 
-        descuentoData = new DescuentoData(this);
 
-        iconAgregar = findViewById(R.id.icon_agregar_descuento);
-        iconAgregar.setOnClickListener(new View.OnClickListener() {
+
+        powerMenu = new PowerMenu.Builder(this)
+                .addItem(new PowerMenuItem("Menú principal", false)) // add an item.
+                .setAnimation(MenuAnimation.SHOWUP_BOTTOM_RIGHT) // Animation start point (TOP | LEFT).
+                .setMenuRadius(10f) // sets the corner radius.
+                .setMenuShadow(10f) // sets the shadow.
+                .setTextColor(ContextCompat.getColor(this, R.color.dark_gray))
+                .setTextGravity(Gravity.CENTER)
+                .setTextTypeface(Typeface.create("sans-serif-medium", Typeface.BOLD))
+                .setSelectedTextColor(Color.WHITE)
+                .setMenuColor(Color.WHITE)
+                .setSelectedMenuColor(ContextCompat.getColor(getApplicationContext(), R.color.black))
+                .setOnMenuItemClickListener(onMenuItemClickListener)
+                .build();
+
+        iconDescuento = findViewById(R.id.icon_ti_descuentos);
+        int primaryColor = ContextCompat.getColor(this, R.color.primary);
+        iconDescuento.addValueCallback(
+                new KeyPath("**"),
+                LottieProperty.COLOR_FILTER,
+                new LottieValueCallback<>(new SimpleColorFilter(primaryColor)));
+        iconDescuento.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-
-                Intent intent = new Intent(DescuentoActivity.this, FormularioDescuentoActivity.class);
-                intent.putExtra("metodo","agregar");
-                startActivity(intent);
-
+            public void onClick(View view) {
+                if (powerMenu.isShowing()) {
+                    powerMenu.dismiss();
+                    return;
+                }
+                powerMenu.showAsDropDown(view);
             }
         });
+
     }
 
 
@@ -138,7 +207,7 @@ public class DescuentoActivity extends AppCompatActivity {
                 .margin(18,18)
                 .build());
 
-        //Aquí se tendría que llenar la lista auxiliar con lo que hay en la BD del server
+
         VolleyDescuento volleyDescuento = new VolleyDescuento();
 
         DescuentoICallback listener = new DescuentoICallback() {
@@ -149,9 +218,17 @@ public class DescuentoActivity extends AppCompatActivity {
                 ((DescuentoAdapter)mAdaptadorDescuento).setOnItemClickListener(new DescuentoAdapter.OnItemClickListener() {
                     @Override
                     public void onItemClick(int position) {
-                        volleyDescuento.eliminarDescuento(DescuentoActivity.this, listaDescuentos.get(position),credenciales.getString("ip", "192.168.100.216"));
-                        actualizarLista();
-
+                        VolleyDescuento volleyDescuento = new VolleyDescuento();
+                        DescuentoICallback listener = new DescuentoICallback() {
+                            @Override
+                            public void onDescuentoReceived(ArrayList<Descuento> lista) {
+                                listaDescuentos = lista;
+                                ((DescuentoAdapter)mAdaptadorDescuento ).setListaDescuentos(listaDescuentos);
+                                mAdaptadorDescuento.notifyDataSetChanged();
+                            }
+                        };
+                        volleyDescuento.eliminarDescuento(DescuentoActivity.this,listaDescuentos.get(position),credenciales.getString("ip", "192.168.100.216"));
+                        volleyDescuento.obtenerDescuentos(DescuentoActivity.this,credenciales.getString("ip", "192.168.100.216"),listener);
                     }
                 });
                 ((DescuentoAdapter)mAdaptadorDescuento).setMode(Attributes.Mode.Single);
@@ -164,27 +241,6 @@ public class DescuentoActivity extends AppCompatActivity {
 
         volleyDescuento.obtenerDescuentos(this,credenciales.getString("ip", "192.168.100.216"),listener);
 
-    }
-
-
-    private void iniciarWidgets() {
-        // cardViewTitulo = findViewById(R.id.contenedor_titulo);
-        searchDescuento = findViewById(R.id.barra_busqueda_te);
-        searchDescuento.clearFocus();
-        iconDescuento = findViewById(R.id.icon_ti_descuentos);
-        iconAgregar = findViewById(R.id.icon_agregar_descuento);
-
-
-    }
-
-
-
-    private void verificarEstadoSesion(String cedula) {
-        if(cedula == null){
-            Intent intent = new Intent(DescuentoActivity.this, LoginActivity.class);
-            startActivity(intent);;
-            finish();
-        }
     }
 
 
@@ -211,6 +267,21 @@ public class DescuentoActivity extends AppCompatActivity {
 
 
     }
+
+    private void verificarEstadoSesion(String cedula) {
+        if(cedula == null){
+            Intent intent = new Intent(DescuentoActivity.this, LoginActivity.class);
+            startActivity(intent);;
+            finish();
+        }
+    }
+
+
+    @Override
+    public void onBackPressed() {
+
+    }
+
 
     public void filtrar(Float dato){
         ArrayList<Descuento> filtrado = new ArrayList<>();
@@ -251,7 +322,7 @@ public class DescuentoActivity extends AppCompatActivity {
                     actualizarLista();
                 }else{
                     actualizarLista();
-                    filtrar(((Float.parseFloat(newText)) ));
+                    filtrar(Float.valueOf(newText));
 
                 }
 
@@ -273,5 +344,22 @@ public class DescuentoActivity extends AppCompatActivity {
     }
 
 
+    private void iniciarWidgets() {
+
+        searchDescuento = findViewById(R.id.barra_busqueda_te);
+        searchDescuento.clearFocus();
+        iconDescuento = findViewById(R.id.icon_ti_descuentos);
+        iconAgregar = findViewById(R.id.icon_agregar_descuento);
+        int whiteColor = ContextCompat.getColor(this, R.color.white);
+        iconDescuento .addValueCallback(
+                new KeyPath("**"),
+                LottieProperty.COLOR_FILTER,
+                new LottieValueCallback<>(new SimpleColorFilter(whiteColor)));
+
+    }
+
+
+
 
 }
+
