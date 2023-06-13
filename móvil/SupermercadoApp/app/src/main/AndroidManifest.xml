@@ -17,6 +17,8 @@
         android:usesCleartextTraffic="true"
         tools:replace="android:icon"
         tools:targetApi="31">
+        <activity android:name=".view.activities.FormularioClienteActivity" />
+
         <activity
             android:name=".view.activities.FormularioMembresiaActivity"
             android:exported="false" />

@@ -141,7 +141,7 @@ background: linear-gradient(to right, #24243e, #302b63, #0f0c29); /* W3C, IE 10+
             </ul> -->
           </li>
 
-           <li class="nav-item">
+         <!--   <li class="nav-item">
             <a href="" class="nav-link">
                <i class="nav-icon fas fa-file"></i>
               <p>
@@ -165,7 +165,7 @@ background: linear-gradient(to right, #24243e, #302b63, #0f0c29); /* W3C, IE 10+
                 </a>
               </li>
             </ul>
-          </li>
+          </li> -->
 
            <?php if($_SESSION['tipodescripcion'] == "Administrador"){ ?>
           <li class="nav-item">
