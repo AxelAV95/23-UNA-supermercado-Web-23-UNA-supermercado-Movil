@@ -208,11 +208,12 @@ public class FormularioClienteActivity extends AppCompatActivity {
                     Toasty.info(getApplicationContext(), "Debe agregar una Cédula", Toast.LENGTH_SHORT, true).show();
                     campoCedula.requestFocus();
                     return;
-                } else if (!campoCedula.getText().toString().matches("\\d+")) {
-                    campoCedula.setError("La cédula solo puede contener números enteros");
+                } else if (!campoCedula.getText().toString().matches("^\\d{9}$")) {
+                    campoCedula.setError("La cédula debe contener solo números y ser exactamente 9");
                     campoCedula.requestFocus();
                     return;
                 }
+
                 if (campoDireccion.getText().toString().isEmpty()) {
                     Toasty.info(getApplicationContext(), "Debe agregar un Dirección", Toast.LENGTH_SHORT, true).show();
                     campoDireccion.requestFocus();
@@ -227,11 +228,12 @@ public class FormularioClienteActivity extends AppCompatActivity {
                     Toasty.info(getApplicationContext(), "Debe agregar un Teléfono", Toast.LENGTH_SHORT, true).show();
                     campoTelefono.requestFocus();
                     return;
-                } else if (!campoTelefono.getText().toString().matches("\\d+")) {
-                    campoTelefono.setError("El Teléfono solo puede contener números enteros");
+                } else if (!campoTelefono.getText().toString().matches("^\\d{8}$")) {
+                    campoTelefono.setError("El Teléfono debe ser solo números y contener exactamente 8");
                     campoTelefono.requestFocus();
                     return;
                 }
+
 
                 if (campoCorreo.getText().toString().isEmpty()) {
                     Toasty.info(getApplicationContext(), "Debe agregar un Correo", Toast.LENGTH_SHORT, true).show();
