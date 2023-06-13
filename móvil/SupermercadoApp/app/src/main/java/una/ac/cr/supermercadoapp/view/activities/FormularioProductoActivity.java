@@ -120,12 +120,12 @@ public class FormularioProductoActivity extends AppCompatActivity {
             @Override
             public void onProveedorReceived(ArrayList<Proveedor> lista) {
                 listaProveedores = lista;
-                listaProveedorString.clear();  // Limpiar la lista antes de agregar elementos
+                listaProveedorString.add("Proveedor");
 
                 for (Proveedor tu : listaProveedores) {
                     listaProveedorString.add(tu.getNombre());
                 }
-                ArrayAdapter<String> proveedorAdapter = new ArrayAdapter<>(getApplicationContext(), R.layout.simple_spinner_item, listaProveedorString);
+                ArrayAdapter<String> proveedorAdapter = new ArrayAdapter<String>(getApplicationContext(), R.layout.simple_spinner_item, listaProveedorString);
 
                 proveedorAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                 spinnerProveedor.setAdapter(proveedorAdapter);
@@ -186,35 +186,26 @@ public class FormularioProductoActivity extends AppCompatActivity {
                     }
                 }
             };
+
             volleyProveedor = new VolleyProveedor();
             ProveedorICallback listener3 = new ProveedorICallback() {
                 @Override
                 public void onProveedorReceived(ArrayList<Proveedor> lista) {
                     listaProveedores = lista;
-                    listaProveedorString.clear();  // Limpiar la lista antes de agregar elementos
+                    listaProveedorString.add("Proveedor");
 
                     for (Proveedor tu : listaProveedores) {
                         listaProveedorString.add(tu.getNombre());
                     }
-                    ArrayAdapter<String> proveedorAdapter = new ArrayAdapter<>(getApplicationContext(), R.layout.simple_spinner_item, listaProveedorString);
+                    ArrayAdapter<String> proveedorAdapter = new ArrayAdapter<String>(getApplicationContext(), R.layout.simple_spinner_item, listaProveedorString);
 
                     proveedorAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                     spinnerProveedor.setAdapter(proveedorAdapter);
-
-                    // Si hay un proveedor seleccionado, establecerlo como selección actual
-                    if (producto != null && producto.getProveedor() != null) {
-                        for (int i = 0; i < listaProveedores.size(); i++) {
-                            if (listaProveedores.get(i).getId() == producto.getProveedor().getId()) {
-                                spinnerProveedor.setSelection(i + 1);
-                                break;
-                            }
-                        }
-                    }
                 }
             };
 
-            volleyProveedor.obtenerProveedores(FormularioProductoActivity.this, credenciales.getString("ip", "192.168.100.216"), listener3);
-         } else if (intent.getExtras().getString("metodo").equals("actualizar")) {
+            volleyProveedor.obtenerProveedores(this, credenciales.getString("ip", "192.168.100.216"), listener2);
+        } else if (intent.getExtras().getString("metodo").equals("actualizar")) {
             producto = (Producto) getIntent().getSerializableExtra("producto");
             botonMetodo.setText("Actualizar");
             campoNombre.setText(producto.getNombre());
