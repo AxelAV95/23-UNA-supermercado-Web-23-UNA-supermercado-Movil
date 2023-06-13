@@ -14,9 +14,14 @@ public class Cliente implements Serializable {
     private String fechaAfiliacion;
     private int tipoMembresia;
 
-    public Cliente() {
+    public Membresia getMembresia() {
+        return membresia;
     }
 
+    public void setMembresia(Membresia membresia) {
+        this.membresia = membresia;
+    }
+    private Membresia membresia;
     public Cliente(int id, String nombre, String apellidos, int cedula, String direccion, int telefono, String correo, String fechaAfiliacion, int tipoMembresia) {
         this.id = id;
         this.nombre = nombre;
@@ -27,6 +32,43 @@ public class Cliente implements Serializable {
         this.correo = correo;
         this.fechaAfiliacion = fechaAfiliacion;
         this.tipoMembresia = tipoMembresia;
+    }
+    public Cliente(String nombre, String apellidos, int cedula, String direccion, int telefono, String correo, String fechaAfiliacion, int tipoMembresia) {
+        this.id = id;
+        this.nombre = nombre;
+        this.apellidos = apellidos;
+        this.cedula = cedula;
+        this.direccion = direccion;
+        this.telefono = telefono;
+        this.correo = correo;
+        this.fechaAfiliacion = fechaAfiliacion;
+        this.tipoMembresia = tipoMembresia;
+    }
+
+    public Cliente(String nombre, String apellidos, int cedula, String direccion, int telefono, String correo, String fechaAfiliacion, int tipoMembresia,Membresia membresia) {
+        this.id = id;
+        this.nombre = nombre;
+        this.apellidos = apellidos;
+        this.cedula = cedula;
+        this.direccion = direccion;
+        this.telefono = telefono;
+        this.correo = correo;
+        this.fechaAfiliacion = fechaAfiliacion;
+        this.tipoMembresia = tipoMembresia;
+        this.membresia = membresia;
+    }
+
+    public Cliente(int id,String nombre, String apellidos, int cedula, String direccion, int telefono, String correo, String fechaAfiliacion, int tipoMembresia,Membresia membresia) {
+        this.id = id;
+        this.nombre = nombre;
+        this.apellidos = apellidos;
+        this.cedula = cedula;
+        this.direccion = direccion;
+        this.telefono = telefono;
+        this.correo = correo;
+        this.fechaAfiliacion = fechaAfiliacion;
+        this.tipoMembresia = tipoMembresia;
+        this.membresia = membresia;
     }
 
     public int getId() {

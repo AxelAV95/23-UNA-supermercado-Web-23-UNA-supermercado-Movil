@@ -18,9 +18,9 @@ public class NetworkUtils {
     public static final String RUTA_MEMBRESIA = "/23-UNA-supermercado-Web-23-UNA-supermercado-Movil/web/supermercado/service/membresiaservice.php";
     public static final String RUTA_EMPLEADO = "/23-UNA-supermercado-Web-23-UNA-supermercado-Movil/web/supermercado/service/empleadoservice.php";
     public static final String RUTA_PRODUCTO = "/23-UNA-supermercado-Web-23-UNA-supermercado-Movil/web/supermercado/service/productoservice.php";
-
-  public static final String RUTA_PROVEEDOR = "/23-UNA-supermercado-Web-23-UNA-supermercado-Movil/web/supermercado/service/proveedorservice.php";
- public static final String RUTA_DESCUENTO = "/23-UNA-supermercado-Web-23-UNA-supermercado-Movil/web/supermercado/service/descuentoservice.php";
+    public static final String RUTA_CLIENTE = "/23-UNA-supermercado-Web-23-UNA-supermercado-Movil/web/supermercado/service/clienteservice.php";
+    public static final String RUTA_PROVEEDOR = "/23-UNA-supermercado-Web-23-UNA-supermercado-Movil/web/supermercado/service/proveedorservice.php";
+    public static final String RUTA_DESCUENTO = "/23-UNA-supermercado-Web-23-UNA-supermercado-Movil/web/supermercado/service/descuentoservice.php";
 
     public static final String RUTA_CONFIGURACION = "/23-UNA-supermercado-Web-23-UNA-supermercado-Movil/web/supermercado/service/configuracionservice.php";
 }

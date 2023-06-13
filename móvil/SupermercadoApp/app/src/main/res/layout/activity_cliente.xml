@@ -86,7 +86,7 @@
         android:layout_marginRight="20dp"
         android:layout_height="wrap_content"
         android:id="@+id/barra_busqueda_cliente"
-        android:queryHint="Ingrese cédula"
+        android:queryHint="Ingrese nombre"
         android:layout_below="@id/icon_ver_clientes"
         android:background="@drawable/search_bg"
         />
