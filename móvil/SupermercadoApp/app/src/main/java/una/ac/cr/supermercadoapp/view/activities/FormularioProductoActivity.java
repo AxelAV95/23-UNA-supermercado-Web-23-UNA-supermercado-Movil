@@ -116,6 +116,23 @@ public class FormularioProductoActivity extends AppCompatActivity {
         estadoAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerEstado.setAdapter(estadoAdapter);
         volleyProveedor = new VolleyProveedor();
+        ProveedorICallback listener2 = new ProveedorICallback() {
+            @Override
+            public void onProveedorReceived(ArrayList<Proveedor> lista) {
+                listaProveedores = lista;
+                listaProveedorString.clear();  // Limpiar la lista antes de agregar elementos
+
+                for (Proveedor tu : listaProveedores) {
+                    listaProveedorString.add(tu.getNombre());
+                }
+                ArrayAdapter<String> proveedorAdapter = new ArrayAdapter<>(getApplicationContext(), R.layout.simple_spinner_item, listaProveedorString);
+
+                proveedorAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                spinnerProveedor.setAdapter(proveedorAdapter);
+            }
+        };
+
+        volleyProveedor.obtenerProveedores(this, credenciales.getString("ip", "192.168.100.216"), listener2);
 
         volleyProducto = new VolleyProducto();
         volleyCategoria = new VolleyCategoria();
@@ -169,26 +186,35 @@ public class FormularioProductoActivity extends AppCompatActivity {
                     }
                 }
             };
-
             volleyProveedor = new VolleyProveedor();
             ProveedorICallback listener3 = new ProveedorICallback() {
                 @Override
                 public void onProveedorReceived(ArrayList<Proveedor> lista) {
                     listaProveedores = lista;
-                    listaProveedorString.add("Proveedor");
+                    listaProveedorString.clear();  // Limpiar la lista antes de agregar elementos
 
                     for (Proveedor tu : listaProveedores) {
                         listaProveedorString.add(tu.getNombre());
                     }
-                    ArrayAdapter<String> proveedorAdapter = new ArrayAdapter<String>(getApplicationContext(), R.layout.simple_spinner_item, listaProveedorString);
+                    ArrayAdapter<String> proveedorAdapter = new ArrayAdapter<>(getApplicationContext(), R.layout.simple_spinner_item, listaProveedorString);
 
                     proveedorAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                     spinnerProveedor.setAdapter(proveedorAdapter);
+
+                    // Si hay un proveedor seleccionado, establecerlo como selección actual
+                    if (producto != null && producto.getProveedor() != null) {
+                        for (int i = 0; i < listaProveedores.size(); i++) {
+                            if (listaProveedores.get(i).getId() == producto.getProveedor().getId()) {
+                                spinnerProveedor.setSelection(i + 1);
+                                break;
+                            }
+                        }
+                    }
                 }
             };
 
-            volleyProveedor.obtenerProveedores(this, credenciales.getString("ip", "192.168.100.216"), listener3);
-        } else if (intent.getExtras().getString("metodo").equals("actualizar")) {
+            volleyProveedor.obtenerProveedores(FormularioProductoActivity.this, credenciales.getString("ip", "192.168.100.216"), listener3);
+         } else if (intent.getExtras().getString("metodo").equals("actualizar")) {
             producto = (Producto) getIntent().getSerializableExtra("producto");
             botonMetodo.setText("Actualizar");
             campoNombre.setText(producto.getNombre());
@@ -232,13 +258,13 @@ public class FormularioProductoActivity extends AppCompatActivity {
                     return;
                 }
 
-                if (spinnerCategoria.getSelectedItem().equals("Categorias")) {
+                if (spinnerCategoria.getSelectedItem().equals("Categoria")) {
                     Toasty.info(getApplicationContext(), "Debe seleccionar una categoría", Toast.LENGTH_SHORT, true).show();
                     spinnerCategoria.requestFocus();
                     return;
                 }
 
-                if (spinnerProveedor.getSelectedItem().toString().equals("Proveedores")) {
+                if (spinnerProveedor.getSelectedItem().toString().equals("Proveedor")) {
                     Toasty.info(getApplicationContext(), "Debe seleccionar un proveedor", Toast.LENGTH_SHORT, true).show();
                     spinnerProveedor.requestFocus();
                     return;
@@ -264,7 +290,6 @@ public class FormularioProductoActivity extends AppCompatActivity {
                             listaProveedores.get(spinnerProveedor.getSelectedItemPosition() - 1).getId());
                     volleyProducto.insertarProducto(FormularioProductoActivity.this, producto,
                             credenciales.getString("ip", "192.168.100.216"));
-
                 } else if (intent.getExtras().getString("metodo").equals("actualizar")) {
                     Producto productoActualizado = new Producto(producto.getId(), campoNombre.getText().toString(),
                             Double.parseDouble(campoPrecio.getText().toString()), campoFecha.getText().toString(),
