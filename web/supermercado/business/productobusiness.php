@@ -41,6 +41,9 @@ class ProductoBusiness{
     public function getAllTBProductos(){
         return $this->productoData->getAllTBProductos();
     }
+    public function getAllTBProductos2(){
+        return $this->productoData->getAllTBProductos2();
+    }
 
     public function getAllTBHistorialProducto(){
          return $this->productoData->getAllTBHistorialProducto();

@@ -13,6 +13,35 @@ public class Producto implements Serializable {
     private int categoriaid;
     private int proveedorid;
 
+    public String getProveedorNombre() {
+        return proveedorNombre;
+    }
+
+    public Producto(int id, String nombre, double precio, String fechaIngreso, int stock, int estado, String proveedorNombre, String categoriaNombre) {
+        this.id = id;
+        this.nombre = nombre;
+        this.precio = precio;
+        this.fechaIngreso = fechaIngreso;
+        this.stock = stock;
+        this.estado = estado;
+        this.proveedorNombre = proveedorNombre;
+        this.categoriaNombre = categoriaNombre;
+    }
+
+    public void setProveedorNombre(String proveedorNombre) {
+        this.proveedorNombre = proveedorNombre;
+    }
+
+    public String getCategoriaNombre() {
+        return categoriaNombre;
+    }
+
+    public void setCategoriaNombre(String categoriaNombre) {
+        this.categoriaNombre = categoriaNombre;
+    }
+
+    private String proveedorNombre, categoriaNombre;
+
     public Categoria getCategoria() {
         return categoria;
     }

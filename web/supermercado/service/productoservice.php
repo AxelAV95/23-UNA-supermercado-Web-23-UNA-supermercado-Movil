@@ -4,7 +4,7 @@
 
 	if($_SERVER['REQUEST_METHOD'] == "GET"){
 		$productobusiness = new ProductoBusiness();
-  		$productos = $productobusiness->getAllTBProductos();
+  		$productos = $productobusiness->getAllTBProductos2();
   		echo json_encode($productos);
 	}else if($_SERVER['REQUEST_METHOD'] == "POST"){
 		//se utiliza en PHP para obtener el contenido de la solicitud HTTP entrante

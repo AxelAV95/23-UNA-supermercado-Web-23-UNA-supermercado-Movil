@@ -137,7 +137,13 @@
             Database::desconectar();
             return $stm->fetchAll(PDO::FETCH_ASSOC);
          }
-
+         public function getAllTBProductos2() {
+            $pdo = Database::conectar();
+            $stm = $pdo->prepare("Call ObtenerProductosConNombres()");
+            $stm->execute();
+            Database::desconectar();
+            return $stm->fetchAll(PDO::FETCH_ASSOC);
+         }
           public function obtenerProductosRecientes() {
             $pdo = Database::conectar();
             $stm = $pdo->prepare("CALL obtenerProductosRecientes()");

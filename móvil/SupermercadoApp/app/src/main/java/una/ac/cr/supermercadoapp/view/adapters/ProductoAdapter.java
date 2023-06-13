@@ -69,10 +69,10 @@ public class ProductoAdapter extends RecyclerSwipeAdapter<ProductoAdapter.ViewHo
                         .setTitle("Detalles")
                         .setBackgroundColor(Color.parseColor("#262943"))
                         .setMessage( "ID: "+listaProductos.get(position).getId()+"\n"+"Nombre: "+listaProductos.get(position).getNombre()
-                                +"Precio: "+listaProductos.get(position).getPrecio()+"\n"+"Estado: "+listaProductos.get(position).getEstado()
-                                +"Fecha de ingreso: "+listaProductos.get(position).getFechaIngreso()+"\n"+"Stock: "+listaProductos.get(position).getStock()+"\n"
-                                +"Categoria: "+listaProductos.get(position).getCategoriaid()
-                                +"\n"+"Proveedor: "+listaProductos.get(position).getProveedorid()
+                                +"\nPrecio: "+listaProductos.get(position).getPrecio()+"\n"+"Estado: "+listaProductos.get(position).getEstado()
+                                +"\nFecha de ingreso: "+listaProductos.get(position).getFechaIngreso()+"\n"+"Stock: "+listaProductos.get(position).getStock()+"\n"
+                                +"\nCategoria: "+listaProductos.get(position).getCategoriaNombre()
+                                +"\n"+"Proveedor: "+listaProductos.get(position).getProveedorNombre()
 				                    )
                         .setAnimation(Animation.POP)
                         .setIcon(R.drawable.productoicon, View.VISIBLE)

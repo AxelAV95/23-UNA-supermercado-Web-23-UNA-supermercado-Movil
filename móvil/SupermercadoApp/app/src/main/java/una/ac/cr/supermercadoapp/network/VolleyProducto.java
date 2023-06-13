@@ -58,8 +58,8 @@ public class VolleyProducto {
                         int productostock  = jsonObject.getInt("productostock");
                         int productoestado  = jsonObject.getInt("productoestado");
 
-                        int categoriaid  = jsonObject.getInt("productocategoriaid");
-                        int proveedorid = jsonObject.getInt("productoproveedorid");
+                        String categoriaid  = jsonObject.getString("categorianombre");
+                        String proveedorid = jsonObject.getString("proveedornombre");
 
 
 
