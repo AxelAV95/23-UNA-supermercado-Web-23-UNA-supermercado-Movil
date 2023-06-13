@@ -16,6 +16,9 @@
     	public function modificarDescuento($descuento){
     		return $this->descuentoData->modificarDescuento($descuento);
     	}
+		public function modificarDescuento1($descuento){
+    		return $this->descuentoData->modificarDescuento1($descuento);
+    	}
     	public function eliminarDescuento($id){
 
     		return $this->descuentoData->eliminarDescuento($id);

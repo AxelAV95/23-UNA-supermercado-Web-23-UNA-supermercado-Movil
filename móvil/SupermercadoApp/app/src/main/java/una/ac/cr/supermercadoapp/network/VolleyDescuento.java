@@ -136,7 +136,7 @@ public class VolleyDescuento {
         try {
             descuentoJson.put("id",descuento.getId());
             descuentoJson.put("tarifa",descuento.getTarifa());
-            descuentoJson.put("membresiaid",descuento.getMembresiaid());
+
 
         } catch (JSONException e) {
             throw new RuntimeException(e);
@@ -201,4 +201,3 @@ public class VolleyDescuento {
     }
 
 }
-

@@ -50,10 +50,12 @@ import una.ac.cr.supermercadoapp.data.ProductoData;
 import una.ac.cr.supermercadoapp.data.TipoEmpleadoData;
 import una.ac.cr.supermercadoapp.domain.AdministradorRed;
 import una.ac.cr.supermercadoapp.domain.Descuento;
+import una.ac.cr.supermercadoapp.domain.Empleado;
 import una.ac.cr.supermercadoapp.domain.Producto;
 import una.ac.cr.supermercadoapp.domain.TipoEmpleado;
 import una.ac.cr.supermercadoapp.domain.TipoUsuario;
 import una.ac.cr.supermercadoapp.network.VolleyDescuento;
+import una.ac.cr.supermercadoapp.network.VolleyEmpleado;
 import una.ac.cr.supermercadoapp.network.VolleyProducto;
 import una.ac.cr.supermercadoapp.network.VolleySingleton;
 import una.ac.cr.supermercadoapp.network.VolleyTipoEmpleado;
@@ -61,10 +63,12 @@ import una.ac.cr.supermercadoapp.network.VolleyTipoUsuario;
 import una.ac.cr.supermercadoapp.utils.MonitorRedUtils;
 import una.ac.cr.supermercadoapp.utils.NetworkUtils;
 import una.ac.cr.supermercadoapp.view.adapters.DescuentoAdapter;
+import una.ac.cr.supermercadoapp.view.adapters.EmpleadoAdapter;
 import una.ac.cr.supermercadoapp.view.adapters.ProductoAdapter;
 import una.ac.cr.supermercadoapp.view.adapters.TipoEmpleadoAdapter;
 import una.ac.cr.supermercadoapp.view.adapters.TipoUsuarioAdapter;
 import una.ac.cr.supermercadoapp.view.interfaces.DescuentoICallback;
+import una.ac.cr.supermercadoapp.view.interfaces.EmpleadoICallback;
 import una.ac.cr.supermercadoapp.view.interfaces.ProductoICallback;
 import una.ac.cr.supermercadoapp.view.interfaces.TipoEmpleadoICallback;
 import una.ac.cr.supermercadoapp.view.interfaces.TipoUsuarioICallback;
@@ -248,24 +252,21 @@ public class DescuentoActivity extends AppCompatActivity {
     private void actualizarLista() {
         listaDescuentos.clear();
         VolleyDescuento volleyDescuento = new VolleyDescuento();
-        if(mAdaptadorDescuento == null){
+        if(mAdaptadorDescuento==null){
             return;
         }else{
-
             DescuentoICallback listener = new DescuentoICallback() {
                 @Override
                 public void onDescuentoReceived(ArrayList<Descuento> lista) {
                     listaDescuentos = lista;
                     ((DescuentoAdapter)mAdaptadorDescuento ).setListaDescuentos(listaDescuentos);
+
                     mAdaptadorDescuento.notifyDataSetChanged();
                 }
             };
 
-            volleyDescuento.obtenerDescuentos(this,credenciales.getString("ip", "192.168.100.216"),listener);
-
+            volleyDescuento.obtenerDescuentos(this, credenciales.getString("ip", "192.168.100.216"), listener);
         }
-
-
     }
 
     private void verificarEstadoSesion(String cedula) {

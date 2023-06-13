@@ -36,9 +36,27 @@ class descuentoData extends Database{
             $descuentotarifa = $descuento->getDescuentotarifa();
             $descuentomembresiaid=$descuento->getDescuentomembresiaid();
 			
-            $stm ->bindParam(1,$descuentotarifa,PDO::PARAM_STR);
-            $stm ->bindParam(2,$descuentomembresiaid,PDO::PARAM_INT);
-			$stm ->bindParam(3,$descuentoid,PDO::PARAM_INT);
+			$stm ->bindParam(1,$descuentoid,PDO::PARAM_INT);
+            $stm ->bindParam(2,$descuentotarifa,PDO::PARAM_STR);
+            $stm ->bindParam(3,$descuentomembresiaid,PDO::PARAM_INT);
+			
+            $resultado = $stm->execute();
+            Database::desconectar();
+	           
+	        return $resultado;
+		}
+
+		public function modificarDescuento1($descuento){
+			$pdo = Database::conectar();
+            $stm = $pdo->prepare("CALL modificarDes(?,?)");
+            $descuentoid = $descuento->getDescuentoid();
+            $descuentotarifa = $descuento->getDescuentotarifa();
+         
+			
+			$stm ->bindParam(1,$descuentoid,PDO::PARAM_INT);
+            $stm ->bindParam(2,$descuentotarifa,PDO::PARAM_STR);
+        
+			
             $resultado = $stm->execute();
             Database::desconectar();
 	           

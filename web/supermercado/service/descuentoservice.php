@@ -36,8 +36,13 @@
 		$json = file_get_contents('php://input');
 		$data = json_decode($json);
 		
+		$descuento = new Descuento();
+		$descuento ->setDescuentoid($data->id);
+		$descuento ->setDescuentotarifa($data->tarifa);
+		
+		
 		$descuentoBusiness = new DescuentoBusiness();
-		$resultado = $descuentoBusiness->modificarDescuento(new Descuento($data->id,$data->tarifa,$data->membresiaid));
+		$resultado = $descuentoBusiness->modificarDescuento1($descuento);
 
 		if($resultado == 1){
 	    		echo json_encode(array("statusCode"=>200));	

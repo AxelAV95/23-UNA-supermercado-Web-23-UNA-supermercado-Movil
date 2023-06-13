@@ -100,19 +100,7 @@ public class FormularioDescuentoActivity extends AppCompatActivity {
                     ArrayAdapter<String> membresiaAdapter = new ArrayAdapter<String>(getApplicationContext(), R.layout.simple_spinner_item, listaMembresiaString);
                     membresiaAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                     spinnermembresias.setAdapter(membresiaAdapter);
-                if(intent.getExtras().getString("metodo").equals("actualizar")) {
-                        if (intent != null && intent.getExtras() != null) {
-                            String membresia = descuento.getMembresia().getDescripcion();
-                            int position = 0;
-                            for (int i = 0; i < listaMembresiaString.size(); i++) {
-                                if (listaMembresiaString.get(i).replaceAll("\\s", "").equals(membresia.replaceAll("\\s", ""))) {
-                                    position = i;
-                                    break;
-                                }
-                            }
-                            spinnermembresias.setSelection(position);
-                        }
-                    }
+
                 }
 
 
@@ -136,17 +124,13 @@ public class FormularioDescuentoActivity extends AppCompatActivity {
                     tarifa.requestFocus();
                     return;
                 } else if (!tarifa.getText().toString().matches("\\d+(\\.\\d+)?")) {
-                    tarifa.setError("El precio solo puede contener números");
+                    tarifa.setError("El formato es invalido");
                     tarifa.requestFocus();
                     return;
                 }
 
 
-                if (spinnermembresias.getSelectedItem().toString().equals("Membresias")) {
-                    Toasty.info(getApplicationContext(), "Debe seleccionar una membresia", Toast.LENGTH_SHORT, true).show();
-                    spinnermembresias.requestFocus();
-                    return;
-                }
+
 
 
                 if (intent.getExtras().getString("metodo").equals("agregar")) {
@@ -158,8 +142,8 @@ public class FormularioDescuentoActivity extends AppCompatActivity {
 
                 } else if (intent.getExtras().getString("metodo").equals("actualizar")) {
                     Descuento descuentoActualizado = new Descuento(descuento.getId(),
-                            Double.parseDouble(tarifa.getText().toString()),
-                            listaMembresias.get(spinnermembresias.getSelectedItemPosition() - 1).getId());
+                            Double.parseDouble(tarifa.getText().toString()));
+
                     volleyDescuento.actualizarDescuento(FormularioDescuentoActivity.this, descuentoActualizado,
                             credenciales.getString("ip", "192.168.100.216"));
                 }

@@ -21,7 +21,11 @@ public class Descuento implements Serializable {
         this.tarifa = tarifa;
         this.membresiaid = membresiaid;
     }
+    public Descuento(int id, double tarifa) {
+        this.id = id;
+        this.tarifa = tarifa;
 
+    }
     public Descuento(double tarifa, int membresiaid) {
         this.tarifa = tarifa;
         this.membresiaid = membresiaid;
@@ -51,3 +55,4 @@ public class Descuento implements Serializable {
         this.membresiaid = membresiaid;
     }
 }
+
