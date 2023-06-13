@@ -71,8 +71,8 @@ public class ProductoAdapter extends RecyclerSwipeAdapter<ProductoAdapter.ViewHo
                         .setMessage( "ID: "+listaProductos.get(position).getId()+"\n"+"Nombre: "+listaProductos.get(position).getNombre()
                                 +"\nPrecio: "+listaProductos.get(position).getPrecio()+"\n"+"Estado: "+listaProductos.get(position).getEstado()
                                 +"\nFecha de ingreso: "+listaProductos.get(position).getFechaIngreso()+"\n"+"Stock: "+listaProductos.get(position).getStock()+"\n"
-                                +"\nCategoria: "+listaProductos.get(position).getCategoriaNombre()
-                                +"\n"+"Proveedor: "+listaProductos.get(position).getProveedorNombre()
+                                +"\nCategoria: "+listaProductos.get(position).getProveedorNombre()
+                                +"\n"+"Proveedor: "+listaProductos.get(position).getCategoriaNombre()
 				                    )
                         .setAnimation(Animation.POP)
                         .setIcon(R.drawable.productoicon, View.VISIBLE)
